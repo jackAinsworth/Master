@@ -1,0 +1,121 @@
+
+usage: transform_pointcloud.py [-h] --input_csv INPUT_CSV --output_dir
+                               OUTPUT_DIR --output_csv OUTPUT_CSV
+                               [--batch_size BATCH_SIZE]
+                               [--start_idx START_IDX]
+transform_pointcloud.py: error: unrecognized arguments: logs/pointcloud_data.log
+2025-06-12 11:44:10.755932: I tensorflow/core/util/port.cc:110] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-06-12 11:44:11.642191: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Traceback (most recent call last):
+  File "createTFRecord_pointcloud.py", line 122, in <module>
+    write_pointcloud_tfrecord_shards(
+  File "createTFRecord_pointcloud.py", line 60, in write_pointcloud_tfrecord_shards
+    raise ValueError("CSV must have a 'filepath' column")
+ValueError: CSV must have a 'filepath' column
+2025-06-12 13:10:42.401477: I tensorflow/core/util/port.cc:110] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-06-12 13:10:42.487332: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-06-12 13:10:51.292496: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 38776 MB memory:  -> device: 0, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:3d:00.0, compute capability: 8.9
+2025-06-12 13:10:51.295307: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 43443 MB memory:  -> device: 1, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:61:00.0, compute capability: 8.9
+2025-06-12 13:10:51.297443: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:2 with 20011 MB memory:  -> device: 2, name: NVIDIA TITAN RTX, pci bus id: 0000:60:00.0, compute capability: 7.5
+2025-06-12 13:10:51.300608: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:3 with 20013 MB memory:  -> device: 3, name: NVIDIA TITAN RTX, pci bus id: 0000:64:00.0, compute capability: 7.5
+2025-06-12 13:10:51.302502: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:4 with 6828 MB memory:  -> device: 4, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:3e:00.0, compute capability: 7.5
+2025-06-12 13:10:51.304906: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:5 with 6831 MB memory:  -> device: 5, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:42:00.0, compute capability: 7.5
+2025-06-12 13:10:51.306799: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:6 with 7979 MB memory:  -> device: 6, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:43:00.0, compute capability: 7.5
+Traceback (most recent call last):
+  File "pointnet_surface_recon_model.py", line 225, in <module>
+    main(args.tfrecord_glob, args.epochs)
+  File "pointnet_surface_recon_model.py", line 188, in main
+    train_ds = make_dataset(shards[:n_train])
+  File "pointnet_surface_recon_model.py", line 149, in make_dataset
+    files = tf.io.gfile.glob(pattern)
+  File "/home/ainsworth/master/py38/lib/python3.8/site-packages/tensorflow/python/lib/io/file_io.py", line 445, in get_matching_files_v2
+    return [
+  File "/home/ainsworth/master/py38/lib/python3.8/site-packages/tensorflow/python/lib/io/file_io.py", line 450, in <listcomp>
+    compat.as_bytes(single_filename))
+  File "/home/ainsworth/master/py38/lib/python3.8/site-packages/tensorflow/python/util/compat.py", line 85, in as_bytes
+    raise TypeError('Expected binary or unicode string, got %r' %
+TypeError: Expected binary or unicode string, got <tf.Tensor: shape=(), dtype=string, numpy=b'./tfrecords_pointcloud/data_0082-of-0100.tfrecord'>
+Traceback (most recent call last):
+  File "/home/ainsworth/master/create_data_coons.py", line 19, in <module>
+    import DatasetGeneratorKoons  # make sure this module is in your PYTHONPATH
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ainsworth/master/DatasetGeneratorKoons.py", line 26, in <module>
+    import nurbs_vis_koons
+  File "/home/ainsworth/master/nurbs_vis_koons.py", line 22, in <module>
+    import matplotlib.pyplot as plt
+ModuleNotFoundError: No module named 'matplotlib'
+Traceback (most recent call last):
+  File "/home/ainsworth/master/create_data_coons.py", line 134, in <module>
+    main()
+  File "/home/ainsworth/master/create_data_coons.py", line 87, in main
+    filepath = DatasetGeneratorKoons.create_and_save_dataset(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ainsworth/master/DatasetGeneratorKoons.py", line 1242, in create_and_save_dataset
+    dataset = [create_dataset_entry(**entry_params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ainsworth/master/DatasetGeneratorKoons.py", line 1159, in create_dataset_entry
+    surf_pts = interpolate_coons_patch(corrected_edges,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ainsworth/master/DatasetGeneratorKoons.py", line 731, in interpolate_coons_patch
+    surface_pts[iv, iu, :] = blend_C + blend_D - bilinear
+    ~~~~~~~~~~~^^^^^^^^^^^
+KeyboardInterrupt
+python3: can't open file '/home/ainsworth/master/convert_to_tfrecords.py': [Errno 2] No such file or directory
+2025-09-08 20:54:38.428776: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-09-08 20:54:38.752373: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1757357678.858332 3619924 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1757357678.890373 3619924 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1757357679.166493 3619924 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1757357679.166573 3619924 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1757357679.166577 3619924 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1757357679.166580 3619924 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-09-08 20:54:39.208378: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+usage: createTFRecord.py [-h] --csv_file CSV_FILE --out_dir OUT_DIR
+                         [--num_shards NUM_SHARDS]
+createTFRecord.py: error: the following arguments are required: --csv_file, --out_dir
+2025-09-08 20:56:01.345184: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-09-08 20:56:01.361860: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1757357761.381179 3620485 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1757357761.387091 3620485 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1757357761.402775 3620485 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1757357761.402801 3620485 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1757357761.402804 3620485 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1757357761.402806 3620485 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-09-08 20:56:01.407265: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+usage: createTFRecord.py [-h] --csv_file CSV_FILE --out_dir OUT_DIR
+                         [--num_shards NUM_SHARDS]
+createTFRecord.py: error: the following arguments are required: --csv_file, --out_dir
+2025-09-08 20:56:19.791341: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-09-08 20:56:19.808267: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1757357779.827536 3620683 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1757357779.833401 3620683 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1757357779.849103 3620683 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1757357779.849132 3620683 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1757357779.849135 3620683 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1757357779.849138 3620683 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-09-08 20:56:19.853614: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+usage: createTFRecord.py [-h] --csv_file CSV_FILE --out_dir OUT_DIR
+                         [--num_shards NUM_SHARDS]
+createTFRecord.py: error: the following arguments are required: --csv_file, --out_dir
+2025-09-08 20:57:09.627463: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-09-08 20:57:09.645940: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1757357829.666950 3621062 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1757357829.673199 3621062 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1757357829.690217 3621062 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1757357829.690248 3621062 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1757357829.690252 3621062 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1757357829.690256 3621062 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-09-08 20:57:09.695215: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+usage: createTFRecord.py [-h] --csv_file CSV_FILE --out_dir OUT_DIR
+                         [--num_shards NUM_SHARDS]
+createTFRecord.py: error: the following arguments are required: --csv_file, --out_dir

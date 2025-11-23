@@ -1,0 +1,3 @@
+nohup: ignoring input
+dataset_subdiv.py:151: RuntimeWarning: invalid value encountered in divide
+  uv = (uv - uv.min(axis=0)) / uv.ptp(axis=0)
