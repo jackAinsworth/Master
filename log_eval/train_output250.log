@@ -1,0 +1,649 @@
+nohup: ignoring input
+2025-04-05 20:45:47.109345: I tensorflow/core/util/port.cc:110] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-04-05 20:45:47.459425: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-04-05 20:45:52.687554: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 46551 MB memory:  -> device: 0, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:61:00.0, compute capability: 8.9
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input_1 (InputLayer)        [(None, 100, 100, 3)]        0         []                            
+                                                                                                  
+ conv2d (Conv2D)             (None, 100, 100, 64)         4864      ['input_1[0][0]']             
+                                                                                                  
+ conv2d_2 (Conv2D)           (None, 100, 100, 256)        16640     ['conv2d[0][0]']              
+                                                                                                  
+ conv2d_4 (Conv2D)           (None, 100, 100, 256)        16640     ['conv2d[0][0]']              
+                                                                                                  
+ max_pooling2d (MaxPooling2  (None, 100, 100, 64)         0         ['conv2d[0][0]']              
+ D)                                                                                               
+                                                                                                  
+ conv2d_1 (Conv2D)           (None, 100, 100, 256)        16640     ['conv2d[0][0]']              
+                                                                                                  
+ conv2d_3 (Conv2D)           (None, 100, 100, 256)        590080    ['conv2d_2[0][0]']            
+                                                                                                  
+ conv2d_5 (Conv2D)           (None, 100, 100, 256)        1638656   ['conv2d_4[0][0]']            
+                                                                                                  
+ conv2d_6 (Conv2D)           (None, 100, 100, 256)        16640     ['max_pooling2d[0][0]']       
+                                                                                                  
+ concatenate (Concatenate)   (None, 100, 100, 1024)       0         ['conv2d_1[0][0]',            
+                                                                     'conv2d_3[0][0]',            
+                                                                     'conv2d_5[0][0]',            
+                                                                     'conv2d_6[0][0]']            
+                                                                                                  
+ conv2d_7 (Conv2D)           (None, 100, 100, 128)        1179776   ['concatenate[0][0]']         
+                                                                                                  
+ batch_normalization (Batch  (None, 100, 100, 128)        512       ['conv2d_7[0][0]']            
+ Normalization)                                                                                   
+                                                                                                  
+ max_pooling2d_1 (MaxPoolin  (None, 34, 34, 128)          0         ['batch_normalization[0][0]'] 
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_9 (Conv2D)           (None, 34, 34, 256)          33024     ['max_pooling2d_1[0][0]']     
+                                                                                                  
+ conv2d_11 (Conv2D)          (None, 34, 34, 256)          33024     ['max_pooling2d_1[0][0]']     
+                                                                                                  
+ max_pooling2d_2 (MaxPoolin  (None, 34, 34, 128)          0         ['max_pooling2d_1[0][0]']     
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_8 (Conv2D)           (None, 34, 34, 256)          33024     ['max_pooling2d_1[0][0]']     
+                                                                                                  
+ conv2d_10 (Conv2D)          (None, 34, 34, 256)          590080    ['conv2d_9[0][0]']            
+                                                                                                  
+ conv2d_12 (Conv2D)          (None, 34, 34, 256)          1638656   ['conv2d_11[0][0]']           
+                                                                                                  
+ conv2d_13 (Conv2D)          (None, 34, 34, 256)          33024     ['max_pooling2d_2[0][0]']     
+                                                                                                  
+ concatenate_1 (Concatenate  (None, 34, 34, 1024)         0         ['conv2d_8[0][0]',            
+ )                                                                   'conv2d_10[0][0]',           
+                                                                     'conv2d_12[0][0]',           
+                                                                     'conv2d_13[0][0]']           
+                                                                                                  
+ conv2d_14 (Conv2D)          (None, 34, 34, 512)          4719104   ['concatenate_1[0][0]']       
+                                                                                                  
+ batch_normalization_1 (Bat  (None, 34, 34, 512)          2048      ['conv2d_14[0][0]']           
+ chNormalization)                                                                                 
+                                                                                                  
+ max_pooling2d_3 (MaxPoolin  (None, 12, 12, 512)          0         ['batch_normalization_1[0][0]'
+ g2D)                                                               ]                             
+                                                                                                  
+ conv2d_16 (Conv2D)          (None, 12, 12, 256)          131328    ['max_pooling2d_3[0][0]']     
+                                                                                                  
+ conv2d_18 (Conv2D)          (None, 12, 12, 256)          131328    ['max_pooling2d_3[0][0]']     
+                                                                                                  
+ max_pooling2d_4 (MaxPoolin  (None, 12, 12, 512)          0         ['max_pooling2d_3[0][0]']     
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_15 (Conv2D)          (None, 12, 12, 256)          131328    ['max_pooling2d_3[0][0]']     
+                                                                                                  
+ conv2d_17 (Conv2D)          (None, 12, 12, 256)          590080    ['conv2d_16[0][0]']           
+                                                                                                  
+ conv2d_19 (Conv2D)          (None, 12, 12, 256)          1638656   ['conv2d_18[0][0]']           
+                                                                                                  
+ conv2d_20 (Conv2D)          (None, 12, 12, 256)          131328    ['max_pooling2d_4[0][0]']     
+                                                                                                  
+ concatenate_2 (Concatenate  (None, 12, 12, 1024)         0         ['conv2d_15[0][0]',           
+ )                                                                   'conv2d_17[0][0]',           
+                                                                     'conv2d_19[0][0]',           
+                                                                     'conv2d_20[0][0]']           
+                                                                                                  
+ conv2d_21 (Conv2D)          (None, 12, 12, 256)          2359552   ['concatenate_2[0][0]']       
+                                                                                                  
+ batch_normalization_2 (Bat  (None, 12, 12, 256)          1024      ['conv2d_21[0][0]']           
+ chNormalization)                                                                                 
+                                                                                                  
+ max_pooling2d_5 (MaxPoolin  (None, 4, 4, 256)            0         ['batch_normalization_2[0][0]'
+ g2D)                                                               ]                             
+                                                                                                  
+ conv2d_23 (Conv2D)          (None, 4, 4, 256)            65792     ['max_pooling2d_5[0][0]']     
+                                                                                                  
+ conv2d_25 (Conv2D)          (None, 4, 4, 256)            65792     ['max_pooling2d_5[0][0]']     
+                                                                                                  
+ max_pooling2d_6 (MaxPoolin  (None, 4, 4, 256)            0         ['max_pooling2d_5[0][0]']     
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_22 (Conv2D)          (None, 4, 4, 256)            65792     ['max_pooling2d_5[0][0]']     
+                                                                                                  
+ conv2d_24 (Conv2D)          (None, 4, 4, 256)            590080    ['conv2d_23[0][0]']           
+                                                                                                  
+ conv2d_26 (Conv2D)          (None, 4, 4, 256)            1638656   ['conv2d_25[0][0]']           
+                                                                                                  
+ conv2d_27 (Conv2D)          (None, 4, 4, 256)            65792     ['max_pooling2d_6[0][0]']     
+                                                                                                  
+ concatenate_3 (Concatenate  (None, 4, 4, 1024)           0         ['conv2d_22[0][0]',           
+ )                                                                   'conv2d_24[0][0]',           
+                                                                     'conv2d_26[0][0]',           
+                                                                     'conv2d_27[0][0]']           
+                                                                                                  
+ conv2d_28 (Conv2D)          (None, 4, 4, 512)            4719104   ['concatenate_3[0][0]']       
+                                                                                                  
+ batch_normalization_3 (Bat  (None, 4, 4, 512)            2048      ['conv2d_28[0][0]']           
+ chNormalization)                                                                                 
+                                                                                                  
+ max_pooling2d_7 (MaxPoolin  (None, 2, 2, 512)            0         ['batch_normalization_3[0][0]'
+ g2D)                                                               ]                             
+                                                                                                  
+ flatten (Flatten)           (None, 2048)                 0         ['max_pooling2d_7[0][0]']     
+                                                                                                  
+ dense (Dense)               (None, 96)                   196704    ['flatten[0][0]']             
+                                                                                                  
+ reshape (Reshape)           (None, 4, 8, 3)              0         ['dense[0][0]']               
+                                                                                                  
+==================================================================================================
+Total params: 23086816 (88.07 MB)
+Trainable params: 23084000 (88.06 MB)
+Non-trainable params: 2816 (11.00 KB)
+__________________________________________________________________________________________________
+Training set: (56000, 100, 100, 3) (56000, 4, 8, 3)
+Validation set: (12000, 100, 100, 3) (12000, 4, 8, 3)
+Test set: (12000, 100, 100, 3) (12000, 4, 8, 3)
+Epoch 1/250
+2025-04-05 20:48:49.996596: I tensorflow/compiler/xla/stream_executor/cuda/cuda_dnn.cc:432] Loaded cuDNN version 8907
+2025-04-05 20:48:56.288176: I tensorflow/compiler/xla/stream_executor/cuda/cuda_blas.cc:606] TensorFloat-32 will be used for the matrix multiplication. This will only be logged once.
+2025-04-05 20:48:56.400303: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7fc2ccbf9230 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2025-04-05 20:48:56.400339: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): NVIDIA RTX 6000 Ada Generation, Compute Capability 8.9
+2025-04-05 20:48:56.515577: I tensorflow/compiler/mlir/tensorflow/utils/dump_mlir_util.cc:255] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
+2025-04-05 20:48:57.144930: I ./tensorflow/compiler/jit/device_compiler.h:186] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+2025-04-05 20:49:07.872389: W tensorflow/core/kernels/gpu_utils.cc:50] Failed to allocate memory for convolution redzone checking; skipping this check. This is benign and only means that we won't check cudnn for out-of-bounds reads and writes. This message will only be printed once.
+438/438 - 347s - loss: 209.3304 - val_loss: 1502.9958 - 347s/epoch - 792ms/step
+Epoch 2/250
+438/438 - 296s - loss: 105.4427 - val_loss: 225.5286 - 296s/epoch - 676ms/step
+Epoch 3/250
+438/438 - 296s - loss: 63.9215 - val_loss: 3641.5784 - 296s/epoch - 676ms/step
+Epoch 4/250
+438/438 - 294s - loss: 46.0484 - val_loss: 443.9672 - 294s/epoch - 671ms/step
+Epoch 5/250
+438/438 - 292s - loss: 33.7515 - val_loss: 229.0517 - 292s/epoch - 667ms/step
+Epoch 6/250
+438/438 - 291s - loss: 21.9364 - val_loss: 116.5123 - 291s/epoch - 664ms/step
+Epoch 7/250
+438/438 - 289s - loss: 19.9248 - val_loss: 1359.0968 - 289s/epoch - 660ms/step
+Epoch 8/250
+438/438 - 288s - loss: 14.7216 - val_loss: 68.2834 - 288s/epoch - 658ms/step
+Epoch 9/250
+438/438 - 288s - loss: 9.5917 - val_loss: 12.1741 - 288s/epoch - 657ms/step
+Epoch 10/250
+438/438 - 288s - loss: 7.4569 - val_loss: 17.8526 - 288s/epoch - 657ms/step
+Epoch 11/250
+438/438 - 288s - loss: 6.6813 - val_loss: 117.3660 - 288s/epoch - 657ms/step
+Epoch 12/250
+438/438 - 287s - loss: 9.9170 - val_loss: 186073.8594 - 287s/epoch - 654ms/step
+Epoch 13/250
+438/438 - 284s - loss: 6.3221 - val_loss: 66.1267 - 284s/epoch - 649ms/step
+Epoch 14/250
+438/438 - 285s - loss: 7.3621 - val_loss: 204.3053 - 285s/epoch - 650ms/step
+Epoch 15/250
+438/438 - 284s - loss: 4.7150 - val_loss: 92.7849 - 284s/epoch - 649ms/step
+Epoch 16/250
+438/438 - 284s - loss: 3.6189 - val_loss: 8.7526 - 284s/epoch - 649ms/step
+Epoch 17/250
+438/438 - 284s - loss: 6.2410 - val_loss: 767.3138 - 284s/epoch - 648ms/step
+Epoch 18/250
+438/438 - 284s - loss: 3.8306 - val_loss: 25.2977 - 284s/epoch - 648ms/step
+Epoch 19/250
+438/438 - 283s - loss: 3.1276 - val_loss: 42.9379 - 283s/epoch - 647ms/step
+Epoch 20/250
+438/438 - 283s - loss: 2.6031 - val_loss: 8.0904 - 283s/epoch - 647ms/step
+Epoch 21/250
+438/438 - 283s - loss: 5.8864 - val_loss: 687.8765 - 283s/epoch - 645ms/step
+Epoch 22/250
+438/438 - 282s - loss: 3.1600 - val_loss: 8.4734 - 282s/epoch - 643ms/step
+Epoch 23/250
+438/438 - 282s - loss: 2.1507 - val_loss: 80.5371 - 282s/epoch - 644ms/step
+Epoch 24/250
+438/438 - 282s - loss: 2.0705 - val_loss: 557.4988 - 282s/epoch - 643ms/step
+Epoch 25/250
+438/438 - 281s - loss: 2.8933 - val_loss: 8.8539 - 281s/epoch - 643ms/step
+Epoch 26/250
+438/438 - 281s - loss: 1.9273 - val_loss: 3.9248 - 281s/epoch - 643ms/step
+Epoch 27/250
+438/438 - 281s - loss: 6.3593 - val_loss: 169.0748 - 281s/epoch - 641ms/step
+Epoch 28/250
+438/438 - 281s - loss: 2.0517 - val_loss: 4.1624 - 281s/epoch - 641ms/step
+Epoch 29/250
+438/438 - 280s - loss: 1.6432 - val_loss: 9.4267 - 280s/epoch - 640ms/step
+Epoch 30/250
+438/438 - 281s - loss: 1.4418 - val_loss: 11.9607 - 281s/epoch - 641ms/step
+Epoch 31/250
+438/438 - 281s - loss: 1.3952 - val_loss: 3.0172 - 281s/epoch - 641ms/step
+Epoch 32/250
+438/438 - 280s - loss: 1.4213 - val_loss: 2.6299 - 280s/epoch - 640ms/step
+Epoch 33/250
+438/438 - 281s - loss: 1.3802 - val_loss: 15.1266 - 281s/epoch - 642ms/step
+Epoch 34/250
+438/438 - 280s - loss: 5.0606 - val_loss: 4.6699 - 280s/epoch - 638ms/step
+Epoch 35/250
+438/438 - 280s - loss: 1.2655 - val_loss: 3.3069 - 280s/epoch - 639ms/step
+Epoch 36/250
+438/438 - 280s - loss: 1.1685 - val_loss: 21.7138 - 280s/epoch - 639ms/step
+Epoch 37/250
+438/438 - 280s - loss: 1.1965 - val_loss: 5.5475 - 280s/epoch - 638ms/step
+Epoch 38/250
+438/438 - 280s - loss: 1.0991 - val_loss: 1.7812 - 280s/epoch - 639ms/step
+Epoch 39/250
+438/438 - 280s - loss: 1.1627 - val_loss: 3.1094 - 280s/epoch - 638ms/step
+Epoch 40/250
+438/438 - 280s - loss: 1.2779 - val_loss: 2.8071 - 280s/epoch - 639ms/step
+Epoch 41/250
+438/438 - 279s - loss: 3.2239 - val_loss: 2.6795 - 279s/epoch - 638ms/step
+Epoch 42/250
+438/438 - 279s - loss: 1.3882 - val_loss: 2.7282 - 279s/epoch - 637ms/step
+Epoch 43/250
+438/438 - 278s - loss: 1.0576 - val_loss: 2.7362 - 278s/epoch - 636ms/step
+Epoch 44/250
+438/438 - 279s - loss: 0.9566 - val_loss: 1.7960 - 279s/epoch - 636ms/step
+Epoch 45/250
+438/438 - 279s - loss: 0.9476 - val_loss: 2.5857 - 279s/epoch - 636ms/step
+Epoch 46/250
+438/438 - 279s - loss: 0.9022 - val_loss: 10.3656 - 279s/epoch - 638ms/step
+Epoch 47/250
+438/438 - 279s - loss: 4.7797 - val_loss: 271.3147 - 279s/epoch - 636ms/step
+Epoch 48/250
+438/438 - 277s - loss: 1.4890 - val_loss: 4.2642 - 277s/epoch - 632ms/step
+Epoch 49/250
+438/438 - 276s - loss: 0.9165 - val_loss: 1.7420 - 276s/epoch - 631ms/step
+Epoch 50/250
+438/438 - 277s - loss: 1.7632 - val_loss: 538.9698 - 277s/epoch - 632ms/step
+Epoch 51/250
+438/438 - 277s - loss: 1.0259 - val_loss: 1.9973 - 277s/epoch - 632ms/step
+Epoch 52/250
+438/438 - 276s - loss: 0.8412 - val_loss: 1.3545 - 276s/epoch - 630ms/step
+Epoch 53/250
+438/438 - 276s - loss: 0.7831 - val_loss: 4.5672 - 276s/epoch - 631ms/step
+Epoch 54/250
+438/438 - 276s - loss: 0.8439 - val_loss: 2.5438 - 276s/epoch - 630ms/step
+Epoch 55/250
+438/438 - 276s - loss: 0.8056 - val_loss: 5.7659 - 276s/epoch - 631ms/step
+Epoch 56/250
+438/438 - 276s - loss: 0.9381 - val_loss: 109.1163 - 276s/epoch - 631ms/step
+Epoch 57/250
+438/438 - 276s - loss: 0.8044 - val_loss: 2.9677 - 276s/epoch - 630ms/step
+Epoch 58/250
+438/438 - 276s - loss: 0.7655 - val_loss: 2.0241 - 276s/epoch - 631ms/step
+Epoch 59/250
+438/438 - 275s - loss: 2.4967 - val_loss: 4.5485 - 275s/epoch - 628ms/step
+Epoch 60/250
+438/438 - 275s - loss: 0.7256 - val_loss: 1.2693 - 275s/epoch - 629ms/step
+Epoch 61/250
+438/438 - 276s - loss: 0.6784 - val_loss: 1.7069 - 276s/epoch - 629ms/step
+Epoch 62/250
+438/438 - 275s - loss: 2.5740 - val_loss: 71.4191 - 275s/epoch - 629ms/step
+Epoch 63/250
+438/438 - 275s - loss: 0.7712 - val_loss: 1.1876 - 275s/epoch - 628ms/step
+Epoch 64/250
+438/438 - 275s - loss: 0.6742 - val_loss: 0.9976 - 275s/epoch - 629ms/step
+Epoch 65/250
+438/438 - 275s - loss: 0.6807 - val_loss: 1.0957 - 275s/epoch - 628ms/step
+Epoch 66/250
+438/438 - 275s - loss: 0.6897 - val_loss: 1.7086 - 275s/epoch - 629ms/step
+Epoch 67/250
+438/438 - 275s - loss: 0.6674 - val_loss: 1.8015 - 275s/epoch - 628ms/step
+Epoch 68/250
+438/438 - 275s - loss: 3.0577 - val_loss: 624.4772 - 275s/epoch - 628ms/step
+Epoch 69/250
+438/438 - 274s - loss: 1.0452 - val_loss: 4.5210 - 274s/epoch - 625ms/step
+Epoch 70/250
+438/438 - 274s - loss: 0.6743 - val_loss: 0.8799 - 274s/epoch - 626ms/step
+Epoch 71/250
+438/438 - 275s - loss: 0.6450 - val_loss: 1.4871 - 275s/epoch - 627ms/step
+Epoch 72/250
+438/438 - 274s - loss: 0.5897 - val_loss: 1.9361 - 274s/epoch - 626ms/step
+Epoch 73/250
+438/438 - 274s - loss: 1.7761 - val_loss: 63.2499 - 274s/epoch - 626ms/step
+Epoch 74/250
+438/438 - 274s - loss: 0.6974 - val_loss: 2.5081 - 274s/epoch - 626ms/step
+Epoch 75/250
+438/438 - 274s - loss: 0.5840 - val_loss: 1.0342 - 274s/epoch - 626ms/step
+Epoch 76/250
+438/438 - 274s - loss: 0.5904 - val_loss: 1.0748 - 274s/epoch - 626ms/step
+Epoch 77/250
+438/438 - 274s - loss: 0.5912 - val_loss: 1.2539 - 274s/epoch - 625ms/step
+Epoch 78/250
+438/438 - 274s - loss: 0.5761 - val_loss: 4.0646 - 274s/epoch - 625ms/step
+Epoch 79/250
+438/438 - 274s - loss: 0.9281 - val_loss: 3.4155 - 274s/epoch - 626ms/step
+Epoch 80/250
+438/438 - 273s - loss: 2.9403 - val_loss: 9.9677 - 273s/epoch - 623ms/step
+Epoch 81/250
+438/438 - 272s - loss: 0.6094 - val_loss: 0.7096 - 272s/epoch - 622ms/step
+Epoch 82/250
+438/438 - 272s - loss: 0.5104 - val_loss: 1.1634 - 272s/epoch - 621ms/step
+Epoch 83/250
+438/438 - 272s - loss: 0.5492 - val_loss: 1.0142 - 272s/epoch - 622ms/step
+Epoch 84/250
+438/438 - 272s - loss: 0.5095 - val_loss: 1.2567 - 272s/epoch - 621ms/step
+Epoch 85/250
+438/438 - 272s - loss: 0.5242 - val_loss: 1.2371 - 272s/epoch - 622ms/step
+Epoch 86/250
+438/438 - 272s - loss: 0.5211 - val_loss: 0.8694 - 272s/epoch - 621ms/step
+Epoch 87/250
+438/438 - 272s - loss: 0.5449 - val_loss: 189.3460 - 272s/epoch - 620ms/step
+Epoch 88/250
+438/438 - 272s - loss: 3.4114 - val_loss: 161.7868 - 272s/epoch - 621ms/step
+Epoch 89/250
+438/438 - 271s - loss: 1.1479 - val_loss: 1.1369 - 271s/epoch - 619ms/step
+Epoch 90/250
+438/438 - 271s - loss: 0.5279 - val_loss: 0.7559 - 271s/epoch - 619ms/step
+Epoch 91/250
+438/438 - 271s - loss: 0.4779 - val_loss: 0.6914 - 271s/epoch - 619ms/step
+Epoch 92/250
+438/438 - 271s - loss: 0.5525 - val_loss: 0.6856 - 271s/epoch - 620ms/step
+Epoch 93/250
+438/438 - 271s - loss: 0.4898 - val_loss: 1.4294 - 271s/epoch - 620ms/step
+Epoch 94/250
+438/438 - 271s - loss: 0.4945 - val_loss: 0.7285 - 271s/epoch - 619ms/step
+Epoch 95/250
+438/438 - 271s - loss: 0.6196 - val_loss: 1.4916 - 271s/epoch - 619ms/step
+Epoch 96/250
+438/438 - 271s - loss: 0.4925 - val_loss: 1.1077 - 271s/epoch - 618ms/step
+Epoch 97/250
+438/438 - 271s - loss: 0.7738 - val_loss: 2.8023 - 271s/epoch - 618ms/step
+Epoch 98/250
+438/438 - 271s - loss: 0.5015 - val_loss: 1.4011 - 271s/epoch - 619ms/step
+Epoch 99/250
+438/438 - 272s - loss: 0.4715 - val_loss: 0.6066 - 272s/epoch - 620ms/step
+Epoch 100/250
+438/438 - 272s - loss: 0.4871 - val_loss: 1.6871 - 272s/epoch - 620ms/step
+Epoch 101/250
+438/438 - 271s - loss: 0.4755 - val_loss: 2.8175 - 271s/epoch - 619ms/step
+Epoch 102/250
+438/438 - 271s - loss: 0.5765 - val_loss: 0.7955 - 271s/epoch - 619ms/step
+Epoch 103/250
+438/438 - 271s - loss: 1.9348 - val_loss: 5.6924 - 271s/epoch - 618ms/step
+Epoch 104/250
+438/438 - 270s - loss: 0.4833 - val_loss: 1.3573 - 270s/epoch - 617ms/step
+Epoch 105/250
+438/438 - 270s - loss: 0.4377 - val_loss: 1.0534 - 270s/epoch - 617ms/step
+Epoch 106/250
+438/438 - 270s - loss: 0.4478 - val_loss: 563.9227 - 270s/epoch - 617ms/step
+Epoch 107/250
+438/438 - 271s - loss: 0.4562 - val_loss: 1.1327 - 271s/epoch - 618ms/step
+Epoch 108/250
+438/438 - 271s - loss: 0.4205 - val_loss: 0.7764 - 271s/epoch - 618ms/step
+Epoch 109/250
+438/438 - 270s - loss: 0.4473 - val_loss: 1.3317 - 270s/epoch - 617ms/step
+Epoch 110/250
+438/438 - 271s - loss: 0.4783 - val_loss: 1.8986 - 271s/epoch - 618ms/step
+Epoch 111/250
+438/438 - 270s - loss: 0.4655 - val_loss: 0.9935 - 270s/epoch - 617ms/step
+Epoch 112/250
+438/438 - 270s - loss: 0.4403 - val_loss: 0.7460 - 270s/epoch - 617ms/step
+Epoch 113/250
+438/438 - 270s - loss: 0.4408 - val_loss: 5.1830 - 270s/epoch - 616ms/step
+Epoch 114/250
+438/438 - 270s - loss: 2.5139 - val_loss: 160.7393 - 270s/epoch - 616ms/step
+Epoch 115/250
+438/438 - 271s - loss: 0.6219 - val_loss: 0.7517 - 271s/epoch - 619ms/step
+Epoch 116/250
+438/438 - 271s - loss: 0.4283 - val_loss: 0.6494 - 271s/epoch - 619ms/step
+Epoch 117/250
+438/438 - 272s - loss: 0.4901 - val_loss: 0.6590 - 272s/epoch - 621ms/step
+Epoch 118/250
+438/438 - 271s - loss: 0.4023 - val_loss: 0.6495 - 271s/epoch - 619ms/step
+Epoch 119/250
+438/438 - 270s - loss: 0.3908 - val_loss: 0.5802 - 270s/epoch - 616ms/step
+Epoch 120/250
+438/438 - 270s - loss: 0.3964 - val_loss: 0.8191 - 270s/epoch - 617ms/step
+Epoch 121/250
+438/438 - 271s - loss: 0.3965 - val_loss: 0.9561 - 271s/epoch - 619ms/step
+Epoch 122/250
+438/438 - 272s - loss: 0.4003 - val_loss: 0.5536 - 272s/epoch - 620ms/step
+Epoch 123/250
+438/438 - 271s - loss: 1.8261 - val_loss: 733.6724 - 271s/epoch - 620ms/step
+Epoch 124/250
+438/438 - 271s - loss: 0.7492 - val_loss: 0.9777 - 271s/epoch - 619ms/step
+Epoch 125/250
+438/438 - 271s - loss: 0.4020 - val_loss: 0.7746 - 271s/epoch - 619ms/step
+Epoch 126/250
+438/438 - 271s - loss: 0.3676 - val_loss: 0.8639 - 271s/epoch - 619ms/step
+Epoch 127/250
+438/438 - 271s - loss: 0.3809 - val_loss: 0.8491 - 271s/epoch - 619ms/step
+Epoch 128/250
+438/438 - 271s - loss: 0.4140 - val_loss: 0.5298 - 271s/epoch - 620ms/step
+Epoch 129/250
+438/438 - 272s - loss: 0.3819 - val_loss: 0.8291 - 272s/epoch - 620ms/step
+Epoch 130/250
+438/438 - 271s - loss: 0.5981 - val_loss: 6.6701 - 271s/epoch - 619ms/step
+Epoch 131/250
+438/438 - 271s - loss: 0.4524 - val_loss: 0.7656 - 271s/epoch - 618ms/step
+Epoch 132/250
+438/438 - 271s - loss: 0.3773 - val_loss: 0.8311 - 271s/epoch - 619ms/step
+Epoch 133/250
+438/438 - 272s - loss: 0.3379 - val_loss: 0.6257 - 272s/epoch - 621ms/step
+Epoch 134/250
+438/438 - 271s - loss: 0.3832 - val_loss: 0.9069 - 271s/epoch - 619ms/step
+Epoch 135/250
+438/438 - 271s - loss: 0.3798 - val_loss: 1.1477 - 271s/epoch - 619ms/step
+Epoch 136/250
+438/438 - 271s - loss: 0.3445 - val_loss: 0.9804 - 271s/epoch - 618ms/step
+Epoch 137/250
+438/438 - 271s - loss: 1.2276 - val_loss: 0.9025 - 271s/epoch - 620ms/step
+Epoch 138/250
+438/438 - 271s - loss: 0.3751 - val_loss: 0.9683 - 271s/epoch - 619ms/step
+Epoch 139/250
+438/438 - 271s - loss: 0.3627 - val_loss: 0.8570 - 271s/epoch - 618ms/step
+Epoch 140/250
+438/438 - 271s - loss: 0.3681 - val_loss: 0.5854 - 271s/epoch - 618ms/step
+Epoch 141/250
+438/438 - 270s - loss: 0.3744 - val_loss: 0.8943 - 270s/epoch - 617ms/step
+Epoch 142/250
+438/438 - 271s - loss: 0.3492 - val_loss: 2.1805 - 271s/epoch - 618ms/step
+Epoch 143/250
+438/438 - 270s - loss: 0.3758 - val_loss: 0.8358 - 270s/epoch - 617ms/step
+Epoch 144/250
+438/438 - 271s - loss: 0.3582 - val_loss: 0.7970 - 271s/epoch - 618ms/step
+Epoch 145/250
+438/438 - 270s - loss: 0.3939 - val_loss: 1.4406 - 270s/epoch - 617ms/step
+Epoch 146/250
+438/438 - 271s - loss: 1.0808 - val_loss: 3.8077 - 271s/epoch - 619ms/step
+Epoch 147/250
+438/438 - 270s - loss: 0.3981 - val_loss: 4.0637 - 270s/epoch - 617ms/step
+Epoch 148/250
+438/438 - 270s - loss: 0.3294 - val_loss: 0.7720 - 270s/epoch - 615ms/step
+Epoch 149/250
+438/438 - 270s - loss: 2.8769 - val_loss: 320.2847 - 270s/epoch - 617ms/step
+Epoch 150/250
+438/438 - 270s - loss: 0.4168 - val_loss: 0.8806 - 270s/epoch - 616ms/step
+Epoch 151/250
+438/438 - 270s - loss: 0.3414 - val_loss: 1.1398 - 270s/epoch - 617ms/step
+Epoch 152/250
+438/438 - 271s - loss: 0.3363 - val_loss: 0.5136 - 271s/epoch - 618ms/step
+Epoch 153/250
+438/438 - 270s - loss: 0.3404 - val_loss: 1.3201 - 270s/epoch - 617ms/step
+Epoch 154/250
+438/438 - 270s - loss: 0.3380 - val_loss: 0.6703 - 270s/epoch - 616ms/step
+Epoch 155/250
+438/438 - 270s - loss: 0.3390 - val_loss: 1.2814 - 270s/epoch - 617ms/step
+Epoch 156/250
+438/438 - 270s - loss: 0.3932 - val_loss: 0.6490 - 270s/epoch - 617ms/step
+Epoch 157/250
+438/438 - 271s - loss: 0.3308 - val_loss: 0.6333 - 271s/epoch - 618ms/step
+Epoch 158/250
+438/438 - 270s - loss: 0.3298 - val_loss: 5.8644 - 270s/epoch - 617ms/step
+Epoch 159/250
+438/438 - 270s - loss: 0.3491 - val_loss: 1.3693 - 270s/epoch - 615ms/step
+Epoch 160/250
+438/438 - 270s - loss: 0.5786 - val_loss: 259.5459 - 270s/epoch - 617ms/step
+Epoch 161/250
+438/438 - 269s - loss: 0.4253 - val_loss: 0.9093 - 269s/epoch - 615ms/step
+Epoch 162/250
+438/438 - 270s - loss: 0.3398 - val_loss: 0.6268 - 270s/epoch - 617ms/step
+Epoch 163/250
+438/438 - 270s - loss: 0.3263 - val_loss: 0.7409 - 270s/epoch - 616ms/step
+Epoch 164/250
+438/438 - 269s - loss: 0.3285 - val_loss: 0.5222 - 269s/epoch - 615ms/step
+Epoch 165/250
+438/438 - 269s - loss: 0.3267 - val_loss: 0.5001 - 269s/epoch - 614ms/step
+Epoch 166/250
+438/438 - 270s - loss: 0.3152 - val_loss: 1.0324 - 270s/epoch - 616ms/step
+Epoch 167/250
+438/438 - 269s - loss: 0.3165 - val_loss: 0.6443 - 269s/epoch - 613ms/step
+Epoch 168/250
+438/438 - 270s - loss: 0.3357 - val_loss: 1.2603 - 270s/epoch - 617ms/step
+Epoch 169/250
+438/438 - 270s - loss: 0.3555 - val_loss: 8.9470 - 270s/epoch - 617ms/step
+Epoch 170/250
+438/438 - 270s - loss: 0.8276 - val_loss: 0.9897 - 270s/epoch - 616ms/step
+Epoch 171/250
+438/438 - 270s - loss: 0.3377 - val_loss: 0.6003 - 270s/epoch - 616ms/step
+Epoch 172/250
+438/438 - 270s - loss: 0.3021 - val_loss: 0.5393 - 270s/epoch - 617ms/step
+Epoch 173/250
+438/438 - 270s - loss: 0.3015 - val_loss: 0.8779 - 270s/epoch - 616ms/step
+Epoch 174/250
+438/438 - 270s - loss: 0.3063 - val_loss: 0.6318 - 270s/epoch - 617ms/step
+Epoch 175/250
+438/438 - 270s - loss: 0.3010 - val_loss: 1.8976 - 270s/epoch - 616ms/step
+Epoch 176/250
+438/438 - 270s - loss: 0.3060 - val_loss: 0.7417 - 270s/epoch - 616ms/step
+Epoch 177/250
+438/438 - 271s - loss: 0.3127 - val_loss: 0.7509 - 271s/epoch - 619ms/step
+Epoch 178/250
+438/438 - 270s - loss: 0.3267 - val_loss: 5.3750 - 270s/epoch - 617ms/step
+Epoch 179/250
+438/438 - 269s - loss: 0.3204 - val_loss: 0.6508 - 269s/epoch - 615ms/step
+Epoch 180/250
+438/438 - 269s - loss: 0.4419 - val_loss: 52.9301 - 269s/epoch - 614ms/step
+Epoch 181/250
+438/438 - 270s - loss: 0.5251 - val_loss: 2.2677 - 270s/epoch - 616ms/step
+Epoch 182/250
+438/438 - 269s - loss: 0.2871 - val_loss: 2.3350 - 269s/epoch - 614ms/step
+Epoch 183/250
+438/438 - 269s - loss: 0.2978 - val_loss: 0.7274 - 269s/epoch - 614ms/step
+Epoch 184/250
+438/438 - 269s - loss: 0.2773 - val_loss: 0.8435 - 269s/epoch - 615ms/step
+Epoch 185/250
+438/438 - 269s - loss: 0.2844 - val_loss: 1.3464 - 269s/epoch - 613ms/step
+Epoch 186/250
+438/438 - 268s - loss: 0.2989 - val_loss: 1.7136 - 268s/epoch - 612ms/step
+Epoch 187/250
+438/438 - 269s - loss: 0.2897 - val_loss: 1.9296 - 269s/epoch - 614ms/step
+Epoch 188/250
+438/438 - 270s - loss: 0.9122 - val_loss: 84.7409 - 270s/epoch - 615ms/step
+Epoch 189/250
+438/438 - 270s - loss: 0.3178 - val_loss: 0.5816 - 270s/epoch - 616ms/step
+Epoch 190/250
+438/438 - 270s - loss: 0.2638 - val_loss: 0.3356 - 270s/epoch - 616ms/step
+Epoch 191/250
+438/438 - 270s - loss: 0.2737 - val_loss: 0.3855 - 270s/epoch - 615ms/step
+Epoch 192/250
+438/438 - 271s - loss: 0.2734 - val_loss: 0.4349 - 271s/epoch - 618ms/step
+Epoch 193/250
+438/438 - 270s - loss: 0.2788 - val_loss: 0.4535 - 270s/epoch - 617ms/step
+Epoch 194/250
+438/438 - 269s - loss: 0.2819 - val_loss: 0.5808 - 269s/epoch - 615ms/step
+Epoch 195/250
+438/438 - 270s - loss: 0.2950 - val_loss: 0.7124 - 270s/epoch - 617ms/step
+Epoch 196/250
+438/438 - 269s - loss: 0.2840 - val_loss: 1.3297 - 269s/epoch - 615ms/step
+Epoch 197/250
+438/438 - 269s - loss: 0.2735 - val_loss: 0.5108 - 269s/epoch - 615ms/step
+Epoch 198/250
+438/438 - 270s - loss: 0.4961 - val_loss: 4.0064 - 270s/epoch - 616ms/step
+Epoch 199/250
+438/438 - 269s - loss: 0.2952 - val_loss: 0.6329 - 269s/epoch - 615ms/step
+Epoch 200/250
+438/438 - 270s - loss: 0.2611 - val_loss: 0.4977 - 270s/epoch - 616ms/step
+Epoch 201/250
+438/438 - 271s - loss: 0.2815 - val_loss: 0.6477 - 271s/epoch - 618ms/step
+Epoch 202/250
+438/438 - 270s - loss: 0.2613 - val_loss: 0.7282 - 270s/epoch - 617ms/step
+Epoch 203/250
+438/438 - 270s - loss: 0.2751 - val_loss: 1.5370 - 270s/epoch - 617ms/step
+Epoch 204/250
+438/438 - 270s - loss: 0.3040 - val_loss: 0.6755 - 270s/epoch - 616ms/step
+Epoch 205/250
+438/438 - 269s - loss: 0.5190 - val_loss: 347.5548 - 269s/epoch - 615ms/step
+Epoch 206/250
+438/438 - 268s - loss: 0.2834 - val_loss: 0.5242 - 268s/epoch - 613ms/step
+Epoch 207/250
+438/438 - 269s - loss: 0.2516 - val_loss: 0.7234 - 269s/epoch - 613ms/step
+Epoch 208/250
+438/438 - 270s - loss: 0.2577 - val_loss: 0.4626 - 270s/epoch - 616ms/step
+Epoch 209/250
+438/438 - 268s - loss: 0.2603 - val_loss: 0.6318 - 268s/epoch - 613ms/step
+Epoch 210/250
+438/438 - 269s - loss: 0.2755 - val_loss: 1.3628 - 269s/epoch - 614ms/step
+Epoch 211/250
+438/438 - 269s - loss: 0.4659 - val_loss: 38.6984 - 269s/epoch - 614ms/step
+Epoch 212/250
+438/438 - 270s - loss: 0.2726 - val_loss: 0.6415 - 270s/epoch - 616ms/step
+Epoch 213/250
+438/438 - 269s - loss: 0.2626 - val_loss: 0.4436 - 269s/epoch - 615ms/step
+Epoch 214/250
+438/438 - 270s - loss: 0.2622 - val_loss: 0.6126 - 270s/epoch - 616ms/step
+Epoch 215/250
+438/438 - 270s - loss: 0.2741 - val_loss: 0.7039 - 270s/epoch - 617ms/step
+Epoch 216/250
+438/438 - 270s - loss: 0.2771 - val_loss: 0.3975 - 270s/epoch - 616ms/step
+Epoch 217/250
+438/438 - 270s - loss: 0.4253 - val_loss: 0.8955 - 270s/epoch - 616ms/step
+Epoch 218/250
+438/438 - 269s - loss: 0.2848 - val_loss: 0.5200 - 269s/epoch - 615ms/step
+Epoch 219/250
+438/438 - 269s - loss: 0.2662 - val_loss: 0.5565 - 269s/epoch - 613ms/step
+Epoch 220/250
+438/438 - 269s - loss: 0.2468 - val_loss: 0.7149 - 269s/epoch - 614ms/step
+Epoch 221/250
+438/438 - 269s - loss: 0.2603 - val_loss: 0.6011 - 269s/epoch - 614ms/step
+Epoch 222/250
+438/438 - 269s - loss: 0.4280 - val_loss: 5.3732 - 269s/epoch - 615ms/step
+Epoch 223/250
+438/438 - 269s - loss: 0.2928 - val_loss: 0.7844 - 269s/epoch - 615ms/step
+Epoch 224/250
+438/438 - 270s - loss: 0.2454 - val_loss: 0.6098 - 270s/epoch - 615ms/step
+Epoch 225/250
+438/438 - 270s - loss: 0.2470 - val_loss: 0.5418 - 270s/epoch - 615ms/step
+Epoch 226/250
+438/438 - 269s - loss: 0.2515 - val_loss: 2.2818 - 269s/epoch - 614ms/step
+Epoch 227/250
+438/438 - 269s - loss: 0.2581 - val_loss: 2.1502 - 269s/epoch - 613ms/step
+Epoch 228/250
+438/438 - 269s - loss: 0.2546 - val_loss: 0.5304 - 269s/epoch - 614ms/step
+Epoch 229/250
+438/438 - 269s - loss: 0.2554 - val_loss: 0.7200 - 269s/epoch - 614ms/step
+Epoch 230/250
+438/438 - 269s - loss: 0.3735 - val_loss: 1.3360 - 269s/epoch - 614ms/step
+Epoch 231/250
+438/438 - 269s - loss: 0.2471 - val_loss: 1.0403 - 269s/epoch - 614ms/step
+Epoch 232/250
+438/438 - 269s - loss: 0.2358 - val_loss: 0.4685 - 269s/epoch - 614ms/step
+Epoch 233/250
+438/438 - 269s - loss: 0.2349 - val_loss: 0.5412 - 269s/epoch - 613ms/step
+Epoch 234/250
+438/438 - 268s - loss: 0.2366 - val_loss: 0.6380 - 268s/epoch - 611ms/step
+Epoch 235/250
+438/438 - 269s - loss: 0.3974 - val_loss: 0.7299 - 269s/epoch - 615ms/step
+Epoch 236/250
+438/438 - 270s - loss: 0.2632 - val_loss: 0.8884 - 270s/epoch - 616ms/step
+Epoch 237/250
+438/438 - 269s - loss: 0.2381 - val_loss: 0.6588 - 269s/epoch - 615ms/step
+Epoch 238/250
+438/438 - 269s - loss: 0.2498 - val_loss: 0.5311 - 269s/epoch - 614ms/step
+Epoch 239/250
+438/438 - 269s - loss: 0.2595 - val_loss: 0.4351 - 269s/epoch - 614ms/step
+Epoch 240/250
+438/438 - 269s - loss: 0.2484 - val_loss: 0.6034 - 269s/epoch - 615ms/step
+Epoch 241/250
+438/438 - 269s - loss: 0.2354 - val_loss: 0.6283 - 269s/epoch - 614ms/step
+Epoch 242/250
+438/438 - 269s - loss: 0.2499 - val_loss: 13.1834 - 269s/epoch - 614ms/step
+Epoch 243/250
+438/438 - 268s - loss: 0.2388 - val_loss: 53.4964 - 268s/epoch - 611ms/step
+Epoch 244/250
+438/438 - 269s - loss: 0.6694 - val_loss: 1.3376 - 269s/epoch - 615ms/step
+Epoch 245/250
+438/438 - 269s - loss: 0.2377 - val_loss: 0.4199 - 269s/epoch - 614ms/step
+Epoch 246/250
+438/438 - 268s - loss: 0.2306 - val_loss: 0.3875 - 268s/epoch - 612ms/step
+Epoch 247/250
+438/438 - 269s - loss: 0.2164 - val_loss: 0.3650 - 269s/epoch - 614ms/step
+Epoch 248/250
+438/438 - 269s - loss: 0.2240 - val_loss: 0.3301 - 269s/epoch - 614ms/step
+Epoch 249/250
+438/438 - 268s - loss: 0.2201 - val_loss: 0.3411 - 268s/epoch - 613ms/step
+Epoch 250/250
+438/438 - 269s - loss: 0.2302 - val_loss: 0.3230 - 269s/epoch - 615ms/step
+Test Loss (MSE): 0.280670702457428
+Model saved as: incept_surface_72653_250ep_0.2807.keras
+Training history saved as: history_72653_250ep_0.2807.json

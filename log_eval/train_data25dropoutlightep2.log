@@ -1,0 +1,223 @@
+nohup: ignoring input
+2025-06-16 18:26:15.427431: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-06-16 18:26:15.444635: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1750091175.464703  230920 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1750091175.470904  230920 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1750091175.487653  230920 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750091175.487699  230920 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750091175.487702  230920 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750091175.487704  230920 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-06-16 18:26:15.492470: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+I0000 00:00:1750091179.946955  230920 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 46550 MB memory:  -> device: 0, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:61:00.0, compute capability: 8.9
+I0000 00:00:1750091179.949497  230920 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 41433 MB memory:  -> device: 1, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:3d:00.0, compute capability: 8.9
+All shards found: ['./tfrecords/data_0077-of-0100.tfrecord', './tfrecords/data_0065-of-0100.tfrecord', './tfrecords/data_0091-of-0100.tfrecord', './tfrecords/data_0081-of-0100.tfrecord', './tfrecords/data_0033-of-0100.tfrecord', './tfrecords/data_0084-of-0100.tfrecord', './tfrecords/data_0047-of-0100.tfrecord', './tfrecords/data_0041-of-0100.tfrecord', './tfrecords/data_0010-of-0100.tfrecord', './tfrecords/data_0038-of-0100.tfrecord', './tfrecords/data_0052-of-0100.tfrecord', './tfrecords/data_0079-of-0100.tfrecord', './tfrecords/data_0014-of-0100.tfrecord', './tfrecords/data_0080-of-0100.tfrecord', './tfrecords/data_0051-of-0100.tfrecord', './tfrecords/data_0090-of-0100.tfrecord', './tfrecords/data_0062-of-0100.tfrecord', './tfrecords/data_0075-of-0100.tfrecord', './tfrecords/data_0013-of-0100.tfrecord', './tfrecords/data_0048-of-0100.tfrecord', './tfrecords/data_0059-of-0100.tfrecord', './tfrecords/data_0025-of-0100.tfrecord', './tfrecords/data_0055-of-0100.tfrecord', './tfrecords/data_0030-of-0100.tfrecord', './tfrecords/data_0017-of-0100.tfrecord', './tfrecords/data_0098-of-0100.tfrecord', './tfrecords/data_0001-of-0100.tfrecord', './tfrecords/data_0050-of-0100.tfrecord', './tfrecords/data_0096-of-0100.tfrecord', './tfrecords/data_0054-of-0100.tfrecord', './tfrecords/data_0069-of-0100.tfrecord', './tfrecords/data_0009-of-0100.tfrecord', './tfrecords/data_0067-of-0100.tfrecord', './tfrecords/data_0092-of-0100.tfrecord', './tfrecords/data_0015-of-0100.tfrecord', './tfrecords/data_0087-of-0100.tfrecord', './tfrecords/data_0032-of-0100.tfrecord', './tfrecords/data_0063-of-0100.tfrecord', './tfrecords/data_0039-of-0100.tfrecord', './tfrecords/data_0082-of-0100.tfrecord', './tfrecords/data_0035-of-0100.tfrecord', './tfrecords/data_0029-of-0100.tfrecord', './tfrecords/data_0093-of-0100.tfrecord', './tfrecords/data_0021-of-0100.tfrecord', './tfrecords/data_0028-of-0100.tfrecord', './tfrecords/data_0012-of-0100.tfrecord', './tfrecords/data_0073-of-0100.tfrecord', './tfrecords/data_0083-of-0100.tfrecord', './tfrecords/data_0007-of-0100.tfrecord', './tfrecords/data_0088-of-0100.tfrecord', './tfrecords/data_0006-of-0100.tfrecord', './tfrecords/data_0086-of-0100.tfrecord', './tfrecords/data_0046-of-0100.tfrecord', './tfrecords/data_0005-of-0100.tfrecord', './tfrecords/data_0019-of-0100.tfrecord', './tfrecords/data_0095-of-0100.tfrecord', './tfrecords/data_0043-of-0100.tfrecord', './tfrecords/data_0034-of-0100.tfrecord', './tfrecords/data_0027-of-0100.tfrecord', './tfrecords/data_0042-of-0100.tfrecord', './tfrecords/data_0040-of-0100.tfrecord', './tfrecords/data_0003-of-0100.tfrecord', './tfrecords/data_0066-of-0100.tfrecord', './tfrecords/data_0022-of-0100.tfrecord', './tfrecords/data_0049-of-0100.tfrecord', './tfrecords/data_0094-of-0100.tfrecord', './tfrecords/data_0000-of-0100.tfrecord', './tfrecords/data_0016-of-0100.tfrecord', './tfrecords/data_0008-of-0100.tfrecord', './tfrecords/data_0011-of-0100.tfrecord', './tfrecords/data_0056-of-0100.tfrecord', './tfrecords/data_0097-of-0100.tfrecord', './tfrecords/data_0053-of-0100.tfrecord', './tfrecords/data_0024-of-0100.tfrecord', './tfrecords/data_0068-of-0100.tfrecord', './tfrecords/data_0061-of-0100.tfrecord', './tfrecords/data_0002-of-0100.tfrecord', './tfrecords/data_0020-of-0100.tfrecord', './tfrecords/data_0058-of-0100.tfrecord', './tfrecords/data_0060-of-0100.tfrecord', './tfrecords/data_0004-of-0100.tfrecord', './tfrecords/data_0036-of-0100.tfrecord', './tfrecords/data_0031-of-0100.tfrecord', './tfrecords/data_0018-of-0100.tfrecord', './tfrecords/data_0044-of-0100.tfrecord', './tfrecords/data_0037-of-0100.tfrecord', './tfrecords/data_0026-of-0100.tfrecord', './tfrecords/data_0064-of-0100.tfrecord', './tfrecords/data_0074-of-0100.tfrecord', './tfrecords/data_0023-of-0100.tfrecord', './tfrecords/data_0072-of-0100.tfrecord', './tfrecords/data_0085-of-0100.tfrecord', './tfrecords/data_0071-of-0100.tfrecord', './tfrecords/data_0089-of-0100.tfrecord', './tfrecords/data_0078-of-0100.tfrecord', './tfrecords/data_0099-of-0100.tfrecord', './tfrecords/data_0057-of-0100.tfrecord', './tfrecords/data_0070-of-0100.tfrecord', './tfrecords/data_0076-of-0100.tfrecord', './tfrecords/data_0045-of-0100.tfrecord']
+Train shards: 80 Val shards: 20
+Model: "functional"
+┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)        ┃ Output Shape      ┃    Param # ┃ Connected to      ┃
+┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━┩
+│ input_layer         │ (None, 35, 35, 3) │          0 │ -                 │
+│ (InputLayer)        │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d (Conv2D)     │ (None, 35, 35,    │      4,864 │ input_layer[0][0] │
+│                     │ 64)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_2 (Conv2D)   │ (None, 35, 35,    │      4,160 │ conv2d[0][0]      │
+│                     │ 64)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_4 (Conv2D)   │ (None, 35, 35,    │      4,160 │ conv2d[0][0]      │
+│                     │ 64)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ max_pooling2d       │ (None, 35, 35,    │          0 │ conv2d[0][0]      │
+│ (MaxPooling2D)      │ 64)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_1 (Conv2D)   │ (None, 35, 35,    │      4,160 │ conv2d[0][0]      │
+│                     │ 64)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_3 (Conv2D)   │ (None, 35, 35,    │     36,928 │ conv2d_2[0][0]    │
+│                     │ 64)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_5 (Conv2D)   │ (None, 35, 35,    │    102,464 │ conv2d_4[0][0]    │
+│                     │ 64)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_6 (Conv2D)   │ (None, 35, 35,    │      4,160 │ max_pooling2d[0]… │
+│                     │ 64)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ concatenate         │ (None, 35, 35,    │          0 │ conv2d_1[0][0],   │
+│ (Concatenate)       │ 256)              │            │ conv2d_3[0][0],   │
+│                     │                   │            │ conv2d_5[0][0],   │
+│                     │                   │            │ conv2d_6[0][0]    │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_7 (Conv2D)   │ (None, 35, 35,    │    295,040 │ concatenate[0][0] │
+│                     │ 128)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ batch_normalization │ (None, 35, 35,    │        512 │ conv2d_7[0][0]    │
+│ (BatchNormalizatio… │ 128)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ max_pooling2d_1     │ (None, 12, 12,    │          0 │ batch_normalizat… │
+│ (MaxPooling2D)      │ 128)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_9 (Conv2D)   │ (None, 12, 12,    │     33,024 │ max_pooling2d_1[… │
+│                     │ 256)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_11 (Conv2D)  │ (None, 12, 12,    │     33,024 │ max_pooling2d_1[… │
+│                     │ 256)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ max_pooling2d_2     │ (None, 12, 12,    │          0 │ max_pooling2d_1[… │
+│ (MaxPooling2D)      │ 128)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_8 (Conv2D)   │ (None, 12, 12,    │     33,024 │ max_pooling2d_1[… │
+│                     │ 256)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_10 (Conv2D)  │ (None, 12, 12,    │    590,080 │ conv2d_9[0][0]    │
+│                     │ 256)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_12 (Conv2D)  │ (None, 12, 12,    │  1,638,656 │ conv2d_11[0][0]   │
+│                     │ 256)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_13 (Conv2D)  │ (None, 12, 12,    │     33,024 │ max_pooling2d_2[… │
+│                     │ 256)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ concatenate_1       │ (None, 12, 12,    │          0 │ conv2d_8[0][0],   │
+│ (Concatenate)       │ 1024)             │            │ conv2d_10[0][0],  │
+│                     │                   │            │ conv2d_12[0][0],  │
+│                     │                   │            │ conv2d_13[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_14 (Conv2D)  │ (None, 12, 12,    │  4,719,104 │ concatenate_1[0]… │
+│                     │ 512)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ batch_normalizatio… │ (None, 12, 12,    │      2,048 │ conv2d_14[0][0]   │
+│ (BatchNormalizatio… │ 512)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ max_pooling2d_3     │ (None, 4, 4, 512) │          0 │ batch_normalizat… │
+│ (MaxPooling2D)      │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_16 (Conv2D)  │ (None, 4, 4, 256) │    131,328 │ max_pooling2d_3[… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_18 (Conv2D)  │ (None, 4, 4, 256) │    131,328 │ max_pooling2d_3[… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ max_pooling2d_4     │ (None, 4, 4, 512) │          0 │ max_pooling2d_3[… │
+│ (MaxPooling2D)      │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_15 (Conv2D)  │ (None, 4, 4, 256) │    131,328 │ max_pooling2d_3[… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_17 (Conv2D)  │ (None, 4, 4, 256) │    590,080 │ conv2d_16[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_19 (Conv2D)  │ (None, 4, 4, 256) │  1,638,656 │ conv2d_18[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_20 (Conv2D)  │ (None, 4, 4, 256) │    131,328 │ max_pooling2d_4[… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ concatenate_2       │ (None, 4, 4,      │          0 │ conv2d_15[0][0],  │
+│ (Concatenate)       │ 1024)             │            │ conv2d_17[0][0],  │
+│                     │                   │            │ conv2d_19[0][0],  │
+│                     │                   │            │ conv2d_20[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_21 (Conv2D)  │ (None, 4, 4, 256) │  2,359,552 │ concatenate_2[0]… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ batch_normalizatio… │ (None, 4, 4, 256) │      1,024 │ conv2d_21[0][0]   │
+│ (BatchNormalizatio… │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ max_pooling2d_5     │ (None, 2, 2, 256) │          0 │ batch_normalizat… │
+│ (MaxPooling2D)      │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_23 (Conv2D)  │ (None, 2, 2, 256) │     65,792 │ max_pooling2d_5[… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_25 (Conv2D)  │ (None, 2, 2, 256) │     65,792 │ max_pooling2d_5[… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ max_pooling2d_6     │ (None, 2, 2, 256) │          0 │ max_pooling2d_5[… │
+│ (MaxPooling2D)      │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_22 (Conv2D)  │ (None, 2, 2, 256) │     65,792 │ max_pooling2d_5[… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_24 (Conv2D)  │ (None, 2, 2, 256) │    590,080 │ conv2d_23[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_26 (Conv2D)  │ (None, 2, 2, 256) │  1,638,656 │ conv2d_25[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_27 (Conv2D)  │ (None, 2, 2, 256) │     65,792 │ max_pooling2d_6[… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ concatenate_3       │ (None, 2, 2,      │          0 │ conv2d_22[0][0],  │
+│ (Concatenate)       │ 1024)             │            │ conv2d_24[0][0],  │
+│                     │                   │            │ conv2d_26[0][0],  │
+│                     │                   │            │ conv2d_27[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_28 (Conv2D)  │ (None, 2, 2, 512) │  4,719,104 │ concatenate_3[0]… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ batch_normalizatio… │ (None, 2, 2, 512) │      2,048 │ conv2d_28[0][0]   │
+│ (BatchNormalizatio… │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ max_pooling2d_7     │ (None, 1, 1, 512) │          0 │ batch_normalizat… │
+│ (MaxPooling2D)      │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ flatten (Flatten)   │ (None, 512)       │          0 │ max_pooling2d_7[… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ dropout (Dropout)   │ (None, 512)       │          0 │ flatten[0][0]     │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ ctrl (Dense)        │ (None, 300)       │    153,900 │ dropout[0][0]     │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ ctrl_net (Reshape)  │ (None, 10, 10, 3) │          0 │ ctrl[0][0]        │
+└─────────────────────┴───────────────────┴────────────┴───────────────────┘
+ Total params: 20,020,012 (76.37 MB)
+ Trainable params: 20,017,196 (76.36 MB)
+ Non-trainable params: 2,816 (11.00 KB)
+2025-06-16 18:26:23.880889: I tensorflow/core/kernels/data/tf_record_dataset_op.cc:381] TFRecordDataset `buffer_size` is unspecified, default to 262144
+Epoch 1/25
+I0000 00:00:1750091200.391632  231122 cuda_dnn.cc:529] Loaded cuDNN version 90800
+I0000 00:00:1750091201.214157  231133 cuda_dnn.cc:529] Loaded cuDNN version 90800
+2025-06-16 18:32:36.437206: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+	 [[{{node MultiDeviceIteratorGetNextFromShard}}]]
+2025-06-16 18:32:36.437330: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+	 [[{{node MultiDeviceIteratorGetNextFromShard}}]]
+	 [[RemoteCall]]
+2025-06-16 18:32:36.437443: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+	 [[{{node MultiDeviceIteratorGetNextFromShard}}]]
+	 [[RemoteCall]]
+2025-06-16 18:32:38.340986: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15334668913543977231
+2025-06-16 18:32:38.341078: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3653418780604711108
+2025-06-16 18:32:38.341133: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 5906675897208652698
+2025-06-16 18:32:38.341165: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 4306870154420379838
+2025-06-16 18:32:38.341180: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13132114648672890510
+2025-06-16 18:32:38.341205: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3120500173176405730
+2025-06-16 18:32:38.341220: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11122854043871539208
+2025-06-16 18:32:38.341277: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11985920892661154192
+2025-06-16 18:32:38.341297: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 10736412653380518722
+2025-06-16 18:32:38.341310: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 8598691755916465310
+2025-06-16 18:32:38.341343: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 420406629092870564
+2025-06-16 18:32:38.341361: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 1536854405647718660
+2025-06-16 18:32:38.341377: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6050576793106107575
+2025-06-16 18:32:38.341394: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3074337530025279020
+2025-06-16 18:32:38.341413: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13311135621576298205
+/home/ainsworth/master/py312/lib/python3.12/site-packages/keras/src/trainers/epoch_iterator.py:160: UserWarning: Your input ran out of data; interrupting training. Make sure that your dataset or generator can generate at least `steps_per_epoch * epochs` batches. You may need to use the `.repeat()` function when building your dataset.
+  self._interrupted_warning()
+2025-06-16 18:32:38.944879: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: CANCELLED: GetNextFromShard was cancelled
+	 [[{{node MultiDeviceIteratorGetNextFromShard}}]]
+	 [[RemoteCall]] [type.googleapis.com/tensorflow.DerivedStatus='']
+2025-06-16 18:33:03.101723: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+	 [[{{node IteratorGetNext_1}}]]
+	 [[StatefulPartitionedCall/replica_1/div_no_nan/_4]]
+2025-06-16 18:33:03.101846: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8296909601503972432
+2025-06-16 18:33:03.101871: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 17483745818061704581
+2025-06-16 18:33:03.101896: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8971272191178807513
+2594/2594 - 398s - 153ms/step - loss: 545.7191 - mse: 209.5440 - val_loss: 427.8689 - val_mse: 163.4468 - learning_rate: 2.0000e-04
+Epoch 2/25
+2025-06-16 18:38:58.194728: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3653418780604711108
+2025-06-16 18:38:58.194798: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3120500173176405730
+2025-06-16 18:38:58.194810: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11122854043871539208
+2025-06-16 18:38:58.194822: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11985920892661154192
+2025-06-16 18:38:58.194829: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 12871383615193747292
+2025-06-16 18:38:58.194837: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 10736412653380518722
+2025-06-16 18:38:58.194846: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 420406629092870564
+2025-06-16 18:38:58.194855: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 1536854405647718660
+2025-06-16 18:38:58.194865: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6050576793106107575
+2025-06-16 18:38:58.194881: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3074337530025279020
+2025-06-16 18:38:58.194890: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13311135621576298205
+2025-06-16 18:38:58.194903: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 5906675897208652698
+2025-06-16 18:38:58.194912: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15334668913543977231
+2025-06-16 18:38:58.194918: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 56644533655873908
+2025-06-16 18:38:58.194926: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13132114648672890510
+2025-06-16 18:39:20.812515: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8296909601503972432
+2025-06-16 18:39:20.812583: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 17483745818061704581
+2025-06-16 18:39:20.812606: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8971272191178807513
+2594/2594 - 379s - 146ms/step - loss: 328.4287 - mse: 117.6821 - val_loss: 260.1738 - val_mse: 88.7655 - learning_rate: 2.0000e-04
+Epoch 3/25

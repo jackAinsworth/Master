@@ -1,0 +1,418 @@
+nohup: ignoring input
+2025-06-03 15:28:14.963759: I tensorflow/core/util/port.cc:110] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-06-03 15:28:15.868449: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-06-03 15:28:22.092762: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 46551 MB memory:  -> device: 0, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:61:00.0, compute capability: 8.9
+2025-06-03 15:28:22.094445: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 46542 MB memory:  -> device: 1, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:3d:00.0, compute capability: 8.9
+Number of devices: 2
+Training set: (928000, 35, 35, 3) (928000, 10, 10, 3)
+Validation set: (116000, 35, 35, 3) (116000, 10, 10, 3)
+Test set: (116000, 35, 35, 3) (116000, 10, 10, 3)
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input_1 (InputLayer)        [(None, 35, 35, 3)]          0         []                            
+                                                                                                  
+ conv2d (Conv2D)             (None, 35, 35, 64)           4864      ['input_1[0][0]']             
+                                                                                                  
+ conv2d_2 (Conv2D)           (None, 35, 35, 64)           4160      ['conv2d[0][0]']              
+                                                                                                  
+ conv2d_4 (Conv2D)           (None, 35, 35, 64)           4160      ['conv2d[0][0]']              
+                                                                                                  
+ max_pooling2d (MaxPooling2  (None, 35, 35, 64)           0         ['conv2d[0][0]']              
+ D)                                                                                               
+                                                                                                  
+ conv2d_1 (Conv2D)           (None, 35, 35, 64)           4160      ['conv2d[0][0]']              
+                                                                                                  
+ conv2d_3 (Conv2D)           (None, 35, 35, 64)           36928     ['conv2d_2[0][0]']            
+                                                                                                  
+ conv2d_5 (Conv2D)           (None, 35, 35, 64)           102464    ['conv2d_4[0][0]']            
+                                                                                                  
+ conv2d_6 (Conv2D)           (None, 35, 35, 64)           4160      ['max_pooling2d[0][0]']       
+                                                                                                  
+ concatenate (Concatenate)   (None, 35, 35, 256)          0         ['conv2d_1[0][0]',            
+                                                                     'conv2d_3[0][0]',            
+                                                                     'conv2d_5[0][0]',            
+                                                                     'conv2d_6[0][0]']            
+                                                                                                  
+ dropout (Dropout)           (None, 35, 35, 256)          0         ['concatenate[0][0]']         
+                                                                                                  
+ conv2d_7 (Conv2D)           (None, 35, 35, 128)          295040    ['dropout[0][0]']             
+                                                                                                  
+ batch_normalization (Batch  (None, 35, 35, 128)          512       ['conv2d_7[0][0]']            
+ Normalization)                                                                                   
+                                                                                                  
+ max_pooling2d_1 (MaxPoolin  (None, 12, 12, 128)          0         ['batch_normalization[0][0]'] 
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_9 (Conv2D)           (None, 12, 12, 256)          33024     ['max_pooling2d_1[0][0]']     
+                                                                                                  
+ conv2d_11 (Conv2D)          (None, 12, 12, 256)          33024     ['max_pooling2d_1[0][0]']     
+                                                                                                  
+ max_pooling2d_2 (MaxPoolin  (None, 12, 12, 128)          0         ['max_pooling2d_1[0][0]']     
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_8 (Conv2D)           (None, 12, 12, 256)          33024     ['max_pooling2d_1[0][0]']     
+                                                                                                  
+ conv2d_10 (Conv2D)          (None, 12, 12, 256)          590080    ['conv2d_9[0][0]']            
+                                                                                                  
+ conv2d_12 (Conv2D)          (None, 12, 12, 256)          1638656   ['conv2d_11[0][0]']           
+                                                                                                  
+ conv2d_13 (Conv2D)          (None, 12, 12, 256)          33024     ['max_pooling2d_2[0][0]']     
+                                                                                                  
+ concatenate_1 (Concatenate  (None, 12, 12, 1024)         0         ['conv2d_8[0][0]',            
+ )                                                                   'conv2d_10[0][0]',           
+                                                                     'conv2d_12[0][0]',           
+                                                                     'conv2d_13[0][0]']           
+                                                                                                  
+ dropout_1 (Dropout)         (None, 12, 12, 1024)         0         ['concatenate_1[0][0]']       
+                                                                                                  
+ conv2d_14 (Conv2D)          (None, 12, 12, 512)          4719104   ['dropout_1[0][0]']           
+                                                                                                  
+ batch_normalization_1 (Bat  (None, 12, 12, 512)          2048      ['conv2d_14[0][0]']           
+ chNormalization)                                                                                 
+                                                                                                  
+ max_pooling2d_3 (MaxPoolin  (None, 4, 4, 512)            0         ['batch_normalization_1[0][0]'
+ g2D)                                                               ]                             
+                                                                                                  
+ conv2d_16 (Conv2D)          (None, 4, 4, 256)            131328    ['max_pooling2d_3[0][0]']     
+                                                                                                  
+ conv2d_18 (Conv2D)          (None, 4, 4, 256)            131328    ['max_pooling2d_3[0][0]']     
+                                                                                                  
+ max_pooling2d_4 (MaxPoolin  (None, 4, 4, 512)            0         ['max_pooling2d_3[0][0]']     
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_15 (Conv2D)          (None, 4, 4, 256)            131328    ['max_pooling2d_3[0][0]']     
+                                                                                                  
+ conv2d_17 (Conv2D)          (None, 4, 4, 256)            590080    ['conv2d_16[0][0]']           
+                                                                                                  
+ conv2d_19 (Conv2D)          (None, 4, 4, 256)            1638656   ['conv2d_18[0][0]']           
+                                                                                                  
+ conv2d_20 (Conv2D)          (None, 4, 4, 256)            131328    ['max_pooling2d_4[0][0]']     
+                                                                                                  
+ concatenate_2 (Concatenate  (None, 4, 4, 1024)           0         ['conv2d_15[0][0]',           
+ )                                                                   'conv2d_17[0][0]',           
+                                                                     'conv2d_19[0][0]',           
+                                                                     'conv2d_20[0][0]']           
+                                                                                                  
+ dropout_2 (Dropout)         (None, 4, 4, 1024)           0         ['concatenate_2[0][0]']       
+                                                                                                  
+ conv2d_21 (Conv2D)          (None, 4, 4, 256)            2359552   ['dropout_2[0][0]']           
+                                                                                                  
+ batch_normalization_2 (Bat  (None, 4, 4, 256)            1024      ['conv2d_21[0][0]']           
+ chNormalization)                                                                                 
+                                                                                                  
+ max_pooling2d_5 (MaxPoolin  (None, 2, 2, 256)            0         ['batch_normalization_2[0][0]'
+ g2D)                                                               ]                             
+                                                                                                  
+ conv2d_23 (Conv2D)          (None, 2, 2, 256)            65792     ['max_pooling2d_5[0][0]']     
+                                                                                                  
+ conv2d_25 (Conv2D)          (None, 2, 2, 256)            65792     ['max_pooling2d_5[0][0]']     
+                                                                                                  
+ max_pooling2d_6 (MaxPoolin  (None, 2, 2, 256)            0         ['max_pooling2d_5[0][0]']     
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_22 (Conv2D)          (None, 2, 2, 256)            65792     ['max_pooling2d_5[0][0]']     
+                                                                                                  
+ conv2d_24 (Conv2D)          (None, 2, 2, 256)            590080    ['conv2d_23[0][0]']           
+                                                                                                  
+ conv2d_26 (Conv2D)          (None, 2, 2, 256)            1638656   ['conv2d_25[0][0]']           
+                                                                                                  
+ conv2d_27 (Conv2D)          (None, 2, 2, 256)            65792     ['max_pooling2d_6[0][0]']     
+                                                                                                  
+ concatenate_3 (Concatenate  (None, 2, 2, 1024)           0         ['conv2d_22[0][0]',           
+ )                                                                   'conv2d_24[0][0]',           
+                                                                     'conv2d_26[0][0]',           
+                                                                     'conv2d_27[0][0]']           
+                                                                                                  
+ dropout_3 (Dropout)         (None, 2, 2, 1024)           0         ['concatenate_3[0][0]']       
+                                                                                                  
+ conv2d_28 (Conv2D)          (None, 2, 2, 512)            4719104   ['dropout_3[0][0]']           
+                                                                                                  
+ batch_normalization_3 (Bat  (None, 2, 2, 512)            2048      ['conv2d_28[0][0]']           
+ chNormalization)                                                                                 
+                                                                                                  
+ max_pooling2d_7 (MaxPoolin  (None, 1, 1, 512)            0         ['batch_normalization_3[0][0]'
+ g2D)                                                               ]                             
+                                                                                                  
+ flatten (Flatten)           (None, 512)                  0         ['max_pooling2d_7[0][0]']     
+                                                                                                  
+ dense (Dense)               (None, 300)                  153900    ['flatten[0][0]']             
+                                                                                                  
+ reshape (Reshape)           (None, 10, 10, 3)            0         ['dense[0][0]']               
+                                                                                                  
+==================================================================================================
+Total params: 20020012 (76.37 MB)
+Trainable params: 20017196 (76.36 MB)
+Non-trainable params: 2816 (11.00 KB)
+__________________________________________________________________________________________________
+Epoch 1/130
+2025-06-03 15:55:39.838411: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:954] layout failed: INVALID_ARGUMENT: Size of values 0 does not match size of permutation 4 @ fanin shape inmodel/dropout/dropout/SelectV2-2-TransposeNHWCToNCHW-LayoutOptimizer
+2025-06-03 15:55:43.288384: I tensorflow/compiler/xla/stream_executor/cuda/cuda_dnn.cc:432] Loaded cuDNN version 8907
+2025-06-03 15:55:43.290337: I tensorflow/compiler/xla/stream_executor/cuda/cuda_dnn.cc:432] Loaded cuDNN version 8907
+2025-06-03 15:55:44.720106: I tensorflow/compiler/xla/stream_executor/cuda/cuda_blas.cc:606] TensorFloat-32 will be used for the matrix multiplication. This will only be logged once.
+2025-06-03 15:55:51.007160: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7f7f8c6380d0 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2025-06-03 15:55:51.008201: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): NVIDIA RTX 6000 Ada Generation, Compute Capability 8.9
+2025-06-03 15:55:51.008218: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (1): NVIDIA RTX 6000 Ada Generation, Compute Capability 8.9
+2025-06-03 15:55:51.203885: I tensorflow/compiler/mlir/tensorflow/utils/dump_mlir_util.cc:255] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
+2025-06-03 15:55:53.732201: I ./tensorflow/compiler/jit/device_compiler.h:186] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+1813/1813 - 296s - loss: 303.5235 - mse: 233.9649 - val_loss: 243.4822 - val_mse: 185.5177 - 296s/epoch - 163ms/step
+Epoch 2/130
+1813/1813 - 205s - loss: 228.0061 - mse: 173.9671 - val_loss: 220.7554 - val_mse: 168.7738 - 205s/epoch - 113ms/step
+Epoch 3/130
+1813/1813 - 204s - loss: 199.4995 - mse: 149.3517 - val_loss: 200.4773 - val_mse: 150.9671 - 204s/epoch - 112ms/step
+Epoch 4/130
+1813/1813 - 205s - loss: 165.8365 - mse: 119.0556 - val_loss: 150.4918 - val_mse: 105.6625 - 205s/epoch - 113ms/step
+Epoch 5/130
+1813/1813 - 205s - loss: 133.0049 - mse: 90.3685 - val_loss: 123.7592 - val_mse: 83.0368 - 205s/epoch - 113ms/step
+Epoch 6/130
+1813/1813 - 207s - loss: 108.9037 - mse: 71.0695 - val_loss: 101.5232 - val_mse: 65.6659 - 207s/epoch - 114ms/step
+Epoch 7/130
+1813/1813 - 208s - loss: 92.8320 - mse: 59.3839 - val_loss: 94.0335 - val_mse: 60.1531 - 208s/epoch - 115ms/step
+Epoch 8/130
+1813/1813 - 206s - loss: 82.0668 - mse: 52.1135 - val_loss: 101.2186 - val_mse: 65.1106 - 206s/epoch - 114ms/step
+Epoch 9/130
+1813/1813 - 203s - loss: 74.1934 - mse: 47.0364 - val_loss: 106.5871 - val_mse: 68.2934 - 203s/epoch - 112ms/step
+Epoch 10/130
+1813/1813 - 203s - loss: 68.1684 - mse: 43.2377 - val_loss: 95.7975 - val_mse: 62.1386 - 203s/epoch - 112ms/step
+Epoch 11/130
+1813/1813 - 202s - loss: 62.9736 - mse: 39.9513 - val_loss: 144.6273 - val_mse: 97.2159 - 202s/epoch - 112ms/step
+Epoch 12/130
+1813/1813 - 202s - loss: 59.1041 - mse: 37.5062 - val_loss: 93.0184 - val_mse: 59.4980 - 202s/epoch - 111ms/step
+Epoch 13/130
+1813/1813 - 202s - loss: 55.0052 - mse: 34.9079 - val_loss: 104.7930 - val_mse: 67.3520 - 202s/epoch - 112ms/step
+Epoch 14/130
+1813/1813 - 207s - loss: 52.0381 - mse: 32.9929 - val_loss: 97.0929 - val_mse: 61.9419 - 207s/epoch - 114ms/step
+Epoch 15/130
+1813/1813 - 206s - loss: 49.1140 - mse: 31.1112 - val_loss: 104.5412 - val_mse: 66.4753 - 206s/epoch - 114ms/step
+Epoch 16/130
+1813/1813 - 206s - loss: 46.9426 - mse: 29.7026 - val_loss: 84.3978 - val_mse: 53.7674 - 206s/epoch - 114ms/step
+Epoch 17/130
+1813/1813 - 205s - loss: 45.1966 - mse: 28.5520 - val_loss: 81.6368 - val_mse: 52.1786 - 205s/epoch - 113ms/step
+Epoch 18/130
+1813/1813 - 204s - loss: 43.6947 - mse: 27.5598 - val_loss: 80.2483 - val_mse: 51.1150 - 204s/epoch - 112ms/step
+Epoch 19/130
+1813/1813 - 206s - loss: 42.7979 - mse: 26.9754 - val_loss: 81.4082 - val_mse: 51.8419 - 206s/epoch - 113ms/step
+Epoch 20/130
+1813/1813 - 207s - loss: 42.4914 - mse: 26.7757 - val_loss: 78.7119 - val_mse: 50.1374 - 207s/epoch - 114ms/step
+Epoch 21/130
+1813/1813 - 203s - loss: 68.7950 - mse: 44.1656 - val_loss: 170.1775 - val_mse: 121.5980 - 203s/epoch - 112ms/step
+Epoch 22/130
+1813/1813 - 206s - loss: 64.9901 - mse: 41.7575 - val_loss: 113.4165 - val_mse: 73.6204 - 206s/epoch - 114ms/step
+Epoch 23/130
+1813/1813 - 203s - loss: 61.6147 - mse: 39.6215 - val_loss: 117.7499 - val_mse: 76.4439 - 203s/epoch - 112ms/step
+Epoch 24/130
+1813/1813 - 205s - loss: 58.7955 - mse: 37.8024 - val_loss: 137.6623 - val_mse: 92.5600 - 205s/epoch - 113ms/step
+Epoch 25/130
+1813/1813 - 203s - loss: 56.6611 - mse: 36.4049 - val_loss: 88.1701 - val_mse: 56.1200 - 203s/epoch - 112ms/step
+Epoch 26/130
+1813/1813 - 207s - loss: 53.7525 - mse: 34.5246 - val_loss: 235.9021 - val_mse: 174.5747 - 207s/epoch - 114ms/step
+Epoch 27/130
+1813/1813 - 204s - loss: 51.1002 - mse: 32.7851 - val_loss: 200.1086 - val_mse: 142.8833 - 204s/epoch - 112ms/step
+Epoch 28/130
+1813/1813 - 204s - loss: 48.4682 - mse: 31.0913 - val_loss: 134.8328 - val_mse: 87.7744 - 204s/epoch - 112ms/step
+Epoch 29/130
+1813/1813 - 204s - loss: 46.7623 - mse: 29.9400 - val_loss: 150.4091 - val_mse: 100.9497 - 204s/epoch - 112ms/step
+Epoch 30/130
+1813/1813 - 206s - loss: 44.2409 - mse: 28.3137 - val_loss: 140.9808 - val_mse: 96.4613 - 206s/epoch - 114ms/step
+Epoch 31/130
+1813/1813 - 204s - loss: 42.5268 - mse: 27.1541 - val_loss: 151.0635 - val_mse: 102.9036 - 204s/epoch - 112ms/step
+Epoch 32/130
+1813/1813 - 204s - loss: 40.2627 - mse: 25.6946 - val_loss: 103.1815 - val_mse: 65.0030 - 204s/epoch - 113ms/step
+Epoch 33/130
+1813/1813 - 208s - loss: 38.4980 - mse: 24.5003 - val_loss: 108.2488 - val_mse: 68.6072 - 208s/epoch - 114ms/step
+Epoch 34/130
+1813/1813 - 204s - loss: 36.8999 - mse: 23.4185 - val_loss: 116.5117 - val_mse: 74.4587 - 204s/epoch - 113ms/step
+Epoch 35/130
+1813/1813 - 205s - loss: 35.1010 - mse: 22.2526 - val_loss: 177.4461 - val_mse: 123.0565 - 205s/epoch - 113ms/step
+Epoch 36/130
+1813/1813 - 204s - loss: 33.5668 - mse: 21.2184 - val_loss: 88.0259 - val_mse: 54.1925 - 204s/epoch - 112ms/step
+Epoch 37/130
+1813/1813 - 203s - loss: 32.0161 - mse: 20.1980 - val_loss: 152.4911 - val_mse: 100.7715 - 203s/epoch - 112ms/step
+Epoch 38/130
+1813/1813 - 202s - loss: 30.3757 - mse: 19.1384 - val_loss: 104.4225 - val_mse: 67.7484 - 202s/epoch - 112ms/step
+Epoch 39/130
+1813/1813 - 202s - loss: 28.9632 - mse: 18.1967 - val_loss: 100.4711 - val_mse: 62.2633 - 202s/epoch - 112ms/step
+Epoch 40/130
+1813/1813 - 202s - loss: 27.7219 - mse: 17.3632 - val_loss: 110.4573 - val_mse: 69.2395 - 202s/epoch - 111ms/step
+Epoch 41/130
+1813/1813 - 203s - loss: 26.4731 - mse: 16.5237 - val_loss: 74.6443 - val_mse: 45.7479 - 203s/epoch - 112ms/step
+Epoch 42/130
+1813/1813 - 204s - loss: 25.3660 - mse: 15.8090 - val_loss: 81.8820 - val_mse: 49.8975 - 204s/epoch - 112ms/step
+Epoch 43/130
+1813/1813 - 203s - loss: 24.0914 - mse: 14.9757 - val_loss: 82.1232 - val_mse: 50.3072 - 203s/epoch - 112ms/step
+Epoch 44/130
+1813/1813 - 202s - loss: 23.0368 - mse: 14.2789 - val_loss: 94.1756 - val_mse: 57.9355 - 202s/epoch - 112ms/step
+Epoch 45/130
+1813/1813 - 202s - loss: 22.0484 - mse: 13.6319 - val_loss: 61.8162 - val_mse: 38.5355 - 202s/epoch - 111ms/step
+Epoch 46/130
+1813/1813 - 204s - loss: 21.0313 - mse: 12.9734 - val_loss: 66.5058 - val_mse: 41.1390 - 204s/epoch - 113ms/step
+Epoch 47/130
+1813/1813 - 203s - loss: 20.1981 - mse: 12.4222 - val_loss: 64.9752 - val_mse: 40.1370 - 203s/epoch - 112ms/step
+Epoch 48/130
+1813/1813 - 202s - loss: 19.2634 - mse: 11.8287 - val_loss: 64.1450 - val_mse: 39.6675 - 202s/epoch - 111ms/step
+Epoch 49/130
+1813/1813 - 202s - loss: 18.4954 - mse: 11.3323 - val_loss: 71.8195 - val_mse: 44.4850 - 202s/epoch - 111ms/step
+Epoch 50/130
+1813/1813 - 202s - loss: 17.8263 - mse: 10.9002 - val_loss: 101.1558 - val_mse: 61.2454 - 202s/epoch - 112ms/step
+Epoch 51/130
+1813/1813 - 202s - loss: 17.1666 - mse: 10.4813 - val_loss: 54.8280 - val_mse: 34.2648 - 202s/epoch - 111ms/step
+Epoch 52/130
+1813/1813 - 202s - loss: 16.6104 - mse: 10.1308 - val_loss: 92.2385 - val_mse: 56.1320 - 202s/epoch - 111ms/step
+Epoch 53/130
+1813/1813 - 201s - loss: 16.1060 - mse: 9.8023 - val_loss: 58.0494 - val_mse: 36.0747 - 201s/epoch - 111ms/step
+Epoch 54/130
+1813/1813 - 202s - loss: 15.6786 - mse: 9.5311 - val_loss: 48.9896 - val_mse: 31.1013 - 202s/epoch - 111ms/step
+Epoch 55/130
+1813/1813 - 201s - loss: 15.3419 - mse: 9.3238 - val_loss: 68.6899 - val_mse: 42.4872 - 201s/epoch - 111ms/step
+Epoch 56/130
+1813/1813 - 203s - loss: 15.0813 - mse: 9.1546 - val_loss: 56.0793 - val_mse: 35.2155 - 203s/epoch - 112ms/step
+Epoch 57/130
+1813/1813 - 203s - loss: 14.8359 - mse: 8.9987 - val_loss: 52.1213 - val_mse: 32.9380 - 203s/epoch - 112ms/step
+Epoch 58/130
+1813/1813 - 202s - loss: 14.7142 - mse: 8.9265 - val_loss: 50.9449 - val_mse: 32.2263 - 202s/epoch - 112ms/step
+Epoch 59/130
+1813/1813 - 203s - loss: 14.5876 - mse: 8.8451 - val_loss: 51.6797 - val_mse: 32.6596 - 203s/epoch - 112ms/step
+Epoch 60/130
+1813/1813 - 202s - loss: 14.5332 - mse: 8.8120 - val_loss: 50.6074 - val_mse: 32.0522 - 202s/epoch - 111ms/step
+Epoch 61/130
+1813/1813 - 202s - loss: 29.9946 - mse: 18.7497 - val_loss: 87.5738 - val_mse: 54.0174 - 202s/epoch - 111ms/step
+Epoch 62/130
+1813/1813 - 201s - loss: 29.9707 - mse: 18.8167 - val_loss: 138.8960 - val_mse: 91.5917 - 201s/epoch - 111ms/step
+Epoch 63/130
+1813/1813 - 199s - loss: 29.1163 - mse: 18.2845 - val_loss: 96.4621 - val_mse: 61.1405 - 199s/epoch - 110ms/step
+Epoch 64/130
+1813/1813 - 203s - loss: 28.6505 - mse: 17.9468 - val_loss: 94.5557 - val_mse: 58.4635 - 203s/epoch - 112ms/step
+Epoch 65/130
+1813/1813 - 202s - loss: 27.6709 - mse: 17.3290 - val_loss: 112.8737 - val_mse: 71.1759 - 202s/epoch - 111ms/step
+Epoch 66/130
+1813/1813 - 203s - loss: 27.0425 - mse: 16.9035 - val_loss: 113.8541 - val_mse: 73.1015 - 203s/epoch - 112ms/step
+Epoch 67/130
+1813/1813 - 202s - loss: 26.3347 - mse: 16.4309 - val_loss: 105.4264 - val_mse: 67.0937 - 202s/epoch - 111ms/step
+Epoch 68/130
+1813/1813 - 201s - loss: 25.5861 - mse: 15.9464 - val_loss: 164.3906 - val_mse: 115.0771 - 201s/epoch - 111ms/step
+Epoch 69/130
+1813/1813 - 201s - loss: 25.0001 - mse: 15.5797 - val_loss: 93.1420 - val_mse: 58.8926 - 201s/epoch - 111ms/step
+Epoch 70/130
+1813/1813 - 202s - loss: 24.3630 - mse: 15.1630 - val_loss: 129.4313 - val_mse: 84.5094 - 202s/epoch - 112ms/step
+Epoch 71/130
+1813/1813 - 202s - loss: 23.6119 - mse: 14.6766 - val_loss: 97.2427 - val_mse: 61.3820 - 202s/epoch - 111ms/step
+Epoch 72/130
+1813/1813 - 202s - loss: 22.6922 - mse: 14.0915 - val_loss: 109.3723 - val_mse: 69.6454 - 202s/epoch - 111ms/step
+Epoch 73/130
+1813/1813 - 201s - loss: 22.2192 - mse: 13.7933 - val_loss: 86.4089 - val_mse: 53.8426 - 201s/epoch - 111ms/step
+Epoch 74/130
+1813/1813 - 202s - loss: 21.5416 - mse: 13.3448 - val_loss: 75.9193 - val_mse: 46.9831 - 202s/epoch - 111ms/step
+Epoch 75/130
+1813/1813 - 202s - loss: 20.9097 - mse: 12.9428 - val_loss: 172.6129 - val_mse: 117.0409 - 202s/epoch - 111ms/step
+Epoch 76/130
+1813/1813 - 201s - loss: 20.3951 - mse: 12.6049 - val_loss: 119.6018 - val_mse: 75.5795 - 201s/epoch - 111ms/step
+Epoch 77/130
+1813/1813 - 201s - loss: 19.7960 - mse: 12.2343 - val_loss: 101.2676 - val_mse: 62.9119 - 201s/epoch - 111ms/step
+Epoch 78/130
+1813/1813 - 201s - loss: 19.1450 - mse: 11.8253 - val_loss: 92.3504 - val_mse: 56.9662 - 201s/epoch - 111ms/step
+Epoch 79/130
+1813/1813 - 200s - loss: 18.6767 - mse: 11.5194 - val_loss: 117.8308 - val_mse: 74.2900 - 200s/epoch - 110ms/step
+Epoch 80/130
+1813/1813 - 201s - loss: 18.2336 - mse: 11.2375 - val_loss: 111.3357 - val_mse: 69.7073 - 201s/epoch - 111ms/step
+Epoch 81/130
+1813/1813 - 202s - loss: 17.6408 - mse: 10.8632 - val_loss: 132.1758 - val_mse: 84.2807 - 202s/epoch - 111ms/step
+Epoch 82/130
+1813/1813 - 201s - loss: 17.0396 - mse: 10.4887 - val_loss: 86.0109 - val_mse: 52.9387 - 201s/epoch - 111ms/step
+Epoch 83/130
+1813/1813 - 202s - loss: 16.3994 - mse: 10.0930 - val_loss: 111.5438 - val_mse: 68.5949 - 202s/epoch - 111ms/step
+Epoch 84/130
+1813/1813 - 201s - loss: 16.0453 - mse: 9.8589 - val_loss: 95.2098 - val_mse: 58.1616 - 201s/epoch - 111ms/step
+Epoch 85/130
+1813/1813 - 202s - loss: 15.6676 - mse: 9.6312 - val_loss: 126.5149 - val_mse: 77.4513 - 202s/epoch - 111ms/step
+Epoch 86/130
+1813/1813 - 202s - loss: 15.0404 - mse: 9.2339 - val_loss: 78.2499 - val_mse: 47.9530 - 202s/epoch - 112ms/step
+Epoch 87/130
+1813/1813 - 201s - loss: 14.6534 - mse: 8.9991 - val_loss: 104.6550 - val_mse: 69.2120 - 201s/epoch - 111ms/step
+Epoch 88/130
+1813/1813 - 202s - loss: 14.2320 - mse: 8.7441 - val_loss: 112.4324 - val_mse: 70.8957 - 202s/epoch - 111ms/step
+Epoch 89/130
+1813/1813 - 202s - loss: 13.8745 - mse: 8.5067 - val_loss: 105.2760 - val_mse: 67.8499 - 202s/epoch - 112ms/step
+Epoch 90/130
+1813/1813 - 201s - loss: 13.4069 - mse: 8.2171 - val_loss: 102.0075 - val_mse: 63.4437 - 201s/epoch - 111ms/step
+Epoch 91/130
+1813/1813 - 201s - loss: 12.9887 - mse: 7.9586 - val_loss: 77.9953 - val_mse: 47.8944 - 201s/epoch - 111ms/step
+Epoch 92/130
+1813/1813 - 205s - loss: 12.6578 - mse: 7.7521 - val_loss: 120.2505 - val_mse: 72.5237 - 205s/epoch - 113ms/step
+Epoch 93/130
+1813/1813 - 203s - loss: 12.0934 - mse: 7.4061 - val_loss: 87.1858 - val_mse: 53.1621 - 203s/epoch - 112ms/step
+Epoch 94/130
+1813/1813 - 201s - loss: 11.7144 - mse: 7.1708 - val_loss: 93.6893 - val_mse: 57.2044 - 201s/epoch - 111ms/step
+Epoch 95/130
+1813/1813 - 200s - loss: 11.4531 - mse: 7.0106 - val_loss: 61.7061 - val_mse: 38.1350 - 200s/epoch - 110ms/step
+Epoch 96/130
+1813/1813 - 200s - loss: 11.0696 - mse: 6.7767 - val_loss: 94.9120 - val_mse: 57.3381 - 200s/epoch - 110ms/step
+Epoch 97/130
+1813/1813 - 201s - loss: 10.6120 - mse: 6.4980 - val_loss: 93.3518 - val_mse: 57.9305 - 201s/epoch - 111ms/step
+Epoch 98/130
+1813/1813 - 200s - loss: 10.4068 - mse: 6.3636 - val_loss: 75.8248 - val_mse: 46.1417 - 200s/epoch - 111ms/step
+Epoch 99/130
+1813/1813 - 201s - loss: 10.1407 - mse: 6.2010 - val_loss: 69.4546 - val_mse: 42.8746 - 201s/epoch - 111ms/step
+Epoch 100/130
+1813/1813 - 203s - loss: 9.7396 - mse: 5.9596 - val_loss: 97.0345 - val_mse: 58.9016 - 203s/epoch - 112ms/step
+Epoch 101/130
+1813/1813 - 203s - loss: 9.4291 - mse: 5.7712 - val_loss: 70.3182 - val_mse: 43.6096 - 203s/epoch - 112ms/step
+Epoch 102/130
+1813/1813 - 203s - loss: 9.1013 - mse: 5.5793 - val_loss: 78.0435 - val_mse: 47.8309 - 203s/epoch - 112ms/step
+Epoch 103/130
+1813/1813 - 202s - loss: 8.8506 - mse: 5.4216 - val_loss: 58.9188 - val_mse: 36.8373 - 202s/epoch - 112ms/step
+Epoch 104/130
+1813/1813 - 200s - loss: 8.5733 - mse: 5.2538 - val_loss: 97.5956 - val_mse: 59.6862 - 200s/epoch - 110ms/step
+Epoch 105/130
+1813/1813 - 201s - loss: 8.3561 - mse: 5.1178 - val_loss: 84.5450 - val_mse: 51.6053 - 201s/epoch - 111ms/step
+Epoch 106/130
+1813/1813 - 200s - loss: 8.0562 - mse: 4.9345 - val_loss: 142.5554 - val_mse: 91.1409 - 200s/epoch - 111ms/step
+Epoch 107/130
+1813/1813 - 200s - loss: 7.8382 - mse: 4.8068 - val_loss: 74.0897 - val_mse: 45.8647 - 200s/epoch - 110ms/step
+Epoch 108/130
+1813/1813 - 200s - loss: 7.5944 - mse: 4.6563 - val_loss: 77.5029 - val_mse: 47.4623 - 200s/epoch - 110ms/step
+Epoch 109/130
+1813/1813 - 201s - loss: 7.3754 - mse: 4.5274 - val_loss: 71.6875 - val_mse: 44.0734 - 201s/epoch - 111ms/step
+Epoch 110/130
+1813/1813 - 200s - loss: 7.1287 - mse: 4.3796 - val_loss: 67.2967 - val_mse: 41.4429 - 200s/epoch - 111ms/step
+Epoch 111/130
+1813/1813 - 201s - loss: 6.9552 - mse: 4.2735 - val_loss: 60.8815 - val_mse: 38.0601 - 201s/epoch - 111ms/step
+Epoch 112/130
+1813/1813 - 200s - loss: 6.7128 - mse: 4.1277 - val_loss: 77.6064 - val_mse: 47.6522 - 200s/epoch - 110ms/step
+Epoch 113/130
+1813/1813 - 200s - loss: 6.5716 - mse: 4.0442 - val_loss: 83.1944 - val_mse: 50.6535 - 200s/epoch - 110ms/step
+Epoch 114/130
+1813/1813 - 199s - loss: 6.3894 - mse: 3.9335 - val_loss: 74.3805 - val_mse: 45.4302 - 199s/epoch - 110ms/step
+Epoch 115/130
+1813/1813 - 200s - loss: 6.2252 - mse: 3.8354 - val_loss: 78.3973 - val_mse: 47.8134 - 200s/epoch - 111ms/step
+Epoch 116/130
+1813/1813 - 200s - loss: 6.0568 - mse: 3.7326 - val_loss: 76.0038 - val_mse: 46.6588 - 200s/epoch - 110ms/step
+Epoch 117/130
+1813/1813 - 200s - loss: 5.8954 - mse: 3.6376 - val_loss: 63.3430 - val_mse: 39.1468 - 200s/epoch - 110ms/step
+Epoch 118/130
+1813/1813 - 200s - loss: 5.7501 - mse: 3.5509 - val_loss: 93.7339 - val_mse: 56.4061 - 200s/epoch - 110ms/step
+Epoch 119/130
+1813/1813 - 200s - loss: 5.6480 - mse: 3.4894 - val_loss: 47.8168 - val_mse: 30.3219 - 200s/epoch - 111ms/step
+Epoch 120/130
+1813/1813 - 200s - loss: 5.5331 - mse: 3.4226 - val_loss: 49.2846 - val_mse: 31.4329 - 200s/epoch - 110ms/step
+Epoch 121/130
+1813/1813 - 200s - loss: 5.3969 - mse: 3.3397 - val_loss: 77.2211 - val_mse: 47.1207 - 200s/epoch - 110ms/step
+Epoch 122/130
+1813/1813 - 200s - loss: 5.3070 - mse: 3.2873 - val_loss: 54.1708 - val_mse: 34.1290 - 200s/epoch - 111ms/step
+Epoch 123/130
+1813/1813 - 201s - loss: 5.1986 - mse: 3.2194 - val_loss: 65.3490 - val_mse: 39.9846 - 201s/epoch - 111ms/step
+Epoch 124/130
+1813/1813 - 203s - loss: 5.1123 - mse: 3.1693 - val_loss: 53.2649 - val_mse: 33.4494 - 203s/epoch - 112ms/step
+Epoch 125/130
+1813/1813 - 201s - loss: 5.0382 - mse: 3.1265 - val_loss: 49.7711 - val_mse: 31.5992 - 201s/epoch - 111ms/step
+Epoch 126/130
+1813/1813 - 201s - loss: 4.9664 - mse: 3.0838 - val_loss: 68.2056 - val_mse: 41.9725 - 201s/epoch - 111ms/step
+Epoch 127/130
+1813/1813 - 201s - loss: 4.8976 - mse: 3.0417 - val_loss: 54.6439 - val_mse: 34.3482 - 201s/epoch - 111ms/step
+Epoch 128/130
+1813/1813 - 201s - loss: 4.8311 - mse: 3.0042 - val_loss: 51.4388 - val_mse: 32.4969 - 201s/epoch - 111ms/step
+Epoch 129/130
+1813/1813 - 201s - loss: 4.7792 - mse: 2.9721 - val_loss: 54.4847 - val_mse: 34.2123 - 201s/epoch - 111ms/step
+Epoch 130/130
+1813/1813 - 201s - loss: 4.7319 - mse: 2.9431 - val_loss: 48.8607 - val_mse: 30.9877 - 201s/epoch - 111ms/step
