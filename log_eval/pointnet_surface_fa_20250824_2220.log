@@ -1,0 +1,1634 @@
+nohup: ignoring input
+2025-08-24 22:24:47.650858: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-08-24 22:24:47.667694: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1756067087.688537  502947 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1756067087.694888  502947 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1756067087.710967  502947 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1756067087.710992  502947 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1756067087.710995  502947 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1756067087.710998  502947 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-08-24 22:24:47.715482: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Torch: 2.7.1+cu126  CUDA available: True
+GPUs: 2 ['NVIDIA RTX 6000 Ada Generation', 'NVIDIA RTX 6000 Ada Generation']
+TensorFlow (for TFRecord I/O only): 2.19.0
+Train shards: 80  Val shards: 20
+I0000 00:00:1756067093.427484  502947 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 45782 MB memory:  -> device: 0, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:3d:00.0, compute capability: 8.9
+I0000 00:00:1756067093.429245  502947 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 46550 MB memory:  -> device: 1, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:61:00.0, compute capability: 8.9
+Total parameters: 5,165,996
+Trainable parameters: 5,165,996
+Detailed summary with torchinfo:
+==========================================================================================
+Layer (type:depth-idx)                   Output Shape              Param #
+==========================================================================================
+PointNet2SurfaceRegressor                [1, 10, 10, 3]            --
+├─Sequential: 1-1                        [1, 64, 1225]             --
+│    └─Conv1d: 2-1                       [1, 64, 1225]             192
+│    └─BatchNorm1d: 2-2                  [1, 64, 1225]             128
+│    └─ReLU: 2-3                         [1, 64, 1225]             --
+├─PointNetSetAbstractionKNN: 1-2         [1, 3, 612]               --
+│    └─ModuleList: 2-4                   --                        --
+│    │    └─Sequential: 3-1              [1, 64, 612, 32]          4,416
+│    │    └─Sequential: 3-2              [1, 64, 612, 32]          4,224
+│    │    └─Sequential: 3-3              [1, 128, 612, 32]         8,448
+├─PointNetSetAbstractionKNN: 1-3         [1, 3, 306]               --
+│    └─ModuleList: 2-5                   --                        --
+│    │    └─Sequential: 3-4              [1, 128, 306, 32]         17,024
+│    │    └─Sequential: 3-5              [1, 128, 306, 32]         16,640
+│    │    └─Sequential: 3-6              [1, 256, 306, 32]         33,280
+├─PointNetSetAbstractionKNN: 1-4         [1, 3, 76]                --
+│    └─ModuleList: 2-6                   --                        --
+│    │    └─Sequential: 3-7              [1, 256, 76, 32]          66,816
+│    │    └─Sequential: 3-8              [1, 256, 76, 32]          66,048
+│    │    └─Sequential: 3-9              [1, 512, 76, 32]          132,096
+├─PointNetSetAbstractionKNN: 1-5         [1, 3, 38]                --
+│    └─ModuleList: 2-7                   --                        --
+│    │    └─Sequential: 3-10             [1, 512, 38, 32]          264,704
+│    │    └─Sequential: 3-11             [1, 512, 38, 32]          263,168
+│    │    └─Sequential: 3-12             [1, 1024, 38, 32]         526,336
+├─PointNetFeaturePropagation: 1-6        [1, 512, 76]              --
+│    └─ModuleList: 2-10                  --                        (recursive)
+│    │    └─Conv1d: 3-13                 [1, 512, 76]              786,944
+│    └─ModuleList: 2-11                  --                        (recursive)
+│    │    └─BatchNorm1d: 3-14            [1, 512, 76]              1,024
+│    └─ModuleList: 2-10                  --                        (recursive)
+│    │    └─Conv1d: 3-15                 [1, 512, 76]              262,656
+│    └─ModuleList: 2-11                  --                        (recursive)
+│    │    └─BatchNorm1d: 3-16            [1, 512, 76]              1,024
+├─PointNetFeaturePropagation: 1-7        [1, 256, 306]             --
+│    └─ModuleList: 2-14                  --                        (recursive)
+│    │    └─Conv1d: 3-17                 [1, 512, 306]             393,728
+│    └─ModuleList: 2-15                  --                        (recursive)
+│    │    └─BatchNorm1d: 3-18            [1, 512, 306]             1,024
+│    └─ModuleList: 2-14                  --                        (recursive)
+│    │    └─Conv1d: 3-19                 [1, 256, 306]             131,328
+│    └─ModuleList: 2-15                  --                        (recursive)
+│    │    └─BatchNorm1d: 3-20            [1, 256, 306]             512
+├─PointNetFeaturePropagation: 1-8        [1, 128, 612]             --
+│    └─ModuleList: 2-18                  --                        (recursive)
+│    │    └─Conv1d: 3-21                 [1, 256, 612]             98,560
+│    └─ModuleList: 2-19                  --                        (recursive)
+│    │    └─BatchNorm1d: 3-22            [1, 256, 612]             512
+│    └─ModuleList: 2-18                  --                        (recursive)
+│    │    └─Conv1d: 3-23                 [1, 128, 612]             32,896
+│    └─ModuleList: 2-19                  --                        (recursive)
+│    │    └─BatchNorm1d: 3-24            [1, 128, 612]             256
+├─PointNetFeaturePropagation: 1-9        [1, 128, 1225]            --
+│    └─ModuleList: 2-24                  --                        (recursive)
+│    │    └─Conv1d: 3-25                 [1, 128, 1225]            24,704
+│    └─ModuleList: 2-25                  --                        (recursive)
+│    │    └─BatchNorm1d: 3-26            [1, 128, 1225]            256
+│    └─ModuleList: 2-24                  --                        (recursive)
+│    │    └─Conv1d: 3-27                 [1, 128, 1225]            16,512
+│    └─ModuleList: 2-25                  --                        (recursive)
+│    │    └─BatchNorm1d: 3-28            [1, 128, 1225]            256
+│    └─ModuleList: 2-24                  --                        (recursive)
+│    │    └─Conv1d: 3-29                 [1, 128, 1225]            16,512
+│    └─ModuleList: 2-25                  --                        (recursive)
+│    │    └─BatchNorm1d: 3-30            [1, 128, 1225]            256
+├─Sequential: 1-10                       [1, 512]                  --
+│    └─Linear: 2-26                      [1, 1024]                 1,311,744
+│    └─ReLU: 2-27                        [1, 1024]                 --
+│    └─GroupNorm: 2-28                   [1, 1024]                 2,048
+│    └─Dropout: 2-29                     [1, 1024]                 --
+│    └─Linear: 2-30                      [1, 512]                  524,800
+│    └─ReLU: 2-31                        [1, 512]                  --
+│    └─GroupNorm: 2-32                   [1, 512]                  1,024
+│    └─Dropout: 2-33                     [1, 512]                  --
+├─Linear: 1-11                           [1, 300]                  153,900
+==========================================================================================
+Total params: 5,165,996
+Trainable params: 5,165,996
+Non-trainable params: 0
+Total mult-adds (Units.GIGABYTES): 3.28
+==========================================================================================
+Input size (MB): 0.01
+Forward/backward pass size (MB): 257.70
+Params size (MB): 20.66
+Estimated Total Size (MB): 278.38
+==========================================================================================
+device count  2
+train_steps=5187  val_steps=1296
+start training for 100 epochs
+2025-08-24 22:24:55.895112: I tensorflow/core/kernels/data/tf_record_dataset_op.cc:381] TFRecordDataset `buffer_size` is unspecified, default to 262144
+/home/ainsworth/master/train_pointnet_surface_torch_fa_1.py:293: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:203.)
+  xyz = torch.from_numpy(xyz_np).to(_DEVICE).float()
+  [train] step 500/5187  loss=381.0680  mse=339.1889
+  [train] step 1000/5187  loss=374.7232  mse=333.0767
+  [train] step 1500/5187  loss=369.9677  mse=328.4890
+  [train] step 2000/5187  loss=366.2055  mse=324.8760
+  [train] step 2500/5187  loss=363.1611  mse=321.9364
+  [train] step 3000/5187  loss=360.7912  mse=319.6772
+  [train] step 3500/5187  loss=358.7124  mse=317.6905
+  [train] step 4000/5187  loss=356.8700  mse=315.9279
+  [train] step 4500/5187  loss=355.0175  mse=314.1509
+  [train] step 5000/5187  loss=353.3599  mse=312.5559
+  [train] step 5187/5187  loss=352.7545  mse=311.9704
+  [val] step 500/1296  loss=342.7495  mse=302.3398
+  [val] step 1000/1296  loss=342.5862  mse=302.2024
+  [val] step 1296/1296  loss=342.7376  mse=302.3617
+Epoch 001/100  train_loss=352.7545  train_mse=311.9704  val_loss=342.7376  val_mse=302.3617  time=4386.2s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=342.7376)
+  [train] step 500/5187  loss=332.9358  mse=292.9356
+  [train] step 1000/5187  loss=331.2438  mse=291.3181
+  [train] step 1500/5187  loss=329.8022  mse=289.9476
+  [train] step 2000/5187  loss=328.2814  mse=288.5034
+  [train] step 2500/5187  loss=326.4072  mse=286.7039
+  [train] step 3000/5187  loss=324.3985  mse=284.7481
+  [train] step 3500/5187  loss=321.7272  mse=282.1610
+  [train] step 4000/5187  loss=318.8164  mse=279.3481
+  [train] step 4500/5187  loss=315.9268  mse=276.5509
+  [train] step 5000/5187  loss=313.1443  mse=273.8656
+  [train] step 5187/5187  loss=312.1520  mse=272.9103
+  [val] step 500/1296  loss=299.7092  mse=261.1015
+  [val] step 1000/1296  loss=299.3916  mse=260.8051
+  [val] step 1296/1296  loss=299.4702  mse=260.8924
+Epoch 002/100  train_loss=312.1520  train_mse=272.9103  val_loss=299.4702  val_mse=260.8924  time=4370.9s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=299.4702)
+  [train] step 500/5187  loss=282.0288  mse=243.8712
+  [train] step 1000/5187  loss=279.6605  mse=241.5890
+  [train] step 1500/5187  loss=277.7615  mse=239.7926
+  [train] step 2000/5187  loss=275.9466  mse=238.0583
+  [train] step 2500/5187  loss=274.3290  mse=236.5034
+  [train] step 3000/5187  loss=272.4934  mse=234.7419
+  [train] step 3500/5187  loss=270.7945  mse=233.1218
+  [train] step 4000/5187  loss=269.1690  mse=231.5809
+  [train] step 4500/5187  loss=267.5660  mse=230.0509
+  [train] step 5000/5187  loss=266.0890  mse=228.6409
+  [train] step 5187/5187  loss=265.5433  mse=228.1201
+  [val] step 500/1296  loss=286.9603  mse=249.0832
+  [val] step 1000/1296  loss=286.7058  mse=248.8524
+  [val] step 1296/1296  loss=286.7984  mse=248.9531
+Epoch 003/100  train_loss=265.5433  train_mse=228.1201  val_loss=286.7984  val_mse=248.9531  time=4353.7s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=286.7984)
+  [train] step 500/5187  loss=249.8785  mse=213.2126
+  [train] step 1000/5187  loss=248.6889  mse=212.1016
+  [train] step 1500/5187  loss=247.9649  mse=211.4197
+  [train] step 2000/5187  loss=247.1000  mse=210.5862
+  [train] step 2500/5187  loss=246.2250  mse=209.7513
+  [train] step 3000/5187  loss=245.2814  mse=208.8652
+  [train] step 3500/5187  loss=244.5404  mse=208.1655
+  [train] step 4000/5187  loss=243.7381  mse=207.4049
+  [train] step 4500/5187  loss=243.0734  mse=206.7795
+  [train] step 5000/5187  loss=242.4051  mse=206.1464
+  [train] step 5187/5187  loss=242.2009  mse=205.9553
+  [val] step 500/1296  loss=285.9604  mse=248.1907
+  [val] step 1000/1296  loss=285.8214  mse=248.0696
+  [val] step 1296/1296  loss=285.8884  mse=248.1424
+Epoch 004/100  train_loss=242.2009  train_mse=205.9553  val_loss=285.8884  val_mse=248.1424  time=4351.5s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=285.8884)
+  [train] step 500/5187  loss=235.5311  mse=199.6013
+  [train] step 1000/5187  loss=234.7057  mse=198.8310
+  [train] step 1500/5187  loss=234.1127  mse=198.2865
+  [train] step 2000/5187  loss=233.9121  mse=198.1105
+  [train] step 2500/5187  loss=233.6819  mse=197.8952
+  [train] step 3000/5187  loss=233.2728  mse=197.5180
+  [train] step 3500/5187  loss=232.9907  mse=197.2659
+  [train] step 4000/5187  loss=232.6781  mse=196.9784
+  [train] step 4500/5187  loss=232.3136  mse=196.6337
+  [train] step 5000/5187  loss=231.8950  mse=196.2458
+  [train] step 5187/5187  loss=231.7699  mse=196.1302
+  [val] step 500/1296  loss=279.7060  mse=242.6325
+  [val] step 1000/1296  loss=279.2181  mse=242.1868
+  [val] step 1296/1296  loss=279.2647  mse=242.2473
+Epoch 005/100  train_loss=231.7699  train_mse=196.1302  val_loss=279.2647  val_mse=242.2473  time=4348.8s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=279.2647)
+  [train] step 500/5187  loss=226.8943  mse=191.5694
+  [train] step 1000/5187  loss=227.2757  mse=191.9493
+  [train] step 1500/5187  loss=226.8247  mse=191.5294
+  [train] step 2000/5187  loss=226.9981  mse=191.6955
+  [train] step 2500/5187  loss=226.8119  mse=191.5229
+  [train] step 3000/5187  loss=226.6284  mse=191.3411
+  [train] step 3500/5187  loss=226.3725  mse=191.1094
+  [train] step 4000/5187  loss=226.2130  mse=190.9675
+  [train] step 4500/5187  loss=226.0299  mse=190.7947
+  [train] step 5000/5187  loss=225.7598  mse=190.5453
+  [train] step 5187/5187  loss=225.6935  mse=190.4833
+  [val] step 500/1296  loss=250.1700  mse=213.7415
+  [val] step 1000/1296  loss=250.1314  mse=213.7182
+  [val] step 1296/1296  loss=250.1161  mse=213.7153
+Epoch 006/100  train_loss=225.6935  train_mse=190.4833  val_loss=250.1161  val_mse=213.7153  time=4349.0s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=250.1161)
+  [train] step 500/5187  loss=224.2185  mse=189.1338
+  [train] step 1000/5187  loss=224.0857  mse=188.9987
+  [train] step 1500/5187  loss=223.0739  mse=188.0609
+  [train] step 2000/5187  loss=223.0484  mse=188.0432
+  [train] step 2500/5187  loss=223.0086  mse=188.0008
+  [train] step 3000/5187  loss=222.7630  mse=187.7650
+  [train] step 3500/5187  loss=223.3686  mse=188.3351
+  [train] step 4000/5187  loss=223.3649  mse=188.3377
+  [train] step 4500/5187  loss=223.2095  mse=188.1941
+  [train] step 5000/5187  loss=223.0414  mse=188.0444
+  [train] step 5187/5187  loss=223.0531  mse=188.0563
+  [val] step 500/1296  loss=248.0328  mse=211.2054
+  [val] step 1000/1296  loss=247.9570  mse=211.1375
+  [val] step 1296/1296  loss=248.0186  mse=211.2092
+Epoch 007/100  train_loss=223.0531  train_mse=188.0563  val_loss=248.0186  val_mse=211.2092  time=4355.6s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=248.0186)
+  [train] step 500/5187  loss=220.8554  mse=185.9780
+  [train] step 1000/5187  loss=220.4235  mse=185.5734
+  [train] step 1500/5187  loss=220.5531  mse=185.7155
+  [train] step 2000/5187  loss=220.6016  mse=185.7714
+  [train] step 2500/5187  loss=220.5698  mse=185.7385
+  [train] step 3000/5187  loss=220.4688  mse=185.6502
+  [train] step 3500/5187  loss=220.2096  mse=185.4087
+  [train] step 4000/5187  loss=220.0963  mse=185.3035
+  [train] step 4500/5187  loss=219.9855  mse=185.1991
+  [train] step 5000/5187  loss=219.8037  mse=185.0315
+  [train] step 5187/5187  loss=219.6856  mse=184.9188
+  [val] step 500/1296  loss=253.9272  mse=217.3963
+  [val] step 1000/1296  loss=253.7707  mse=217.2481
+  [val] step 1296/1296  loss=253.7869  mse=217.2710
+Epoch 008/100  train_loss=219.6856  train_mse=184.9188  val_loss=253.7869  val_mse=217.2710  time=4342.8s
+  [train] step 500/5187  loss=217.7969  mse=183.1302
+  [train] step 1000/5187  loss=218.0803  mse=183.4087
+  [train] step 1500/5187  loss=218.0585  mse=183.3945
+  [train] step 2000/5187  loss=217.9674  mse=183.3142
+  [train] step 2500/5187  loss=217.8254  mse=183.1844
+  [train] step 3000/5187  loss=217.7854  mse=183.1473
+  [train] step 3500/5187  loss=217.5658  mse=182.9420
+  [train] step 4000/5187  loss=217.4425  mse=182.8305
+  [train] step 4500/5187  loss=217.3240  mse=182.7255
+  [train] step 5000/5187  loss=217.1243  mse=182.5360
+  [train] step 5187/5187  loss=217.1007  mse=182.5175
+  [val] step 500/1296  loss=269.4168  mse=231.5249
+  [val] step 1000/1296  loss=269.0015  mse=231.1381
+  [val] step 1296/1296  loss=269.0190  mse=231.1718
+Epoch 009/100  train_loss=217.1007  train_mse=182.5175  val_loss=269.0190  val_mse=231.1718  time=4344.8s
+  [train] step 500/5187  loss=214.5958  mse=180.1852
+  [train] step 1000/5187  loss=214.5829  mse=180.1663
+  [train] step 1500/5187  loss=214.9173  mse=180.4955
+  [train] step 2000/5187  loss=214.9966  mse=180.5838
+  [train] step 2500/5187  loss=215.1930  mse=180.7780
+  [train] step 3000/5187  loss=215.0017  mse=180.5951
+  [train] step 3500/5187  loss=214.9296  mse=180.5345
+  [train] step 4000/5187  loss=214.9060  mse=180.5189
+  [train] step 4500/5187  loss=214.9063  mse=180.5239
+  [train] step 5000/5187  loss=214.7683  mse=180.3955
+  [train] step 5187/5187  loss=214.7414  mse=180.3705
+  [val] step 500/1296  loss=226.8336  mse=191.8564
+  [val] step 1000/1296  loss=226.7799  mse=191.8208
+  [val] step 1296/1296  loss=226.7896  mse=191.8463
+Epoch 010/100  train_loss=214.7414  train_mse=180.3705  val_loss=226.7896  val_mse=191.8463  time=4351.7s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=226.7896)
+  [train] step 500/5187  loss=213.4759  mse=179.1657
+  [train] step 1000/5187  loss=213.5539  mse=179.2721
+  [train] step 1500/5187  loss=213.5689  mse=179.3099
+  [train] step 2000/5187  loss=213.5046  mse=179.2503
+  [train] step 2500/5187  loss=213.3880  mse=179.1532
+  [train] step 3000/5187  loss=213.3637  mse=179.1301
+  [train] step 3500/5187  loss=213.2787  mse=179.0539
+  [train] step 4000/5187  loss=213.1057  mse=178.8918
+  [train] step 4500/5187  loss=212.9551  mse=178.7526
+  [train] step 5000/5187  loss=212.9084  mse=178.7153
+  [train] step 5187/5187  loss=212.8811  mse=178.6875
+  [val] step 500/1296  loss=293.4095  mse=255.2241
+  [val] step 1000/1296  loss=293.2392  mse=255.0712
+  [val] step 1296/1296  loss=293.3505  mse=255.1957
+Epoch 011/100  train_loss=212.8811  train_mse=178.6875  val_loss=293.3505  val_mse=255.1957  time=4361.4s
+  [train] step 500/5187  loss=212.3054  mse=178.1714
+  [train] step 1000/5187  loss=211.9159  mse=177.8022
+  [train] step 1500/5187  loss=212.0662  mse=177.9558
+  [train] step 2000/5187  loss=212.0628  mse=177.9519
+  [train] step 2500/5187  loss=211.8909  mse=177.7903
+  [train] step 3000/5187  loss=211.9535  mse=177.8476
+  [train] step 3500/5187  loss=211.8929  mse=177.7910
+  [train] step 4000/5187  loss=211.8225  mse=177.7293
+  [train] step 4500/5187  loss=211.7279  mse=177.6453
+  [train] step 5000/5187  loss=211.7212  mse=177.6417
+  [train] step 5187/5187  loss=211.6706  mse=177.5960
+  [val] step 500/1296  loss=229.4654  mse=194.7455
+  [val] step 1000/1296  loss=229.3705  mse=194.6612
+  [val] step 1296/1296  loss=229.3202  mse=194.6185
+Epoch 012/100  train_loss=211.6706  train_mse=177.5960  val_loss=229.3202  val_mse=194.6185  time=4350.7s
+  [train] step 500/5187  loss=210.2893  mse=176.3286
+  [train] step 1000/5187  loss=210.6232  mse=176.6302
+  [train] step 1500/5187  loss=210.4987  mse=176.5251
+  [train] step 2000/5187  loss=210.5908  mse=176.6189
+  [train] step 2500/5187  loss=210.6765  mse=176.6987
+  [train] step 3000/5187  loss=210.9365  mse=176.9415
+  [train] step 3500/5187  loss=210.9416  mse=176.9539
+  [train] step 4000/5187  loss=210.8251  mse=176.8381
+  [train] step 4500/5187  loss=210.7805  mse=176.7971
+  [train] step 5000/5187  loss=210.7141  mse=176.7357
+  [train] step 5187/5187  loss=210.6824  mse=176.7067
+  [val] step 500/1296  loss=242.6581  mse=206.7197
+  [val] step 1000/1296  loss=242.2439  mse=206.3421
+  [val] step 1296/1296  loss=242.3182  mse=206.4249
+Epoch 013/100  train_loss=210.6824  train_mse=176.7067  val_loss=242.3182  val_mse=206.4249  time=4356.5s
+  [train] step 500/5187  loss=210.3211  mse=176.3463
+  [train] step 1000/5187  loss=210.4641  mse=176.4692
+  [train] step 1500/5187  loss=210.1090  mse=176.1549
+  [train] step 2000/5187  loss=210.1588  mse=176.2136
+  [train] step 2500/5187  loss=210.2249  mse=176.2884
+  [train] step 3000/5187  loss=210.1098  mse=176.1915
+  [train] step 3500/5187  loss=209.9517  mse=176.0432
+  [train] step 4000/5187  loss=209.8876  mse=175.9779
+  [train] step 4500/5187  loss=209.7905  mse=175.8953
+  [train] step 5000/5187  loss=209.7903  mse=175.8984
+  [train] step 5187/5187  loss=209.7963  mse=175.9109
+  [val] step 500/1296  loss=276.6688  mse=239.9638
+  [val] step 1000/1296  loss=276.4835  mse=239.8053
+  [val] step 1296/1296  loss=276.5381  mse=239.8731
+Epoch 014/100  train_loss=209.7963  train_mse=175.9109  val_loss=276.5381  val_mse=239.8731  time=4353.3s
+  [train] step 500/5187  loss=209.1604  mse=175.2442
+  [train] step 1000/5187  loss=209.3795  mse=175.4904
+  [train] step 1500/5187  loss=209.3029  mse=175.4459
+  [train] step 2000/5187  loss=209.0483  mse=175.1996
+  [train] step 2500/5187  loss=209.1457  mse=175.3084
+  [train] step 3000/5187  loss=209.1308  mse=175.2891
+  [train] step 3500/5187  loss=208.9681  mse=175.1373
+  [train] step 4000/5187  loss=208.9362  mse=175.1117
+  [train] step 4500/5187  loss=208.8822  mse=175.0706
+  [train] step 5000/5187  loss=208.8826  mse=175.0739
+  [train] step 5187/5187  loss=208.9763  mse=175.1626
+  [val] step 500/1296  loss=232.8575  mse=197.9002
+  [val] step 1000/1296  loss=232.7800  mse=197.8262
+  [val] step 1296/1296  loss=232.6460  mse=197.7058
+Epoch 015/100  train_loss=208.9763  train_mse=175.1626  val_loss=232.6460  val_mse=197.7058  time=4352.8s
+  [train] step 500/5187  loss=209.4580  mse=175.6861
+  [train] step 1000/5187  loss=209.2686  mse=175.4488
+  [train] step 1500/5187  loss=208.9362  mse=175.1414
+  [train] step 2000/5187  loss=208.9197  mse=175.1446
+  [train] step 2500/5187  loss=208.9154  mse=175.1245
+  [train] step 3000/5187  loss=208.9205  mse=175.1301
+  [train] step 3500/5187  loss=208.9242  mse=175.1358
+  [train] step 4000/5187  loss=208.8158  mse=175.0409
+  [train] step 4500/5187  loss=208.6961  mse=174.9308
+  [train] step 5000/5187  loss=208.7054  mse=174.9395
+  [train] step 5187/5187  loss=208.6689  mse=174.9013
+  [val] step 500/1296  loss=252.0404  mse=215.1279
+  [val] step 1000/1296  loss=252.0514  mse=215.1510
+  [val] step 1296/1296  loss=252.1708  mse=215.2707
+Epoch 016/100  train_loss=208.6689  train_mse=174.9013  val_loss=252.1708  val_mse=215.2707  time=4366.1s
+  [train] step 500/5187  loss=208.0090  mse=174.3102
+  [train] step 1000/5187  loss=208.5519  mse=174.7968
+  [train] step 1500/5187  loss=208.5083  mse=174.7795
+  [train] step 2000/5187  loss=208.4923  mse=174.7458
+  [train] step 2500/5187  loss=208.4660  mse=174.7213
+  [train] step 3000/5187  loss=208.4670  mse=174.7186
+  [train] step 3500/5187  loss=208.5502  mse=174.7972
+  [train] step 4000/5187  loss=208.4151  mse=174.6753
+  [train] step 4500/5187  loss=208.4279  mse=174.6896
+  [train] step 5000/5187  loss=208.4268  mse=174.6892
+  [train] step 5187/5187  loss=208.4205  mse=174.6869
+  [val] step 500/1296  loss=256.8434  mse=221.0682
+  [val] step 1000/1296  loss=256.6067  mse=220.8604
+  [val] step 1296/1296  loss=256.6255  mse=220.8927
+Epoch 017/100  train_loss=208.4205  train_mse=174.6869  val_loss=256.6255  val_mse=220.8927  time=4351.3s
+  [train] step 500/5187  loss=207.7785  mse=174.0719
+  [train] step 1000/5187  loss=208.0440  mse=174.3330
+  [train] step 1500/5187  loss=208.0920  mse=174.4008
+  [train] step 2000/5187  loss=208.6081  mse=174.8766
+  [train] step 2500/5187  loss=208.4371  mse=174.7130
+  [train] step 3000/5187  loss=208.5478  mse=174.8156
+  [train] step 3500/5187  loss=208.4176  mse=174.7006
+  [train] step 4000/5187  loss=208.4722  mse=174.7486
+  [train] step 4500/5187  loss=208.3062  mse=174.5918
+  [train] step 5000/5187  loss=208.3507  mse=174.6348
+  [train] step 5187/5187  loss=208.3751  mse=174.6617
+  [val] step 500/1296  loss=247.8179  mse=211.5937
+  [val] step 1000/1296  loss=247.5171  mse=211.3387
+  [val] step 1296/1296  loss=247.4937  mse=211.3375
+Epoch 018/100  train_loss=208.3751  train_mse=174.6617  val_loss=247.4937  val_mse=211.3375  time=4359.2s
+  [train] step 500/5187  loss=207.6827  mse=174.0223
+  [train] step 1000/5187  loss=207.9334  mse=174.2718
+  [train] step 1500/5187  loss=208.0325  mse=174.3862
+  [train] step 2000/5187  loss=207.7720  mse=174.1269
+  [train] step 2500/5187  loss=208.0647  mse=174.4030
+  [train] step 3000/5187  loss=207.9995  mse=174.3414
+  [train] step 3500/5187  loss=207.9430  mse=174.2861
+  [train] step 4000/5187  loss=207.8593  mse=174.2080
+  [train] step 4500/5187  loss=207.8075  mse=174.1639
+  [train] step 5000/5187  loss=207.8514  mse=174.2077
+  [train] step 5187/5187  loss=207.8432  mse=174.2001
+  [val] step 500/1296  loss=316.0601  mse=276.1703
+  [val] step 1000/1296  loss=316.2240  mse=276.3515
+  [val] step 1296/1296  loss=316.2227  mse=276.3730
+Epoch 019/100  train_loss=207.8432  train_mse=174.2001  val_loss=316.2227  val_mse=276.3730  time=4339.8s
+  [train] step 500/5187  loss=208.6364  mse=174.9315
+  [train] step 1000/5187  loss=208.0297  mse=174.3741
+  [train] step 1500/5187  loss=207.8224  mse=174.1765
+  [train] step 2000/5187  loss=207.9265  mse=174.2716
+  [train] step 2500/5187  loss=207.8957  mse=174.2479
+  [train] step 3000/5187  loss=207.7160  mse=174.0729
+  [train] step 3500/5187  loss=207.8391  mse=174.1915
+  [train] step 4000/5187  loss=207.8176  mse=174.1757
+  [train] step 4500/5187  loss=207.7473  mse=174.1111
+  [train] step 5000/5187  loss=207.7554  mse=174.1220
+  [train] step 5187/5187  loss=207.7197  mse=174.0886
+  [val] step 500/1296  loss=248.9164  mse=212.9179
+  [val] step 1000/1296  loss=248.9169  mse=212.9152
+  [val] step 1296/1296  loss=248.9664  mse=212.9702
+Epoch 020/100  train_loss=207.7197  train_mse=174.0886  val_loss=248.9664  val_mse=212.9702  time=4335.2s
+  [train] step 500/5187  loss=207.0981  mse=173.4933
+  [train] step 1000/5187  loss=207.9167  mse=174.2892
+  [train] step 1500/5187  loss=207.6544  mse=174.0378
+  [train] step 2000/5187  loss=207.8248  mse=174.1825
+  [train] step 2500/5187  loss=207.7943  mse=174.1576
+  [train] step 3000/5187  loss=207.7164  mse=174.0902
+  [train] step 3500/5187  loss=207.5716  mse=173.9674
+  [train] step 4000/5187  loss=207.7684  mse=174.1574
+  [train] step 4500/5187  loss=207.7634  mse=174.1470
+  [train] step 5000/5187  loss=207.7184  mse=174.1075
+  [train] step 5187/5187  loss=207.6025  mse=173.9986
+  [val] step 500/1296  loss=356.9716  mse=314.6405
+  [val] step 1000/1296  loss=357.1735  mse=314.8544
+  [val] step 1296/1296  loss=356.9572  mse=314.6656
+Epoch 021/100  train_loss=207.6025  train_mse=173.9986  val_loss=356.9572  val_mse=314.6656  time=4339.6s
+  [train] step 500/5187  loss=184.6089  mse=152.7934
+  [train] step 1000/5187  loss=183.7794  mse=152.0797
+  [train] step 1500/5187  loss=183.0892  mse=151.4803
+  [train] step 2000/5187  loss=182.9233  mse=151.3424
+  [train] step 2500/5187  loss=182.7367  mse=151.1747
+  [train] step 3000/5187  loss=182.4258  mse=150.8964
+  [train] step 3500/5187  loss=182.2566  mse=150.7402
+  [train] step 4000/5187  loss=182.0730  mse=150.5774
+  [train] step 4500/5187  loss=181.9767  mse=150.4968
+  [train] step 5000/5187  loss=181.8601  mse=150.3889
+  [train] step 5187/5187  loss=181.8293  mse=150.3625
+  [val] step 500/1296  loss=228.8050  mse=194.5232
+  [val] step 1000/1296  loss=228.4047  mse=194.1451
+  [val] step 1296/1296  loss=228.4440  mse=194.1983
+Epoch 022/100  train_loss=181.8293  train_mse=150.3625  val_loss=228.4440  val_mse=194.1983  time=4334.7s
+  [train] step 500/5187  loss=180.7469  mse=149.4078
+  [train] step 1000/5187  loss=180.9111  mse=149.5208
+  [train] step 1500/5187  loss=181.3943  mse=149.9848
+  [train] step 2000/5187  loss=181.3536  mse=149.9517
+  [train] step 2500/5187  loss=181.5264  mse=150.1158
+  [train] step 3000/5187  loss=181.7635  mse=150.3429
+  [train] step 3500/5187  loss=181.8379  mse=150.4085
+  [train] step 4000/5187  loss=181.9738  mse=150.5327
+  [train] step 4500/5187  loss=182.0298  mse=150.5903
+  [train] step 5000/5187  loss=182.1099  mse=150.6659
+  [train] step 5187/5187  loss=182.1369  mse=150.6908
+  [val] step 500/1296  loss=195.4031  mse=162.9880
+  [val] step 1000/1296  loss=195.2385  mse=162.8431
+  [val] step 1296/1296  loss=195.3689  mse=162.9730
+Epoch 023/100  train_loss=182.1369  train_mse=150.6908  val_loss=195.3689  val_mse=162.9730  time=4337.4s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=195.3689)
+  [train] step 500/5187  loss=182.4934  mse=151.0624
+  [train] step 1000/5187  loss=182.9995  mse=151.4993
+  [train] step 1500/5187  loss=182.8332  mse=151.3526
+  [train] step 2000/5187  loss=183.1114  mse=151.6150
+  [train] step 2500/5187  loss=182.9155  mse=151.4382
+  [train] step 3000/5187  loss=182.9109  mse=151.4290
+  [train] step 3500/5187  loss=183.0566  mse=151.5666
+  [train] step 4000/5187  loss=183.2829  mse=151.7731
+  [train] step 4500/5187  loss=183.4122  mse=151.8971
+  [train] step 5000/5187  loss=183.4638  mse=151.9418
+  [train] step 5187/5187  loss=183.4694  mse=151.9485
+  [val] step 500/1296  loss=217.9070  mse=183.8029
+  [val] step 1000/1296  loss=217.9701  mse=183.8914
+  [val] step 1296/1296  loss=218.0126  mse=183.9469
+Epoch 024/100  train_loss=183.4694  train_mse=151.9485  val_loss=218.0126  val_mse=183.9469  time=4343.0s
+  [train] step 500/5187  loss=183.6637  mse=152.1406
+  [train] step 1000/5187  loss=184.0566  mse=152.4966
+  [train] step 1500/5187  loss=183.9624  mse=152.4259
+  [train] step 2000/5187  loss=183.9623  mse=152.4269
+  [train] step 2500/5187  loss=184.0384  mse=152.4994
+  [train] step 3000/5187  loss=183.9814  mse=152.4382
+  [train] step 3500/5187  loss=183.9645  mse=152.4203
+  [train] step 4000/5187  loss=184.0473  mse=152.4962
+  [train] step 4500/5187  loss=184.0111  mse=152.4639
+  [train] step 5000/5187  loss=184.0155  mse=152.4734
+  [train] step 5187/5187  loss=184.0433  mse=152.5013
+  [val] step 500/1296  loss=193.4280  mse=161.5565
+  [val] step 1000/1296  loss=193.3754  mse=161.5219
+  [val] step 1296/1296  loss=193.4757  mse=161.6346
+Epoch 025/100  train_loss=184.0433  train_mse=152.5013  val_loss=193.4757  val_mse=161.6346  time=4346.4s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=193.4757)
+  [train] step 500/5187  loss=184.7842  mse=153.1779
+  [train] step 1000/5187  loss=184.2215  mse=152.6619
+  [train] step 1500/5187  loss=184.2368  mse=152.6808
+  [train] step 2000/5187  loss=184.2695  mse=152.7325
+  [train] step 2500/5187  loss=184.2782  mse=152.7395
+  [train] step 3000/5187  loss=184.4185  mse=152.8696
+  [train] step 3500/5187  loss=184.4253  mse=152.8788
+  [train] step 4000/5187  loss=184.3877  mse=152.8499
+  [train] step 4500/5187  loss=184.4929  mse=152.9395
+  [train] step 5000/5187  loss=184.4091  mse=152.8648
+  [train] step 5187/5187  loss=184.3760  mse=152.8340
+  [val] step 500/1296  loss=208.9632  mse=175.6070
+  [val] step 1000/1296  loss=208.9456  mse=175.6009
+  [val] step 1296/1296  loss=208.9333  mse=175.6027
+Epoch 026/100  train_loss=184.3760  train_mse=152.8340  val_loss=208.9333  val_mse=175.6027  time=4355.3s
+  [train] step 500/5187  loss=184.0471  mse=152.5442
+  [train] step 1000/5187  loss=184.1907  mse=152.6780
+  [train] step 1500/5187  loss=184.4913  mse=152.9393
+  [train] step 2000/5187  loss=184.4577  mse=152.9130
+  [train] step 2500/5187  loss=184.2425  mse=152.7173
+  [train] step 3000/5187  loss=184.3724  mse=152.8363
+  [train] step 3500/5187  loss=184.2572  mse=152.7365
+  [train] step 4000/5187  loss=184.2437  mse=152.7246
+  [train] step 4500/5187  loss=184.3859  mse=152.8579
+  [train] step 5000/5187  loss=184.3860  mse=152.8624
+  [train] step 5187/5187  loss=184.4465  mse=152.9203
+  [val] step 500/1296  loss=312.4494  mse=273.7843
+  [val] step 1000/1296  loss=312.4785  mse=273.8336
+  [val] step 1296/1296  loss=312.5499  mse=273.9127
+Epoch 027/100  train_loss=184.4465  train_mse=152.9203  val_loss=312.5499  val_mse=273.9127  time=4353.1s
+  [train] step 500/5187  loss=184.4508  mse=152.8854
+  [train] step 1000/5187  loss=183.8113  mse=152.3108
+  [train] step 1500/5187  loss=184.0901  mse=152.5836
+  [train] step 2000/5187  loss=184.3089  mse=152.7976
+  [train] step 2500/5187  loss=184.1992  mse=152.6950
+  [train] step 3000/5187  loss=184.2387  mse=152.7303
+  [train] step 3500/5187  loss=184.2329  mse=152.7270
+  [train] step 4000/5187  loss=184.2750  mse=152.7677
+  [train] step 4500/5187  loss=184.3223  mse=152.8098
+  [train] step 5000/5187  loss=184.3390  mse=152.8259
+  [train] step 5187/5187  loss=184.3346  mse=152.8210
+  [val] step 500/1296  loss=238.6080  mse=203.5126
+  [val] step 1000/1296  loss=238.4121  mse=203.3318
+  [val] step 1296/1296  loss=238.3986  mse=203.3402
+Epoch 028/100  train_loss=184.3346  train_mse=152.8210  val_loss=238.3986  val_mse=203.3402  time=4346.4s
+  [train] step 500/5187  loss=183.5794  mse=152.1279
+  [train] step 1000/5187  loss=183.6362  mse=152.1667
+  [train] step 1500/5187  loss=183.7579  mse=152.2852
+  [train] step 2000/5187  loss=184.4279  mse=152.9230
+  [train] step 2500/5187  loss=184.8432  mse=153.3140
+  [train] step 3000/5187  loss=184.7334  mse=153.2052
+  [train] step 3500/5187  loss=184.5634  mse=153.0501
+  [train] step 4000/5187  loss=184.5056  mse=152.9997
+  [train] step 4500/5187  loss=184.4584  mse=152.9619
+  [train] step 5000/5187  loss=184.3924  mse=152.9032
+  [train] step 5187/5187  loss=184.3188  mse=152.8355
+  [val] step 500/1296  loss=267.4975  mse=230.6380
+  [val] step 1000/1296  loss=267.3372  mse=230.4789
+  [val] step 1296/1296  loss=267.1685  mse=230.3404
+Epoch 029/100  train_loss=184.3188  train_mse=152.8355  val_loss=267.1685  val_mse=230.3404  time=4349.0s
+  [train] step 500/5187  loss=184.6713  mse=153.1104
+  [train] step 1000/5187  loss=184.4824  mse=152.9756
+  [train] step 1500/5187  loss=184.2423  mse=152.7691
+  [train] step 2000/5187  loss=184.2962  mse=152.8106
+  [train] step 2500/5187  loss=184.4033  mse=152.9205
+  [train] step 3000/5187  loss=184.3232  mse=152.8437
+  [train] step 3500/5187  loss=184.3337  mse=152.8592
+  [train] step 4000/5187  loss=184.2962  mse=152.8230
+  [train] step 4500/5187  loss=184.2468  mse=152.7841
+  [train] step 5000/5187  loss=184.1833  mse=152.7228
+  [train] step 5187/5187  loss=184.1380  mse=152.6796
+  [val] step 500/1296  loss=276.7895  mse=237.3981
+  [val] step 1000/1296  loss=276.6298  mse=237.2237
+  [val] step 1296/1296  loss=276.3935  mse=237.0298
+Epoch 030/100  train_loss=184.1380  train_mse=152.6796  val_loss=276.3935  val_mse=237.0298  time=4348.4s
+  [train] step 500/5187  loss=183.9749  mse=152.4587
+  [train] step 1000/5187  loss=183.9247  mse=152.4800
+  [train] step 1500/5187  loss=183.9467  mse=152.4880
+  [train] step 2000/5187  loss=184.1430  mse=152.6835
+  [train] step 2500/5187  loss=183.9929  mse=152.5496
+  [train] step 3000/5187  loss=184.0841  mse=152.6276
+  [train] step 3500/5187  loss=184.0178  mse=152.5732
+  [train] step 4000/5187  loss=183.9828  mse=152.5427
+  [train] step 4500/5187  loss=183.9629  mse=152.5302
+  [train] step 5000/5187  loss=183.9070  mse=152.4776
+  [train] step 5187/5187  loss=183.9489  mse=152.5159
+  [val] step 500/1296  loss=278.1034  mse=238.6717
+  [val] step 1000/1296  loss=278.3236  mse=238.8988
+  [val] step 1296/1296  loss=278.0984  mse=238.7044
+Epoch 031/100  train_loss=183.9489  train_mse=152.5159  val_loss=278.0984  val_mse=238.7044  time=4358.3s
+  [train] step 500/5187  loss=182.6980  mse=151.3084
+  [train] step 1000/5187  loss=183.9817  mse=152.5476
+  [train] step 1500/5187  loss=183.9996  mse=152.5716
+  [train] step 2000/5187  loss=183.9016  mse=152.4786
+  [train] step 2500/5187  loss=183.7518  mse=152.3425
+  [train] step 3000/5187  loss=183.7591  mse=152.3436
+  [train] step 3500/5187  loss=183.8129  mse=152.3966
+  [train] step 4000/5187  loss=183.7485  mse=152.3381
+  [train] step 4500/5187  loss=183.7554  mse=152.3432
+  [train] step 5000/5187  loss=183.7713  mse=152.3556
+  [train] step 5187/5187  loss=183.7526  mse=152.3397
+  [val] step 500/1296  loss=294.7706  mse=255.3669
+  [val] step 1000/1296  loss=294.3465  mse=254.9521
+  [val] step 1296/1296  loss=294.3622  mse=255.0014
+Epoch 032/100  train_loss=183.7526  train_mse=152.3397  val_loss=294.3622  val_mse=255.0014  time=4358.2s
+  [train] step 500/5187  loss=184.1288  mse=152.7375
+  [train] step 1000/5187  loss=183.3202  mse=151.9478
+  [train] step 1500/5187  loss=183.2410  mse=151.8678
+  [train] step 2000/5187  loss=183.2859  mse=151.9088
+  [train] step 2500/5187  loss=183.2652  mse=151.8995
+  [train] step 3000/5187  loss=183.3667  mse=151.9895
+  [train] step 3500/5187  loss=183.3779  mse=152.0074
+  [train] step 4000/5187  loss=183.4298  mse=152.0556
+  [train] step 4500/5187  loss=183.4139  mse=152.0463
+  [train] step 5000/5187  loss=183.4882  mse=152.1184
+  [train] step 5187/5187  loss=183.5303  mse=152.1578
+  [val] step 500/1296  loss=284.3003  mse=244.0655
+  [val] step 1000/1296  loss=284.3596  mse=244.1193
+  [val] step 1296/1296  loss=284.1263  mse=243.9316
+Epoch 033/100  train_loss=183.5303  train_mse=152.1578  val_loss=284.1263  val_mse=243.9316  time=4344.1s
+  [train] step 500/5187  loss=184.7727  mse=153.2992
+  [train] step 1000/5187  loss=184.0789  mse=152.6431
+  [train] step 1500/5187  loss=183.4854  mse=152.1057
+  [train] step 2000/5187  loss=183.5771  mse=152.1897
+  [train] step 2500/5187  loss=183.6212  mse=152.2374
+  [train] step 3000/5187  loss=183.5277  mse=152.1505
+  [train] step 3500/5187  loss=183.5172  mse=152.1400
+  [train] step 4000/5187  loss=183.5055  mse=152.1316
+  [train] step 4500/5187  loss=183.4188  mse=152.0535
+  [train] step 5000/5187  loss=183.4110  mse=152.0447
+  [train] step 5187/5187  loss=183.3958  mse=152.0311
+  [val] step 500/1296  loss=253.0759  mse=218.2002
+  [val] step 1000/1296  loss=252.8446  mse=217.9908
+  [val] step 1296/1296  loss=252.9236  mse=218.0773
+Epoch 034/100  train_loss=183.3958  train_mse=152.0311  val_loss=252.9236  val_mse=218.0773  time=4351.1s
+  [train] step 500/5187  loss=184.2545  mse=152.7795
+  [train] step 1000/5187  loss=183.9747  mse=152.5513
+  [train] step 1500/5187  loss=183.3776  mse=152.0096
+  [train] step 2000/5187  loss=183.2991  mse=151.9457
+  [train] step 2500/5187  loss=183.3417  mse=151.9829
+  [train] step 3000/5187  loss=183.2502  mse=151.9002
+  [train] step 3500/5187  loss=183.2496  mse=151.9024
+  [train] step 4000/5187  loss=183.1099  mse=151.7802
+  [train] step 4500/5187  loss=183.2419  mse=151.9039
+  [train] step 5000/5187  loss=183.1982  mse=151.8606
+  [train] step 5187/5187  loss=183.1870  mse=151.8475
+  [val] step 500/1296  loss=204.4877  mse=172.0712
+  [val] step 1000/1296  loss=204.3984  mse=171.9944
+  [val] step 1296/1296  loss=204.3261  mse=171.9366
+Epoch 035/100  train_loss=183.1870  train_mse=151.8475  val_loss=204.3261  val_mse=171.9366  time=4346.2s
+  [train] step 500/5187  loss=183.0961  mse=151.7811
+  [train] step 1000/5187  loss=183.3099  mse=151.9773
+  [train] step 1500/5187  loss=183.1814  mse=151.8595
+  [train] step 2000/5187  loss=183.0959  mse=151.7752
+  [train] step 2500/5187  loss=183.2743  mse=151.9350
+  [train] step 3000/5187  loss=183.3129  mse=151.9649
+  [train] step 3500/5187  loss=183.2683  mse=151.9251
+  [train] step 4000/5187  loss=183.1930  mse=151.8565
+  [train] step 4500/5187  loss=183.2729  mse=151.9318
+  [train] step 5000/5187  loss=183.2932  mse=151.9500
+  [train] step 5187/5187  loss=183.2954  mse=151.9535
+  [val] step 500/1296  loss=206.6643  mse=173.8363
+  [val] step 1000/1296  loss=206.4633  mse=173.6704
+  [val] step 1296/1296  loss=206.3988  mse=173.6314
+Epoch 036/100  train_loss=183.2954  train_mse=151.9535  val_loss=206.3988  val_mse=173.6314  time=4350.2s
+  [train] step 500/5187  loss=164.9952  mse=135.2710
+  [train] step 1000/5187  loss=163.9128  mse=134.3368
+  [train] step 1500/5187  loss=163.1932  mse=133.6936
+  [train] step 2000/5187  loss=162.7862  mse=133.3167
+  [train] step 2500/5187  loss=162.6106  mse=133.1543
+  [train] step 3000/5187  loss=162.2850  mse=132.8661
+  [train] step 3500/5187  loss=162.0950  mse=132.6957
+  [train] step 4000/5187  loss=161.9186  mse=132.5456
+  [train] step 4500/5187  loss=161.8057  mse=132.4469
+  [train] step 5000/5187  loss=161.7095  mse=132.3559
+  [train] step 5187/5187  loss=161.6494  mse=132.3042
+  [val] step 500/1296  loss=164.0110  mse=134.4562
+  [val] step 1000/1296  loss=163.9035  mse=134.3704
+  [val] step 1296/1296  loss=163.9659  mse=134.4420
+Epoch 037/100  train_loss=161.6494  train_mse=132.3042  val_loss=163.9659  val_mse=134.4420  time=4353.7s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=163.9659)
+  [train] step 500/5187  loss=160.1714  mse=130.9404
+  [train] step 1000/5187  loss=160.3536  mse=131.1439
+  [train] step 1500/5187  loss=160.6276  mse=131.3882
+  [train] step 2000/5187  loss=160.6989  mse=131.4670
+  [train] step 2500/5187  loss=160.9118  mse=131.6559
+  [train] step 3000/5187  loss=160.9731  mse=131.7212
+  [train] step 3500/5187  loss=161.0013  mse=131.7492
+  [train] step 4000/5187  loss=161.0383  mse=131.7807
+  [train] step 4500/5187  loss=160.9845  mse=131.7320
+  [train] step 5000/5187  loss=161.0291  mse=131.7749
+  [train] step 5187/5187  loss=161.0578  mse=131.8044
+  [val] step 500/1296  loss=172.1440  mse=142.1959
+  [val] step 1000/1296  loss=172.1201  mse=142.1848
+  [val] step 1296/1296  loss=172.1744  mse=142.2428
+Epoch 038/100  train_loss=161.0578  train_mse=131.8044  val_loss=172.1744  val_mse=142.2428  time=4362.3s
+  [train] step 500/5187  loss=161.5461  mse=132.2252
+  [train] step 1000/5187  loss=161.3676  mse=132.0805
+  [train] step 1500/5187  loss=161.4409  mse=132.1618
+  [train] step 2000/5187  loss=161.6275  mse=132.3285
+  [train] step 2500/5187  loss=161.7248  mse=132.4174
+  [train] step 3000/5187  loss=161.7867  mse=132.4683
+  [train] step 3500/5187  loss=161.7724  mse=132.4603
+  [train] step 4000/5187  loss=161.8518  mse=132.5322
+  [train] step 4500/5187  loss=161.8897  mse=132.5719
+  [train] step 5000/5187  loss=161.9519  mse=132.6304
+  [train] step 5187/5187  loss=162.0065  mse=132.6820
+  [val] step 500/1296  loss=352.2197  mse=306.7651
+  [val] step 1000/1296  loss=352.3523  mse=306.8795
+  [val] step 1296/1296  loss=352.2540  mse=306.8197
+Epoch 039/100  train_loss=162.0065  train_mse=132.6820  val_loss=352.2540  val_mse=306.8197  time=4363.7s
+  [train] step 500/5187  loss=161.9354  mse=132.5771
+  [train] step 1000/5187  loss=162.0958  mse=132.7260
+  [train] step 1500/5187  loss=162.1579  mse=132.8031
+  [train] step 2000/5187  loss=162.2797  mse=132.9288
+  [train] step 2500/5187  loss=162.5358  mse=133.1558
+  [train] step 3000/5187  loss=162.7449  mse=133.3475
+  [train] step 3500/5187  loss=162.7258  mse=133.3365
+  [train] step 4000/5187  loss=162.8077  mse=133.4125
+  [train] step 4500/5187  loss=162.8048  mse=133.4159
+  [train] step 5000/5187  loss=162.8619  mse=133.4708
+  [train] step 5187/5187  loss=162.8852  mse=133.4912
+  [val] step 500/1296  loss=167.4156  mse=137.9155
+  [val] step 1000/1296  loss=167.4488  mse=137.9558
+  [val] step 1296/1296  loss=167.3086  mse=137.8317
+Epoch 040/100  train_loss=162.8852  train_mse=133.4912  val_loss=167.3086  val_mse=137.8317  time=4358.9s
+  [train] step 500/5187  loss=163.1184  mse=133.6550
+  [train] step 1000/5187  loss=162.7965  mse=133.3866
+  [train] step 1500/5187  loss=163.0997  mse=133.6911
+  [train] step 2000/5187  loss=163.4327  mse=134.0003
+  [train] step 2500/5187  loss=163.5301  mse=134.0857
+  [train] step 3000/5187  loss=163.5470  mse=134.0932
+  [train] step 3500/5187  loss=163.7584  mse=134.2952
+  [train] step 4000/5187  loss=163.6931  mse=134.2411
+  [train] step 4500/5187  loss=163.6622  mse=134.2056
+  [train] step 5000/5187  loss=163.6765  mse=134.2254
+  [train] step 5187/5187  loss=163.7078  mse=134.2550
+  [val] step 500/1296  loss=215.0071  mse=182.3267
+  [val] step 1000/1296  loss=214.9338  mse=182.2621
+  [val] step 1296/1296  loss=214.9380  mse=182.2717
+Epoch 041/100  train_loss=163.7078  train_mse=134.2550  val_loss=214.9380  val_mse=182.2717  time=4362.9s
+  [train] step 500/5187  loss=163.6255  mse=134.1911
+  [train] step 1000/5187  loss=164.0519  mse=134.5649
+  [train] step 1500/5187  loss=164.1580  mse=134.6664
+  [train] step 2000/5187  loss=164.1619  mse=134.6694
+  [train] step 2500/5187  loss=164.1014  mse=134.6274
+  [train] step 3000/5187  loss=164.1968  mse=134.7007
+  [train] step 3500/5187  loss=164.0708  mse=134.5885
+  [train] step 4000/5187  loss=164.0258  mse=134.5471
+  [train] step 4500/5187  loss=164.0011  mse=134.5340
+  [train] step 5000/5187  loss=164.0556  mse=134.5836
+  [train] step 5187/5187  loss=164.0979  mse=134.6209
+  [val] step 500/1296  loss=167.9100  mse=138.3475
+  [val] step 1000/1296  loss=167.8715  mse=138.3275
+  [val] step 1296/1296  loss=167.9179  mse=138.3761
+Epoch 042/100  train_loss=164.0979  train_mse=134.6209  val_loss=167.9179  val_mse=138.3761  time=4359.5s
+  [train] step 500/5187  loss=163.3706  mse=133.9044
+  [train] step 1000/5187  loss=163.5374  mse=134.0944
+  [train] step 1500/5187  loss=163.8782  mse=134.4088
+  [train] step 2000/5187  loss=164.1179  mse=134.6447
+  [train] step 2500/5187  loss=164.1329  mse=134.6616
+  [train] step 3000/5187  loss=164.3393  mse=134.8534
+  [train] step 3500/5187  loss=164.3740  mse=134.8904
+  [train] step 4000/5187  loss=164.4145  mse=134.9270
+  [train] step 4500/5187  loss=164.4593  mse=134.9660
+  [train] step 5000/5187  loss=164.4344  mse=134.9469
+  [train] step 5187/5187  loss=164.4610  mse=134.9669
+  [val] step 500/1296  loss=227.8841  mse=194.9990
+  [val] step 1000/1296  loss=227.9694  mse=195.0916
+  [val] step 1296/1296  loss=227.9782  mse=195.1068
+Epoch 043/100  train_loss=164.4610  train_mse=134.9669  val_loss=227.9782  val_mse=195.1068  time=4358.6s
+  [train] step 500/5187  loss=163.9889  mse=134.5031
+  [train] step 1000/5187  loss=164.1463  mse=134.6611
+  [train] step 1500/5187  loss=164.3026  mse=134.8021
+  [train] step 2000/5187  loss=164.6076  mse=135.0965
+  [train] step 2500/5187  loss=164.7472  mse=135.2237
+  [train] step 3000/5187  loss=164.8404  mse=135.3080
+  [train] step 3500/5187  loss=164.7872  mse=135.2609
+  [train] step 4000/5187  loss=164.6888  mse=135.1694
+  [train] step 4500/5187  loss=164.6496  mse=135.1332
+  [train] step 5000/5187  loss=164.5430  mse=135.0348
+  [train] step 5187/5187  loss=164.5467  mse=135.0408
+  [val] step 500/1296  loss=247.5147  mse=212.4732
+  [val] step 1000/1296  loss=246.8893  mse=211.8937
+  [val] step 1296/1296  loss=246.8430  mse=211.8525
+Epoch 044/100  train_loss=164.5467  train_mse=135.0408  val_loss=246.8430  val_mse=211.8525  time=4355.7s
+  [train] step 500/5187  loss=164.4263  mse=134.9094
+  [train] step 1000/5187  loss=164.5842  mse=135.0834
+  [train] step 1500/5187  loss=164.2879  mse=134.8095
+  [train] step 2000/5187  loss=164.2858  mse=134.8133
+  [train] step 2500/5187  loss=164.3174  mse=134.8530
+  [train] step 3000/5187  loss=164.3890  mse=134.9152
+  [train] step 3500/5187  loss=164.4646  mse=134.9843
+  [train] step 4000/5187  loss=164.4351  mse=134.9603
+  [train] step 4500/5187  loss=164.4946  mse=135.0105
+  [train] step 5000/5187  loss=164.5436  mse=135.0572
+  [train] step 5187/5187  loss=164.5243  mse=135.0374
+  [val] step 500/1296  loss=181.5968  mse=150.6218
+  [val] step 1000/1296  loss=181.3783  mse=150.4291
+  [val] step 1296/1296  loss=181.4344  mse=150.4854
+Epoch 045/100  train_loss=164.5243  train_mse=135.0374  val_loss=181.4344  val_mse=150.4854  time=4357.3s
+  [train] step 500/5187  loss=163.7896  mse=134.3527
+  [train] step 1000/5187  loss=164.5535  mse=135.0640
+  [train] step 1500/5187  loss=164.5408  mse=135.0426
+  [train] step 2000/5187  loss=164.5986  mse=135.1051
+  [train] step 2500/5187  loss=164.6901  mse=135.1947
+  [train] step 3000/5187  loss=164.6303  mse=135.1409
+  [train] step 3500/5187  loss=164.5705  mse=135.0802
+  [train] step 4000/5187  loss=164.6274  mse=135.1306
+  [train] step 4500/5187  loss=164.5703  mse=135.0813
+  [train] step 5000/5187  loss=164.5693  mse=135.0813
+  [train] step 5187/5187  loss=164.5579  mse=135.0751
+  [val] step 500/1296  loss=242.5118  mse=204.9088
+  [val] step 1000/1296  loss=242.7768  mse=205.1541
+  [val] step 1296/1296  loss=242.7209  mse=205.1277
+Epoch 046/100  train_loss=164.5579  train_mse=135.0751  val_loss=242.7209  val_mse=205.1277  time=4349.1s
+  [train] step 500/5187  loss=164.3658  mse=134.8532
+  [train] step 1000/5187  loss=164.0800  mse=134.6124
+  [train] step 1500/5187  loss=164.4454  mse=134.9611
+  [train] step 2000/5187  loss=164.7506  mse=135.2359
+  [train] step 2500/5187  loss=164.8918  mse=135.3763
+  [train] step 3000/5187  loss=164.8519  mse=135.3459
+  [train] step 3500/5187  loss=164.8508  mse=135.3439
+  [train] step 4000/5187  loss=164.8156  mse=135.3155
+  [train] step 4500/5187  loss=164.7936  mse=135.2940
+  [train] step 5000/5187  loss=164.8570  mse=135.3486
+  [train] step 5187/5187  loss=164.8354  mse=135.3294
+  [val] step 500/1296  loss=169.7888  mse=139.9888
+  [val] step 1000/1296  loss=169.7367  mse=139.9496
+  [val] step 1296/1296  loss=169.7306  mse=139.9509
+Epoch 047/100  train_loss=164.8354  train_mse=135.3294  val_loss=169.7306  val_mse=139.9509  time=4348.7s
+  [train] step 500/5187  loss=164.5766  mse=135.0714
+  [train] step 1000/5187  loss=164.7164  mse=135.1986
+  [train] step 1500/5187  loss=164.7452  mse=135.2517
+  [train] step 2000/5187  loss=164.6020  mse=135.1410
+  [train] step 2500/5187  loss=164.5011  mse=135.0484
+  [train] step 3000/5187  loss=164.5419  mse=135.0844
+  [train] step 3500/5187  loss=164.6072  mse=135.1380
+  [train] step 4000/5187  loss=164.5575  mse=135.0971
+  [train] step 4500/5187  loss=164.5304  mse=135.0763
+  [train] step 5000/5187  loss=164.4930  mse=135.0441
+  [train] step 5187/5187  loss=164.5034  mse=135.0548
+  [val] step 500/1296  loss=172.1198  mse=142.2632
+  [val] step 1000/1296  loss=171.9190  mse=142.0973
+  [val] step 1296/1296  loss=171.8715  mse=142.0674
+Epoch 048/100  train_loss=164.5034  train_mse=135.0548  val_loss=171.8715  val_mse=142.0674  time=4336.5s
+  [train] step 500/5187  loss=150.7855  mse=122.6429
+  [train] step 1000/5187  loss=149.4461  mse=121.4364
+  [train] step 1500/5187  loss=149.1195  mse=121.1452
+  [train] step 2000/5187  loss=148.7458  mse=120.8408
+  [train] step 2500/5187  loss=148.4544  mse=120.5850
+  [train] step 3000/5187  loss=148.1658  mse=120.3320
+  [train] step 3500/5187  loss=147.9345  mse=120.1239
+  [train] step 4000/5187  loss=147.7602  mse=119.9706
+  [train] step 4500/5187  loss=147.6439  mse=119.8690
+  [train] step 5000/5187  loss=147.5616  mse=119.7975
+  [train] step 5187/5187  loss=147.5234  mse=119.7653
+  [val] step 500/1296  loss=148.1706  mse=120.4377
+  [val] step 1000/1296  loss=147.8354  mse=120.1311
+  [val] step 1296/1296  loss=147.8395  mse=120.1451
+Epoch 049/100  train_loss=147.5234  train_mse=119.7653  val_loss=147.8395  val_mse=120.1451  time=4339.3s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=147.8395)
+  [train] step 500/5187  loss=145.5064  mse=117.9473
+  [train] step 1000/5187  loss=145.6665  mse=118.1165
+  [train] step 1500/5187  loss=145.7929  mse=118.2315
+  [train] step 2000/5187  loss=145.8574  mse=118.3029
+  [train] step 2500/5187  loss=146.0550  mse=118.4727
+  [train] step 3000/5187  loss=146.2081  mse=118.6090
+  [train] step 3500/5187  loss=146.1919  mse=118.5932
+  [train] step 4000/5187  loss=146.1457  mse=118.5534
+  [train] step 4500/5187  loss=146.1091  mse=118.5219
+  [train] step 5000/5187  loss=146.1922  mse=118.5933
+  [train] step 5187/5187  loss=146.1500  mse=118.5588
+  [val] step 500/1296  loss=194.6554  mse=162.0727
+  [val] step 1000/1296  loss=194.3755  mse=161.8302
+  [val] step 1296/1296  loss=194.2406  mse=161.7125
+Epoch 050/100  train_loss=146.1500  train_mse=118.5588  val_loss=194.2406  val_mse=161.7125  time=4340.7s
+  [train] step 500/5187  loss=145.4675  mse=117.9051
+  [train] step 1000/5187  loss=146.1723  mse=118.5476
+  [train] step 1500/5187  loss=146.3634  mse=118.7407
+  [train] step 2000/5187  loss=146.3412  mse=118.7401
+  [train] step 2500/5187  loss=146.3681  mse=118.7721
+  [train] step 3000/5187  loss=146.3932  mse=118.7855
+  [train] step 3500/5187  loss=146.4123  mse=118.8029
+  [train] step 4000/5187  loss=146.5046  mse=118.8883
+  [train] step 4500/5187  loss=146.4838  mse=118.8673
+  [train] step 5000/5187  loss=146.5238  mse=118.9085
+  [train] step 5187/5187  loss=146.5626  mse=118.9438
+  [val] step 500/1296  loss=165.8798  mse=136.8636
+  [val] step 1000/1296  loss=165.6447  mse=136.6593
+  [val] step 1296/1296  loss=165.5967  mse=136.6176
+Epoch 051/100  train_loss=146.5626  train_mse=118.9438  val_loss=165.5967  val_mse=136.6176  time=4339.5s
+  [train] step 500/5187  loss=146.0027  mse=118.4760
+  [train] step 1000/5187  loss=146.4494  mse=118.8617
+  [train] step 1500/5187  loss=146.8617  mse=119.2206
+  [train] step 2000/5187  loss=146.7164  mse=119.0831
+  [train] step 2500/5187  loss=146.7793  mse=119.1419
+  [train] step 3000/5187  loss=146.8081  mse=119.1669
+  [train] step 3500/5187  loss=146.7496  mse=119.1163
+  [train] step 4000/5187  loss=146.8511  mse=119.2079
+  [train] step 4500/5187  loss=146.9504  mse=119.3005
+  [train] step 5000/5187  loss=146.9387  mse=119.2954
+  [train] step 5187/5187  loss=146.9630  mse=119.3167
+  [val] step 500/1296  loss=321.4995  mse=277.5521
+  [val] step 1000/1296  loss=321.2878  mse=277.3556
+  [val] step 1296/1296  loss=320.7420  mse=276.8675
+Epoch 052/100  train_loss=146.9630  train_mse=119.3167  val_loss=320.7420  val_mse=276.8675  time=4346.0s
+  [train] step 500/5187  loss=146.8622  mse=119.1923
+  [train] step 1000/5187  loss=146.9009  mse=119.2201
+  [train] step 1500/5187  loss=147.0547  mse=119.3822
+  [train] step 2000/5187  loss=147.1024  mse=119.4371
+  [train] step 2500/5187  loss=147.2010  mse=119.5329
+  [train] step 3000/5187  loss=147.3313  mse=119.6420
+  [train] step 3500/5187  loss=147.3800  mse=119.6873
+  [train] step 4000/5187  loss=147.3238  mse=119.6390
+  [train] step 4500/5187  loss=147.3322  mse=119.6538
+  [train] step 5000/5187  loss=147.3515  mse=119.6727
+  [train] step 5187/5187  loss=147.3586  mse=119.6776
+  [val] step 500/1296  loss=158.4851  mse=130.2185
+  [val] step 1000/1296  loss=158.3032  mse=130.0666
+  [val] step 1296/1296  loss=158.3006  mse=130.0685
+Epoch 053/100  train_loss=147.3586  train_mse=119.6776  val_loss=158.3006  val_mse=130.0685  time=4345.0s
+  [train] step 500/5187  loss=147.6946  mse=119.9442
+  [train] step 1000/5187  loss=147.7082  mse=119.9819
+  [train] step 1500/5187  loss=147.8340  mse=120.0900
+  [train] step 2000/5187  loss=147.8547  mse=120.1281
+  [train] step 2500/5187  loss=147.8165  mse=120.0992
+  [train] step 3000/5187  loss=147.8136  mse=120.0953
+  [train] step 3500/5187  loss=147.8093  mse=120.0903
+  [train] step 4000/5187  loss=147.7590  mse=120.0464
+  [train] step 4500/5187  loss=147.6907  mse=119.9884
+  [train] step 5000/5187  loss=147.8010  mse=120.0899
+  [train] step 5187/5187  loss=147.7773  mse=120.0688
+  [val] step 500/1296  loss=160.2829  mse=131.5809
+  [val] step 1000/1296  loss=160.0098  mse=131.3435
+  [val] step 1296/1296  loss=160.0441  mse=131.3894
+Epoch 054/100  train_loss=147.7773  train_mse=120.0688  val_loss=160.0441  val_mse=131.3894  time=4347.0s
+  [train] step 500/5187  loss=147.5017  mse=119.7797
+  [train] step 1000/5187  loss=147.9521  mse=120.2098
+  [train] step 1500/5187  loss=148.0002  mse=120.2762
+  [train] step 2000/5187  loss=148.1441  mse=120.4110
+  [train] step 2500/5187  loss=148.2601  mse=120.5117
+  [train] step 3000/5187  loss=148.1845  mse=120.4414
+  [train] step 3500/5187  loss=148.2357  mse=120.4912
+  [train] step 4000/5187  loss=148.2239  mse=120.4820
+  [train] step 4500/5187  loss=148.2623  mse=120.5173
+  [train] step 5000/5187  loss=148.2931  mse=120.5442
+  [train] step 5187/5187  loss=148.3216  mse=120.5700
+  [val] step 500/1296  loss=260.9210  mse=219.2988
+  [val] step 1000/1296  loss=260.7735  mse=219.1583
+  [val] step 1296/1296  loss=260.6139  mse=219.0416
+Epoch 055/100  train_loss=148.3216  train_mse=120.5700  val_loss=260.6139  val_mse=219.0416  time=4341.7s
+  [train] step 500/5187  loss=147.6492  mse=119.9389
+  [train] step 1000/5187  loss=147.9175  mse=120.2103
+  [train] step 1500/5187  loss=148.0668  mse=120.3510
+  [train] step 2000/5187  loss=148.2107  mse=120.4766
+  [train] step 2500/5187  loss=148.2560  mse=120.5141
+  [train] step 3000/5187  loss=148.2253  mse=120.4879
+  [train] step 3500/5187  loss=148.2868  mse=120.5447
+  [train] step 4000/5187  loss=148.4273  mse=120.6703
+  [train] step 4500/5187  loss=148.4473  mse=120.6881
+  [train] step 5000/5187  loss=148.4188  mse=120.6656
+  [train] step 5187/5187  loss=148.4072  mse=120.6556
+  [val] step 500/1296  loss=194.3055  mse=161.3129
+  [val] step 1000/1296  loss=193.9966  mse=161.0451
+  [val] step 1296/1296  loss=193.8661  mse=160.9325
+Epoch 056/100  train_loss=148.4072  train_mse=120.6556  val_loss=193.8661  val_mse=160.9325  time=4338.5s
+  [train] step 500/5187  loss=148.7375  mse=120.9609
+  [train] step 1000/5187  loss=149.0395  mse=121.2143
+  [train] step 1500/5187  loss=148.8562  mse=121.0573
+  [train] step 2000/5187  loss=148.7294  mse=120.9490
+  [train] step 2500/5187  loss=148.8584  mse=121.0725
+  [train] step 3000/5187  loss=148.8490  mse=121.0574
+  [train] step 3500/5187  loss=148.9217  mse=121.1219
+  [train] step 4000/5187  loss=148.9355  mse=121.1384
+  [train] step 4500/5187  loss=148.8870  mse=121.0961
+  [train] step 5000/5187  loss=148.8370  mse=121.0515
+  [train] step 5187/5187  loss=148.8350  mse=121.0507
+  [val] step 500/1296  loss=159.8618  mse=131.3686
+  [val] step 1000/1296  loss=159.5882  mse=131.1256
+  [val] step 1296/1296  loss=159.6196  mse=131.1614
+Epoch 057/100  train_loss=148.8350  train_mse=121.0507  val_loss=159.6196  val_mse=131.1614  time=4346.7s
+  [train] step 500/5187  loss=148.4428  mse=120.6587
+  [train] step 1000/5187  loss=148.6824  mse=120.8965
+  [train] step 1500/5187  loss=148.8387  mse=121.0686
+  [train] step 2000/5187  loss=148.8781  mse=121.1096
+  [train] step 2500/5187  loss=148.7309  mse=120.9711
+  [train] step 3000/5187  loss=148.8133  mse=121.0315
+  [train] step 3500/5187  loss=148.9287  mse=121.1390
+  [train] step 4000/5187  loss=148.9502  mse=121.1648
+  [train] step 4500/5187  loss=149.0074  mse=121.2187
+  [train] step 5000/5187  loss=148.9680  mse=121.1860
+  [train] step 5187/5187  loss=149.0005  mse=121.2146
+  [val] step 500/1296  loss=147.4912  mse=119.9166
+  [val] step 1000/1296  loss=147.1608  mse=119.6206
+  [val] step 1296/1296  loss=147.0614  mse=119.5374
+Epoch 058/100  train_loss=149.0005  train_mse=121.2146  val_loss=147.0614  val_mse=119.5374  time=4338.9s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=147.0614)
+  [train] step 500/5187  loss=148.5074  mse=120.7274
+  [train] step 1000/5187  loss=149.0513  mse=121.2383
+  [train] step 1500/5187  loss=148.9573  mse=121.1784
+  [train] step 2000/5187  loss=149.0634  mse=121.2761
+  [train] step 2500/5187  loss=149.0363  mse=121.2503
+  [train] step 3000/5187  loss=149.0493  mse=121.2620
+  [train] step 3500/5187  loss=148.9436  mse=121.1632
+  [train] step 4000/5187  loss=148.9674  mse=121.1861
+  [train] step 4500/5187  loss=148.9689  mse=121.1908
+  [train] step 5000/5187  loss=148.9754  mse=121.1970
+  [train] step 5187/5187  loss=148.9789  mse=121.1986
+  [val] step 500/1296  loss=163.3882  mse=134.8706
+  [val] step 1000/1296  loss=162.9804  mse=134.4980
+  [val] step 1296/1296  loss=162.8984  mse=134.4302
+Epoch 059/100  train_loss=148.9789  train_mse=121.1986  val_loss=162.8984  val_mse=134.4302  time=4349.1s
+  [train] step 500/5187  loss=149.0463  mse=121.2431
+  [train] step 1000/5187  loss=149.1689  mse=121.3876
+  [train] step 1500/5187  loss=149.0246  mse=121.2664
+  [train] step 2000/5187  loss=149.1747  mse=121.3932
+  [train] step 2500/5187  loss=149.1460  mse=121.3641
+  [train] step 3000/5187  loss=149.1509  mse=121.3616
+  [train] step 3500/5187  loss=149.0826  mse=121.3047
+  [train] step 4000/5187  loss=149.1152  mse=121.3361
+  [train] step 4500/5187  loss=149.1871  mse=121.4048
+  [train] step 5000/5187  loss=149.1950  mse=121.4181
+  [train] step 5187/5187  loss=149.2188  mse=121.4397
+  [val] step 500/1296  loss=148.8807  mse=121.2953
+  [val] step 1000/1296  loss=148.6206  mse=121.0753
+  [val] step 1296/1296  loss=148.5777  mse=121.0415
+Epoch 060/100  train_loss=149.2188  train_mse=121.4397  val_loss=148.5777  val_mse=121.0415  time=4340.7s
+  [train] step 500/5187  loss=149.0832  mse=121.2794
+  [train] step 1000/5187  loss=149.0938  mse=121.3119
+  [train] step 1500/5187  loss=148.8715  mse=121.1160
+  [train] step 2000/5187  loss=149.0094  mse=121.2424
+  [train] step 2500/5187  loss=149.0935  mse=121.3211
+  [train] step 3000/5187  loss=149.0885  mse=121.3150
+  [train] step 3500/5187  loss=149.1530  mse=121.3724
+  [train] step 4000/5187  loss=149.1576  mse=121.3810
+  [train] step 4500/5187  loss=149.1934  mse=121.4140
+  [train] step 5000/5187  loss=149.2429  mse=121.4593
+  [train] step 5187/5187  loss=149.2357  mse=121.4521
+  [val] step 500/1296  loss=181.9733  mse=152.0479
+  [val] step 1000/1296  loss=181.5686  mse=151.6742
+  [val] step 1296/1296  loss=181.5421  mse=151.6568
+Epoch 061/100  train_loss=149.2357  train_mse=121.4521  val_loss=181.5421  val_mse=151.6568  time=4345.0s
+  [train] step 500/5187  loss=148.8990  mse=121.1107
+  [train] step 1000/5187  loss=148.7535  mse=121.0100
+  [train] step 1500/5187  loss=148.8956  mse=121.1367
+  [train] step 2000/5187  loss=148.8937  mse=121.1375
+  [train] step 2500/5187  loss=148.8897  mse=121.1328
+  [train] step 3000/5187  loss=148.9578  mse=121.1910
+  [train] step 3500/5187  loss=149.0102  mse=121.2393
+  [train] step 4000/5187  loss=148.9939  mse=121.2382
+  [train] step 4500/5187  loss=149.0259  mse=121.2629
+  [train] step 5000/5187  loss=149.0428  mse=121.2773
+  [train] step 5187/5187  loss=149.0422  mse=121.2758
+  [val] step 500/1296  loss=158.5386  mse=130.1892
+  [val] step 1000/1296  loss=158.4934  mse=130.1452
+  [val] step 1296/1296  loss=158.4530  mse=130.1153
+Epoch 062/100  train_loss=149.0422  train_mse=121.2758  val_loss=158.4530  val_mse=130.1153  time=4334.3s
+  [train] step 500/5187  loss=149.5464  mse=121.6931
+  [train] step 1000/5187  loss=149.3015  mse=121.5073
+  [train] step 1500/5187  loss=149.3268  mse=121.5310
+  [train] step 2000/5187  loss=149.1956  mse=121.4247
+  [train] step 2500/5187  loss=149.2161  mse=121.4485
+  [train] step 3000/5187  loss=149.2873  mse=121.5068
+  [train] step 3500/5187  loss=149.2781  mse=121.4980
+  [train] step 4000/5187  loss=149.2484  mse=121.4753
+  [train] step 4500/5187  loss=149.2687  mse=121.4909
+  [train] step 5000/5187  loss=149.2134  mse=121.4416
+  [train] step 5187/5187  loss=149.2173  mse=121.4424
+  [val] step 500/1296  loss=170.1470  mse=140.8328
+  [val] step 1000/1296  loss=169.7473  mse=140.4716
+  [val] step 1296/1296  loss=169.6552  mse=140.3921
+Epoch 063/100  train_loss=149.2173  train_mse=121.4424  val_loss=169.6552  val_mse=140.3921  time=4333.4s
+  [train] step 500/5187  loss=149.6742  mse=121.8431
+  [train] step 1000/5187  loss=149.2275  mse=121.4335
+  [train] step 1500/5187  loss=149.1924  mse=121.4160
+  [train] step 2000/5187  loss=149.1954  mse=121.4274
+  [train] step 2500/5187  loss=149.2974  mse=121.5116
+  [train] step 3000/5187  loss=149.2416  mse=121.4671
+  [train] step 3500/5187  loss=149.2532  mse=121.4768
+  [train] step 4000/5187  loss=149.1961  mse=121.4244
+  [train] step 4500/5187  loss=149.2416  mse=121.4660
+  [train] step 5000/5187  loss=149.2228  mse=121.4551
+  [train] step 5187/5187  loss=149.2438  mse=121.4752
+  [val] step 500/1296  loss=155.6083  mse=127.5208
+  [val] step 1000/1296  loss=155.4984  mse=127.4297
+  [val] step 1296/1296  loss=155.4609  mse=127.4085
+Epoch 064/100  train_loss=149.2438  train_mse=121.4752  val_loss=155.4609  val_mse=127.4085  time=4353.9s
+  [train] step 500/5187  loss=148.6445  mse=120.8813
+  [train] step 1000/5187  loss=149.1705  mse=121.3857
+  [train] step 1500/5187  loss=149.3424  mse=121.5312
+  [train] step 2000/5187  loss=149.4138  mse=121.6199
+  [train] step 2500/5187  loss=149.4146  mse=121.6293
+  [train] step 3000/5187  loss=149.2629  mse=121.4820
+  [train] step 3500/5187  loss=149.2932  mse=121.5093
+  [train] step 4000/5187  loss=149.2860  mse=121.5026
+  [train] step 4500/5187  loss=149.3031  mse=121.5249
+  [train] step 5000/5187  loss=149.3034  mse=121.5252
+  [train] step 5187/5187  loss=149.3134  mse=121.5337
+  [val] step 500/1296  loss=176.8567  mse=147.1296
+  [val] step 1000/1296  loss=176.7433  mse=147.0299
+  [val] step 1296/1296  loss=176.6775  mse=146.9815
+Epoch 065/100  train_loss=149.3134  train_mse=121.5337  val_loss=176.6775  val_mse=146.9815  time=4343.2s
+  [train] step 500/5187  loss=148.6848  mse=120.9730
+  [train] step 1000/5187  loss=148.6839  mse=120.9610
+  [train] step 1500/5187  loss=148.8077  mse=121.0705
+  [train] step 2000/5187  loss=149.0460  mse=121.3060
+  [train] step 2500/5187  loss=149.0425  mse=121.3079
+  [train] step 3000/5187  loss=149.1599  mse=121.4112
+  [train] step 3500/5187  loss=149.2869  mse=121.5301
+  [train] step 4000/5187  loss=149.2911  mse=121.5331
+  [train] step 4500/5187  loss=149.2884  mse=121.5287
+  [train] step 5000/5187  loss=149.2719  mse=121.5088
+  [train] step 5187/5187  loss=149.3076  mse=121.5412
+  [val] step 500/1296  loss=156.7165  mse=128.5571
+  [val] step 1000/1296  loss=156.4890  mse=128.3506
+  [val] step 1296/1296  loss=156.5071  mse=128.3676
+Epoch 066/100  train_loss=149.3076  train_mse=121.5412  val_loss=156.5071  val_mse=128.3676  time=4336.0s
+  [train] step 500/5187  loss=149.0326  mse=121.2972
+  [train] step 1000/5187  loss=148.5691  mse=120.8875
+  [train] step 1500/5187  loss=148.7505  mse=121.0522
+  [train] step 2000/5187  loss=148.8115  mse=121.1132
+  [train] step 2500/5187  loss=148.8891  mse=121.1788
+  [train] step 3000/5187  loss=148.9682  mse=121.2403
+  [train] step 3500/5187  loss=149.0606  mse=121.3242
+  [train] step 4000/5187  loss=148.9923  mse=121.2623
+  [train] step 4500/5187  loss=149.0407  mse=121.3074
+  [train] step 5000/5187  loss=149.0502  mse=121.3167
+  [train] step 5187/5187  loss=149.0535  mse=121.3167
+  [val] step 500/1296  loss=155.4403  mse=127.1786
+  [val] step 1000/1296  loss=155.4640  mse=127.1945
+  [val] step 1296/1296  loss=155.4039  mse=127.1429
+Epoch 067/100  train_loss=149.0535  train_mse=121.3167  val_loss=155.4039  val_mse=127.1429  time=4348.5s
+  [train] step 500/5187  loss=148.9888  mse=121.2237
+  [train] step 1000/5187  loss=149.1091  mse=121.3518
+  [train] step 1500/5187  loss=149.0114  mse=121.2791
+  [train] step 2000/5187  loss=149.2432  mse=121.4994
+  [train] step 2500/5187  loss=149.2951  mse=121.5474
+  [train] step 3000/5187  loss=149.2570  mse=121.5057
+  [train] step 3500/5187  loss=149.2977  mse=121.5431
+  [train] step 4000/5187  loss=149.2715  mse=121.5232
+  [train] step 4500/5187  loss=149.1862  mse=121.4456
+  [train] step 5000/5187  loss=149.1634  mse=121.4310
+  [train] step 5187/5187  loss=149.2149  mse=121.4774
+  [val] step 500/1296  loss=154.7379  mse=126.6916
+  [val] step 1000/1296  loss=154.4756  mse=126.4493
+  [val] step 1296/1296  loss=154.4333  mse=126.4132
+Epoch 068/100  train_loss=149.2149  train_mse=121.4774  val_loss=154.4333  val_mse=126.4132  time=4353.0s
+  [train] step 500/5187  loss=148.8258  mse=121.0854
+  [train] step 1000/5187  loss=149.0692  mse=121.3238
+  [train] step 1500/5187  loss=149.0434  mse=121.3281
+  [train] step 2000/5187  loss=149.0492  mse=121.3426
+  [train] step 2500/5187  loss=148.9766  mse=121.2711
+  [train] step 3000/5187  loss=149.0512  mse=121.3313
+  [train] step 3500/5187  loss=149.1061  mse=121.3787
+  [train] step 4000/5187  loss=149.0800  mse=121.3570
+  [train] step 4500/5187  loss=149.0901  mse=121.3695
+  [train] step 5000/5187  loss=149.0558  mse=121.3362
+  [train] step 5187/5187  loss=149.0209  mse=121.3055
+  [val] step 500/1296  loss=161.7800  mse=132.9490
+  [val] step 1000/1296  loss=161.4741  mse=132.6751
+  [val] step 1296/1296  loss=161.3858  mse=132.6114
+Epoch 069/100  train_loss=149.0209  train_mse=121.3055  val_loss=161.3858  val_mse=132.6114  time=4335.7s
+  [train] step 500/5187  loss=137.5772  mse=111.0207
+  [train] step 1000/5187  loss=136.6940  mse=110.2648
+  [train] step 1500/5187  loss=136.5194  mse=110.1190
+  [train] step 2000/5187  loss=136.2929  mse=109.9210
+  [train] step 2500/5187  loss=136.0210  mse=109.6826
+  [train] step 3000/5187  loss=135.9640  mse=109.6304
+  [train] step 3500/5187  loss=135.7795  mse=109.4718
+  [train] step 4000/5187  loss=135.6304  mse=109.3440
+  [train] step 4500/5187  loss=135.4784  mse=109.2126
+  [train] step 5000/5187  loss=135.3843  mse=109.1272
+  [train] step 5187/5187  loss=135.3736  mse=109.1190
+  [val] step 500/1296  loss=134.5364  mse=108.6687
+  [val] step 1000/1296  loss=134.1469  mse=108.3066
+  [val] step 1296/1296  loss=134.0471  mse=108.2213
+Epoch 070/100  train_loss=135.3736  train_mse=109.1190  val_loss=134.0471  val_mse=108.2213  time=4332.6s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=134.0471)
+  [train] step 500/5187  loss=134.6386  mse=108.4612
+  [train] step 1000/5187  loss=134.4619  mse=108.3266
+  [train] step 1500/5187  loss=134.2153  mse=108.1110
+  [train] step 2000/5187  loss=134.2065  mse=108.0986
+  [train] step 2500/5187  loss=134.1961  mse=108.0929
+  [train] step 3000/5187  loss=134.2285  mse=108.1187
+  [train] step 3500/5187  loss=134.1733  mse=108.0667
+  [train] step 4000/5187  loss=134.1820  mse=108.0792
+  [train] step 4500/5187  loss=134.1085  mse=108.0122
+  [train] step 5000/5187  loss=134.0605  mse=107.9694
+  [train] step 5187/5187  loss=134.0377  mse=107.9490
+  [val] step 500/1296  loss=198.8789  mse=164.1825
+  [val] step 1000/1296  loss=199.0260  mse=164.3235
+  [val] step 1296/1296  loss=198.8462  mse=164.1670
+Epoch 071/100  train_loss=134.0377  train_mse=107.9490  val_loss=198.8462  val_mse=164.1670  time=4337.4s
+  [train] step 500/5187  loss=133.5989  mse=107.5523
+  [train] step 1000/5187  loss=133.6660  mse=107.6174
+  [train] step 1500/5187  loss=133.9701  mse=107.9104
+  [train] step 2000/5187  loss=134.1280  mse=108.0487
+  [train] step 2500/5187  loss=134.0960  mse=108.0110
+  [train] step 3000/5187  loss=134.0830  mse=107.9931
+  [train] step 3500/5187  loss=134.0232  mse=107.9448
+  [train] step 4000/5187  loss=134.0283  mse=107.9501
+  [train] step 4500/5187  loss=134.0223  mse=107.9470
+  [train] step 5000/5187  loss=134.0313  mse=107.9535
+  [train] step 5187/5187  loss=134.0240  mse=107.9472
+  [val] step 500/1296  loss=131.5589  mse=105.9422
+  [val] step 1000/1296  loss=131.4208  mse=105.8119
+  [val] step 1296/1296  loss=131.2640  mse=105.6672
+Epoch 072/100  train_loss=134.0240  train_mse=107.9472  val_loss=131.2640  val_mse=105.6672  time=4345.6s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=131.2640)
+  [train] step 500/5187  loss=133.4825  mse=107.4073
+  [train] step 1000/5187  loss=133.6388  mse=107.5828
+  [train] step 1500/5187  loss=133.6991  mse=107.6452
+  [train] step 2000/5187  loss=133.8250  mse=107.7601
+  [train] step 2500/5187  loss=133.8887  mse=107.8295
+  [train] step 3000/5187  loss=133.8760  mse=107.8178
+  [train] step 3500/5187  loss=133.9035  mse=107.8378
+  [train] step 4000/5187  loss=133.8068  mse=107.7513
+  [train] step 4500/5187  loss=133.8350  mse=107.7791
+  [train] step 5000/5187  loss=133.8774  mse=107.8146
+  [train] step 5187/5187  loss=133.8734  mse=107.8106
+  [val] step 500/1296  loss=131.4548  mse=105.8567
+  [val] step 1000/1296  loss=131.4394  mse=105.8399
+  [val] step 1296/1296  loss=131.3847  mse=105.7947
+Epoch 073/100  train_loss=133.8734  train_mse=107.8106  val_loss=131.3847  val_mse=105.7947  time=4338.4s
+  [train] step 500/5187  loss=133.5915  mse=107.5273
+  [train] step 1000/5187  loss=133.8516  mse=107.7877
+  [train] step 1500/5187  loss=133.8668  mse=107.7990
+  [train] step 2000/5187  loss=133.8867  mse=107.8273
+  [train] step 2500/5187  loss=133.9086  mse=107.8460
+  [train] step 3000/5187  loss=133.8629  mse=107.8022
+  [train] step 3500/5187  loss=133.9960  mse=107.9281
+  [train] step 4000/5187  loss=134.0450  mse=107.9766
+  [train] step 4500/5187  loss=134.0958  mse=108.0229
+  [train] step 5000/5187  loss=134.0917  mse=108.0196
+  [train] step 5187/5187  loss=134.1398  mse=108.0614
+  [val] step 500/1296  loss=132.7462  mse=107.0199
+  [val] step 1000/1296  loss=132.7194  mse=106.9939
+  [val] step 1296/1296  loss=132.7118  mse=106.9842
+Epoch 074/100  train_loss=134.1398  train_mse=108.0614  val_loss=132.7118  val_mse=106.9842  time=4344.9s
+  [train] step 500/5187  loss=133.7712  mse=107.6994
+  [train] step 1000/5187  loss=133.9500  mse=107.9166
+  [train] step 1500/5187  loss=133.9234  mse=107.8927
+  [train] step 2000/5187  loss=134.1003  mse=108.0523
+  [train] step 2500/5187  loss=134.2568  mse=108.1896
+  [train] step 3000/5187  loss=134.3142  mse=108.2301
+  [train] step 3500/5187  loss=134.4436  mse=108.3481
+  [train] step 4000/5187  loss=134.3372  mse=108.2556
+  [train] step 4500/5187  loss=134.2881  mse=108.2112
+  [train] step 5000/5187  loss=134.3101  mse=108.2313
+  [train] step 5187/5187  loss=134.3238  mse=108.2454
+  [val] step 500/1296  loss=168.3376  mse=138.2670
+  [val] step 1000/1296  loss=168.5607  mse=138.4765
+  [val] step 1296/1296  loss=168.6115  mse=138.5341
+Epoch 075/100  train_loss=134.3238  train_mse=108.2454  val_loss=168.6115  val_mse=138.5341  time=4345.0s
+  [train] step 500/5187  loss=134.0757  mse=107.9766
+  [train] step 1000/5187  loss=134.2927  mse=108.2032
+  [train] step 1500/5187  loss=134.1649  mse=108.0955
+  [train] step 2000/5187  loss=134.2155  mse=108.1367
+  [train] step 2500/5187  loss=134.3206  mse=108.2274
+  [train] step 3000/5187  loss=134.4703  mse=108.3665
+  [train] step 3500/5187  loss=134.4607  mse=108.3535
+  [train] step 4000/5187  loss=134.4435  mse=108.3392
+  [train] step 4500/5187  loss=134.4365  mse=108.3380
+  [train] step 5000/5187  loss=134.4341  mse=108.3374
+  [train] step 5187/5187  loss=134.4393  mse=108.3417
+  [val] step 500/1296  loss=140.6646  mse=114.0363
+  [val] step 1000/1296  loss=140.5514  mse=113.9306
+  [val] step 1296/1296  loss=140.5392  mse=113.9260
+Epoch 076/100  train_loss=134.4393  train_mse=108.3417  val_loss=140.5392  val_mse=113.9260  time=4345.2s
+  [train] step 500/5187  loss=134.0194  mse=107.9392
+  [train] step 1000/5187  loss=134.1312  mse=108.0449
+  [train] step 1500/5187  loss=134.3511  mse=108.2453
+  [train] step 2000/5187  loss=134.5002  mse=108.3949
+  [train] step 2500/5187  loss=134.5332  mse=108.4237
+  [train] step 3000/5187  loss=134.6338  mse=108.5092
+  [train] step 3500/5187  loss=134.6806  mse=108.5571
+  [train] step 4000/5187  loss=134.7070  mse=108.5824
+  [train] step 4500/5187  loss=134.6306  mse=108.5136
+  [train] step 5000/5187  loss=134.6250  mse=108.5093
+  [train] step 5187/5187  loss=134.6312  mse=108.5152
+  [val] step 500/1296  loss=135.7564  mse=109.8066
+  [val] step 1000/1296  loss=135.5836  mse=109.6623
+  [val] step 1296/1296  loss=135.4310  mse=109.5203
+Epoch 077/100  train_loss=134.6312  train_mse=108.5152  val_loss=135.4310  val_mse=109.5203  time=4352.2s
+  [train] step 500/5187  loss=134.5041  mse=108.4101
+  [train] step 1000/5187  loss=134.7677  mse=108.6375
+  [train] step 1500/5187  loss=134.8091  mse=108.6652
+  [train] step 2000/5187  loss=134.7650  mse=108.6312
+  [train] step 2500/5187  loss=134.9080  mse=108.7656
+  [train] step 3000/5187  loss=134.9855  mse=108.8295
+  [train] step 3500/5187  loss=134.9852  mse=108.8308
+  [train] step 4000/5187  loss=134.9661  mse=108.8175
+  [train] step 4500/5187  loss=134.9596  mse=108.8131
+  [train] step 5000/5187  loss=134.9379  mse=108.7931
+  [train] step 5187/5187  loss=134.9556  mse=108.8081
+  [val] step 500/1296  loss=141.9394  mse=115.2555
+  [val] step 1000/1296  loss=142.0767  mse=115.3801
+  [val] step 1296/1296  loss=142.0152  mse=115.3237
+Epoch 078/100  train_loss=134.9556  train_mse=108.8081  val_loss=142.0152  val_mse=115.3237  time=4346.8s
+  [train] step 500/5187  loss=135.0621  mse=108.8685
+  [train] step 1000/5187  loss=135.1171  mse=108.9477
+  [train] step 1500/5187  loss=135.1099  mse=108.9373
+  [train] step 2000/5187  loss=135.0996  mse=108.9308
+  [train] step 2500/5187  loss=135.0924  mse=108.9282
+  [train] step 3000/5187  loss=135.1628  mse=108.9911
+  [train] step 3500/5187  loss=135.1590  mse=108.9912
+  [train] step 4000/5187  loss=135.1459  mse=108.9819
+  [train] step 4500/5187  loss=135.1453  mse=108.9853
+  [train] step 5000/5187  loss=135.1581  mse=108.9957
+  [train] step 5187/5187  loss=135.1672  mse=109.0000
+  [val] step 500/1296  loss=133.6296  mse=107.8233
+  [val] step 1000/1296  loss=133.5728  mse=107.7536
+  [val] step 1296/1296  loss=133.5015  mse=107.6948
+Epoch 079/100  train_loss=135.1672  train_mse=109.0000  val_loss=133.5015  val_mse=107.6948  time=4347.8s
+  [train] step 500/5187  loss=134.5656  mse=108.4361
+  [train] step 1000/5187  loss=134.8482  mse=108.6946
+  [train] step 1500/5187  loss=135.0057  mse=108.8515
+  [train] step 2000/5187  loss=135.0704  mse=108.9179
+  [train] step 2500/5187  loss=135.1825  mse=109.0076
+  [train] step 3000/5187  loss=135.2022  mse=109.0196
+  [train] step 3500/5187  loss=135.1434  mse=108.9698
+  [train] step 4000/5187  loss=135.1858  mse=109.0053
+  [train] step 4500/5187  loss=135.1945  mse=109.0186
+  [train] step 5000/5187  loss=135.2390  mse=109.0583
+  [train] step 5187/5187  loss=135.2958  mse=109.1106
+  [val] step 500/1296  loss=130.4787  mse=104.8827
+  [val] step 1000/1296  loss=130.4384  mse=104.8593
+  [val] step 1296/1296  loss=130.4287  mse=104.8478
+Epoch 080/100  train_loss=135.2958  train_mse=109.1106  val_loss=130.4287  val_mse=104.8478  time=4345.8s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=130.4287)
+  [train] step 500/5187  loss=135.2860  mse=109.0910
+  [train] step 1000/5187  loss=135.3761  mse=109.1845
+  [train] step 1500/5187  loss=135.3629  mse=109.1657
+  [train] step 2000/5187  loss=135.2269  mse=109.0357
+  [train] step 2500/5187  loss=135.3556  mse=109.1592
+  [train] step 3000/5187  loss=135.3126  mse=109.1219
+  [train] step 3500/5187  loss=135.3177  mse=109.1259
+  [train] step 4000/5187  loss=135.3853  mse=109.1897
+  [train] step 4500/5187  loss=135.3829  mse=109.1941
+  [train] step 5000/5187  loss=135.4347  mse=109.2371
+  [train] step 5187/5187  loss=135.4531  mse=109.2528
+  [val] step 500/1296  loss=149.6478  mse=122.6561
+  [val] step 1000/1296  loss=149.6691  mse=122.6843
+  [val] step 1296/1296  loss=149.6924  mse=122.7052
+Epoch 081/100  train_loss=135.4531  train_mse=109.2528  val_loss=149.6924  val_mse=122.7052  time=4348.9s
+  [train] step 500/5187  loss=135.6634  mse=109.4023
+  [train] step 1000/5187  loss=135.3691  mse=109.1586
+  [train] step 1500/5187  loss=135.2908  mse=109.1057
+  [train] step 2000/5187  loss=135.3649  mse=109.1822
+  [train] step 2500/5187  loss=135.4584  mse=109.2541
+  [train] step 3000/5187  loss=135.4104  mse=109.2114
+  [train] step 3500/5187  loss=135.4268  mse=109.2253
+  [train] step 4000/5187  loss=135.4769  mse=109.2762
+  [train] step 4500/5187  loss=135.5151  mse=109.3138
+  [train] step 5000/5187  loss=135.5469  mse=109.3428
+  [train] step 5187/5187  loss=135.5647  mse=109.3596
+  [val] step 500/1296  loss=131.7181  mse=106.0906
+  [val] step 1000/1296  loss=131.9069  mse=106.2591
+  [val] step 1296/1296  loss=131.9115  mse=106.2668
+Epoch 082/100  train_loss=135.5647  train_mse=109.3596  val_loss=131.9115  val_mse=106.2668  time=4342.4s
+  [train] step 500/5187  loss=135.7223  mse=109.4902
+  [train] step 1000/5187  loss=135.6254  mse=109.4109
+  [train] step 1500/5187  loss=135.5065  mse=109.3086
+  [train] step 2000/5187  loss=135.5830  mse=109.3790
+  [train] step 2500/5187  loss=135.7200  mse=109.5086
+  [train] step 3000/5187  loss=135.8055  mse=109.5776
+  [train] step 3500/5187  loss=135.7766  mse=109.5437
+  [train] step 4000/5187  loss=135.8146  mse=109.5794
+  [train] step 4500/5187  loss=135.8299  mse=109.5888
+  [train] step 5000/5187  loss=135.7725  mse=109.5382
+  [train] step 5187/5187  loss=135.7312  mse=109.5012
+  [val] step 500/1296  loss=249.9386  mse=211.1029
+  [val] step 1000/1296  loss=250.0288  mse=211.1605
+  [val] step 1296/1296  loss=249.5885  mse=210.7548
+Epoch 083/100  train_loss=135.7312  train_mse=109.5012  val_loss=249.5885  val_mse=210.7548  time=4350.7s
+  [train] step 500/5187  loss=135.6613  mse=109.4849
+  [train] step 1000/5187  loss=135.5448  mse=109.3365
+  [train] step 1500/5187  loss=135.8638  mse=109.6167
+  [train] step 2000/5187  loss=136.0353  mse=109.7710
+  [train] step 2500/5187  loss=136.0455  mse=109.7803
+  [train] step 3000/5187  loss=135.9925  mse=109.7391
+  [train] step 3500/5187  loss=135.9018  mse=109.6642
+  [train] step 4000/5187  loss=135.9245  mse=109.6894
+  [train] step 4500/5187  loss=135.9581  mse=109.7197
+  [train] step 5000/5187  loss=135.9067  mse=109.6704
+  [train] step 5187/5187  loss=135.9238  mse=109.6876
+  [val] step 500/1296  loss=133.7176  mse=107.7845
+  [val] step 1000/1296  loss=133.5722  mse=107.6262
+  [val] step 1296/1296  loss=133.4716  mse=107.5330
+Epoch 084/100  train_loss=135.9238  train_mse=109.6876  val_loss=133.4716  val_mse=107.5330  time=4348.4s
+  [train] step 500/5187  loss=135.7785  mse=109.5268
+  [train] step 1000/5187  loss=135.8342  mse=109.5835
+  [train] step 1500/5187  loss=135.7025  mse=109.4735
+  [train] step 2000/5187  loss=135.8172  mse=109.5882
+  [train] step 2500/5187  loss=135.7768  mse=109.5453
+  [train] step 3000/5187  loss=135.8145  mse=109.5804
+  [train] step 3500/5187  loss=135.8165  mse=109.5789
+  [train] step 4000/5187  loss=135.8884  mse=109.6468
+  [train] step 4500/5187  loss=135.9670  mse=109.7218
+  [train] step 5000/5187  loss=135.9934  mse=109.7397
+  [train] step 5187/5187  loss=135.9914  mse=109.7412
+  [val] step 500/1296  loss=140.5401  mse=114.0036
+  [val] step 1000/1296  loss=140.2905  mse=113.7690
+  [val] step 1296/1296  loss=140.1991  mse=113.6900
+Epoch 085/100  train_loss=135.9914  train_mse=109.7412  val_loss=140.1991  val_mse=113.6900  time=4348.9s
+  [train] step 500/5187  loss=135.5005  mse=109.3413
+  [train] step 1000/5187  loss=135.6153  mse=109.4306
+  [train] step 1500/5187  loss=135.8689  mse=109.6428
+  [train] step 2000/5187  loss=135.9566  mse=109.7353
+  [train] step 2500/5187  loss=135.9385  mse=109.7133
+  [train] step 3000/5187  loss=136.0573  mse=109.8164
+  [train] step 3500/5187  loss=136.0989  mse=109.8533
+  [train] step 4000/5187  loss=136.0738  mse=109.8355
+  [train] step 4500/5187  loss=136.0928  mse=109.8541
+  [train] step 5000/5187  loss=136.0789  mse=109.8359
+  [train] step 5187/5187  loss=136.0828  mse=109.8391
+  [val] step 500/1296  loss=134.3505  mse=108.4667
+  [val] step 1000/1296  loss=134.2474  mse=108.3792
+  [val] step 1296/1296  loss=134.2174  mse=108.3517
+Epoch 086/100  train_loss=136.0828  train_mse=109.8391  val_loss=134.2174  val_mse=108.3517  time=4354.9s
+  [train] step 500/5187  loss=135.8499  mse=109.6011
+  [train] step 1000/5187  loss=135.9295  mse=109.6739
+  [train] step 1500/5187  loss=135.8940  mse=109.6457
+  [train] step 2000/5187  loss=135.9212  mse=109.6808
+  [train] step 2500/5187  loss=136.0041  mse=109.7504
+  [train] step 3000/5187  loss=136.1449  mse=109.8736
+  [train] step 3500/5187  loss=136.0814  mse=109.8192
+  [train] step 4000/5187  loss=136.0251  mse=109.7668
+  [train] step 4500/5187  loss=136.0672  mse=109.8085
+  [train] step 5000/5187  loss=136.0589  mse=109.8039
+  [train] step 5187/5187  loss=136.0664  mse=109.8112
+  [val] step 500/1296  loss=134.6571  mse=108.7149
+  [val] step 1000/1296  loss=134.7101  mse=108.7540
+  [val] step 1296/1296  loss=134.6257  mse=108.6814
+Epoch 087/100  train_loss=136.0664  train_mse=109.8112  val_loss=134.6257  val_mse=108.6814  time=4344.9s
+  [train] step 500/5187  loss=135.9721  mse=109.7053
+  [train] step 1000/5187  loss=136.2494  mse=109.9591
+  [train] step 1500/5187  loss=136.3601  mse=110.0833
+  [train] step 2000/5187  loss=136.5075  mse=110.2183
+  [train] step 2500/5187  loss=136.5244  mse=110.2288
+  [train] step 3000/5187  loss=136.4907  mse=110.2009
+  [train] step 3500/5187  loss=136.4971  mse=110.1980
+  [train] step 4000/5187  loss=136.4604  mse=110.1678
+  [train] step 4500/5187  loss=136.4503  mse=110.1613
+  [train] step 5000/5187  loss=136.4733  mse=110.1823
+  [train] step 5187/5187  loss=136.4885  mse=110.1960
+  [val] step 500/1296  loss=141.5251  mse=115.0928
+  [val] step 1000/1296  loss=141.5210  mse=115.0783
+  [val] step 1296/1296  loss=141.4144  mse=114.9821
+Epoch 088/100  train_loss=136.4885  train_mse=110.1960  val_loss=141.4144  val_mse=114.9821  time=4347.7s
+  [train] step 500/5187  loss=136.7859  mse=110.3948
+  [train] step 1000/5187  loss=136.5599  mse=110.2419
+  [train] step 1500/5187  loss=136.4931  mse=110.1889
+  [train] step 2000/5187  loss=136.3404  mse=110.0665
+  [train] step 2500/5187  loss=136.4759  mse=110.1843
+  [train] step 3000/5187  loss=136.5246  mse=110.2219
+  [train] step 3500/5187  loss=136.4996  mse=110.1984
+  [train] step 4000/5187  loss=136.5067  mse=110.2099
+  [train] step 4500/5187  loss=136.4782  mse=110.1909
+  [train] step 5000/5187  loss=136.5210  mse=110.2311
+  [train] step 5187/5187  loss=136.5293  mse=110.2387
+  [val] step 500/1296  loss=135.8190  mse=109.7142
+  [val] step 1000/1296  loss=135.7837  mse=109.6781
+  [val] step 1296/1296  loss=135.7098  mse=109.6183
+Epoch 089/100  train_loss=136.5293  train_mse=110.2387  val_loss=135.7098  val_mse=109.6183  time=4336.3s
+  [train] step 500/5187  loss=137.1761  mse=110.7640
+  [train] step 1000/5187  loss=136.8763  mse=110.5123
+  [train] step 1500/5187  loss=136.5542  mse=110.2368
+  [train] step 2000/5187  loss=136.4236  mse=110.1195
+  [train] step 2500/5187  loss=136.4525  mse=110.1505
+  [train] step 3000/5187  loss=136.4732  mse=110.1775
+  [train] step 3500/5187  loss=136.4134  mse=110.1237
+  [train] step 4000/5187  loss=136.4456  mse=110.1516
+  [train] step 4500/5187  loss=136.3501  mse=110.0656
+  [train] step 5000/5187  loss=136.3534  mse=110.0678
+  [train] step 5187/5187  loss=136.3789  mse=110.0929
+  [val] step 500/1296  loss=153.1023  mse=125.2585
+  [val] step 1000/1296  loss=153.0023  mse=125.1877
+  [val] step 1296/1296  loss=152.9854  mse=125.1783
+Epoch 090/100  train_loss=136.3789  train_mse=110.0929  val_loss=152.9854  val_mse=125.1783  time=4359.3s
+  [train] step 500/5187  loss=136.4535  mse=110.1453
+  [train] step 1000/5187  loss=136.4753  mse=110.1839
+  [train] step 1500/5187  loss=136.7156  mse=110.4060
+  [train] step 2000/5187  loss=136.8097  mse=110.4895
+  [train] step 2500/5187  loss=136.8281  mse=110.5010
+  [train] step 3000/5187  loss=136.8016  mse=110.4789
+  [train] step 3500/5187  loss=136.7465  mse=110.4367
+  [train] step 4000/5187  loss=136.6588  mse=110.3562
+  [train] step 4500/5187  loss=136.5465  mse=110.2581
+  [train] step 5000/5187  loss=136.6145  mse=110.3146
+  [train] step 5187/5187  loss=136.6145  mse=110.3142
+  [val] step 500/1296  loss=132.5089  mse=106.9579
+  [val] step 1000/1296  loss=132.4127  mse=106.8440
+  [val] step 1296/1296  loss=132.3755  mse=106.8113
+Epoch 091/100  train_loss=136.6145  train_mse=110.3142  val_loss=132.3755  val_mse=106.8113  time=4346.6s
+  [train] step 500/5187  loss=128.2648  mse=102.9096
+  [train] step 1000/5187  loss=127.5407  mse=102.2475
+  [train] step 1500/5187  loss=127.3075  mse=102.0495
+  [train] step 2000/5187  loss=127.0453  mse=101.8211
+  [train] step 2500/5187  loss=126.8540  mse=101.6614
+  [train] step 3000/5187  loss=126.6316  mse=101.4610
+  [train] step 3500/5187  loss=126.5322  mse=101.3724
+  [train] step 4000/5187  loss=126.3617  mse=101.2279
+  [train] step 4500/5187  loss=126.2613  mse=101.1429
+  [train] step 5000/5187  loss=126.1327  mse=101.0264
+  [train] step 5187/5187  loss=126.1107  mse=101.0056
+  [val] step 500/1296  loss=118.8754  mse=94.7921
+  [val] step 1000/1296  loss=118.7364  mse=94.6685
+  [val] step 1296/1296  loss=118.6922  mse=94.6362
+Epoch 092/100  train_loss=126.1107  train_mse=101.0056  val_loss=118.6922  val_mse=94.6362  time=4512.2s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=118.6922)
+  [train] step 500/5187  loss=125.4498  mse=100.3823
+  [train] step 1000/5187  loss=125.2636  mse=100.2534
+  [train] step 1500/5187  loss=125.0976  mse=100.1196
+  [train] step 2000/5187  loss=125.1182  mse=100.1521
+  [train] step 2500/5187  loss=125.1485  mse=100.1831
+  [train] step 3000/5187  loss=125.1207  mse=100.1497
+  [train] step 3500/5187  loss=125.0937  mse=100.1156
+  [train] step 4000/5187  loss=125.0392  mse=100.0749
+  [train] step 4500/5187  loss=124.9931  mse=100.0346
+  [train] step 5000/5187  loss=124.9631  mse=100.0112
+  [train] step 5187/5187  loss=124.9622  mse=100.0112
+  [val] step 500/1296  loss=121.4963  mse=97.0522
+  [val] step 1000/1296  loss=121.6466  mse=97.1795
+  [val] step 1296/1296  loss=121.7379  mse=97.2659
+Epoch 093/100  train_loss=124.9622  train_mse=100.0112  val_loss=121.7379  val_mse=97.2659  time=4303.3s
+  [train] step 500/5187  loss=124.4615  mse=99.5691
+  [train] step 1000/5187  loss=124.5331  mse=99.6130
+  [train] step 1500/5187  loss=124.5857  mse=99.6751
+  [train] step 2000/5187  loss=124.5311  mse=99.6332
+  [train] step 2500/5187  loss=124.6758  mse=99.7606
+  [train] step 3000/5187  loss=124.6740  mse=99.7600
+  [train] step 3500/5187  loss=124.6334  mse=99.7291
+  [train] step 4000/5187  loss=124.5931  mse=99.6847
+  [train] step 4500/5187  loss=124.5773  mse=99.6731
+  [train] step 5000/5187  loss=124.5774  mse=99.6694
+  [train] step 5187/5187  loss=124.5603  mse=99.6549
+  [val] step 500/1296  loss=122.3954  mse=97.8473
+  [val] step 1000/1296  loss=122.3599  mse=97.7955
+  [val] step 1296/1296  loss=122.2695  mse=97.7202
+Epoch 094/100  train_loss=124.5603  train_mse=99.6549  val_loss=122.2695  val_mse=97.7202  time=4589.2s
+  [train] step 500/5187  loss=124.8823  mse=99.9292
+  [train] step 1000/5187  loss=124.8336  mse=99.9034
+  [train] step 1500/5187  loss=124.5963  mse=99.6909
+  [train] step 2000/5187  loss=124.7397  mse=99.8214
+  [train] step 2500/5187  loss=124.6695  mse=99.7638
+  [train] step 3000/5187  loss=124.6834  mse=99.7750
+  [train] step 3500/5187  loss=124.6501  mse=99.7407
+  [train] step 4000/5187  loss=124.6341  mse=99.7253
+  [train] step 4500/5187  loss=124.6273  mse=99.7217
+  [train] step 5000/5187  loss=124.5604  mse=99.6650
+  [train] step 5187/5187  loss=124.5595  mse=99.6678
+  [val] step 500/1296  loss=124.2615  mse=99.7413
+  [val] step 1000/1296  loss=124.1157  mse=99.5869
+  [val] step 1296/1296  loss=124.0499  mse=99.5303
+Epoch 095/100  train_loss=124.5595  train_mse=99.6678  val_loss=124.0499  val_mse=99.5303  time=4367.8s
+  [train] step 500/5187  loss=124.4104  mse=99.5130
+  [train] step 1000/5187  loss=124.5456  mse=99.6506
+  [train] step 1500/5187  loss=124.6158  mse=99.7279
+  [train] step 2000/5187  loss=124.5850  mse=99.6997
+  [train] step 2500/5187  loss=124.6782  mse=99.7760
+  [train] step 3000/5187  loss=124.5751  mse=99.6842
+  [train] step 3500/5187  loss=124.5386  mse=99.6520
+  [train] step 4000/5187  loss=124.5346  mse=99.6570
+  [train] step 4500/5187  loss=124.5532  mse=99.6746
+  [train] step 5000/5187  loss=124.5495  mse=99.6678
+  [train] step 5187/5187  loss=124.5664  mse=99.6814
+  [val] step 500/1296  loss=119.1572  mse=95.0161
+  [val] step 1000/1296  loss=118.7974  mse=94.6788
+  [val] step 1296/1296  loss=118.8507  mse=94.7307
+Epoch 096/100  train_loss=124.5664  train_mse=99.6814  val_loss=118.8507  val_mse=94.7307  time=4347.1s
+  [train] step 500/5187  loss=124.3176  mse=99.4562
+  [train] step 1000/5187  loss=124.4473  mse=99.5614
+  [train] step 1500/5187  loss=124.3648  mse=99.4923
+  [train] step 2000/5187  loss=124.5292  mse=99.6377
+  [train] step 2500/5187  loss=124.6005  mse=99.6979
+  [train] step 3000/5187  loss=124.6304  mse=99.7300
+  [train] step 3500/5187  loss=124.6254  mse=99.7218
+  [train] step 4000/5187  loss=124.5894  mse=99.6931
+  [train] step 4500/5187  loss=124.5271  mse=99.6404
+  [train] step 5000/5187  loss=124.6101  mse=99.7107
+  [train] step 5187/5187  loss=124.6139  mse=99.7130
+  [val] step 500/1296  loss=131.4208  mse=105.7264
+  [val] step 1000/1296  loss=131.3561  mse=105.6671
+  [val] step 1296/1296  loss=131.4955  mse=105.8044
+Epoch 097/100  train_loss=124.6139  train_mse=99.7130  val_loss=131.4955  val_mse=105.8044  time=4336.0s
+  [train] step 500/5187  loss=124.8283  mse=99.8684
+  [train] step 1000/5187  loss=124.5054  mse=99.6018
+  [train] step 1500/5187  loss=124.3718  mse=99.5028
+  [train] step 2000/5187  loss=124.3831  mse=99.5143
+  [train] step 2500/5187  loss=124.5371  mse=99.6482
+  [train] step 3000/5187  loss=124.6211  mse=99.7269
+  [train] step 3500/5187  loss=124.6693  mse=99.7648
+  [train] step 4000/5187  loss=124.6737  mse=99.7745
+  [train] step 4500/5187  loss=124.5860  mse=99.7030
+  [train] step 5000/5187  loss=124.5808  mse=99.6947
+  [train] step 5187/5187  loss=124.5887  mse=99.7004
+  [val] step 500/1296  loss=200.3013  mse=166.0731
+  [val] step 1000/1296  loss=200.6980  mse=166.4255
+  [val] step 1296/1296  loss=200.5582  mse=166.3186
+Epoch 098/100  train_loss=124.5887  train_mse=99.7004  val_loss=200.5582  val_mse=166.3186  time=4345.1s
+  [train] step 500/5187  loss=124.2127  mse=99.3436
+  [train] step 1000/5187  loss=124.4529  mse=99.5482
+  [train] step 1500/5187  loss=124.5749  mse=99.6829
+  [train] step 2000/5187  loss=124.7366  mse=99.8286
+  [train] step 2500/5187  loss=124.8102  mse=99.8968
+  [train] step 3000/5187  loss=124.7487  mse=99.8337
+  [train] step 3500/5187  loss=124.6693  mse=99.7679
+  [train] step 4000/5187  loss=124.6114  mse=99.7203
+  [train] step 4500/5187  loss=124.6658  mse=99.7672
+  [train] step 5000/5187  loss=124.6725  mse=99.7685
+  [train] step 5187/5187  loss=124.6822  mse=99.7775
+  [val] step 500/1296  loss=124.1292  mse=99.5078
+  [val] step 1000/1296  loss=124.2284  mse=99.5921
+  [val] step 1296/1296  loss=124.2003  mse=99.5720
+Epoch 099/100  train_loss=124.6822  train_mse=99.7775  val_loss=124.2003  val_mse=99.5720  time=4336.7s
+  [train] step 500/5187  loss=124.5728  mse=99.6826
+  [train] step 1000/5187  loss=124.6106  mse=99.7072
+  [train] step 1500/5187  loss=124.6146  mse=99.7204
+  [train] step 2000/5187  loss=124.6789  mse=99.7719
+  [train] step 2500/5187  loss=124.7563  mse=99.8408
+  [train] step 3000/5187  loss=124.8456  mse=99.9235
+  [train] step 3500/5187  loss=124.8254  mse=99.9074
+  [train] step 4000/5187  loss=124.8322  mse=99.9182
+  [train] step 4500/5187  loss=124.8477  mse=99.9292
+  [train] step 5000/5187  loss=124.8272  mse=99.9112
+  [train] step 5187/5187  loss=124.8186  mse=99.9037
+  [val] step 500/1296  loss=306.4120  mse=263.3628
+  [val] step 1000/1296  loss=307.1656  mse=264.0846
+  [val] step 1296/1296  loss=306.8743  mse=263.8169
+Epoch 100/100  train_loss=124.8186  train_mse=99.9037  val_loss=306.8743  val_mse=263.8169  time=4344.1s
+Finished training → saved models/pointnet_surface_20250829_2318_100ep.pt

@@ -1,0 +1,215 @@
+nohup: ignoring input
+2025-05-30 18:26:22.211593: I tensorflow/core/util/port.cc:110] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-05-30 18:26:22.557468: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-05-30 18:26:28.053417: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 46551 MB memory:  -> device: 0, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:61:00.0, compute capability: 8.9
+2025-05-30 18:26:28.055340: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 46542 MB memory:  -> device: 1, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:3d:00.0, compute capability: 8.9
+Number of devices: 2
+Training set: (448000, 35, 35, 3) (448000, 10, 10, 3)
+Validation set: (56000, 35, 35, 3) (56000, 10, 10, 3)
+Test set: (56000, 35, 35, 3) (56000, 10, 10, 3)
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input_1 (InputLayer)        [(None, 35, 35, 3)]          0         []                            
+                                                                                                  
+ conv2d (Conv2D)             (None, 35, 35, 64)           4864      ['input_1[0][0]']             
+                                                                                                  
+ conv2d_2 (Conv2D)           (None, 35, 35, 64)           4160      ['conv2d[0][0]']              
+                                                                                                  
+ conv2d_4 (Conv2D)           (None, 35, 35, 64)           4160      ['conv2d[0][0]']              
+                                                                                                  
+ max_pooling2d (MaxPooling2  (None, 35, 35, 64)           0         ['conv2d[0][0]']              
+ D)                                                                                               
+                                                                                                  
+ conv2d_1 (Conv2D)           (None, 35, 35, 64)           4160      ['conv2d[0][0]']              
+                                                                                                  
+ conv2d_3 (Conv2D)           (None, 35, 35, 64)           36928     ['conv2d_2[0][0]']            
+                                                                                                  
+ conv2d_5 (Conv2D)           (None, 35, 35, 64)           102464    ['conv2d_4[0][0]']            
+                                                                                                  
+ conv2d_6 (Conv2D)           (None, 35, 35, 64)           4160      ['max_pooling2d[0][0]']       
+                                                                                                  
+ concatenate (Concatenate)   (None, 35, 35, 256)          0         ['conv2d_1[0][0]',            
+                                                                     'conv2d_3[0][0]',            
+                                                                     'conv2d_5[0][0]',            
+                                                                     'conv2d_6[0][0]']            
+                                                                                                  
+ conv2d_7 (Conv2D)           (None, 35, 35, 128)          295040    ['concatenate[0][0]']         
+                                                                                                  
+ batch_normalization (Batch  (None, 35, 35, 128)          512       ['conv2d_7[0][0]']            
+ Normalization)                                                                                   
+                                                                                                  
+ max_pooling2d_1 (MaxPoolin  (None, 12, 12, 128)          0         ['batch_normalization[0][0]'] 
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_9 (Conv2D)           (None, 12, 12, 256)          33024     ['max_pooling2d_1[0][0]']     
+                                                                                                  
+ conv2d_11 (Conv2D)          (None, 12, 12, 256)          33024     ['max_pooling2d_1[0][0]']     
+                                                                                                  
+ max_pooling2d_2 (MaxPoolin  (None, 12, 12, 128)          0         ['max_pooling2d_1[0][0]']     
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_8 (Conv2D)           (None, 12, 12, 256)          33024     ['max_pooling2d_1[0][0]']     
+                                                                                                  
+ conv2d_10 (Conv2D)          (None, 12, 12, 256)          590080    ['conv2d_9[0][0]']            
+                                                                                                  
+ conv2d_12 (Conv2D)          (None, 12, 12, 256)          1638656   ['conv2d_11[0][0]']           
+                                                                                                  
+ conv2d_13 (Conv2D)          (None, 12, 12, 256)          33024     ['max_pooling2d_2[0][0]']     
+                                                                                                  
+ concatenate_1 (Concatenate  (None, 12, 12, 1024)         0         ['conv2d_8[0][0]',            
+ )                                                                   'conv2d_10[0][0]',           
+                                                                     'conv2d_12[0][0]',           
+                                                                     'conv2d_13[0][0]']           
+                                                                                                  
+ conv2d_14 (Conv2D)          (None, 12, 12, 512)          4719104   ['concatenate_1[0][0]']       
+                                                                                                  
+ batch_normalization_1 (Bat  (None, 12, 12, 512)          2048      ['conv2d_14[0][0]']           
+ chNormalization)                                                                                 
+                                                                                                  
+ max_pooling2d_3 (MaxPoolin  (None, 4, 4, 512)            0         ['batch_normalization_1[0][0]'
+ g2D)                                                               ]                             
+                                                                                                  
+ conv2d_16 (Conv2D)          (None, 4, 4, 256)            131328    ['max_pooling2d_3[0][0]']     
+                                                                                                  
+ conv2d_18 (Conv2D)          (None, 4, 4, 256)            131328    ['max_pooling2d_3[0][0]']     
+                                                                                                  
+ max_pooling2d_4 (MaxPoolin  (None, 4, 4, 512)            0         ['max_pooling2d_3[0][0]']     
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_15 (Conv2D)          (None, 4, 4, 256)            131328    ['max_pooling2d_3[0][0]']     
+                                                                                                  
+ conv2d_17 (Conv2D)          (None, 4, 4, 256)            590080    ['conv2d_16[0][0]']           
+                                                                                                  
+ conv2d_19 (Conv2D)          (None, 4, 4, 256)            1638656   ['conv2d_18[0][0]']           
+                                                                                                  
+ conv2d_20 (Conv2D)          (None, 4, 4, 256)            131328    ['max_pooling2d_4[0][0]']     
+                                                                                                  
+ concatenate_2 (Concatenate  (None, 4, 4, 1024)           0         ['conv2d_15[0][0]',           
+ )                                                                   'conv2d_17[0][0]',           
+                                                                     'conv2d_19[0][0]',           
+                                                                     'conv2d_20[0][0]']           
+                                                                                                  
+ conv2d_21 (Conv2D)          (None, 4, 4, 256)            2359552   ['concatenate_2[0][0]']       
+                                                                                                  
+ batch_normalization_2 (Bat  (None, 4, 4, 256)            1024      ['conv2d_21[0][0]']           
+ chNormalization)                                                                                 
+                                                                                                  
+ max_pooling2d_5 (MaxPoolin  (None, 2, 2, 256)            0         ['batch_normalization_2[0][0]'
+ g2D)                                                               ]                             
+                                                                                                  
+ conv2d_23 (Conv2D)          (None, 2, 2, 256)            65792     ['max_pooling2d_5[0][0]']     
+                                                                                                  
+ conv2d_25 (Conv2D)          (None, 2, 2, 256)            65792     ['max_pooling2d_5[0][0]']     
+                                                                                                  
+ max_pooling2d_6 (MaxPoolin  (None, 2, 2, 256)            0         ['max_pooling2d_5[0][0]']     
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_22 (Conv2D)          (None, 2, 2, 256)            65792     ['max_pooling2d_5[0][0]']     
+                                                                                                  
+ conv2d_24 (Conv2D)          (None, 2, 2, 256)            590080    ['conv2d_23[0][0]']           
+                                                                                                  
+ conv2d_26 (Conv2D)          (None, 2, 2, 256)            1638656   ['conv2d_25[0][0]']           
+                                                                                                  
+ conv2d_27 (Conv2D)          (None, 2, 2, 256)            65792     ['max_pooling2d_6[0][0]']     
+                                                                                                  
+ concatenate_3 (Concatenate  (None, 2, 2, 1024)           0         ['conv2d_22[0][0]',           
+ )                                                                   'conv2d_24[0][0]',           
+                                                                     'conv2d_26[0][0]',           
+                                                                     'conv2d_27[0][0]']           
+                                                                                                  
+ conv2d_28 (Conv2D)          (None, 2, 2, 512)            4719104   ['concatenate_3[0][0]']       
+                                                                                                  
+ batch_normalization_3 (Bat  (None, 2, 2, 512)            2048      ['conv2d_28[0][0]']           
+ chNormalization)                                                                                 
+                                                                                                  
+ max_pooling2d_7 (MaxPoolin  (None, 1, 1, 512)            0         ['batch_normalization_3[0][0]'
+ g2D)                                                               ]                             
+                                                                                                  
+ flatten (Flatten)           (None, 512)                  0         ['max_pooling2d_7[0][0]']     
+                                                                                                  
+ dense (Dense)               (None, 300)                  153900    ['flatten[0][0]']             
+                                                                                                  
+ reshape (Reshape)           (None, 10, 10, 3)            0         ['dense[0][0]']               
+                                                                                                  
+==================================================================================================
+Total params: 20020012 (76.37 MB)
+Trainable params: 20017196 (76.36 MB)
+Non-trainable params: 2816 (11.00 KB)
+__________________________________________________________________________________________________
+Epoch 1/30
+2025-05-30 18:33:25.222790: I tensorflow/compiler/xla/stream_executor/cuda/cuda_dnn.cc:432] Loaded cuDNN version 8907
+2025-05-30 18:33:25.249492: I tensorflow/compiler/xla/stream_executor/cuda/cuda_dnn.cc:432] Loaded cuDNN version 8907
+2025-05-30 18:33:26.945619: I tensorflow/compiler/xla/stream_executor/cuda/cuda_blas.cc:606] TensorFloat-32 will be used for the matrix multiplication. This will only be logged once.
+2025-05-30 18:33:29.514193: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7f37b3b9cb10 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2025-05-30 18:33:29.514249: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): NVIDIA RTX 6000 Ada Generation, Compute Capability 8.9
+2025-05-30 18:33:29.514262: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (1): NVIDIA RTX 6000 Ada Generation, Compute Capability 8.9
+2025-05-30 18:33:29.633512: I tensorflow/compiler/mlir/tensorflow/utils/dump_mlir_util.cc:255] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
+2025-05-30 18:33:30.211670: I ./tensorflow/compiler/jit/device_compiler.h:186] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+1750/1750 - 159s - loss: 326.7144 - mse: 252.9239 - val_loss: 270.7747 - val_mse: 205.9926 - 159s/epoch - 91ms/step
+Epoch 2/30
+1750/1750 - 120s - loss: 243.5660 - mse: 185.4341 - val_loss: 232.5134 - val_mse: 178.0584 - 120s/epoch - 69ms/step
+Epoch 3/30
+1750/1750 - 123s - loss: 224.7778 - mse: 172.1621 - val_loss: 231.7524 - val_mse: 178.8338 - 123s/epoch - 70ms/step
+Epoch 4/30
+1750/1750 - 126s - loss: 202.1252 - mse: 152.0565 - val_loss: 205.5312 - val_mse: 155.4155 - 126s/epoch - 72ms/step
+Epoch 5/30
+1750/1750 - 126s - loss: 162.1760 - mse: 115.3121 - val_loss: 214.3378 - val_mse: 164.0929 - 126s/epoch - 72ms/step
+Epoch 6/30
+1750/1750 - 126s - loss: 138.6382 - mse: 94.8253 - val_loss: 136.7100 - val_mse: 93.9621 - 126s/epoch - 72ms/step
+Epoch 7/30
+1750/1750 - 126s - loss: 117.8631 - mse: 77.7977 - val_loss: 113.4060 - val_mse: 74.3083 - 126s/epoch - 72ms/step
+Epoch 8/30
+1750/1750 - 126s - loss: 102.0115 - mse: 65.9421 - val_loss: 120.3636 - val_mse: 79.6463 - 126s/epoch - 72ms/step
+Epoch 9/30
+1750/1750 - 126s - loss: 91.2026 - mse: 58.1870 - val_loss: 101.1630 - val_mse: 65.9026 - 126s/epoch - 72ms/step
+Epoch 10/30
+1750/1750 - 124s - loss: 82.4463 - mse: 52.0953 - val_loss: 83.3832 - val_mse: 52.9758 - 124s/epoch - 71ms/step
+Epoch 11/30
+1750/1750 - 124s - loss: 74.5524 - mse: 46.7144 - val_loss: 76.6856 - val_mse: 48.6086 - 124s/epoch - 71ms/step
+Epoch 12/30
+1750/1750 - 125s - loss: 67.8496 - mse: 42.2928 - val_loss: 80.8213 - val_mse: 51.6691 - 125s/epoch - 71ms/step
+Epoch 13/30
+1750/1750 - 125s - loss: 61.9631 - mse: 38.4298 - val_loss: 68.4795 - val_mse: 43.4193 - 125s/epoch - 72ms/step
+Epoch 14/30
+1750/1750 - 125s - loss: 56.7787 - mse: 35.0944 - val_loss: 61.6679 - val_mse: 39.0265 - 125s/epoch - 72ms/step
+Epoch 15/30
+1750/1750 - 124s - loss: 52.4524 - mse: 32.3064 - val_loss: 60.5187 - val_mse: 38.4559 - 124s/epoch - 71ms/step
+Epoch 16/30
+1750/1750 - 124s - loss: 48.5083 - mse: 29.7507 - val_loss: 57.1876 - val_mse: 36.2264 - 124s/epoch - 71ms/step
+Epoch 17/30
+1750/1750 - 124s - loss: 45.5586 - mse: 27.8403 - val_loss: 61.3051 - val_mse: 38.8286 - 124s/epoch - 71ms/step
+Epoch 18/30
+1750/1750 - 124s - loss: 43.2563 - mse: 26.3406 - val_loss: 53.2404 - val_mse: 33.8570 - 124s/epoch - 71ms/step
+Epoch 19/30
+1750/1750 - 125s - loss: 41.8871 - mse: 25.4350 - val_loss: 52.4493 - val_mse: 33.3852 - 125s/epoch - 71ms/step
+Epoch 20/30
+1750/1750 - 124s - loss: 41.1958 - mse: 24.9826 - val_loss: 52.1802 - val_mse: 33.2308 - 124s/epoch - 71ms/step
+Epoch 21/30
+1750/1750 - 126s - loss: 78.8000 - mse: 50.3417 - val_loss: 97.7166 - val_mse: 63.7605 - 126s/epoch - 72ms/step
+Epoch 22/30
+1750/1750 - 125s - loss: 74.3675 - mse: 47.4691 - val_loss: 83.0791 - val_mse: 54.0834 - 125s/epoch - 71ms/step
+Epoch 23/30
+1750/1750 - 124s - loss: 69.4516 - mse: 44.1804 - val_loss: 83.9884 - val_mse: 55.2979 - 124s/epoch - 71ms/step
+Epoch 24/30
+1750/1750 - 124s - loss: 65.7295 - mse: 41.7095 - val_loss: 83.2712 - val_mse: 54.6386 - 124s/epoch - 71ms/step
+Epoch 25/30
+1750/1750 - 126s - loss: 61.7619 - mse: 39.0423 - val_loss: 73.6380 - val_mse: 47.4474 - 126s/epoch - 72ms/step
+Epoch 26/30
+1750/1750 - 126s - loss: 58.0408 - mse: 36.5682 - val_loss: 82.0537 - val_mse: 53.6244 - 126s/epoch - 72ms/step
+Epoch 27/30
+1750/1750 - 125s - loss: 55.1107 - mse: 34.5995 - val_loss: 69.6178 - val_mse: 44.4997 - 125s/epoch - 71ms/step
+Epoch 28/30
+1750/1750 - 124s - loss: 52.4302 - mse: 32.8501 - val_loss: 73.3633 - val_mse: 47.6975 - 124s/epoch - 71ms/step
+Epoch 29/30
+1750/1750 - 124s - loss: 50.0514 - mse: 31.2274 - val_loss: 80.1045 - val_mse: 52.0404 - 124s/epoch - 71ms/step
+Epoch 30/30
+1750/1750 - 123s - loss: 46.9425 - mse: 29.1637 - val_loss: 74.4706 - val_mse: 47.9132 - 123s/epoch - 70ms/step
+Traceback (most recent call last):
+  File "incept_surface_model_op.py", line 277, in <module>
+    main(args.epochs, args.data_path)
+  File "incept_surface_model_op.py", line 262, in main
+    fname = f"models/incept_surface_{stamp}_{epochs}ep_{loss:.4f}.keras"
+TypeError: unsupported format string passed to list.__format__

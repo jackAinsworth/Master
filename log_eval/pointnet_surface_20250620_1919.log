@@ -1,0 +1,139 @@
+nohup: ignoring input
+2025-06-20 19:32:00.003446: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-06-20 19:32:00.019611: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1750440720.039334  181322 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1750440720.045433  181322 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1750440720.061106  181322 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750440720.061135  181322 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750440720.061138  181322 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750440720.061140  181322 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-06-20 19:32:00.065647: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Torch: 2.7.1+cu126  CUDA available: True
+GPUs: 2 ['NVIDIA RTX 6000 Ada Generation', 'NVIDIA RTX 6000 Ada Generation']
+TensorFlow (for TFRecord I/O only): 2.19.0
+Train shards: 80  Val shards: 20
+I0000 00:00:1750440725.681916  181322 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 46542 MB memory:  -> device: 0, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:3d:00.0, compute capability: 8.9
+I0000 00:00:1750440725.684661  181322 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 46551 MB memory:  -> device: 1, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:61:00.0, compute capability: 8.9
+Total parameters: 18,217,260
+Trainable parameters: 18,217,260
+Detailed summary with torchinfo:
+==========================================================================================
+Layer (type:depth-idx)                   Output Shape              Param #
+==========================================================================================
+PointNet2SurfaceRegressor                [1, 10, 10, 3]            --
+├─Sequential: 1-1                        [1, 256, 1225]            --
+│    └─Conv1d: 2-1                       [1, 128, 1225]            384
+│    └─BatchNorm1d: 2-2                  [1, 128, 1225]            256
+│    └─ReLU: 2-3                         [1, 128, 1225]            --
+│    └─Conv1d: 2-4                       [1, 128, 1225]            16,384
+│    └─BatchNorm1d: 2-5                  [1, 128, 1225]            256
+│    └─ReLU: 2-6                         [1, 128, 1225]            --
+│    └─Conv1d: 2-7                       [1, 256, 1225]            32,768
+│    └─BatchNorm1d: 2-8                  [1, 256, 1225]            512
+│    └─ReLU: 2-9                         [1, 256, 1225]            --
+├─PointNetSetAbstractionKNN: 1-2         [1, 3, 612]               --
+│    └─ModuleList: 2-10                  --                        --
+│    │    └─Sequential: 3-1              [1, 128, 612, 64]         33,408
+│    │    └─Sequential: 3-2              [1, 128, 612, 64]         16,640
+│    │    └─Sequential: 3-3              [1, 256, 612, 64]         33,280
+│    │    └─Sequential: 3-4              [1, 256, 612, 64]         66,048
+├─PointNetSetAbstractionKNN: 1-3         [1, 3, 306]               --
+│    └─ModuleList: 2-11                  --                        --
+│    │    └─Sequential: 3-5              [1, 256, 306, 64]         66,816
+│    │    └─Sequential: 3-6              [1, 256, 306, 64]         66,048
+│    │    └─Sequential: 3-7              [1, 512, 306, 64]         132,096
+│    │    └─Sequential: 3-8              [1, 512, 306, 64]         263,168
+├─PointNetSetAbstractionKNN: 1-4         [1, 3, 76]                --
+│    └─ModuleList: 2-12                  --                        --
+│    │    └─Sequential: 3-9              [1, 512, 76, 64]          264,704
+│    │    └─Sequential: 3-10             [1, 512, 76, 64]          263,168
+│    │    └─Sequential: 3-11             [1, 1024, 76, 64]         526,336
+│    │    └─Sequential: 3-12             [1, 1024, 76, 64]         1,050,624
+├─PointNetSetAbstractionKNN: 1-5         [1, 3, 38]                --
+│    └─ModuleList: 2-13                  --                        --
+│    │    └─Sequential: 3-13             [1, 1024, 38, 64]         1,053,696
+│    │    └─Sequential: 3-14             [1, 1024, 38, 64]         1,050,624
+│    │    └─Sequential: 3-15             [1, 2048, 38, 64]         2,101,248
+│    │    └─Sequential: 3-16             [1, 2048, 38, 64]         4,198,400
+├─Sequential: 1-6                        [1, 512]                  --
+│    └─Linear: 2-14                      [1, 2048]                 4,196,352
+│    └─ReLU: 2-15                        [1, 2048]                 --
+│    └─BatchNorm1d: 2-16                 [1, 2048]                 4,096
+│    └─Dropout: 2-17                     [1, 2048]                 --
+│    └─Linear: 2-18                      [1, 1024]                 2,098,176
+│    └─ReLU: 2-19                        [1, 1024]                 --
+│    └─BatchNorm1d: 2-20                 [1, 1024]                 2,048
+│    └─Dropout: 2-21                     [1, 1024]                 --
+│    └─Linear: 2-22                      [1, 512]                  524,800
+│    └─ReLU: 2-23                        [1, 512]                  --
+│    └─BatchNorm1d: 2-24                 [1, 512]                  1,024
+│    └─Dropout: 2-25                     [1, 512]                  --
+├─Linear: 1-7                            [1, 300]                  153,900
+==========================================================================================
+Total params: 18,217,260
+Trainable params: 18,217,260
+Non-trainable params: 0
+Total mult-adds (Units.GIGABYTES): 46.76
+==========================================================================================
+Input size (MB): 0.01
+Forward/backward pass size (MB): 1450.84
+Params size (MB): 72.87
+Estimated Total Size (MB): 1523.72
+==========================================================================================
+device count  2
+start training for 100 epochs
+2025-06-20 19:32:08.890772: I tensorflow/core/kernels/data/tf_record_dataset_op.cc:381] TFRecordDataset `buffer_size` is unspecified, default to 262144
+/home/ainsworth/master/train_pointnet_surface_torch.py:289: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:203.)
+  xyz = torch.from_numpy(xyz_np).to(_DEVICE).float()
+  [train] step 500/9375  loss=461.7791  mse=375.3524
+  [train] step 1000/9375  loss=442.2484  mse=357.2344
+  [train] step 1500/9375  loss=435.0471  mse=350.4803
+  [train] step 2000/9375  loss=430.8134  mse=346.5869
+  [train] step 2500/9375  loss=427.7094  mse=343.7232
+  [train] step 3000/9375  loss=425.0046  mse=341.2180
+  [train] step 3500/9375  loss=423.2153  mse=339.5420
+  [train] step 4000/9375  loss=422.0123  mse=338.3909
+  [train] step 4500/9375  loss=420.4033  mse=336.9076
+  [train] step 5000/9375  loss=418.8720  mse=335.5005
+  [train] step 5500/9375  loss=417.4947  mse=334.2347
+  [train] step 6000/9375  loss=416.1452  mse=332.9896
+  [train] step 6500/9375  loss=414.8714  mse=331.8152
+  [train] step 7000/9375  loss=413.7338  mse=330.7860
+  [train] step 7500/9375  loss=412.6118  mse=329.7568
+  [train] step 8000/9375  loss=411.7211  mse=328.9325
+  [train] step 8500/9375  loss=410.9784  mse=328.2443
+  [train] step 9000/9375  loss=410.2863  mse=327.5996
+  [train] step 9375/9375  loss=409.7013  mse=327.0588
+  [val] step 500/1562  loss=1537933.7713  mse=1428743.6744
+  [val] step 1000/1562  loss=1353911.6512  mse=1257053.9188
+  [val] step 1500/1562  loss=1431663.5727  mse=1333294.6447
+  [val] step 1562/1562  loss=1405088.5806  mse=1308839.7628
+Epoch 001/100  train_loss=409.7013  train_mse=327.0588  val_loss=1405088.5806  val_mse=1308839.7628  time=7880.8s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=1405088.5806)
+  [train] step 500/9375  loss=395.9899  mse=314.5940
+  [train] step 1000/9375  loss=395.8004  mse=314.3550
+  [train] step 1500/9375  loss=396.0873  mse=314.6218
+  [train] step 2000/9375  loss=395.8494  mse=314.3886
+  [train] step 2500/9375  loss=395.6826  mse=314.2566
+  [train] step 3000/9375  loss=395.3135  mse=313.9420
+  [train] step 3500/9375  loss=395.3207  mse=313.9664
+  [train] step 4000/9375  loss=394.8379  mse=313.5198
+  [train] step 4500/9375  loss=394.5338  mse=313.2706
+  [train] step 5000/9375  loss=394.3188  mse=313.0707
+  [train] step 5500/9375  loss=394.1954  mse=312.9538
+  [train] step 6000/9375  loss=394.0797  mse=312.8442
+  [train] step 6500/9375  loss=393.7701  mse=312.5636
+  [train] step 7000/9375  loss=393.4076  mse=312.2278
+  [train] step 7500/9375  loss=393.2009  mse=312.0449
+  [train] step 8000/9375  loss=392.9668  mse=311.8036
+  [train] step 8500/9375  loss=392.7449  mse=311.5892
+  [train] step 9000/9375  loss=392.4751  mse=311.3292
+  [train] step 9375/9375  loss=392.3685  mse=311.2313
+  [val] step 500/1562  loss=7512.7109  mse=7032.0923
+  [val] step 1000/1562  loss=5868.7839  mse=5448.9849
+  [val] step 1500/1562  loss=9658.5820  mse=8951.7743
+  [val] step 1562/1562  loss=9376.4006  mse=8689.8768
+Epoch 002/100  train_loss=392.3685  train_mse=311.2313  val_loss=9376.4006  val_mse=8689.8768  time=7879.2s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=9376.4006)

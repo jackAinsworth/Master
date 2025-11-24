@@ -1,0 +1,704 @@
+nohup: ignoring input
+2025-06-22 02:14:20.934489: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-06-22 02:14:20.950998: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1750551260.969803 3936176 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1750551260.975525 3936176 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1750551260.990950 3936176 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750551260.990976 3936176 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750551260.990979 3936176 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750551260.990981 3936176 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-06-22 02:14:20.995426: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+I0000 00:00:1750551266.581307 3936176 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 46542 MB memory:  -> device: 0, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:3d:00.0, compute capability: 8.9
+I0000 00:00:1750551266.583494 3936176 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 46551 MB memory:  -> device: 1, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:61:00.0, compute capability: 8.9
+Model architecture:
+SurfaceTransformer(
+  (to_embedding): Sequential(
+    (0): Linear(in_features=3, out_features=256, bias=True)
+    (1): GELU(approximate='none')
+    (2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+  )
+  (transformer_layers): ModuleList(
+    (0-3): 4 x PointTransformerLayer(
+      (to_qkv): Linear(in_features=256, out_features=768, bias=False)
+      (pos_mlp): Sequential(
+        (0): Linear(in_features=3, out_features=64, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=64, out_features=256, bias=True)
+      )
+      (attn_mlp): Sequential(
+        (0): Linear(in_features=256, out_features=1024, bias=True)
+        (1): ReLU()
+        (2): Linear(in_features=1024, out_features=256, bias=True)
+      )
+    )
+  )
+  (head): Sequential(
+    (0): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+    (1): Linear(in_features=256, out_features=512, bias=True)
+    (2): GELU(approximate='none')
+    (3): Linear(in_features=512, out_features=300, bias=True)
+  )
+)
+Total parameters: 3,243,820
+==========================================================================================
+Layer (type:depth-idx)                   Output Shape              Param #
+==========================================================================================
+SurfaceTransformer                       [1, 10, 10, 3]            --
+├─Sequential: 1-1                        [1, 1225, 256]            --
+│    └─Linear: 2-1                       [1, 1225, 256]            1,024
+│    └─GELU: 2-2                         [1, 1225, 256]            --
+│    └─LayerNorm: 2-3                    [1, 1225, 256]            512
+├─ModuleList: 1-2                        --                        --
+│    └─PointTransformerLayer: 2-4        [1, 1225, 256]            --
+│    │    └─Linear: 3-1                  [1, 1225, 768]            196,608
+│    │    └─Sequential: 3-2              [1, 1225, 1225, 256]      16,896
+│    │    └─Sequential: 3-3              [1, 1225, 32, 256]        525,568
+│    └─PointTransformerLayer: 2-5        [1, 1225, 256]            --
+│    │    └─Linear: 3-4                  [1, 1225, 768]            196,608
+│    │    └─Sequential: 3-5              [1, 1225, 1225, 256]      16,896
+│    │    └─Sequential: 3-6              [1, 1225, 32, 256]        525,568
+│    └─PointTransformerLayer: 2-6        [1, 1225, 256]            --
+│    │    └─Linear: 3-7                  [1, 1225, 768]            196,608
+│    │    └─Sequential: 3-8              [1, 1225, 1225, 256]      16,896
+│    │    └─Sequential: 3-9              [1, 1225, 32, 256]        525,568
+│    └─PointTransformerLayer: 2-7        [1, 1225, 256]            --
+│    │    └─Linear: 3-10                 [1, 1225, 768]            196,608
+│    │    └─Sequential: 3-11             [1, 1225, 1225, 256]      16,896
+│    │    └─Sequential: 3-12             [1, 1225, 32, 256]        525,568
+├─Sequential: 1-3                        [1, 300]                  --
+│    └─LayerNorm: 2-8                    [1, 256]                  512
+│    └─Linear: 2-9                       [1, 512]                  131,584
+│    └─GELU: 2-10                        [1, 512]                  --
+│    └─Linear: 2-11                      [1, 300]                  153,900
+==========================================================================================
+Total params: 3,243,820
+Trainable params: 3,243,820
+Non-trainable params: 0
+Total mult-adds (Units.MEGABYTES): 3.24
+==========================================================================================
+Input size (MB): 0.01
+Forward/backward pass size (MB): 17007.16
+Params size (MB): 12.98
+Estimated Total Size (MB): 17020.15
+==========================================================================================
+Epoch 1/100 — train_steps=150000, val_steps=25000
+2025-06-22 02:14:28.698972: I tensorflow/core/kernels/data/tf_record_dataset_op.cc:381] TFRecordDataset `buffer_size` is unspecified, default to 262144
+/home/ainsworth/master/point_surface_transformer.py:164: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:203.)
+  return torch.from_numpy(xyz_np).to(DEVICE).float(), torch.from_numpy(ctrl_np).to(DEVICE).float()
+/home/ainsworth/master/py312/lib/python3.12/site-packages/torch/nn/modules/linear.py:125: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at /pytorch/aten/src/ATen/cuda/CublasHandlePool.cpp:181.)
+  return F.linear(input, self.weight, self.bias)
+  [train] step 500/150000  loss=620.7119  mse=526.5169
+  [train] step 1000/150000  loss=604.8587  mse=511.4727
+  [train] step 1500/150000  loss=586.0863  mse=493.3697
+  [train] step 2000/150000  loss=567.6673  mse=475.9802
+  [train] step 2500/150000  loss=550.7184  mse=460.1448
+  [train] step 3000/150000  loss=535.5012  mse=445.7255
+  [train] step 3500/150000  loss=522.0497  mse=433.0169
+  [train] step 4000/150000  loss=511.2016  mse=422.8432
+  [train] step 4500/150000  loss=503.1779  mse=415.4049
+  [train] step 5000/150000  loss=496.9366  mse=409.4665
+  [train] step 5500/150000  loss=491.4122  mse=404.3371
+  [train] step 6000/150000  loss=486.0155  mse=399.2360
+  [train] step 6500/150000  loss=481.5676  mse=395.0648
+  [train] step 7000/150000  loss=477.5556  mse=391.2571
+  [train] step 7500/150000  loss=474.1467  mse=387.9935
+  [train] step 8000/150000  loss=471.4461  mse=385.4015
+  [train] step 8500/150000  loss=469.0018  mse=383.0643
+  [train] step 9000/150000  loss=466.8278  mse=380.9444
+  [train] step 9500/150000  loss=464.8489  mse=379.0661
+  [train] step 10000/150000  loss=462.8585  mse=377.2289
+  [train] step 10500/150000  loss=461.5283  mse=375.9671
+  [train] step 11000/150000  loss=459.6783  mse=374.2592
+  [train] step 11500/150000  loss=458.1950  mse=372.8485
+  [train] step 12000/150000  loss=456.8947  mse=371.6533
+  [train] step 12500/150000  loss=455.6589  mse=370.4894
+  [train] step 13000/150000  loss=454.7707  mse=369.6623
+  [train] step 13500/150000  loss=453.7299  mse=368.6686
+  [train] step 14000/150000  loss=452.4932  mse=367.4727
+  [train] step 14500/150000  loss=451.4566  mse=366.5206
+  [train] step 15000/150000  loss=450.5647  mse=365.6957
+  [train] step 15500/150000  loss=449.8520  mse=365.0153
+  [train] step 16000/150000  loss=449.0044  mse=364.2283
+  [train] step 16500/150000  loss=448.2575  mse=363.5395
+  [train] step 17000/150000  loss=447.6339  mse=362.9305
+  [train] step 17500/150000  loss=447.0284  mse=362.3454
+  [train] step 18000/150000  loss=446.3997  mse=361.7504
+  [train] step 18500/150000  loss=445.8273  mse=361.1784
+  [train] step 19000/150000  loss=445.2689  mse=360.6832
+  [train] step 19500/150000  loss=444.7537  mse=360.1768
+  [train] step 20000/150000  loss=444.3242  mse=359.7606
+  [train] step 20500/150000  loss=443.7131  mse=359.1858
+  [train] step 21000/150000  loss=443.1806  mse=358.6900
+  [train] step 21500/150000  loss=442.6648  mse=358.2077
+  [train] step 22000/150000  loss=442.2968  mse=357.8434
+  [train] step 22500/150000  loss=441.8075  mse=357.3736
+  [train] step 23000/150000  loss=441.3533  mse=356.9476
+  [train] step 23500/150000  loss=440.8669  mse=356.5066
+  [train] step 24000/150000  loss=440.6018  mse=356.2568
+  [train] step 24500/150000  loss=440.2347  mse=355.8963
+  [train] step 25000/150000  loss=439.7971  mse=355.4779
+  [train] step 25500/150000  loss=439.3801  mse=355.0855
+  [train] step 26000/150000  loss=439.0060  mse=354.7434
+  [train] step 26500/150000  loss=438.6894  mse=354.4381
+  [train] step 27000/150000  loss=438.2962  mse=354.0558
+  [train] step 27500/150000  loss=437.9923  mse=353.7678
+  [train] step 28000/150000  loss=437.7892  mse=353.5758
+  [train] step 28500/150000  loss=437.4660  mse=353.2813
+  [train] step 29000/150000  loss=437.2716  mse=353.0839
+  [train] step 29500/150000  loss=436.9603  mse=352.7965
+  [train] step 30000/150000  loss=436.6962  mse=352.5486
+  [train] step 30500/150000  loss=436.4465  mse=352.3107
+  [train] step 31000/150000  loss=436.1319  mse=352.0150
+  [train] step 31500/150000  loss=435.7685  mse=351.6859
+  [train] step 32000/150000  loss=435.4537  mse=351.3869
+  [train] step 32500/150000  loss=435.1053  mse=351.0606
+  [train] step 33000/150000  loss=434.7656  mse=350.7430
+  [train] step 33500/150000  loss=434.4631  mse=350.4676
+  [train] step 34000/150000  loss=434.2609  mse=350.2902
+  [train] step 34500/150000  loss=433.9641  mse=350.0154
+  [train] step 35000/150000  loss=433.7481  mse=349.8232
+  [train] step 35500/150000  loss=433.5771  mse=349.6455
+  [train] step 36000/150000  loss=433.2906  mse=349.3899
+  [train] step 36500/150000  loss=433.0747  mse=349.1798
+  [train] step 37000/150000  loss=432.8497  mse=348.9618
+  [train] step 37500/150000  loss=432.6246  mse=348.7372
+  [train] step 38000/150000  loss=432.3889  mse=348.5081
+  [train] step 38500/150000  loss=432.2686  mse=348.3979
+  [train] step 39000/150000  loss=432.0191  mse=348.1615
+  [train] step 39500/150000  loss=431.9014  mse=348.0347
+  [train] step 40000/150000  loss=431.6311  mse=347.7851
+  [train] step 40500/150000  loss=431.3641  mse=347.5340
+  [train] step 41000/150000  loss=431.1195  mse=347.3119
+  [train] step 41500/150000  loss=430.9401  mse=347.1369
+  [train] step 42000/150000  loss=430.7646  mse=346.9696
+  [train] step 42500/150000  loss=430.6575  mse=346.8742
+  [train] step 43000/150000  loss=430.5046  mse=346.7339
+  [train] step 43500/150000  loss=430.2810  mse=346.5209
+  [train] step 44000/150000  loss=430.1741  mse=346.4147
+  [train] step 44500/150000  loss=429.9984  mse=346.2567
+  [train] step 45000/150000  loss=429.9065  mse=346.1702
+  [train] step 45500/150000  loss=429.7878  mse=346.0545
+  [train] step 46000/150000  loss=429.6879  mse=345.9525
+  [train] step 46500/150000  loss=429.4572  mse=345.7395
+  [train] step 47000/150000  loss=429.3536  mse=345.6356
+  [train] step 47500/150000  loss=429.1765  mse=345.4838
+  [train] step 48000/150000  loss=429.0152  mse=345.3346
+  [train] step 48500/150000  loss=428.8494  mse=345.1809
+  [train] step 49000/150000  loss=428.6679  mse=345.0146
+  [train] step 49500/150000  loss=428.4683  mse=344.8275
+  [train] step 50000/150000  loss=428.2844  mse=344.6564
+  [train] step 50500/150000  loss=428.0957  mse=344.4851
+  [train] step 51000/150000  loss=427.9579  mse=344.3605
+  [train] step 51500/150000  loss=427.8217  mse=344.2276
+  [train] step 52000/150000  loss=427.7201  mse=344.1382
+  [train] step 52500/150000  loss=427.5851  mse=344.0029
+  [train] step 53000/150000  loss=427.4721  mse=343.8899
+  [train] step 53500/150000  loss=427.3011  mse=343.7329
+  [train] step 54000/150000  loss=427.1157  mse=343.5605
+  [train] step 54500/150000  loss=427.0073  mse=343.4542
+  [train] step 55000/150000  loss=426.8798  mse=343.3249
+  [train] step 55500/150000  loss=426.7613  mse=343.2138
+  [train] step 56000/150000  loss=426.6620  mse=343.1129
+  [train] step 56500/150000  loss=426.6100  mse=343.0626
+  [train] step 57000/150000  loss=426.4288  mse=342.8975
+  [train] step 57500/150000  loss=426.2939  mse=342.7766
+  [train] step 58000/150000  loss=426.1623  mse=342.6492
+  [train] step 58500/150000  loss=426.0596  mse=342.5483
+  [train] step 59000/150000  loss=425.9110  mse=342.4077
+  [train] step 59500/150000  loss=425.7948  mse=342.3007
+  [train] step 60000/150000  loss=425.6802  mse=342.2014
+  [train] step 60500/150000  loss=425.6027  mse=342.1334
+  [train] step 61000/150000  loss=425.5552  mse=342.0855
+  [train] step 61500/150000  loss=425.4413  mse=341.9803
+  [train] step 62000/150000  loss=425.3197  mse=341.8638
+  [train] step 62500/150000  loss=425.1984  mse=341.7449
+  [train] step 63000/150000  loss=425.1318  mse=341.6836
+  [train] step 63500/150000  loss=425.0188  mse=341.5702
+  [train] step 64000/150000  loss=424.9292  mse=341.4892
+  [train] step 64500/150000  loss=424.8355  mse=341.4073
+  [train] step 65000/150000  loss=424.7288  mse=341.3026
+  [train] step 65500/150000  loss=424.6776  mse=341.2546
+  [train] step 66000/150000  loss=424.5716  mse=341.1526
+  [train] step 66500/150000  loss=424.5028  mse=341.0902
+  [train] step 67000/150000  loss=424.3842  mse=340.9825
+  [train] step 67500/150000  loss=424.3520  mse=340.9538
+  [train] step 68000/150000  loss=424.2602  mse=340.8601
+  [train] step 68500/150000  loss=424.2420  mse=340.8308
+  [train] step 69000/150000  loss=424.1060  mse=340.7025
+  [train] step 69500/150000  loss=424.0671  mse=340.6583
+  [train] step 70000/150000  loss=423.9867  mse=340.5824
+  [train] step 70500/150000  loss=423.8770  mse=340.4817
+  [train] step 71000/150000  loss=423.7505  mse=340.3657
+  [train] step 71500/150000  loss=423.6719  mse=340.2965
+  [train] step 72000/150000  loss=423.5924  mse=340.2200
+  [train] step 72500/150000  loss=423.5102  mse=340.1406
+  [train] step 73000/150000  loss=423.4294  mse=340.0696
+  [train] step 73500/150000  loss=423.4008  mse=340.0399
+  [train] step 74000/150000  loss=423.3314  mse=339.9678
+  [train] step 74500/150000  loss=423.2219  mse=339.8688
+  [train] step 75000/150000  loss=423.1277  mse=339.7761
+  [train] step 75500/150000  loss=423.0655  mse=339.7162
+  [train] step 76000/150000  loss=423.0175  mse=339.6689
+  [train] step 76500/150000  loss=422.9940  mse=339.6433
+  [train] step 77000/150000  loss=422.9803  mse=339.6245
+  [train] step 77500/150000  loss=422.9337  mse=339.5852
+  [train] step 78000/150000  loss=422.8837  mse=339.5283
+  [train] step 78500/150000  loss=422.8291  mse=339.4763
+  [train] step 79000/150000  loss=422.7926  mse=339.4377
+  [train] step 79500/150000  loss=422.6792  mse=339.3334
+  [train] step 80000/150000  loss=422.6435  mse=339.2962
+  [train] step 80500/150000  loss=422.5795  mse=339.2332
+  [train] step 81000/150000  loss=422.5343  mse=339.1897
+  [train] step 81500/150000  loss=422.4569  mse=339.1212
+  [train] step 82000/150000  loss=422.3957  mse=339.0693
+  [train] step 82500/150000  loss=422.3467  mse=339.0195
+  [train] step 83000/150000  loss=422.2755  mse=338.9551
+  [train] step 83500/150000  loss=422.2377  mse=338.9212
+  [train] step 84000/150000  loss=422.2234  mse=338.9069
+  [train] step 84500/150000  loss=422.1828  mse=338.8671
+  [train] step 85000/150000  loss=422.1566  mse=338.8373
+  [train] step 85500/150000  loss=422.1439  mse=338.8172
+  [train] step 86000/150000  loss=422.0882  mse=338.7640
+  [train] step 86500/150000  loss=422.0275  mse=338.7045
+  [train] step 87000/150000  loss=421.9884  mse=338.6621
+  [train] step 87500/150000  loss=421.9101  mse=338.5954
+  [train] step 88000/150000  loss=421.8403  mse=338.5241
+  [train] step 88500/150000  loss=421.8347  mse=338.5115
+  [train] step 89000/150000  loss=421.7522  mse=338.4377
+  [train] step 89500/150000  loss=421.7069  mse=338.3934
+  [train] step 90000/150000  loss=421.6641  mse=338.3511
+  [train] step 90500/150000  loss=421.6207  mse=338.3068
+  [train] step 91000/150000  loss=421.5925  mse=338.2759
+  [train] step 91500/150000  loss=421.5580  mse=338.2367
+  [train] step 92000/150000  loss=421.5531  mse=338.2319
+  [train] step 92500/150000  loss=421.5030  mse=338.1841
+  [train] step 93000/150000  loss=421.4691  mse=338.1465
+  [train] step 93500/150000  loss=421.3888  mse=338.0733
+  [train] step 94000/150000  loss=421.3592  mse=338.0362
+  [train] step 94500/150000  loss=421.3415  mse=338.0130
+  [train] step 95000/150000  loss=421.3052  mse=337.9782
+  [train] step 95500/150000  loss=421.3017  mse=337.9731
+  [train] step 96000/150000  loss=421.2471  mse=337.9221
+  [train] step 96500/150000  loss=421.1868  mse=337.8654
+  [train] step 97000/150000  loss=421.1599  mse=337.8396
+  [train] step 97500/150000  loss=421.1229  mse=337.8052
+  [train] step 98000/150000  loss=421.0825  mse=337.7700
+  [train] step 98500/150000  loss=421.0267  mse=337.7235
+  [train] step 99000/150000  loss=420.9866  mse=337.6885
+  [train] step 99500/150000  loss=420.9518  mse=337.6549
+  [train] step 100000/150000  loss=420.9140  mse=337.6191
+  [train] step 100500/150000  loss=420.8694  mse=337.5762
+  [train] step 101000/150000  loss=420.8190  mse=337.5296
+  [train] step 101500/150000  loss=420.7684  mse=337.4819
+  [train] step 102000/150000  loss=420.7219  mse=337.4349
+  [train] step 102500/150000  loss=420.6952  mse=337.4093
+  [train] step 103000/150000  loss=420.6489  mse=337.3688
+  [train] step 103500/150000  loss=420.5974  mse=337.3221
+  [train] step 104000/150000  loss=420.5336  mse=337.2655
+  [train] step 104500/150000  loss=420.4810  mse=337.2148
+  [train] step 105000/150000  loss=420.4484  mse=337.1803
+  [train] step 105500/150000  loss=420.4203  mse=337.1540
+  [train] step 106000/150000  loss=420.3821  mse=337.1103
+  [train] step 106500/150000  loss=420.3611  mse=337.0902
+  [train] step 107000/150000  loss=420.2941  mse=337.0282
+  [train] step 107500/150000  loss=420.2632  mse=336.9992
+  [train] step 108000/150000  loss=420.2220  mse=336.9597
+  [train] step 108500/150000  loss=420.1702  mse=336.9151
+  [train] step 109000/150000  loss=420.1639  mse=336.9096
+  [train] step 109500/150000  loss=420.1453  mse=336.8883
+  [train] step 110000/150000  loss=420.1063  mse=336.8528
+  [train] step 110500/150000  loss=420.0469  mse=336.8005
+  [train] step 111000/150000  loss=420.0045  mse=336.7582
+  [train] step 111500/150000  loss=419.9605  mse=336.7181
+  [train] step 112000/150000  loss=419.9124  mse=336.6763
+  [train] step 112500/150000  loss=419.8513  mse=336.6159
+  [train] step 113000/150000  loss=419.8472  mse=336.6081
+  [train] step 113500/150000  loss=419.8287  mse=336.5882
+  [train] step 114000/150000  loss=419.7781  mse=336.5403
+  [train] step 114500/150000  loss=419.7442  mse=336.5080
+  [train] step 115000/150000  loss=419.7341  mse=336.4987
+  [train] step 115500/150000  loss=419.7232  mse=336.4850
+  [train] step 116000/150000  loss=419.6780  mse=336.4422
+  [train] step 116500/150000  loss=419.6551  mse=336.4206
+  [train] step 117000/150000  loss=419.6227  mse=336.3929
+  [train] step 117500/150000  loss=419.6173  mse=336.3843
+  [train] step 118000/150000  loss=419.6166  mse=336.3851
+  [train] step 118500/150000  loss=419.5869  mse=336.3578
+  [train] step 119000/150000  loss=419.5338  mse=336.3058
+  [train] step 119500/150000  loss=419.5078  mse=336.2790
+  [train] step 120000/150000  loss=419.4786  mse=336.2534
+  [train] step 120500/150000  loss=419.4735  mse=336.2457
+  [train] step 121000/150000  loss=419.4164  mse=336.1913
+  [train] step 121500/150000  loss=419.3624  mse=336.1407
+  [train] step 122000/150000  loss=419.3459  mse=336.1226
+  [train] step 122500/150000  loss=419.2847  mse=336.0672
+  [train] step 123000/150000  loss=419.2285  mse=336.0181
+  [train] step 123500/150000  loss=419.2110  mse=336.0016
+  [train] step 124000/150000  loss=419.1786  mse=335.9680
+  [train] step 124500/150000  loss=419.1485  mse=335.9401
+  [train] step 125000/150000  loss=419.1230  mse=335.9172
+  [train] step 125500/150000  loss=419.0882  mse=335.8812
+  [train] step 126000/150000  loss=419.0543  mse=335.8469
+  [train] step 126500/150000  loss=419.0184  mse=335.8150
+  [train] step 127000/150000  loss=418.9727  mse=335.7742
+  [train] step 127500/150000  loss=418.9225  mse=335.7265
+  [train] step 128000/150000  loss=418.9160  mse=335.7147
+  [train] step 128500/150000  loss=418.8709  mse=335.6748
+  [train] step 129000/150000  loss=418.8645  mse=335.6702
+  [train] step 129500/150000  loss=418.8354  mse=335.6448
+  [train] step 130000/150000  loss=418.7751  mse=335.5909
+  [train] step 130500/150000  loss=418.7337  mse=335.5529
+  [train] step 131000/150000  loss=418.7034  mse=335.5249
+  [train] step 131500/150000  loss=418.6920  mse=335.5111
+  [train] step 132000/150000  loss=418.6637  mse=335.4814
+  [train] step 132500/150000  loss=418.6286  mse=335.4444
+  [train] step 133000/150000  loss=418.6275  mse=335.4420
+  [train] step 133500/150000  loss=418.5902  mse=335.4080
+  [train] step 134000/150000  loss=418.5699  mse=335.3890
+  [train] step 134500/150000  loss=418.5398  mse=335.3547
+  [train] step 135000/150000  loss=418.4936  mse=335.3110
+  [train] step 135500/150000  loss=418.4492  mse=335.2726
+  [train] step 136000/150000  loss=418.4019  mse=335.2291
+  [train] step 136500/150000  loss=418.3706  mse=335.1982
+  [train] step 137000/150000  loss=418.3521  mse=335.1785
+  [train] step 137500/150000  loss=418.3033  mse=335.1344
+  [train] step 138000/150000  loss=418.2646  mse=335.0954
+  [train] step 138500/150000  loss=418.2316  mse=335.0627
+  [train] step 139000/150000  loss=418.1932  mse=335.0272
+  [train] step 139500/150000  loss=418.1585  mse=334.9923
+  [train] step 140000/150000  loss=418.1043  mse=334.9433
+  [train] step 140500/150000  loss=418.0693  mse=334.9108
+  [train] step 141000/150000  loss=418.0219  mse=334.8661
+  [train] step 141500/150000  loss=417.9993  mse=334.8430
+  [train] step 142000/150000  loss=417.9628  mse=334.8091
+  [train] step 142500/150000  loss=417.9350  mse=334.7850
+  [train] step 143000/150000  loss=417.9190  mse=334.7627
+  [train] step 143500/150000  loss=417.8730  mse=334.7206
+  [train] step 144000/150000  loss=417.8187  mse=334.6694
+  [train] step 144500/150000  loss=417.7795  mse=334.6322
+  [train] step 145000/150000  loss=417.7656  mse=334.6214
+  [train] step 145500/150000  loss=417.7288  mse=334.5882
+  [train] step 146000/150000  loss=417.6797  mse=334.5442
+  [train] step 146500/150000  loss=417.6348  mse=334.4995
+  [train] step 147000/150000  loss=417.6062  mse=334.4704
+  [train] step 147500/150000  loss=417.5368  mse=334.4081
+  [train] step 148000/150000  loss=417.4973  mse=334.3704
+  [train] step 148500/150000  loss=417.4739  mse=334.3482
+  [train] step 149000/150000  loss=417.4472  mse=334.3225
+  [train] step 149500/150000  loss=417.4173  mse=334.2971
+  [train] step 150000/150000  loss=417.3545  mse=334.2374
+  [val] step 500/25000  loss=407.2558  mse=324.5542
+  [val] step 1000/25000  loss=407.6564  mse=325.1271
+  [val] step 1500/25000  loss=406.7572  mse=324.3883
+  [val] step 2000/25000  loss=405.9386  mse=323.6188
+  [val] step 2500/25000  loss=407.3621  mse=324.8486
+  [val] step 3000/25000  loss=407.7847  mse=325.2119
+  [val] step 3500/25000  loss=408.2397  mse=325.7066
+  [val] step 4000/25000  loss=408.3702  mse=325.8744
+  [val] step 4500/25000  loss=408.1066  mse=325.5906
+  [val] step 5000/25000  loss=407.4415  mse=324.9099
+  [val] step 5500/25000  loss=407.0377  mse=324.4822
+  [val] step 6000/25000  loss=406.8613  mse=324.3125
+  [val] step 6500/25000  loss=407.0617  mse=324.4301
+  [val] step 7000/25000  loss=407.1653  mse=324.4486
+  [val] step 7500/25000  loss=407.0059  mse=324.2983
+  [val] step 8000/25000  loss=407.1627  mse=324.4679
+  [val] step 8500/25000  loss=407.1477  mse=324.4129
+  [val] step 9000/25000  loss=407.0771  mse=324.3413
+  [val] step 9500/25000  loss=406.8289  mse=324.1427
+  [val] step 10000/25000  loss=406.9644  mse=324.2897
+  [val] step 10500/25000  loss=407.0319  mse=324.3394
+  [val] step 11000/25000  loss=407.2969  mse=324.5743
+  [val] step 11500/25000  loss=407.4073  mse=324.6549
+  [val] step 12000/25000  loss=407.6908  mse=324.8994
+  [val] step 12500/25000  loss=407.5881  mse=324.8271
+  [val] step 13000/25000  loss=407.6663  mse=324.9053
+  [val] step 13500/25000  loss=407.7493  mse=324.9839
+  [val] step 14000/25000  loss=407.5401  mse=324.8231
+  [val] step 14500/25000  loss=407.5368  mse=324.8401
+  [val] step 15000/25000  loss=407.8081  mse=325.0769
+  [val] step 15500/25000  loss=407.7705  mse=325.0595
+  [val] step 16000/25000  loss=407.8655  mse=325.1313
+  [val] step 16500/25000  loss=407.8530  mse=325.0803
+  [val] step 17000/25000  loss=408.0486  mse=325.2607
+  [val] step 17500/25000  loss=407.8029  mse=325.0537
+  [val] step 18000/25000  loss=407.8365  mse=325.0616
+  [val] step 18500/25000  loss=407.7931  mse=324.9934
+  [val] step 19000/25000  loss=407.8749  mse=325.0618
+  [val] step 19500/25000  loss=407.8069  mse=325.0220
+  [val] step 20000/25000  loss=407.6603  mse=324.8849
+  [val] step 20500/25000  loss=407.6372  mse=324.8879
+  [val] step 21000/25000  loss=407.5766  mse=324.7995
+  [val] step 21500/25000  loss=407.4754  mse=324.7093
+  [val] step 22000/25000  loss=407.4358  mse=324.6814
+  [val] step 22500/25000  loss=407.2830  mse=324.5394
+  [val] step 23000/25000  loss=407.2426  mse=324.5044
+  [val] step 23500/25000  loss=407.2183  mse=324.4824
+  [val] step 24000/25000  loss=407.2953  mse=324.5620
+  [val] step 24500/25000  loss=407.3223  mse=324.5808
+  [val] step 25000/25000  loss=407.5454  mse=324.7905
+Epoch 1 summary: train_loss=417.3545 mse=334.2374 val_loss=407.5454 mse=324.7905 time=93363.5s
+Epoch 2/100 — train_steps=150000, val_steps=25000
+  [train] step 500/150000  loss=417.2289  mse=333.7031
+  [train] step 1000/150000  loss=415.0879  mse=332.4909
+  [train] step 1500/150000  loss=411.4729  mse=328.9960
+  [train] step 2000/150000  loss=413.6393  mse=330.6068
+  [train] step 2500/150000  loss=411.3913  mse=328.4795
+  [train] step 3000/150000  loss=411.7345  mse=328.8512
+  [train] step 3500/150000  loss=410.0542  mse=327.1976
+  [train] step 4000/150000  loss=410.5660  mse=327.6777
+  [train] step 4500/150000  loss=409.6474  mse=326.7911
+  [train] step 5000/150000  loss=409.9229  mse=326.9364
+  [train] step 5500/150000  loss=409.3325  mse=326.3801
+  [train] step 6000/150000  loss=409.6062  mse=326.5505
+  [train] step 6500/150000  loss=409.7842  mse=326.6705
+  [train] step 7000/150000  loss=409.6104  mse=326.4596
+  [train] step 7500/150000  loss=409.1513  mse=325.9863
+  [train] step 8000/150000  loss=408.7270  mse=325.6205
+  [train] step 8500/150000  loss=408.4898  mse=325.4022
+  [train] step 9000/150000  loss=408.3024  mse=325.2724
+  [train] step 9500/150000  loss=408.0758  mse=325.0583
+  [train] step 10000/150000  loss=407.7299  mse=324.7343
+  [train] step 10500/150000  loss=407.7307  mse=324.7712
+  [train] step 11000/150000  loss=407.6995  mse=324.7393
+  [train] step 11500/150000  loss=407.6587  mse=324.6964
+  [train] step 12000/150000  loss=407.7277  mse=324.7601
+  [train] step 12500/150000  loss=407.6363  mse=324.6787
+  [train] step 13000/150000  loss=407.4424  mse=324.4909
+  [train] step 13500/150000  loss=407.3694  mse=324.3968
+  [train] step 14000/150000  loss=406.9625  mse=323.9943
+  [train] step 14500/150000  loss=406.8902  mse=323.9646
+  [train] step 15000/150000  loss=406.4164  mse=323.5304
+  [train] step 15500/150000  loss=406.0865  mse=323.2269
+  [train] step 16000/150000  loss=405.8464  mse=322.9966
+  [train] step 16500/150000  loss=405.9119  mse=323.0616
+  [train] step 17000/150000  loss=405.6254  mse=322.7845
+  [train] step 17500/150000  loss=405.4780  mse=322.6492
+  [train] step 18000/150000  loss=405.3655  mse=322.5409
+  [train] step 18500/150000  loss=405.2467  mse=322.4156
+  [train] step 19000/150000  loss=405.0035  mse=322.1888
+  [train] step 19500/150000  loss=404.7601  mse=321.9458
+  [train] step 20000/150000  loss=404.5542  mse=321.7585
+  [train] step 20500/150000  loss=404.4704  mse=321.6733
+  [train] step 21000/150000  loss=404.3801  mse=321.5930
+  [train] step 21500/150000  loss=404.2173  mse=321.4412
+  [train] step 22000/150000  loss=404.0708  mse=321.3092
+  [train] step 22500/150000  loss=403.8664  mse=321.1297
+  [train] step 23000/150000  loss=403.7492  mse=321.0271
+  [train] step 23500/150000  loss=403.7897  mse=321.0500
+  [train] step 24000/150000  loss=403.7439  mse=321.0175
+  [train] step 24500/150000  loss=403.6073  mse=320.8914
+  [train] step 25000/150000  loss=403.4469  mse=320.7379
+  [train] step 25500/150000  loss=403.3516  mse=320.6354
+  [train] step 26000/150000  loss=403.1623  mse=320.4636
+  [train] step 26500/150000  loss=402.9288  mse=320.2398
+  [train] step 27000/150000  loss=402.8864  mse=320.2172
+  [train] step 27500/150000  loss=402.7502  mse=320.0704
+  [train] step 28000/150000  loss=402.6748  mse=320.0069
+  [train] step 28500/150000  loss=402.5585  mse=319.9015
+  [train] step 29000/150000  loss=402.3423  mse=319.7118
+  [train] step 29500/150000  loss=402.1221  mse=319.4918
+  [train] step 30000/150000  loss=401.9694  mse=319.3454
+  [train] step 30500/150000  loss=401.7416  mse=319.1410
+  [train] step 31000/150000  loss=401.5607  mse=318.9817
+  [train] step 31500/150000  loss=401.4329  mse=318.8685
+  [train] step 32000/150000  loss=401.2994  mse=318.7307
+  [train] step 32500/150000  loss=401.1615  mse=318.6074
+  [train] step 33000/150000  loss=401.0307  mse=318.4891
+  [train] step 33500/150000  loss=400.9046  mse=318.3630
+  [train] step 34000/150000  loss=400.7156  mse=318.1915
+  [train] step 34500/150000  loss=400.6258  mse=318.0918
+  [train] step 35000/150000  loss=400.5597  mse=318.0210
+  [train] step 35500/150000  loss=400.4826  mse=317.9518
+  [train] step 36000/150000  loss=400.3934  mse=317.8792
+  [train] step 36500/150000  loss=400.2214  mse=317.7309
+  [train] step 37000/150000  loss=400.0891  mse=317.5981
+  [train] step 37500/150000  loss=399.8866  mse=317.4140
+  [train] step 38000/150000  loss=399.8320  mse=317.3565
+  [train] step 38500/150000  loss=399.6572  mse=317.1957
+  [train] step 39000/150000  loss=399.5492  mse=317.1014
+  [train] step 39500/150000  loss=399.4370  mse=317.0014
+  [train] step 40000/150000  loss=399.2374  mse=316.8248
+  [train] step 40500/150000  loss=399.1285  mse=316.7263
+  [train] step 41000/150000  loss=399.0295  mse=316.6263
+  [train] step 41500/150000  loss=398.8998  mse=316.5195
+  [train] step 42000/150000  loss=398.7754  mse=316.4093
+  [train] step 42500/150000  loss=398.6807  mse=316.3191
+  [train] step 43000/150000  loss=398.6239  mse=316.2749
+  [train] step 43500/150000  loss=398.4444  mse=316.1140
+  [train] step 44000/150000  loss=398.3520  mse=316.0199
+  [train] step 44500/150000  loss=398.2993  mse=315.9648
+  [train] step 45000/150000  loss=398.1956  mse=315.8681
+  [train] step 45500/150000  loss=398.0849  mse=315.7639
+  [train] step 46000/150000  loss=397.9004  mse=315.6054
+  [train] step 46500/150000  loss=397.7724  mse=315.4879
+  [train] step 47000/150000  loss=397.7415  mse=315.4545
+  [train] step 47500/150000  loss=397.6518  mse=315.3718
+  [train] step 48000/150000  loss=397.5150  mse=315.2449
+  [train] step 48500/150000  loss=397.3473  mse=315.0804
+  [train] step 49000/150000  loss=397.3204  mse=315.0450
+  [train] step 49500/150000  loss=397.1748  mse=314.9135
+  [train] step 50000/150000  loss=397.0643  mse=314.8076
+  [train] step 50500/150000  loss=396.9762  mse=314.7238
+  [train] step 51000/150000  loss=396.8905  mse=314.6451
+  [train] step 51500/150000  loss=396.7913  mse=314.5532
+  [train] step 52000/150000  loss=396.7064  mse=314.4741
+  [train] step 52500/150000  loss=396.6194  mse=314.3856
+  [train] step 53000/150000  loss=396.5585  mse=314.3235
+  [train] step 53500/150000  loss=396.4550  mse=314.2298
+  [train] step 54000/150000  loss=396.3928  mse=314.1645
+  [train] step 54500/150000  loss=396.2727  mse=314.0598
+  [train] step 55000/150000  loss=396.2081  mse=313.9975
+  [train] step 55500/150000  loss=396.1109  mse=313.9035
+  [train] step 56000/150000  loss=396.0536  mse=313.8432
+  [train] step 56500/150000  loss=395.9713  mse=313.7620
+  [train] step 57000/150000  loss=395.8408  mse=313.6421
+  [train] step 57500/150000  loss=395.7037  mse=313.5195
+  [train] step 58000/150000  loss=395.5725  mse=313.3927
+  [train] step 58500/150000  loss=395.4314  mse=313.2624
+  [train] step 59000/150000  loss=395.3378  mse=313.1646
+  [train] step 59500/150000  loss=395.2242  mse=313.0654
+  [train] step 60000/150000  loss=395.1097  mse=312.9563
+  [train] step 60500/150000  loss=395.0202  mse=312.8674
+  [train] step 61000/150000  loss=394.9447  mse=312.7960
+  [train] step 61500/150000  loss=394.8748  mse=312.7235
+  [train] step 62000/150000  loss=394.7358  mse=312.5962
+  [train] step 62500/150000  loss=394.6410  mse=312.5151
+  [train] step 63000/150000  loss=394.5144  mse=312.4023
+  [train] step 63500/150000  loss=394.4081  mse=312.2975
+  [train] step 64000/150000  loss=394.2614  mse=312.1607
+  [train] step 64500/150000  loss=394.1609  mse=312.0645
+  [train] step 65000/150000  loss=394.0314  mse=311.9421
+  [train] step 65500/150000  loss=393.9415  mse=311.8607
+  [train] step 66000/150000  loss=393.8391  mse=311.7654
+  [train] step 66500/150000  loss=393.7520  mse=311.6894
+  [train] step 67000/150000  loss=393.5752  mse=311.5278
+  [train] step 67500/150000  loss=393.4945  mse=311.4455
+  [train] step 68000/150000  loss=393.3679  mse=311.3361
+  [train] step 68500/150000  loss=393.2514  mse=311.2294
+  [train] step 69000/150000  loss=393.1878  mse=311.1707
+  [train] step 69500/150000  loss=393.1185  mse=311.1075
+  [train] step 70000/150000  loss=393.0413  mse=311.0347
+  [train] step 70500/150000  loss=392.9371  mse=310.9451
+  [train] step 71000/150000  loss=392.8118  mse=310.8385
+  [train] step 71500/150000  loss=392.7568  mse=310.7863
+  [train] step 72000/150000  loss=392.6894  mse=310.7224
+  [train] step 72500/150000  loss=392.5654  mse=310.6066
+  [train] step 73000/150000  loss=392.4645  mse=310.5198
+  [train] step 73500/150000  loss=392.3610  mse=310.4294
+  [train] step 74000/150000  loss=392.3131  mse=310.3823
+  [train] step 74500/150000  loss=392.2163  mse=310.2924
+  [train] step 75000/150000  loss=392.1540  mse=310.2350
+  [train] step 75500/150000  loss=392.0520  mse=310.1471
+  [train] step 76000/150000  loss=391.9903  mse=310.0894
+  [train] step 76500/150000  loss=391.8887  mse=309.9952
+  [train] step 77000/150000  loss=391.7802  mse=309.8976
+  [train] step 77500/150000  loss=391.6274  mse=309.7565
+  [train] step 78000/150000  loss=391.5112  mse=309.6534
+  [train] step 78500/150000  loss=391.4020  mse=309.5460
+  [train] step 79000/150000  loss=391.3349  mse=309.4869
+  [train] step 79500/150000  loss=391.2400  mse=309.4058
+  [train] step 80000/150000  loss=391.1491  mse=309.3203
+  [train] step 80500/150000  loss=391.0683  mse=309.2491
+  [train] step 81000/150000  loss=390.9600  mse=309.1507
+  [train] step 81500/150000  loss=390.8908  mse=309.0860
+  [train] step 82000/150000  loss=390.7946  mse=309.0012
+  [train] step 82500/150000  loss=390.7187  mse=308.9309
+  [train] step 83000/150000  loss=390.6028  mse=308.8299
+  [train] step 83500/150000  loss=390.5093  mse=308.7513
+  [train] step 84000/150000  loss=390.4363  mse=308.6824
+  [train] step 84500/150000  loss=390.3682  mse=308.6135
+  [train] step 85000/150000  loss=390.3242  mse=308.5712
+  [train] step 85500/150000  loss=390.2355  mse=308.4900
+  [train] step 86000/150000  loss=390.1630  mse=308.4186
+  [train] step 86500/150000  loss=390.0793  mse=308.3375
+  [train] step 87000/150000  loss=389.9972  mse=308.2541
+  [train] step 87500/150000  loss=389.8918  mse=308.1609
+  [train] step 88000/150000  loss=389.8257  mse=308.0964
+  [train] step 88500/150000  loss=389.7498  mse=308.0235
+  [train] step 89000/150000  loss=389.6884  mse=307.9660
+  [train] step 89500/150000  loss=389.6121  mse=307.8906
+  [train] step 90000/150000  loss=389.4490  mse=307.7388
+  [train] step 90500/150000  loss=389.3665  mse=307.6623
+  [train] step 91000/150000  loss=389.2532  mse=307.5638
+  [train] step 91500/150000  loss=389.1739  mse=307.4917
+  [train] step 92000/150000  loss=389.0865  mse=307.4075
+  [train] step 92500/150000  loss=388.9772  mse=307.3078
+  [train] step 93000/150000  loss=388.8755  mse=307.2066
+  [train] step 93500/150000  loss=388.7809  mse=307.1192
+  [train] step 94000/150000  loss=388.7104  mse=307.0538
+  [train] step 94500/150000  loss=388.5965  mse=306.9553
+  [train] step 95000/150000  loss=388.5442  mse=306.9125
+  [train] step 95500/150000  loss=388.4818  mse=306.8493
+  [train] step 96000/150000  loss=388.4033  mse=306.7765
+  [train] step 96500/150000  loss=388.2854  mse=306.6709
+  [train] step 97000/150000  loss=388.1666  mse=306.5640
+  [train] step 97500/150000  loss=388.0880  mse=306.4912
+  [train] step 98000/150000  loss=388.0209  mse=306.4287
+  [train] step 98500/150000  loss=387.9345  mse=306.3500
+  [train] step 99000/150000  loss=387.8634  mse=306.2789
+  [train] step 99500/150000  loss=387.7816  mse=306.2000
+  [train] step 100000/150000  loss=387.6952  mse=306.1178
+  [train] step 100500/150000  loss=387.6390  mse=306.0636
+  [train] step 101000/150000  loss=387.5723  mse=306.0021
+  [train] step 101500/150000  loss=387.4710  mse=305.9114
+  [train] step 102000/150000  loss=387.4059  mse=305.8497
+  [train] step 102500/150000  loss=387.3158  mse=305.7658
+  [train] step 103000/150000  loss=387.2185  mse=305.6791
+  [train] step 103500/150000  loss=387.1755  mse=305.6358
+  [train] step 104000/150000  loss=387.0951  mse=305.5610
+  [train] step 104500/150000  loss=387.0051  mse=305.4791
+  [train] step 105000/150000  loss=386.9163  mse=305.3977
+  [train] step 105500/150000  loss=386.8151  mse=305.3050
+  [train] step 106000/150000  loss=386.7363  mse=305.2283
+  [train] step 106500/150000  loss=386.6488  mse=305.1492
+  [train] step 107000/150000  loss=386.5869  mse=305.0924
+  [train] step 107500/150000  loss=386.4816  mse=305.0004
+  [train] step 108000/150000  loss=386.3947  mse=304.9180
+  [train] step 108500/150000  loss=386.2997  mse=304.8348
+  [train] step 109000/150000  loss=386.2033  mse=304.7457
+  [train] step 109500/150000  loss=386.0864  mse=304.6390
+  [train] step 110000/150000  loss=385.9975  mse=304.5570
+  [train] step 110500/150000  loss=385.9309  mse=304.4939
+  [train] step 111000/150000  loss=385.8280  mse=304.3982
+  [train] step 111500/150000  loss=385.7608  mse=304.3329
+  [train] step 112000/150000  loss=385.7046  mse=304.2781
+  [train] step 112500/150000  loss=385.6401  mse=304.2162
+  [train] step 113000/150000  loss=385.5582  mse=304.1445
+  [train] step 113500/150000  loss=385.4937  mse=304.0851
+  [train] step 114000/150000  loss=385.4241  mse=304.0226
+  [train] step 114500/150000  loss=385.3701  mse=303.9727
+  [train] step 115000/150000  loss=385.2969  mse=303.9052
+  [train] step 115500/150000  loss=385.2270  mse=303.8373
+  [train] step 116000/150000  loss=385.1750  mse=303.7899
+  [train] step 116500/150000  loss=385.1133  mse=303.7336
+  [train] step 117000/150000  loss=385.0529  mse=303.6744
+  [train] step 117500/150000  loss=384.9634  mse=303.5924
+  [train] step 118000/150000  loss=384.8649  mse=303.5017
+  [train] step 118500/150000  loss=384.7883  mse=303.4317
+  [train] step 119000/150000  loss=384.6952  mse=303.3460
+  [train] step 119500/150000  loss=384.6490  mse=303.2993
+  [train] step 120000/150000  loss=384.5543  mse=303.2149
+  [train] step 120500/150000  loss=384.4631  mse=303.1335
+  [train] step 121000/150000  loss=384.3819  mse=303.0601
+  [train] step 121500/150000  loss=384.3008  mse=302.9864
+  [train] step 122000/150000  loss=384.2079  mse=302.9022
+  [train] step 122500/150000  loss=384.1053  mse=302.8094
+  [train] step 123000/150000  loss=384.0164  mse=302.7273
+  [train] step 123500/150000  loss=383.9688  mse=302.6846
+  [train] step 124000/150000  loss=383.8857  mse=302.6094
+  [train] step 124500/150000  loss=383.8190  mse=302.5479
+  [train] step 125000/150000  loss=383.7406  mse=302.4746
+  [train] step 125500/150000  loss=383.6729  mse=302.4153
+  [train] step 126000/150000  loss=383.5663  mse=302.3204
+  [train] step 126500/150000  loss=383.4961  mse=302.2577
+  [train] step 127000/150000  loss=383.4034  mse=302.1737
+  [train] step 127500/150000  loss=383.3268  mse=302.1037
+  [train] step 128000/150000  loss=383.2536  mse=302.0380
+  [train] step 128500/150000  loss=383.1688  mse=301.9606
+  [train] step 129000/150000  loss=383.1127  mse=301.9068
+  [train] step 129500/150000  loss=383.0252  mse=301.8238
+  [train] step 130000/150000  loss=382.9459  mse=301.7480
+  [train] step 130500/150000  loss=382.9029  mse=301.7070

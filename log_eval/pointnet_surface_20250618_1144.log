@@ -1,0 +1,66 @@
+nohup: ignoring input
+2025-06-18 11:55:06.300574: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-06-18 11:55:06.319594: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1750240506.340894 1833126 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1750240506.346847 1833126 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1750240506.362679 1833126 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750240506.362710 1833126 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750240506.362713 1833126 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750240506.362715 1833126 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-06-18 11:55:06.367156: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Torch: 2.7.1+cu126  CUDA available: True
+GPUs: 1 ['NVIDIA RTX 6000 Ada Generation']
+TensorFlow (for TFRecord I/O only): 2.19.0
+Train shards: 80  Val shards: 20
+I0000 00:00:1750240516.147248 1833126 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 46542 MB memory:  -> device: 0, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:3d:00.0, compute capability: 8.9
+I0000 00:00:1750240516.155288 1833126 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 863 MB memory:  -> device: 1, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:61:00.0, compute capability: 8.9
+I0000 00:00:1750240516.156952 1833126 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:2 with 22808 MB memory:  -> device: 2, name: NVIDIA TITAN RTX, pci bus id: 0000:60:00.0, compute capability: 7.5
+I0000 00:00:1750240516.158588 1833126 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:3 with 22808 MB memory:  -> device: 3, name: NVIDIA TITAN RTX, pci bus id: 0000:64:00.0, compute capability: 7.5
+I0000 00:00:1750240516.160221 1833126 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:4 with 9615 MB memory:  -> device: 4, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:3e:00.0, compute capability: 7.5
+I0000 00:00:1750240516.161838 1833126 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:5 with 9616 MB memory:  -> device: 5, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:42:00.0, compute capability: 7.5
+I0000 00:00:1750240516.163405 1833126 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:6 with 9616 MB memory:  -> device: 6, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:43:00.0, compute capability: 7.5
+2025-06-18 11:55:19.156852: I tensorflow/core/kernels/data/tf_record_dataset_op.cc:381] TFRecordDataset `buffer_size` is unspecified, default to 262144
+/home/ainsworth/master/train_pointnet_surface_torch.py:184: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:203.)
+  xyz = torch.from_numpy(xyz_np).to(_DEVICE).float()
+Traceback (most recent call last):
+  File "/home/ainsworth/master/train_pointnet_surface_torch.py", line 291, in <module>
+    main(args.tfrecord_glob, args.epochs)
+  File "/home/ainsworth/master/train_pointnet_surface_torch.py", line 256, in main
+    train_loss = train_epoch(model, train_iter, optimizer, train_steps)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ainsworth/master/train_pointnet_surface_torch.py", line 207, in train_epoch
+    pred = model(xyz)
+           ^^^^^^^^^^
+  File "/home/ainsworth/master/py312/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ainsworth/master/py312/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ainsworth/master/train_pointnet_surface_torch.py", line 141, in forward
+    l3_xyz, l3_pts = self.sa3(l2_xyz, l2_pts)         # (B,3,N/16),(B,1024,N/16)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ainsworth/master/py312/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ainsworth/master/py312/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ainsworth/master/pointnet2_utils.py", line 256, in forward
+    grouped_points =  F.relu(bn(conv(grouped_points)))
+                             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ainsworth/master/py312/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ainsworth/master/py312/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ainsworth/master/py312/lib/python3.12/site-packages/torch/nn/modules/batchnorm.py", line 193, in forward
+    return F.batch_norm(
+           ^^^^^^^^^^^^^
+  File "/home/ainsworth/master/py312/lib/python3.12/site-packages/torch/nn/functional.py", line 2822, in batch_norm
+    return torch.batch_norm(
+           ^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacity of 47.38 GiB of which 220.75 MiB is free. Including non-PyTorch memory, this process has 47.15 GiB memory in use. Of the allocated memory 1.13 GiB is allocated by PyTorch, and 71.52 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

@@ -1,0 +1,229 @@
+nohup: ignoring input
+2025-05-28 19:09:52.891986: I tensorflow/core/util/port.cc:110] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-05-28 19:09:52.941320: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-05-28 19:09:55.974852: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 46542 MB memory:  -> device: 0, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:3d:00.0, compute capability: 8.9
+Number of devices: 1
+Training set: (32000, 35, 35, 3) (32000, 10, 10, 3)
+Validation set: (4000, 35, 35, 3) (4000, 10, 10, 3)
+Test set: (4000, 35, 35, 3) (4000, 10, 10, 3)
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input_1 (InputLayer)        [(None, 35, 35, 3)]          0         []                            
+                                                                                                  
+ conv2d (Conv2D)             (None, 35, 35, 64)           4864      ['input_1[0][0]']             
+                                                                                                  
+ conv2d_2 (Conv2D)           (None, 35, 35, 64)           4160      ['conv2d[0][0]']              
+                                                                                                  
+ conv2d_4 (Conv2D)           (None, 35, 35, 64)           4160      ['conv2d[0][0]']              
+                                                                                                  
+ max_pooling2d (MaxPooling2  (None, 35, 35, 64)           0         ['conv2d[0][0]']              
+ D)                                                                                               
+                                                                                                  
+ conv2d_1 (Conv2D)           (None, 35, 35, 64)           4160      ['conv2d[0][0]']              
+                                                                                                  
+ conv2d_3 (Conv2D)           (None, 35, 35, 64)           36928     ['conv2d_2[0][0]']            
+                                                                                                  
+ conv2d_5 (Conv2D)           (None, 35, 35, 64)           102464    ['conv2d_4[0][0]']            
+                                                                                                  
+ conv2d_6 (Conv2D)           (None, 35, 35, 64)           4160      ['max_pooling2d[0][0]']       
+                                                                                                  
+ concatenate (Concatenate)   (None, 35, 35, 256)          0         ['conv2d_1[0][0]',            
+                                                                     'conv2d_3[0][0]',            
+                                                                     'conv2d_5[0][0]',            
+                                                                     'conv2d_6[0][0]']            
+                                                                                                  
+ conv2d_7 (Conv2D)           (None, 35, 35, 128)          295040    ['concatenate[0][0]']         
+                                                                                                  
+ batch_normalization (Batch  (None, 35, 35, 128)          512       ['conv2d_7[0][0]']            
+ Normalization)                                                                                   
+                                                                                                  
+ max_pooling2d_1 (MaxPoolin  (None, 12, 12, 128)          0         ['batch_normalization[0][0]'] 
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_9 (Conv2D)           (None, 12, 12, 256)          33024     ['max_pooling2d_1[0][0]']     
+                                                                                                  
+ conv2d_11 (Conv2D)          (None, 12, 12, 256)          33024     ['max_pooling2d_1[0][0]']     
+                                                                                                  
+ max_pooling2d_2 (MaxPoolin  (None, 12, 12, 128)          0         ['max_pooling2d_1[0][0]']     
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_8 (Conv2D)           (None, 12, 12, 256)          33024     ['max_pooling2d_1[0][0]']     
+                                                                                                  
+ conv2d_10 (Conv2D)          (None, 12, 12, 256)          590080    ['conv2d_9[0][0]']            
+                                                                                                  
+ conv2d_12 (Conv2D)          (None, 12, 12, 256)          1638656   ['conv2d_11[0][0]']           
+                                                                                                  
+ conv2d_13 (Conv2D)          (None, 12, 12, 256)          33024     ['max_pooling2d_2[0][0]']     
+                                                                                                  
+ concatenate_1 (Concatenate  (None, 12, 12, 1024)         0         ['conv2d_8[0][0]',            
+ )                                                                   'conv2d_10[0][0]',           
+                                                                     'conv2d_12[0][0]',           
+                                                                     'conv2d_13[0][0]']           
+                                                                                                  
+ conv2d_14 (Conv2D)          (None, 12, 12, 512)          4719104   ['concatenate_1[0][0]']       
+                                                                                                  
+ batch_normalization_1 (Bat  (None, 12, 12, 512)          2048      ['conv2d_14[0][0]']           
+ chNormalization)                                                                                 
+                                                                                                  
+ max_pooling2d_3 (MaxPoolin  (None, 4, 4, 512)            0         ['batch_normalization_1[0][0]'
+ g2D)                                                               ]                             
+                                                                                                  
+ conv2d_16 (Conv2D)          (None, 4, 4, 256)            131328    ['max_pooling2d_3[0][0]']     
+                                                                                                  
+ conv2d_18 (Conv2D)          (None, 4, 4, 256)            131328    ['max_pooling2d_3[0][0]']     
+                                                                                                  
+ max_pooling2d_4 (MaxPoolin  (None, 4, 4, 512)            0         ['max_pooling2d_3[0][0]']     
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_15 (Conv2D)          (None, 4, 4, 256)            131328    ['max_pooling2d_3[0][0]']     
+                                                                                                  
+ conv2d_17 (Conv2D)          (None, 4, 4, 256)            590080    ['conv2d_16[0][0]']           
+                                                                                                  
+ conv2d_19 (Conv2D)          (None, 4, 4, 256)            1638656   ['conv2d_18[0][0]']           
+                                                                                                  
+ conv2d_20 (Conv2D)          (None, 4, 4, 256)            131328    ['max_pooling2d_4[0][0]']     
+                                                                                                  
+ concatenate_2 (Concatenate  (None, 4, 4, 1024)           0         ['conv2d_15[0][0]',           
+ )                                                                   'conv2d_17[0][0]',           
+                                                                     'conv2d_19[0][0]',           
+                                                                     'conv2d_20[0][0]']           
+                                                                                                  
+ conv2d_21 (Conv2D)          (None, 4, 4, 256)            2359552   ['concatenate_2[0][0]']       
+                                                                                                  
+ batch_normalization_2 (Bat  (None, 4, 4, 256)            1024      ['conv2d_21[0][0]']           
+ chNormalization)                                                                                 
+                                                                                                  
+ max_pooling2d_5 (MaxPoolin  (None, 2, 2, 256)            0         ['batch_normalization_2[0][0]'
+ g2D)                                                               ]                             
+                                                                                                  
+ conv2d_23 (Conv2D)          (None, 2, 2, 256)            65792     ['max_pooling2d_5[0][0]']     
+                                                                                                  
+ conv2d_25 (Conv2D)          (None, 2, 2, 256)            65792     ['max_pooling2d_5[0][0]']     
+                                                                                                  
+ max_pooling2d_6 (MaxPoolin  (None, 2, 2, 256)            0         ['max_pooling2d_5[0][0]']     
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_22 (Conv2D)          (None, 2, 2, 256)            65792     ['max_pooling2d_5[0][0]']     
+                                                                                                  
+ conv2d_24 (Conv2D)          (None, 2, 2, 256)            590080    ['conv2d_23[0][0]']           
+                                                                                                  
+ conv2d_26 (Conv2D)          (None, 2, 2, 256)            1638656   ['conv2d_25[0][0]']           
+                                                                                                  
+ conv2d_27 (Conv2D)          (None, 2, 2, 256)            65792     ['max_pooling2d_6[0][0]']     
+                                                                                                  
+ concatenate_3 (Concatenate  (None, 2, 2, 1024)           0         ['conv2d_22[0][0]',           
+ )                                                                   'conv2d_24[0][0]',           
+                                                                     'conv2d_26[0][0]',           
+                                                                     'conv2d_27[0][0]']           
+                                                                                                  
+ conv2d_28 (Conv2D)          (None, 2, 2, 512)            4719104   ['concatenate_3[0][0]']       
+                                                                                                  
+ batch_normalization_3 (Bat  (None, 2, 2, 512)            2048      ['conv2d_28[0][0]']           
+ chNormalization)                                                                                 
+                                                                                                  
+ max_pooling2d_7 (MaxPoolin  (None, 1, 1, 512)            0         ['batch_normalization_3[0][0]'
+ g2D)                                                               ]                             
+                                                                                                  
+ flatten (Flatten)           (None, 512)                  0         ['max_pooling2d_7[0][0]']     
+                                                                                                  
+ dense (Dense)               (None, 300)                  153900    ['flatten[0][0]']             
+                                                                                                  
+ reshape (Reshape)           (None, 10, 10, 3)            0         ['dense[0][0]']               
+                                                                                                  
+==================================================================================================
+Total params: 20020012 (76.37 MB)
+Trainable params: 20017196 (76.36 MB)
+Non-trainable params: 2816 (11.00 KB)
+__________________________________________________________________________________________________
+Epoch 1/600
+2025-05-28 19:10:23.429462: I tensorflow/compiler/xla/stream_executor/cuda/cuda_dnn.cc:432] Loaded cuDNN version 8907
+2025-05-28 19:10:24.365157: I tensorflow/compiler/xla/stream_executor/cuda/cuda_blas.cc:606] TensorFloat-32 will be used for the matrix multiplication. This will only be logged once.
+2025-05-28 19:10:24.516060: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7f8b2bb0de40 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2025-05-28 19:10:24.516096: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): NVIDIA RTX 6000 Ada Generation, Compute Capability 8.9
+2025-05-28 19:10:24.524491: I tensorflow/compiler/mlir/tensorflow/utils/dump_mlir_util.cc:255] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
+2025-05-28 19:10:24.685749: I ./tensorflow/compiler/jit/device_compiler.h:186] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+500/500 - 35s - loss: 395.3695 - mse: 315.1749 - pred_mean: 5.5585 - target_mean: 7.0545 - val_loss: 372.6998 - val_mse: 294.4053 - val_pred_mean: 9.3250 - val_target_mean: 7.0303 - 35s/epoch - 71ms/step
+Epoch 2/600
+500/500 - 18s - loss: 343.6245 - mse: 267.7172 - pred_mean: 7.0619 - target_mean: 7.0545 - val_loss: 351.6684 - val_mse: 275.2075 - val_pred_mean: 8.2498 - val_target_mean: 7.0303 - 18s/epoch - 35ms/step
+Epoch 3/600
+500/500 - 18s - loss: 341.1690 - mse: 265.6100 - pred_mean: 7.0526 - target_mean: 7.0545 - val_loss: 345.7892 - val_mse: 269.9202 - val_pred_mean: 7.6103 - val_target_mean: 7.0303 - 18s/epoch - 36ms/step
+Epoch 4/600
+500/500 - 18s - loss: 338.4080 - mse: 263.0222 - pred_mean: 7.0435 - target_mean: 7.0545 - val_loss: 343.5774 - val_mse: 267.8597 - val_pred_mean: 6.4605 - val_target_mean: 7.0303 - 18s/epoch - 35ms/step
+Epoch 5/600
+500/500 - 18s - loss: 326.8500 - mse: 251.9876 - pred_mean: 7.0545 - target_mean: 7.0545 - val_loss: 330.8176 - val_mse: 255.7289 - val_pred_mean: 5.4595 - val_target_mean: 7.0303 - 18s/epoch - 35ms/step
+Epoch 6/600
+500/500 - 18s - loss: 310.7780 - mse: 237.0322 - pred_mean: 7.0433 - target_mean: 7.0545 - val_loss: 319.7771 - val_mse: 245.2907 - val_pred_mean: 5.6034 - val_target_mean: 7.0303 - 18s/epoch - 35ms/step
+Epoch 7/600
+500/500 - 18s - loss: 299.7319 - mse: 227.0412 - pred_mean: 7.0515 - target_mean: 7.0545 - val_loss: 301.1105 - val_mse: 228.5654 - val_pred_mean: 6.7484 - val_target_mean: 7.0303 - 18s/epoch - 36ms/step
+Epoch 8/600
+500/500 - 18s - loss: 290.2462 - mse: 218.9606 - pred_mean: 7.0326 - target_mean: 7.0545 - val_loss: 296.4868 - val_mse: 224.9301 - val_pred_mean: 5.7157 - val_target_mean: 7.0303 - 18s/epoch - 35ms/step
+Epoch 9/600
+500/500 - 18s - loss: 281.0357 - mse: 211.7080 - pred_mean: 7.0655 - target_mean: 7.0545 - val_loss: 295.2372 - val_mse: 225.2975 - val_pred_mean: 5.2798 - val_target_mean: 7.0303 - 18s/epoch - 36ms/step
+Epoch 10/600
+500/500 - 18s - loss: 273.2183 - mse: 205.7242 - pred_mean: 7.0424 - target_mean: 7.0545 - val_loss: 275.8171 - val_mse: 209.0152 - val_pred_mean: 6.3978 - val_target_mean: 7.0303 - 18s/epoch - 35ms/step
+Epoch 11/600
+500/500 - 18s - loss: 264.0465 - mse: 198.5583 - pred_mean: 7.0196 - target_mean: 7.0545 - val_loss: 268.5807 - val_mse: 203.3085 - val_pred_mean: 6.8598 - val_target_mean: 7.0303 - 18s/epoch - 35ms/step
+Epoch 12/600
+500/500 - 18s - loss: 256.1371 - mse: 192.3521 - pred_mean: 7.0463 - target_mean: 7.0545 - val_loss: 264.2830 - val_mse: 200.3856 - val_pred_mean: 6.3970 - val_target_mean: 7.0303 - 18s/epoch - 36ms/step
+Epoch 13/600
+500/500 - 18s - loss: 248.6246 - mse: 186.4243 - pred_mean: 7.0223 - target_mean: 7.0545 - val_loss: 259.2366 - val_mse: 196.5181 - val_pred_mean: 7.2729 - val_target_mean: 7.0303 - 18s/epoch - 37ms/step
+Epoch 14/600
+500/500 - 18s - loss: 242.0225 - mse: 180.9793 - pred_mean: 7.0495 - target_mean: 7.0545 - val_loss: 257.0377 - val_mse: 195.0890 - val_pred_mean: 5.9793 - val_target_mean: 7.0303 - 18s/epoch - 35ms/step
+Epoch 15/600
+500/500 - 17s - loss: 235.7989 - mse: 175.6558 - pred_mean: 7.0165 - target_mean: 7.0545 - val_loss: 254.1266 - val_mse: 192.7450 - val_pred_mean: 6.7358 - val_target_mean: 7.0303 - 17s/epoch - 34ms/step
+Epoch 16/600
+500/500 - 17s - loss: 229.7236 - mse: 170.2954 - pred_mean: 7.0260 - target_mean: 7.0545 - val_loss: 253.5087 - val_mse: 192.4585 - val_pred_mean: 6.6886 - val_target_mean: 7.0303 - 17s/epoch - 35ms/step
+Epoch 17/600
+500/500 - 17s - loss: 224.9771 - mse: 166.0301 - pred_mean: 7.0120 - target_mean: 7.0545 - val_loss: 251.7437 - val_mse: 190.9996 - val_pred_mean: 6.6139 - val_target_mean: 7.0303 - 17s/epoch - 34ms/step
+Epoch 18/600
+500/500 - 17s - loss: 221.3781 - mse: 162.7567 - pred_mean: 7.0244 - target_mean: 7.0545 - val_loss: 251.4152 - val_mse: 190.7605 - val_pred_mean: 6.6177 - val_target_mean: 7.0303 - 17s/epoch - 35ms/step
+Epoch 19/600
+500/500 - 17s - loss: 219.1266 - mse: 160.7451 - pred_mean: 7.0188 - target_mean: 7.0545 - val_loss: 251.4772 - val_mse: 190.8953 - val_pred_mean: 6.8099 - val_target_mean: 7.0303 - 17s/epoch - 35ms/step
+Epoch 20/600
+500/500 - 17s - loss: 218.1713 - mse: 159.8902 - pred_mean: 7.0207 - target_mean: 7.0545 - val_loss: 251.3956 - val_mse: 190.8179 - val_pred_mean: 6.7137 - val_target_mean: 7.0303 - 17s/epoch - 34ms/step
+Epoch 21/600
+500/500 - 17s - loss: 251.0359 - mse: 189.2834 - pred_mean: 7.0666 - target_mean: 7.0545 - val_loss: 263.5495 - val_mse: 201.0758 - val_pred_mean: 6.6407 - val_target_mean: 7.0303 - 17s/epoch - 35ms/step
+Epoch 22/600
+500/500 - 17s - loss: 244.3526 - mse: 184.0431 - pred_mean: 7.0364 - target_mean: 7.0545 - val_loss: 260.2053 - val_mse: 198.8963 - val_pred_mean: 6.7977 - val_target_mean: 7.0303 - 17s/epoch - 35ms/step
+Epoch 23/600
+500/500 - 17s - loss: 237.3822 - mse: 178.5780 - pred_mean: 7.0367 - target_mean: 7.0545 - val_loss: 265.9349 - val_mse: 204.5754 - val_pred_mean: 7.1812 - val_target_mean: 7.0303 - 17s/epoch - 34ms/step
+Epoch 24/600
+500/500 - 17s - loss: 229.3298 - mse: 171.9438 - pred_mean: 7.0355 - target_mean: 7.0545 - val_loss: 263.1096 - val_mse: 202.7874 - val_pred_mean: 6.9111 - val_target_mean: 7.0303 - 17s/epoch - 34ms/step
+Epoch 25/600
+500/500 - 17s - loss: 221.6187 - mse: 165.3761 - pred_mean: 7.0424 - target_mean: 7.0545 - val_loss: 259.5361 - val_mse: 200.0780 - val_pred_mean: 6.9715 - val_target_mean: 7.0303 - 17s/epoch - 35ms/step
+Epoch 26/600
+500/500 - 17s - loss: 212.4223 - mse: 157.3317 - pred_mean: 7.0393 - target_mean: 7.0545 - val_loss: 259.4771 - val_mse: 200.8441 - val_pred_mean: 7.8873 - val_target_mean: 7.0303 - 17s/epoch - 34ms/step
+Epoch 27/600
+500/500 - 17s - loss: 202.9368 - mse: 148.9214 - pred_mean: 7.0526 - target_mean: 7.0545 - val_loss: 258.5889 - val_mse: 200.3880 - val_pred_mean: 5.8664 - val_target_mean: 7.0303 - 17s/epoch - 35ms/step
+Epoch 28/600
+500/500 - 18s - loss: 192.4905 - mse: 139.6400 - pred_mean: 7.0268 - target_mean: 7.0545 - val_loss: 260.8009 - val_mse: 202.8124 - val_pred_mean: 5.7402 - val_target_mean: 7.0303 - 18s/epoch - 35ms/step
+Epoch 29/600
+500/500 - 17s - loss: 181.7639 - mse: 130.1362 - pred_mean: 7.0195 - target_mean: 7.0545 - val_loss: 265.7121 - val_mse: 207.1645 - val_pred_mean: 5.5012 - val_target_mean: 7.0303 - 17s/epoch - 35ms/step
+Epoch 30/600
+500/500 - 17s - loss: 170.2708 - mse: 119.9287 - pred_mean: 7.0350 - target_mean: 7.0545 - val_loss: 262.1619 - val_mse: 204.2416 - val_pred_mean: 6.1621 - val_target_mean: 7.0303 - 17s/epoch - 34ms/step
+Epoch 31/600
+500/500 - 17s - loss: 158.6030 - mse: 109.7072 - pred_mean: 7.0305 - target_mean: 7.0545 - val_loss: 265.4483 - val_mse: 207.1629 - val_pred_mean: 6.2448 - val_target_mean: 7.0303 - 17s/epoch - 35ms/step
+Epoch 32/600
+500/500 - 17s - loss: 148.8528 - mse: 101.2233 - pred_mean: 7.0174 - target_mean: 7.0545 - val_loss: 269.8713 - val_mse: 211.8920 - val_pred_mean: 5.6639 - val_target_mean: 7.0303 - 17s/epoch - 34ms/step
+Epoch 33/600
+500/500 - 18s - loss: 139.6714 - mse: 93.4114 - pred_mean: 7.0404 - target_mean: 7.0545 - val_loss: 267.4869 - val_mse: 209.4093 - val_pred_mean: 5.9163 - val_target_mean: 7.0303 - 18s/epoch - 36ms/step
+Epoch 34/600
+500/500 - 17s - loss: 131.4427 - mse: 86.5015 - pred_mean: 7.0327 - target_mean: 7.0545 - val_loss: 270.2770 - val_mse: 211.8528 - val_pred_mean: 6.3978 - val_target_mean: 7.0303 - 17s/epoch - 35ms/step
+Epoch 35/600
+500/500 - 17s - loss: 123.8121 - mse: 80.2449 - pred_mean: 7.0213 - target_mean: 7.0545 - val_loss: 271.9371 - val_mse: 213.2210 - val_pred_mean: 6.9864 - val_target_mean: 7.0303 - 17s/epoch - 35ms/step
+Epoch 36/600
+500/500 - 17s - loss: 116.0835 - mse: 73.9774 - pred_mean: 7.0319 - target_mean: 7.0545 - val_loss: 275.4152 - val_mse: 216.5693 - val_pred_mean: 5.4534 - val_target_mean: 7.0303 - 17s/epoch - 35ms/step
+Epoch 37/600
+500/500 - 17s - loss: 109.4205 - mse: 68.8736 - pred_mean: 7.0260 - target_mean: 7.0545 - val_loss: 271.2427 - val_mse: 212.8728 - val_pred_mean: 5.3729 - val_target_mean: 7.0303 - 17s/epoch - 34ms/step
+Epoch 38/600
+500/500 - 17s - loss: 103.2794 - mse: 64.2085 - pred_mean: 7.0278 - target_mean: 7.0545 - val_loss: 274.4966 - val_mse: 215.6196 - val_pred_mean: 5.1394 - val_target_mean: 7.0303 - 17s/epoch - 35ms/step
+Epoch 39/600
+500/500 - 17s - loss: 97.0362 - mse: 59.5586 - pred_mean: 7.0309 - target_mean: 7.0545 - val_loss: 276.6866 - val_mse: 217.5817 - val_pred_mean: 5.0982 - val_target_mean: 7.0303 - 17s/epoch - 35ms/step
+Epoch 40/600
+500/500 - 17s - loss: 91.6059 - mse: 55.7793 - pred_mean: 7.0210 - target_mean: 7.0545 - val_loss: 274.1765 - val_mse: 214.7581 - val_pred_mean: 6.7143 - val_target_mean: 7.0303 - 17s/epoch - 35ms/step
+Epoch 41/600
+500/500 - 17s - loss: 85.8715 - mse: 51.7740 - pred_mean: 7.0304 - target_mean: 7.0545 - val_loss: 273.3005 - val_mse: 213.7664 - val_pred_mean: 5.9519 - val_target_mean: 7.0303 - 17s/epoch - 34ms/step
+Epoch 42/600

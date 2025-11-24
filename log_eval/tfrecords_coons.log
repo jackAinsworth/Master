@@ -1,0 +1,24 @@
+nohup: ignoring input
+2025-09-12 10:32:40.480944: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-09-12 10:32:41.022244: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1757665961.225541 1204513 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1757665961.284244 1204513 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1757665961.739541 1204513 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1757665961.739632 1204513 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1757665961.739643 1204513 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1757665961.739653 1204513 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-09-12 10:32:41.787448: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+I0000 00:00:1757666348.183808 1204513 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 45475 MB memory:  -> device: 0, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:3d:00.0, compute capability: 8.9
+I0000 00:00:1757666348.190794 1204513 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 46550 MB memory:  -> device: 1, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:61:00.0, compute capability: 8.9
+I0000 00:00:1757666348.192559 1204513 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:2 with 22807 MB memory:  -> device: 2, name: NVIDIA TITAN RTX, pci bus id: 0000:60:00.0, compute capability: 7.5
+I0000 00:00:1757666348.194256 1204513 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:3 with 22807 MB memory:  -> device: 3, name: NVIDIA TITAN RTX, pci bus id: 0000:64:00.0, compute capability: 7.5
+I0000 00:00:1757666348.195858 1204513 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:4 with 9615 MB memory:  -> device: 4, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:3e:00.0, compute capability: 7.5
+I0000 00:00:1757666348.197605 1204513 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:5 with 9615 MB memory:  -> device: 5, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:42:00.0, compute capability: 7.5
+I0000 00:00:1757666348.199282 1204513 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:6 with 9615 MB memory:  -> device: 6, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:43:00.0, compute capability: 7.5
+Counting total number of examples...
+→ Skipping first 167 examples (already processed)
+Writing TFRecord shards ... this may take a while.
+  → Processed file 'dataset_coons/coons_dataset_batch1_250000_coons_norm_noise0.0_0809_0813.pkl', total so far: 250000/1000000  → Processed file 'dataset_coons/coons_dataset_batch2_250000_coons_norm_noise0.0_0909_0404.pkl', total so far: 500000/1000000  → Processed file 'dataset_coons/coons_dataset_batch3_250000_coons_norm_noise0.0_1009_0011.pkl', total so far: 750000/1000000  → Processed file 'dataset_coons/coons_dataset_batch4_250000_coons_norm_noise0.0_1009_1959.pkl', total so far: 1000000/1000000
+All shards written.

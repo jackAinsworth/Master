@@ -1,0 +1,73 @@
+nohup: ignoring input
+2025-10-04 13:29:59.956169: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-10-04 13:30:00.355737: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1759577400.505547  187234 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1759577400.555568  187234 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1759577400.904807  187234 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1759577400.904907  187234 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1759577400.904913  187234 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1759577400.904919  187234 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-10-04 13:30:00.946158: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+I0000 00:00:1759577532.694303  187234 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 22807 MB memory:  -> device: 0, name: NVIDIA TITAN RTX, pci bus id: 0000:60:00.0, compute capability: 7.5
+I0000 00:00:1759577532.696331  187234 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 22807 MB memory:  -> device: 1, name: NVIDIA TITAN RTX, pci bus id: 0000:64:00.0, compute capability: 7.5
+I0000 00:00:1759577532.697795  187234 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:2 with 9615 MB memory:  -> device: 2, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:3e:00.0, compute capability: 7.5
+CONFIG -> CSV_FILE=dataset/filepaths.csv | OUT_DIR=dataset/tfrecords_ruled | SHARDS_PER_BATCH=25 | NUM_SAMPLES=50 | MAX_CTRLPTS_U=12 | MAX_CTRLPTS_V=12 | PAD_VALUE=-0.1
+[Batch 0] Loading dataset/dataset_500000_surfaces_noise0.0_0210_1722.pkl ...
+[Batch 0] total=500000, shards=25, avg~20000 (+1 for first 0)
+[Batch 0] wrote shard 1/25 (20000 ex) -> data_batch_new000_0000-of-0025.tfrecord
+[Batch 0] wrote shard 2/25 (20000 ex) -> data_batch_new000_0001-of-0025.tfrecord
+[Batch 0] wrote shard 3/25 (20000 ex) -> data_batch_new000_0002-of-0025.tfrecord
+[Batch 0] wrote shard 4/25 (20000 ex) -> data_batch_new000_0003-of-0025.tfrecord
+[Batch 0] wrote shard 5/25 (20000 ex) -> data_batch_new000_0004-of-0025.tfrecord
+[Batch 0] wrote shard 6/25 (20000 ex) -> data_batch_new000_0005-of-0025.tfrecord
+[Batch 0] wrote shard 7/25 (20000 ex) -> data_batch_new000_0006-of-0025.tfrecord
+[Batch 0] wrote shard 8/25 (20000 ex) -> data_batch_new000_0007-of-0025.tfrecord
+[Batch 0] wrote shard 9/25 (20000 ex) -> data_batch_new000_0008-of-0025.tfrecord
+[Batch 0] wrote shard 10/25 (20000 ex) -> data_batch_new000_0009-of-0025.tfrecord
+[Batch 0] wrote shard 11/25 (20000 ex) -> data_batch_new000_0010-of-0025.tfrecord
+[Batch 0] wrote shard 12/25 (20000 ex) -> data_batch_new000_0011-of-0025.tfrecord
+[Batch 0] wrote shard 13/25 (20000 ex) -> data_batch_new000_0012-of-0025.tfrecord
+[Batch 0] wrote shard 14/25 (20000 ex) -> data_batch_new000_0013-of-0025.tfrecord
+[Batch 0] wrote shard 15/25 (20000 ex) -> data_batch_new000_0014-of-0025.tfrecord
+[Batch 0] wrote shard 16/25 (20000 ex) -> data_batch_new000_0015-of-0025.tfrecord
+[Batch 0] wrote shard 17/25 (20000 ex) -> data_batch_new000_0016-of-0025.tfrecord
+[Batch 0] wrote shard 18/25 (20000 ex) -> data_batch_new000_0017-of-0025.tfrecord
+[Batch 0] wrote shard 19/25 (20000 ex) -> data_batch_new000_0018-of-0025.tfrecord
+[Batch 0] wrote shard 20/25 (20000 ex) -> data_batch_new000_0019-of-0025.tfrecord
+[Batch 0] wrote shard 21/25 (20000 ex) -> data_batch_new000_0020-of-0025.tfrecord
+[Batch 0] wrote shard 22/25 (20000 ex) -> data_batch_new000_0021-of-0025.tfrecord
+[Batch 0] wrote shard 23/25 (20000 ex) -> data_batch_new000_0022-of-0025.tfrecord
+[Batch 0] wrote shard 24/25 (20000 ex) -> data_batch_new000_0023-of-0025.tfrecord
+[Batch 0] wrote shard 25/25 (20000 ex) -> data_batch_new000_0024-of-0025.tfrecord
+[Batch 0] DONE: 500000 examples
+[Batch 1] Loading dataset/dataset_500000_surfaces_noise0.0_2409_2039.pkl ...
+[Batch 1] total=500000, shards=25, avg~20000 (+1 for first 0)
+[Batch 1] wrote shard 1/25 (20000 ex) -> data_batch_new001_0000-of-0025.tfrecord
+[Batch 1] wrote shard 2/25 (20000 ex) -> data_batch_new001_0001-of-0025.tfrecord
+[Batch 1] wrote shard 3/25 (20000 ex) -> data_batch_new001_0002-of-0025.tfrecord
+[Batch 1] wrote shard 4/25 (20000 ex) -> data_batch_new001_0003-of-0025.tfrecord
+[Batch 1] wrote shard 5/25 (20000 ex) -> data_batch_new001_0004-of-0025.tfrecord
+[Batch 1] wrote shard 6/25 (20000 ex) -> data_batch_new001_0005-of-0025.tfrecord
+[Batch 1] wrote shard 7/25 (20000 ex) -> data_batch_new001_0006-of-0025.tfrecord
+[Batch 1] wrote shard 8/25 (20000 ex) -> data_batch_new001_0007-of-0025.tfrecord
+[Batch 1] wrote shard 9/25 (20000 ex) -> data_batch_new001_0008-of-0025.tfrecord
+[Batch 1] wrote shard 10/25 (20000 ex) -> data_batch_new001_0009-of-0025.tfrecord
+[Batch 1] wrote shard 11/25 (20000 ex) -> data_batch_new001_0010-of-0025.tfrecord
+[Batch 1] wrote shard 12/25 (20000 ex) -> data_batch_new001_0011-of-0025.tfrecord
+[Batch 1] wrote shard 13/25 (20000 ex) -> data_batch_new001_0012-of-0025.tfrecord
+[Batch 1] wrote shard 14/25 (20000 ex) -> data_batch_new001_0013-of-0025.tfrecord
+[Batch 1] wrote shard 15/25 (20000 ex) -> data_batch_new001_0014-of-0025.tfrecord
+[Batch 1] wrote shard 16/25 (20000 ex) -> data_batch_new001_0015-of-0025.tfrecord
+[Batch 1] wrote shard 17/25 (20000 ex) -> data_batch_new001_0016-of-0025.tfrecord
+[Batch 1] wrote shard 18/25 (20000 ex) -> data_batch_new001_0017-of-0025.tfrecord
+[Batch 1] wrote shard 19/25 (20000 ex) -> data_batch_new001_0018-of-0025.tfrecord
+[Batch 1] wrote shard 20/25 (20000 ex) -> data_batch_new001_0019-of-0025.tfrecord
+[Batch 1] wrote shard 21/25 (20000 ex) -> data_batch_new001_0020-of-0025.tfrecord
+[Batch 1] wrote shard 22/25 (20000 ex) -> data_batch_new001_0021-of-0025.tfrecord
+[Batch 1] wrote shard 23/25 (20000 ex) -> data_batch_new001_0022-of-0025.tfrecord
+[Batch 1] wrote shard 24/25 (20000 ex) -> data_batch_new001_0023-of-0025.tfrecord
+[Batch 1] wrote shard 25/25 (20000 ex) -> data_batch_new001_0024-of-0025.tfrecord
+[Batch 1] DONE: 500000 examples
+ALL DONE — total examples written: 1000000

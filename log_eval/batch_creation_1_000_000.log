@@ -1,0 +1,14 @@
+TIMESTAMP | BATCH_IDX/TOTAL | FILEPATH | DURATION_SEC
+2025-06-27 19:47:22 | Batch 1/4 | dataset_coons/coons_dataset_batch1_250000_coons_norm_noise1.0_2706_1946.pkl | 71023.71s
+2025-06-28 15:31:40 | Batch 2/4 | dataset_coons/coons_dataset_batch2_250000_coons_norm_noise1.0_2806_1530.pkl | 71057.94s
+2025-06-29 11:12:44 | Batch 3/4 | dataset_coons/coons_dataset_batch3_250000_coons_norm_noise1.0_2906_1111.pkl | 70863.27s
+2025-06-30 06:50:36 | Batch 4/4 | dataset_coons/coons_dataset_batch4_250000_coons_norm_noise1.0_3006_0649.pkl | 70672.72s
+2025-08-25 19:48:53 | Batch 1/4 | dataset_coons/coons_dataset_batch1_250000_coons_norm_noise0.15_2508_1947.pkl | 76794.49s
+2025-08-26 17:18:01 | Batch 2/4 | dataset_coons/coons_dataset_batch2_250000_coons_norm_noise0.15_2608_1716.pkl | 77347.65s
+2025-08-27 14:43:19 | Batch 3/4 | dataset_coons/coons_dataset_batch3_250000_coons_norm_noise0.15_2708_1442.pkl | 77118.83s
+2025-08-28 12:11:10 | Batch 4/4 | dataset_coons/coons_dataset_batch4_250000_coons_norm_noise0.15_2808_1210.pkl | 77270.05s
+2025-09-08 08:14:54 | Batch 1/4 | dataset_coons/coons_dataset_batch1_250000_coons_norm_noise0.0_0809_0813.pkl | 72678.23s
+2025-09-09 04:06:05 | Batch 2/4 | dataset_coons/coons_dataset_batch2_250000_coons_norm_noise0.0_0909_0404.pkl | 71471.38s
+2025-09-10 00:21:56 | Batch 3/4 | dataset_coons/coons_dataset_batch3_250000_coons_norm_noise0.0_1009_0011.pkl | 72951.10s
+2025-09-10 20:00:21 | Batch 4/4 | dataset_coons/coons_dataset_batch4_250000_coons_norm_noise0.0_1009_1959.pkl | 70704.85s
+2025-09-23 00:15:24 | Batch 1/1 | dataset_coons/coons_dataset_batch1_2000_coons_norm_noise0.0_2309_0015.pkl | 652.65s

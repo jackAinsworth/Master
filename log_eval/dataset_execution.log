@@ -1,0 +1,43 @@
+Dataset saved to: dataset/dataset_40000_surfaces_noise0.05_1004_0219.pkl
+
+Execution time: 21621.51 seconds
+
+Configuration Parameters:
+
+{
+    "num_entries": 40000,
+    "num_points_range": [
+        4,
+        10
+    ],
+    "plane_width_range": [
+        40,
+        100
+    ],
+    "plane_height_range": [
+        20,
+        60
+    ],
+    "num_samples": 100,
+    "num_v": 25,
+    "noise_std": 0.05,
+    "noise_mean": 0.0,
+    "degree_u": 3,
+    "degree_v": 3,
+    "ctrlpts_size_u_range": [
+        4,
+        8
+    ],
+    "ctrlpts_size_v_range": [
+        4,
+        8
+    ],
+    "z_gap_range": [
+        40,
+        80
+    ],
+    "bspline_degree": 3,
+    "extrapolate": false,
+    "random_rotation": true,
+    "show_visu": false
+}

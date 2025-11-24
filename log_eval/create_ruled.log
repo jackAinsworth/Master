@@ -1,0 +1,4 @@
+nohup: ignoring input
+Dataset saved to: dataset/dataset_500000_surfaces_noise0.0_0210_1722.pkl
+Execution time: 91724.98 seconds
+Configuration parameters logged to: logs/dataset_executionbetterapprox.log

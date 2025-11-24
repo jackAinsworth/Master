@@ -1,0 +1,46 @@
+nohup: ignoring input
+2025-06-16 18:48:19.030399: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-06-16 18:48:19.048920: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1750092499.070437  244832 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1750092499.076708  244832 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1750092499.094188  244832 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750092499.094221  244832 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750092499.094225  244832 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750092499.094227  244832 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-06-16 18:48:19.099399: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+I0000 00:00:1750092503.468301  244832 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 46550 MB memory:  -> device: 0, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:61:00.0, compute capability: 8.9
+/home/ainsworth/master/py312/lib/python3.12/site-packages/keras/src/layers/layer.py:1474: UserWarning: Layer 'sa1' looks like it has unbuilt state, but Keras is not able to trace the layer `call()` in order to build it automatically. Possible causes:
+1. The `call()` method of your layer may be crashing. Try to `__call__()` the layer eagerly on some test input first to see if it works. E.g. `x = np.random.random((3, 4)); y = layer(x)`
+2. If the `call()` method is correct, then you may need to implement the `def build(self, input_shape)` method on your layer. It should create all variables used by the layer (e.g. by calling `layer.build()` on all its children layers).
+Exception encountered: ''name 'farthest_point_sample' is not defined''
+  warnings.warn(
+/home/ainsworth/master/py312/lib/python3.12/site-packages/keras/src/layers/layer.py:421: UserWarning: `build()` was called on layer 'sa1', however the layer does not have a `build()` method implemented and it looks like it has unbuilt state. This will cause the layer to be marked as built, despite not being actually built, which may cause failures down the line. Make sure to implement a proper `build()` method.
+  warnings.warn(
+Traceback (most recent call last):
+  File "/home/ainsworth/master/pointnet2_surface_recon_optimized.py", line 276, in <module>
+    main(tfrecord_path_pattern=args.tfrecord_glob, epochs=args.epochs)
+  File "/home/ainsworth/master/pointnet2_surface_recon_optimized.py", line 235, in main
+    model = build_pointnet2_surface_model()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ainsworth/master/pointnet2_surface_recon_optimized.py", line 176, in build_pointnet2_surface_model
+    l1_xyz, l1_points = PointNetSetAbstraction(512, 32, [64, 64, 128], name='sa1')(l0_xyz, l0_points)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ainsworth/master/py312/lib/python3.12/site-packages/keras/src/utils/traceback_utils.py", line 122, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "/home/ainsworth/master/pointnet2_surface_recon_optimized.py", line 149, in call
+    new_xyz, new_features = sample_and_group(
+                            ^^^^^^^^^^^^^^^^^
+  File "/home/ainsworth/master/pointnet2_surface_recon_optimized.py", line 104, in sample_and_group
+    idx = farthest_point_sample(npoint, xyz)                # (B, npoint)
+          ^^^^^^^^^^^^^^^^^^^^^
+NameError: Exception encountered when calling PointNetSetAbstraction.call().
+
+[1mCould not automatically infer the output shape / dtype of 'sa1' (of type PointNetSetAbstraction). Either the `PointNetSetAbstraction.call()` method is incorrect, or you need to implement the `PointNetSetAbstraction.compute_output_spec() / compute_output_shape()` method. Error encountered:
+
+name 'farthest_point_sample' is not defined[0m
+
+Arguments received by PointNetSetAbstraction.call():
+  • args=('<KerasTensor shape=(None, 1225, 3), dtype=float32, sparse=False, ragged=False, name=keras_tensor>', 'None')
+  • kwargs=<class 'inspect._empty'>

@@ -1,0 +1,694 @@
+nohup: ignoring input
+2025-05-28 23:10:17.621273: I tensorflow/core/util/port.cc:110] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-05-28 23:10:17.709615: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-05-28 23:10:21.263126: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 46120 MB memory:  -> device: 0, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:61:00.0, compute capability: 8.9
+Number of devices: 1
+Training set: (128000, 35, 35, 3) (128000, 10, 10, 3)
+Validation set: (16000, 35, 35, 3) (16000, 10, 10, 3)
+Test set: (16000, 35, 35, 3) (16000, 10, 10, 3)
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input_1 (InputLayer)        [(None, 35, 35, 3)]          0         []                            
+                                                                                                  
+ conv2d (Conv2D)             (None, 35, 35, 64)           4864      ['input_1[0][0]']             
+                                                                                                  
+ conv2d_2 (Conv2D)           (None, 35, 35, 64)           4160      ['conv2d[0][0]']              
+                                                                                                  
+ conv2d_4 (Conv2D)           (None, 35, 35, 64)           4160      ['conv2d[0][0]']              
+                                                                                                  
+ max_pooling2d (MaxPooling2  (None, 35, 35, 64)           0         ['conv2d[0][0]']              
+ D)                                                                                               
+                                                                                                  
+ conv2d_1 (Conv2D)           (None, 35, 35, 64)           4160      ['conv2d[0][0]']              
+                                                                                                  
+ conv2d_3 (Conv2D)           (None, 35, 35, 64)           36928     ['conv2d_2[0][0]']            
+                                                                                                  
+ conv2d_5 (Conv2D)           (None, 35, 35, 64)           102464    ['conv2d_4[0][0]']            
+                                                                                                  
+ conv2d_6 (Conv2D)           (None, 35, 35, 64)           4160      ['max_pooling2d[0][0]']       
+                                                                                                  
+ concatenate (Concatenate)   (None, 35, 35, 256)          0         ['conv2d_1[0][0]',            
+                                                                     'conv2d_3[0][0]',            
+                                                                     'conv2d_5[0][0]',            
+                                                                     'conv2d_6[0][0]']            
+                                                                                                  
+ conv2d_7 (Conv2D)           (None, 35, 35, 128)          295040    ['concatenate[0][0]']         
+                                                                                                  
+ batch_normalization (Batch  (None, 35, 35, 128)          512       ['conv2d_7[0][0]']            
+ Normalization)                                                                                   
+                                                                                                  
+ max_pooling2d_1 (MaxPoolin  (None, 12, 12, 128)          0         ['batch_normalization[0][0]'] 
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_9 (Conv2D)           (None, 12, 12, 256)          33024     ['max_pooling2d_1[0][0]']     
+                                                                                                  
+ conv2d_11 (Conv2D)          (None, 12, 12, 256)          33024     ['max_pooling2d_1[0][0]']     
+                                                                                                  
+ max_pooling2d_2 (MaxPoolin  (None, 12, 12, 128)          0         ['max_pooling2d_1[0][0]']     
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_8 (Conv2D)           (None, 12, 12, 256)          33024     ['max_pooling2d_1[0][0]']     
+                                                                                                  
+ conv2d_10 (Conv2D)          (None, 12, 12, 256)          590080    ['conv2d_9[0][0]']            
+                                                                                                  
+ conv2d_12 (Conv2D)          (None, 12, 12, 256)          1638656   ['conv2d_11[0][0]']           
+                                                                                                  
+ conv2d_13 (Conv2D)          (None, 12, 12, 256)          33024     ['max_pooling2d_2[0][0]']     
+                                                                                                  
+ concatenate_1 (Concatenate  (None, 12, 12, 1024)         0         ['conv2d_8[0][0]',            
+ )                                                                   'conv2d_10[0][0]',           
+                                                                     'conv2d_12[0][0]',           
+                                                                     'conv2d_13[0][0]']           
+                                                                                                  
+ conv2d_14 (Conv2D)          (None, 12, 12, 512)          4719104   ['concatenate_1[0][0]']       
+                                                                                                  
+ batch_normalization_1 (Bat  (None, 12, 12, 512)          2048      ['conv2d_14[0][0]']           
+ chNormalization)                                                                                 
+                                                                                                  
+ max_pooling2d_3 (MaxPoolin  (None, 4, 4, 512)            0         ['batch_normalization_1[0][0]'
+ g2D)                                                               ]                             
+                                                                                                  
+ conv2d_16 (Conv2D)          (None, 4, 4, 256)            131328    ['max_pooling2d_3[0][0]']     
+                                                                                                  
+ conv2d_18 (Conv2D)          (None, 4, 4, 256)            131328    ['max_pooling2d_3[0][0]']     
+                                                                                                  
+ max_pooling2d_4 (MaxPoolin  (None, 4, 4, 512)            0         ['max_pooling2d_3[0][0]']     
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_15 (Conv2D)          (None, 4, 4, 256)            131328    ['max_pooling2d_3[0][0]']     
+                                                                                                  
+ conv2d_17 (Conv2D)          (None, 4, 4, 256)            590080    ['conv2d_16[0][0]']           
+                                                                                                  
+ conv2d_19 (Conv2D)          (None, 4, 4, 256)            1638656   ['conv2d_18[0][0]']           
+                                                                                                  
+ conv2d_20 (Conv2D)          (None, 4, 4, 256)            131328    ['max_pooling2d_4[0][0]']     
+                                                                                                  
+ concatenate_2 (Concatenate  (None, 4, 4, 1024)           0         ['conv2d_15[0][0]',           
+ )                                                                   'conv2d_17[0][0]',           
+                                                                     'conv2d_19[0][0]',           
+                                                                     'conv2d_20[0][0]']           
+                                                                                                  
+ conv2d_21 (Conv2D)          (None, 4, 4, 256)            2359552   ['concatenate_2[0][0]']       
+                                                                                                  
+ batch_normalization_2 (Bat  (None, 4, 4, 256)            1024      ['conv2d_21[0][0]']           
+ chNormalization)                                                                                 
+                                                                                                  
+ max_pooling2d_5 (MaxPoolin  (None, 2, 2, 256)            0         ['batch_normalization_2[0][0]'
+ g2D)                                                               ]                             
+                                                                                                  
+ conv2d_23 (Conv2D)          (None, 2, 2, 256)            65792     ['max_pooling2d_5[0][0]']     
+                                                                                                  
+ conv2d_25 (Conv2D)          (None, 2, 2, 256)            65792     ['max_pooling2d_5[0][0]']     
+                                                                                                  
+ max_pooling2d_6 (MaxPoolin  (None, 2, 2, 256)            0         ['max_pooling2d_5[0][0]']     
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_22 (Conv2D)          (None, 2, 2, 256)            65792     ['max_pooling2d_5[0][0]']     
+                                                                                                  
+ conv2d_24 (Conv2D)          (None, 2, 2, 256)            590080    ['conv2d_23[0][0]']           
+                                                                                                  
+ conv2d_26 (Conv2D)          (None, 2, 2, 256)            1638656   ['conv2d_25[0][0]']           
+                                                                                                  
+ conv2d_27 (Conv2D)          (None, 2, 2, 256)            65792     ['max_pooling2d_6[0][0]']     
+                                                                                                  
+ concatenate_3 (Concatenate  (None, 2, 2, 1024)           0         ['conv2d_22[0][0]',           
+ )                                                                   'conv2d_24[0][0]',           
+                                                                     'conv2d_26[0][0]',           
+                                                                     'conv2d_27[0][0]']           
+                                                                                                  
+ conv2d_28 (Conv2D)          (None, 2, 2, 512)            4719104   ['concatenate_3[0][0]']       
+                                                                                                  
+ batch_normalization_3 (Bat  (None, 2, 2, 512)            2048      ['conv2d_28[0][0]']           
+ chNormalization)                                                                                 
+                                                                                                  
+ max_pooling2d_7 (MaxPoolin  (None, 1, 1, 512)            0         ['batch_normalization_3[0][0]'
+ g2D)                                                               ]                             
+                                                                                                  
+ flatten (Flatten)           (None, 512)                  0         ['max_pooling2d_7[0][0]']     
+                                                                                                  
+ dense (Dense)               (None, 300)                  153900    ['flatten[0][0]']             
+                                                                                                  
+ reshape (Reshape)           (None, 10, 10, 3)            0         ['dense[0][0]']               
+                                                                                                  
+==================================================================================================
+Total params: 20020012 (76.37 MB)
+Trainable params: 20017196 (76.36 MB)
+Non-trainable params: 2816 (11.00 KB)
+__________________________________________________________________________________________________
+2025-05-28 23:11:30.505279: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+Epoch 1/600
+WARNING:tensorflow:Efficient batch_reduce is not supported if destinations are different.
+WARNING:tensorflow:Efficient batch_reduce is not supported if destinations are different.
+2025-05-28 23:11:38.677434: I tensorflow/compiler/xla/stream_executor/cuda/cuda_dnn.cc:432] Loaded cuDNN version 8907
+2025-05-28 23:11:39.531380: I tensorflow/compiler/xla/stream_executor/cuda/cuda_blas.cc:606] TensorFloat-32 will be used for the matrix multiplication. This will only be logged once.
+2025-05-28 23:11:41.028653: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7f5490015eb0 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2025-05-28 23:11:41.028733: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): NVIDIA RTX 6000 Ada Generation, Compute Capability 8.9
+2025-05-28 23:11:41.059955: I tensorflow/compiler/mlir/tensorflow/utils/dump_mlir_util.cc:255] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
+2025-05-28 23:11:41.456245: I ./tensorflow/compiler/jit/device_compiler.h:186] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+2025-05-28 23:13:44.183011: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 137s - loss: 353.9211 - mse: 277.2036 - val_loss: 329.5303 - val_mse: 254.4358 - 137s/epoch - 68ms/step
+Epoch 2/600
+2025-05-28 23:15:50.573569: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 126s - loss: 294.9051 - mse: 224.0570 - val_loss: 275.9492 - val_mse: 209.5249 - 126s/epoch - 63ms/step
+Epoch 3/600
+2025-05-28 23:17:52.857245: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 122s - loss: 260.0626 - mse: 197.4843 - val_loss: 267.4796 - val_mse: 205.3037 - 122s/epoch - 61ms/step
+Epoch 4/600
+2025-05-28 23:19:59.802677: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 127s - loss: 242.5897 - mse: 184.9271 - val_loss: 243.5661 - val_mse: 186.6469 - 127s/epoch - 63ms/step
+Epoch 5/600
+2025-05-28 23:22:04.732042: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 125s - loss: 233.3984 - mse: 178.2424 - val_loss: 230.7287 - val_mse: 176.4495 - 125s/epoch - 62ms/step
+Epoch 6/600
+2025-05-28 23:24:10.970194: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 126s - loss: 227.8967 - mse: 174.2173 - val_loss: 228.3762 - val_mse: 175.1896 - 126s/epoch - 63ms/step
+Epoch 7/600
+2025-05-28 23:26:16.841720: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 126s - loss: 223.4067 - mse: 170.7587 - val_loss: 227.2855 - val_mse: 174.1478 - 126s/epoch - 63ms/step
+Epoch 8/600
+2025-05-28 23:28:21.253355: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 124s - loss: 218.7110 - mse: 166.9340 - val_loss: 225.3471 - val_mse: 173.1945 - 124s/epoch - 62ms/step
+Epoch 9/600
+2025-05-28 23:30:26.515202: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 125s - loss: 213.3932 - mse: 162.3574 - val_loss: 226.1546 - val_mse: 174.3224 - 125s/epoch - 63ms/step
+Epoch 10/600
+2025-05-28 23:32:33.703662: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 127s - loss: 205.4463 - mse: 155.1739 - val_loss: 219.3736 - val_mse: 168.1834 - 127s/epoch - 64ms/step
+Epoch 11/600
+2025-05-28 23:34:43.700223: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 130s - loss: 194.8620 - mse: 145.4512 - val_loss: 230.0065 - val_mse: 178.5320 - 130s/epoch - 65ms/step
+Epoch 12/600
+2025-05-28 23:36:56.769508: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 133s - loss: 182.2790 - mse: 133.8751 - val_loss: 210.8456 - val_mse: 160.4944 - 133s/epoch - 66ms/step
+Epoch 13/600
+2025-05-28 23:39:15.394898: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 139s - loss: 169.9359 - mse: 122.5637 - val_loss: 218.3625 - val_mse: 167.7229 - 139s/epoch - 69ms/step
+Epoch 14/600
+2025-05-28 23:41:28.572451: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 133s - loss: 158.1375 - mse: 111.8283 - val_loss: 209.6023 - val_mse: 159.4852 - 133s/epoch - 67ms/step
+Epoch 15/600
+2025-05-28 23:43:41.443260: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 133s - loss: 148.2468 - mse: 102.9099 - val_loss: 192.9221 - val_mse: 143.9232 - 133s/epoch - 66ms/step
+Epoch 16/600
+2025-05-28 23:45:54.958108: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 134s - loss: 140.4762 - mse: 95.8918 - val_loss: 194.1017 - val_mse: 145.0925 - 134s/epoch - 67ms/step
+Epoch 17/600
+2025-05-28 23:48:11.231335: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 136s - loss: 134.7691 - mse: 90.7700 - val_loss: 190.7822 - val_mse: 141.9451 - 136s/epoch - 68ms/step
+Epoch 18/600
+2025-05-28 23:50:26.884647: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 136s - loss: 130.6636 - mse: 87.0747 - val_loss: 183.9507 - val_mse: 135.6201 - 136s/epoch - 68ms/step
+Epoch 19/600
+2025-05-28 23:52:45.294663: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 138s - loss: 128.2077 - mse: 84.8766 - val_loss: 183.2045 - val_mse: 134.8928 - 138s/epoch - 69ms/step
+Epoch 20/600
+2025-05-28 23:55:03.925811: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 139s - loss: 127.1710 - mse: 83.9439 - val_loss: 183.1187 - val_mse: 134.8066 - 139s/epoch - 69ms/step
+Epoch 21/600
+2025-05-28 23:57:22.737249: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 139s - loss: 187.7818 - mse: 138.9632 - val_loss: 222.9494 - val_mse: 171.1014 - 139s/epoch - 69ms/step
+Epoch 22/600
+2025-05-28 23:59:43.593035: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 141s - loss: 179.4096 - mse: 131.4249 - val_loss: 279.8039 - val_mse: 224.4004 - 141s/epoch - 70ms/step
+Epoch 23/600
+2025-05-29 00:02:05.807350: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 142s - loss: 169.5456 - mse: 122.4881 - val_loss: 233.5755 - val_mse: 181.6902 - 142s/epoch - 71ms/step
+Epoch 24/600
+2025-05-29 00:04:29.830091: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 144s - loss: 159.7858 - mse: 113.7262 - val_loss: 227.0505 - val_mse: 175.5696 - 144s/epoch - 72ms/step
+Epoch 25/600
+2025-05-29 00:07:32.557352: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 183s - loss: 151.5495 - mse: 106.4275 - val_loss: 231.1408 - val_mse: 179.5178 - 183s/epoch - 91ms/step
+Epoch 26/600
+2025-05-29 00:09:56.666134: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 144s - loss: 142.7845 - mse: 98.7484 - val_loss: 240.3759 - val_mse: 188.0531 - 144s/epoch - 72ms/step
+Epoch 27/600
+2025-05-29 00:12:22.626597: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 146s - loss: 135.0036 - mse: 91.9804 - val_loss: 207.4135 - val_mse: 157.3035 - 146s/epoch - 73ms/step
+Epoch 28/600
+2025-05-29 00:14:44.632965: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 142s - loss: 128.4348 - mse: 86.4210 - val_loss: 242.9960 - val_mse: 189.8843 - 142s/epoch - 71ms/step
+Epoch 29/600
+2025-05-29 00:17:05.769264: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 141s - loss: 121.8186 - mse: 80.8877 - val_loss: 215.1567 - val_mse: 164.0524 - 141s/epoch - 70ms/step
+Epoch 30/600
+2025-05-29 00:19:27.732221: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 142s - loss: 115.6223 - mse: 75.7646 - val_loss: 219.7966 - val_mse: 168.5240 - 142s/epoch - 71ms/step
+Epoch 31/600
+2025-05-29 00:21:50.334228: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 143s - loss: 109.2421 - mse: 70.5533 - val_loss: 236.1802 - val_mse: 183.0352 - 143s/epoch - 71ms/step
+Epoch 32/600
+2025-05-29 00:24:14.024076: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 144s - loss: 103.4432 - mse: 65.9336 - val_loss: 203.1811 - val_mse: 152.9837 - 144s/epoch - 72ms/step
+Epoch 33/600
+2025-05-29 00:26:35.236358: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 141s - loss: 98.2130 - mse: 61.8867 - val_loss: 212.8586 - val_mse: 161.6454 - 141s/epoch - 71ms/step
+Epoch 34/600
+2025-05-29 00:28:57.810856: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 142s - loss: 92.6240 - mse: 57.5686 - val_loss: 207.1616 - val_mse: 156.4736 - 142s/epoch - 71ms/step
+Epoch 35/600
+2025-05-29 00:31:21.136354: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 143s - loss: 87.7955 - mse: 53.9327 - val_loss: 207.1052 - val_mse: 155.7636 - 143s/epoch - 72ms/step
+Epoch 36/600
+2025-05-29 00:33:43.149304: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 142s - loss: 83.0754 - mse: 50.4846 - val_loss: 219.5638 - val_mse: 166.9361 - 142s/epoch - 71ms/step
+Epoch 37/600
+2025-05-29 00:36:05.888965: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 143s - loss: 78.5771 - mse: 47.2355 - val_loss: 217.0396 - val_mse: 164.1745 - 143s/epoch - 71ms/step
+Epoch 38/600
+2025-05-29 00:38:30.152911: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 144s - loss: 74.1709 - mse: 44.1416 - val_loss: 211.7872 - val_mse: 159.1845 - 144s/epoch - 72ms/step
+Epoch 39/600
+2025-05-29 00:40:55.818828: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 146s - loss: 70.2468 - mse: 41.4824 - val_loss: 208.6509 - val_mse: 156.0633 - 146s/epoch - 73ms/step
+Epoch 40/600
+2025-05-29 00:43:21.078051: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 145s - loss: 65.8858 - mse: 38.4924 - val_loss: 218.0193 - val_mse: 163.7363 - 145s/epoch - 73ms/step
+Epoch 41/600
+2025-05-29 00:45:45.513470: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 144s - loss: 61.7800 - mse: 35.8093 - val_loss: 210.6465 - val_mse: 157.0981 - 144s/epoch - 72ms/step
+Epoch 42/600
+2025-05-29 00:48:10.746618: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 145s - loss: 58.0830 - mse: 33.4184 - val_loss: 213.0735 - val_mse: 158.7553 - 145s/epoch - 73ms/step
+Epoch 43/600
+2025-05-29 00:50:36.806965: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 146s - loss: 54.5067 - mse: 31.1295 - val_loss: 208.4924 - val_mse: 154.7052 - 146s/epoch - 73ms/step
+Epoch 44/600
+2025-05-29 00:53:02.351331: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 146s - loss: 51.1976 - mse: 29.0118 - val_loss: 216.1337 - val_mse: 160.4969 - 146s/epoch - 73ms/step
+Epoch 45/600
+2025-05-29 00:55:28.172433: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 146s - loss: 48.4925 - mse: 27.3244 - val_loss: 210.2089 - val_mse: 155.2452 - 146s/epoch - 73ms/step
+Epoch 46/600
+2025-05-29 00:57:54.038453: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 146s - loss: 45.7518 - mse: 25.5976 - val_loss: 211.6604 - val_mse: 156.4717 - 146s/epoch - 73ms/step
+Epoch 47/600
+2025-05-29 01:00:20.612920: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 147s - loss: 43.2560 - mse: 24.0130 - val_loss: 210.5230 - val_mse: 155.2733 - 147s/epoch - 73ms/step
+Epoch 48/600
+2025-05-29 01:02:47.575390: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 147s - loss: 41.1608 - mse: 22.7082 - val_loss: 213.9386 - val_mse: 158.1733 - 147s/epoch - 74ms/step
+Epoch 49/600
+2025-05-29 01:05:18.252540: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 151s - loss: 39.1632 - mse: 21.4569 - val_loss: 215.3003 - val_mse: 159.2175 - 151s/epoch - 75ms/step
+Epoch 50/600
+2025-05-29 01:09:47.529375: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 269s - loss: 37.4680 - mse: 20.4125 - val_loss: 213.5424 - val_mse: 157.4038 - 269s/epoch - 135ms/step
+Epoch 51/600
+2025-05-29 01:12:17.297334: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 150s - loss: 36.1346 - mse: 19.5854 - val_loss: 210.7768 - val_mse: 155.0117 - 150s/epoch - 75ms/step
+Epoch 52/600
+2025-05-29 01:14:46.715161: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 149s - loss: 34.9673 - mse: 18.8886 - val_loss: 212.8276 - val_mse: 156.4886 - 149s/epoch - 75ms/step
+Epoch 53/600
+2025-05-29 01:17:17.152995: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 150s - loss: 33.9068 - mse: 18.2341 - val_loss: 211.9510 - val_mse: 155.9780 - 150s/epoch - 75ms/step
+Epoch 54/600
+2025-05-29 01:19:54.548714: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 158s - loss: 32.9614 - mse: 17.6390 - val_loss: 212.2513 - val_mse: 156.0102 - 158s/epoch - 79ms/step
+Epoch 55/600
+2025-05-29 01:22:28.086349: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 154s - loss: 32.2695 - mse: 17.2148 - val_loss: 211.7773 - val_mse: 155.5679 - 154s/epoch - 77ms/step
+Epoch 56/600
+2025-05-29 01:25:01.587664: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 153s - loss: 31.9776 - mse: 17.0534 - val_loss: 213.7186 - val_mse: 157.2858 - 153s/epoch - 77ms/step
+Epoch 57/600
+2025-05-29 01:27:34.817415: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 153s - loss: 31.4780 - mse: 16.7344 - val_loss: 212.0243 - val_mse: 155.7469 - 153s/epoch - 77ms/step
+Epoch 58/600
+2025-05-29 01:30:10.402460: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 156s - loss: 31.1371 - mse: 16.5069 - val_loss: 212.3448 - val_mse: 155.9765 - 156s/epoch - 78ms/step
+Epoch 59/600
+2025-05-29 01:32:42.858701: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 152s - loss: 31.1099 - mse: 16.5078 - val_loss: 212.2399 - val_mse: 155.8849 - 152s/epoch - 76ms/step
+Epoch 60/600
+2025-05-29 01:35:14.948694: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 152s - loss: 30.9830 - mse: 16.4225 - val_loss: 212.1602 - val_mse: 155.7961 - 152s/epoch - 76ms/step
+Epoch 61/600
+2025-05-29 01:37:47.942274: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 153s - loss: 65.7009 - mse: 39.9409 - val_loss: 221.4162 - val_mse: 165.2096 - 153s/epoch - 77ms/step
+Epoch 62/600
+2025-05-29 01:40:22.668912: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 155s - loss: 72.6763 - mse: 45.2209 - val_loss: 252.0054 - val_mse: 192.2587 - 155s/epoch - 77ms/step
+Epoch 63/600
+2025-05-29 01:42:58.473265: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 156s - loss: 69.2483 - mse: 42.9207 - val_loss: 222.6311 - val_mse: 166.2964 - 156s/epoch - 78ms/step
+Epoch 64/600
+2025-05-29 01:45:34.178847: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 156s - loss: 65.7818 - mse: 40.5955 - val_loss: 235.8437 - val_mse: 177.7051 - 156s/epoch - 78ms/step
+Epoch 65/600
+2025-05-29 01:48:11.004216: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 157s - loss: 62.5733 - mse: 38.4359 - val_loss: 219.7265 - val_mse: 162.8496 - 157s/epoch - 78ms/step
+Epoch 66/600
+2025-05-29 01:50:48.497769: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 157s - loss: 59.6774 - mse: 36.5661 - val_loss: 217.4340 - val_mse: 160.8912 - 157s/epoch - 79ms/step
+Epoch 67/600
+2025-05-29 01:53:24.582143: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 156s - loss: 56.5942 - mse: 34.4978 - val_loss: 211.8834 - val_mse: 155.8662 - 156s/epoch - 78ms/step
+Epoch 68/600
+2025-05-29 01:56:01.069348: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 157s - loss: 53.6361 - mse: 32.5159 - val_loss: 231.0337 - val_mse: 172.7848 - 157s/epoch - 78ms/step
+Epoch 69/600
+2025-05-29 01:58:37.202896: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 156s - loss: 51.0568 - mse: 30.8782 - val_loss: 211.6309 - val_mse: 155.1586 - 156s/epoch - 78ms/step
+Epoch 70/600
+2025-05-29 02:01:14.499244: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 157s - loss: 48.3565 - mse: 29.0990 - val_loss: 214.2380 - val_mse: 157.8519 - 157s/epoch - 79ms/step
+Epoch 71/600
+2025-05-29 02:03:49.585398: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 155s - loss: 45.9296 - mse: 27.5382 - val_loss: 213.8694 - val_mse: 157.2854 - 155s/epoch - 78ms/step
+Epoch 72/600
+2025-05-29 02:06:25.233754: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 156s - loss: 43.5024 - mse: 25.9380 - val_loss: 200.3544 - val_mse: 145.2696 - 156s/epoch - 78ms/step
+Epoch 73/600
+2025-05-29 02:09:02.802378: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 158s - loss: 41.0912 - mse: 24.3534 - val_loss: 205.5558 - val_mse: 150.2450 - 158s/epoch - 79ms/step
+Epoch 74/600
+2025-05-29 02:11:38.988783: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 156s - loss: 39.0045 - mse: 23.0299 - val_loss: 203.1806 - val_mse: 147.2348 - 156s/epoch - 78ms/step
+Epoch 75/600
+2025-05-29 02:14:16.940786: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 158s - loss: 36.9608 - mse: 21.7566 - val_loss: 199.3321 - val_mse: 143.8509 - 158s/epoch - 79ms/step
+Epoch 76/600
+2025-05-29 02:16:54.325973: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 157s - loss: 34.9548 - mse: 20.4415 - val_loss: 200.4700 - val_mse: 145.0360 - 157s/epoch - 79ms/step
+Epoch 77/600
+2025-05-29 02:19:31.662679: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 157s - loss: 33.6955 - mse: 19.6876 - val_loss: 192.6102 - val_mse: 138.2417 - 157s/epoch - 79ms/step
+Epoch 78/600
+2025-05-29 02:22:06.843563: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 155s - loss: 31.6376 - mse: 18.3779 - val_loss: 203.2331 - val_mse: 147.6297 - 155s/epoch - 78ms/step
+Epoch 79/600
+2025-05-29 02:24:44.553744: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 158s - loss: 30.2272 - mse: 17.4844 - val_loss: 190.8896 - val_mse: 136.5284 - 158s/epoch - 79ms/step
+Epoch 80/600
+2025-05-29 02:27:23.472654: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 159s - loss: 28.5024 - mse: 16.3983 - val_loss: 184.8582 - val_mse: 131.1870 - 159s/epoch - 79ms/step
+Epoch 81/600
+2025-05-29 02:30:04.986668: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 161s - loss: 27.3023 - mse: 15.6640 - val_loss: 188.8820 - val_mse: 134.6812 - 161s/epoch - 81ms/step
+Epoch 82/600
+2025-05-29 02:32:44.558793: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 160s - loss: 26.0544 - mse: 14.8762 - val_loss: 183.2930 - val_mse: 130.1125 - 160s/epoch - 80ms/step
+Epoch 83/600
+2025-05-29 02:35:24.224845: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 160s - loss: 24.8761 - mse: 14.1680 - val_loss: 180.9122 - val_mse: 127.8695 - 160s/epoch - 80ms/step
+Epoch 84/600
+2025-05-29 02:38:05.189844: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 161s - loss: 23.6622 - mse: 13.4179 - val_loss: 185.7227 - val_mse: 131.7942 - 161s/epoch - 80ms/step
+Epoch 85/600
+2025-05-29 02:40:44.955715: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 160s - loss: 22.5322 - mse: 12.7190 - val_loss: 173.4037 - val_mse: 121.6509 - 160s/epoch - 80ms/step
+Epoch 86/600
+2025-05-29 02:43:27.924929: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 163s - loss: 21.5996 - mse: 12.1585 - val_loss: 177.1603 - val_mse: 124.3247 - 163s/epoch - 81ms/step
+Epoch 87/600
+2025-05-29 02:46:10.415450: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 162s - loss: 20.7737 - mse: 11.6830 - val_loss: 176.1466 - val_mse: 123.3865 - 162s/epoch - 81ms/step
+Epoch 88/600
+2025-05-29 02:48:54.462404: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 164s - loss: 19.7117 - mse: 11.0259 - val_loss: 172.9928 - val_mse: 121.4902 - 164s/epoch - 82ms/step
+Epoch 89/600
+2025-05-29 02:51:36.655909: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 162s - loss: 18.8851 - mse: 10.5297 - val_loss: 181.4887 - val_mse: 127.6135 - 162s/epoch - 81ms/step
+Epoch 90/600
+2025-05-29 02:54:20.971832: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 164s - loss: 18.0964 - mse: 10.0654 - val_loss: 169.9964 - val_mse: 118.6854 - 164s/epoch - 82ms/step
+Epoch 91/600
+2025-05-29 02:57:03.883842: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 163s - loss: 17.3923 - mse: 9.6540 - val_loss: 175.4386 - val_mse: 122.9891 - 163s/epoch - 81ms/step
+Epoch 92/600
+2025-05-29 02:59:46.363472: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 163s - loss: 16.6230 - mse: 9.1980 - val_loss: 172.0792 - val_mse: 120.1916 - 163s/epoch - 81ms/step
+Epoch 93/600
+2025-05-29 03:02:29.351147: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 163s - loss: 15.9060 - mse: 8.7788 - val_loss: 169.0803 - val_mse: 118.2428 - 163s/epoch - 81ms/step
+Epoch 94/600
+2025-05-29 03:05:11.856296: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 163s - loss: 15.1586 - mse: 8.3328 - val_loss: 172.3360 - val_mse: 120.5264 - 163s/epoch - 81ms/step
+Epoch 95/600
+2025-05-29 03:07:55.826872: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 164s - loss: 14.6375 - mse: 8.0412 - val_loss: 165.2910 - val_mse: 114.4839 - 164s/epoch - 82ms/step
+Epoch 96/600
+2025-05-29 03:10:40.465460: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 165s - loss: 13.9746 - mse: 7.6539 - val_loss: 161.3873 - val_mse: 111.3073 - 165s/epoch - 82ms/step
+Epoch 97/600
+2025-05-29 03:13:24.104796: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 163s - loss: 13.4040 - mse: 7.3262 - val_loss: 166.4337 - val_mse: 115.7592 - 163s/epoch - 82ms/step
+Epoch 98/600
+2025-05-29 03:16:08.874373: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 165s - loss: 12.8581 - mse: 7.0118 - val_loss: 161.3573 - val_mse: 111.2415 - 165s/epoch - 83ms/step
+Epoch 99/600
+2025-05-29 03:25:37.532620: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 569s - loss: 12.4127 - mse: 6.7680 - val_loss: 163.1254 - val_mse: 112.2246 - 569s/epoch - 284ms/step
+Epoch 100/600
+2025-05-29 03:28:23.426997: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 166s - loss: 11.9304 - mse: 6.4988 - val_loss: 162.7048 - val_mse: 112.6235 - 166s/epoch - 83ms/step
+Epoch 101/600
+2025-05-29 03:31:10.315789: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 167s - loss: 11.4839 - mse: 6.2502 - val_loss: 160.5647 - val_mse: 110.3768 - 167s/epoch - 83ms/step
+Epoch 102/600
+2025-05-29 03:33:55.882634: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 165s - loss: 11.0475 - mse: 6.0062 - val_loss: 155.4568 - val_mse: 106.4133 - 165s/epoch - 83ms/step
+Epoch 103/600
+2025-05-29 03:36:42.154165: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 166s - loss: 10.6588 - mse: 5.7840 - val_loss: 157.8816 - val_mse: 108.4525 - 166s/epoch - 83ms/step
+Epoch 104/600
+2025-05-29 03:39:29.604993: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 167s - loss: 10.2469 - mse: 5.5585 - val_loss: 154.1758 - val_mse: 105.6672 - 167s/epoch - 84ms/step
+Epoch 105/600
+2025-05-29 03:42:18.773439: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 169s - loss: 9.9248 - mse: 5.3876 - val_loss: 153.9677 - val_mse: 105.6635 - 169s/epoch - 85ms/step
+Epoch 106/600
+2025-05-29 03:45:07.696054: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 169s - loss: 9.5945 - mse: 5.2044 - val_loss: 155.0324 - val_mse: 105.9936 - 169s/epoch - 85ms/step
+Epoch 107/600
+2025-05-29 03:47:57.278854: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 169s - loss: 9.2947 - mse: 5.0452 - val_loss: 152.8726 - val_mse: 104.4310 - 169s/epoch - 85ms/step
+Epoch 108/600
+2025-05-29 03:51:19.342452: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 202s - loss: 9.0026 - mse: 4.8826 - val_loss: 156.0219 - val_mse: 106.9643 - 202s/epoch - 101ms/step
+Epoch 109/600
+2025-05-29 03:54:16.707873: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 178s - loss: 8.6873 - mse: 4.7069 - val_loss: 151.9304 - val_mse: 103.7453 - 178s/epoch - 89ms/step
+Epoch 110/600
+2025-05-29 03:57:11.907000: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 175s - loss: 8.4715 - mse: 4.5958 - val_loss: 150.5021 - val_mse: 102.7347 - 175s/epoch - 87ms/step
+Epoch 111/600
+2025-05-29 04:00:05.850517: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 174s - loss: 8.2310 - mse: 4.4623 - val_loss: 151.8674 - val_mse: 103.4261 - 174s/epoch - 87ms/step
+Epoch 112/600
+2025-05-29 04:03:00.862641: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 175s - loss: 8.0046 - mse: 4.3435 - val_loss: 151.7656 - val_mse: 103.0751 - 175s/epoch - 88ms/step
+Epoch 113/600
+2025-05-29 04:05:57.077528: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 176s - loss: 7.7600 - mse: 4.2029 - val_loss: 151.3260 - val_mse: 102.8674 - 176s/epoch - 88ms/step
+Epoch 114/600
+2025-05-29 04:08:53.208640: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 177s - loss: 7.5917 - mse: 4.1204 - val_loss: 148.5029 - val_mse: 100.9793 - 177s/epoch - 88ms/step
+Epoch 115/600
+2025-05-29 04:11:48.209538: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 175s - loss: 7.3992 - mse: 4.0131 - val_loss: 148.7528 - val_mse: 101.1615 - 175s/epoch - 87ms/step
+Epoch 116/600
+2025-05-29 04:14:44.043037: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 176s - loss: 7.2492 - mse: 3.9356 - val_loss: 148.2602 - val_mse: 100.7560 - 176s/epoch - 88ms/step
+Epoch 117/600
+2025-05-29 04:17:41.958684: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 178s - loss: 7.1012 - mse: 3.8506 - val_loss: 148.8374 - val_mse: 101.2634 - 178s/epoch - 89ms/step
+Epoch 118/600
+2025-05-29 04:20:33.720353: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 171s - loss: 6.9796 - mse: 3.7970 - val_loss: 146.7729 - val_mse: 99.7062 - 171s/epoch - 86ms/step
+Epoch 119/600
+2025-05-29 04:23:26.026620: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 173s - loss: 6.8469 - mse: 3.7204 - val_loss: 147.1951 - val_mse: 99.8890 - 173s/epoch - 86ms/step
+Epoch 120/600
+2025-05-29 04:26:23.788566: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 178s - loss: 6.7000 - mse: 3.6334 - val_loss: 147.0495 - val_mse: 99.7215 - 178s/epoch - 89ms/step
+Epoch 121/600
+2025-05-29 04:29:24.909268: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 181s - loss: 6.6069 - mse: 3.5853 - val_loss: 147.9051 - val_mse: 100.5908 - 181s/epoch - 90ms/step
+Epoch 122/600
+2025-05-29 04:32:24.584803: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 180s - loss: 6.5063 - mse: 3.5294 - val_loss: 146.5346 - val_mse: 99.3509 - 180s/epoch - 90ms/step
+Epoch 123/600
+2025-05-29 04:35:19.055679: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 175s - loss: 6.4016 - mse: 3.4724 - val_loss: 148.3131 - val_mse: 100.5639 - 175s/epoch - 87ms/step
+Epoch 124/600
+2025-05-29 04:38:16.661932: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 177s - loss: 6.3316 - mse: 3.4309 - val_loss: 145.2982 - val_mse: 98.5652 - 177s/epoch - 89ms/step
+Epoch 125/600
+2025-05-29 04:41:16.935369: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 181s - loss: 6.2482 - mse: 3.3874 - val_loss: 146.1049 - val_mse: 99.0095 - 181s/epoch - 91ms/step
+Epoch 126/600
+2025-05-29 04:44:20.547999: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 183s - loss: 6.1929 - mse: 3.3554 - val_loss: 145.7456 - val_mse: 98.7725 - 183s/epoch - 92ms/step
+Epoch 127/600
+2025-05-29 04:47:27.682531: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 187s - loss: 6.1434 - mse: 3.3335 - val_loss: 144.7219 - val_mse: 97.9390 - 187s/epoch - 93ms/step
+Epoch 128/600
+2025-05-29 04:50:29.270081: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 181s - loss: 6.0713 - mse: 3.2919 - val_loss: 145.2048 - val_mse: 98.2686 - 181s/epoch - 91ms/step
+Epoch 129/600
+2025-05-29 04:53:35.397883: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 186s - loss: 6.0431 - mse: 3.2753 - val_loss: 144.1787 - val_mse: 97.6006 - 186s/epoch - 93ms/step
+Epoch 130/600
+2025-05-29 04:56:39.561140: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 184s - loss: 5.9889 - mse: 3.2422 - val_loss: 144.9828 - val_mse: 98.1851 - 184s/epoch - 92ms/step
+Epoch 131/600
+2025-05-29 04:59:42.972031: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 184s - loss: 5.9693 - mse: 3.2353 - val_loss: 144.8443 - val_mse: 98.0584 - 184s/epoch - 92ms/step
+Epoch 132/600
+2025-05-29 05:02:44.723246: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 181s - loss: 5.9446 - mse: 3.2233 - val_loss: 145.3526 - val_mse: 98.5277 - 181s/epoch - 91ms/step
+Epoch 133/600
+2025-05-29 05:05:48.611638: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 184s - loss: 5.8883 - mse: 3.1858 - val_loss: 144.5286 - val_mse: 97.7558 - 184s/epoch - 92ms/step
+Epoch 134/600
+2025-05-29 05:08:57.385817: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 189s - loss: 5.8912 - mse: 3.1915 - val_loss: 144.7521 - val_mse: 97.9700 - 189s/epoch - 94ms/step
+Epoch 135/600
+2025-05-29 05:12:03.231490: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 186s - loss: 5.8621 - mse: 3.1720 - val_loss: 144.7126 - val_mse: 97.9225 - 186s/epoch - 93ms/step
+Epoch 136/600
+2025-05-29 05:15:04.601552: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 181s - loss: 5.8497 - mse: 3.1645 - val_loss: 144.5106 - val_mse: 97.7526 - 181s/epoch - 90ms/step
+Epoch 137/600
+2025-05-29 05:18:08.249345: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 184s - loss: 5.8455 - mse: 3.1617 - val_loss: 144.4026 - val_mse: 97.6876 - 184s/epoch - 92ms/step
+Epoch 138/600
+2025-05-29 05:21:12.587177: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 184s - loss: 5.8480 - mse: 3.1661 - val_loss: 144.4609 - val_mse: 97.7452 - 184s/epoch - 92ms/step
+Epoch 139/600
+2025-05-29 05:24:17.975479: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 186s - loss: 5.8307 - mse: 3.1520 - val_loss: 144.4870 - val_mse: 97.7408 - 186s/epoch - 93ms/step
+Epoch 140/600
+2025-05-29 05:27:26.261350: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 188s - loss: 5.8255 - mse: 3.1517 - val_loss: 144.2828 - val_mse: 97.6209 - 188s/epoch - 94ms/step
+Epoch 141/600
+2025-05-29 05:30:31.169138: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 185s - loss: 14.1714 - mse: 8.2450 - val_loss: 172.4645 - val_mse: 118.9528 - 185s/epoch - 92ms/step
+Epoch 142/600
+2025-05-29 05:33:34.560472: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 184s - loss: 16.9172 - mse: 10.0205 - val_loss: 171.2055 - val_mse: 117.7834 - 184s/epoch - 92ms/step
+Epoch 143/600
+2025-05-29 05:36:37.373376: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 182s - loss: 16.5608 - mse: 9.8003 - val_loss: 177.6895 - val_mse: 123.7436 - 182s/epoch - 91ms/step
+Epoch 144/600
+2025-05-29 05:39:40.509708: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 183s - loss: 16.5062 - mse: 9.7624 - val_loss: 171.5328 - val_mse: 118.0227 - 183s/epoch - 91ms/step
+Epoch 145/600
+2025-05-29 05:42:47.633094: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 187s - loss: 16.0874 - mse: 9.5020 - val_loss: 163.5021 - val_mse: 111.5474 - 187s/epoch - 94ms/step
+Epoch 146/600
+2025-05-29 05:46:04.778447: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 201s - loss: 15.6170 - mse: 9.2086 - val_loss: 163.0180 - val_mse: 111.6370 - 201s/epoch - 100ms/step
+Epoch 147/600
+2025-05-29 05:49:32.570452: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 204s - loss: 15.1541 - mse: 8.9284 - val_loss: 173.4186 - val_mse: 119.8011 - 204s/epoch - 102ms/step
+Epoch 148/600
+2025-05-29 05:52:45.018705: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 193s - loss: 14.7851 - mse: 8.6898 - val_loss: 165.0431 - val_mse: 113.1207 - 193s/epoch - 96ms/step
+Epoch 149/600
+2025-05-29 05:55:55.195142: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 190s - loss: 14.5309 - mse: 8.5361 - val_loss: 163.9293 - val_mse: 112.3325 - 190s/epoch - 95ms/step
+Epoch 150/600
+2025-05-29 05:59:01.306811: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 186s - loss: 14.0221 - mse: 8.2350 - val_loss: 164.1770 - val_mse: 112.6930 - 186s/epoch - 93ms/step
+Epoch 151/600
+2025-05-29 06:02:08.562327: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 187s - loss: 13.6290 - mse: 8.0120 - val_loss: 159.9639 - val_mse: 109.1167 - 187s/epoch - 94ms/step
+Epoch 152/600
+2025-05-29 06:05:14.180717: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 186s - loss: 13.5115 - mse: 7.9332 - val_loss: 162.3193 - val_mse: 110.3786 - 186s/epoch - 93ms/step
+Epoch 153/600
+2025-05-29 06:08:19.932541: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 186s - loss: 13.2064 - mse: 7.7800 - val_loss: 165.1811 - val_mse: 112.7613 - 186s/epoch - 93ms/step
+Epoch 154/600
+2025-05-29 06:11:25.760776: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 186s - loss: 12.9201 - mse: 7.6008 - val_loss: 165.3680 - val_mse: 113.0398 - 186s/epoch - 93ms/step
+Epoch 155/600
+2025-05-29 06:15:28.687920: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 247s - loss: 12.6154 - mse: 7.4169 - val_loss: 162.5274 - val_mse: 111.2715 - 247s/epoch - 123ms/step
+Epoch 156/600
+2025-05-29 06:18:40.554281: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 189s - loss: 12.1245 - mse: 7.1051 - val_loss: 165.0681 - val_mse: 113.0221 - 189s/epoch - 95ms/step
+Epoch 157/600
+2025-05-29 06:21:43.460180: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 184s - loss: 11.8845 - mse: 6.9705 - val_loss: 162.9028 - val_mse: 110.8705 - 184s/epoch - 92ms/step
+Epoch 158/600
+2025-05-29 06:24:59.136614: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 194s - loss: 11.6377 - mse: 6.8436 - val_loss: 165.9244 - val_mse: 113.6923 - 194s/epoch - 97ms/step
+Epoch 159/600
+2025-05-29 06:28:23.244691: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 204s - loss: 11.1936 - mse: 6.5602 - val_loss: 163.5593 - val_mse: 111.7821 - 204s/epoch - 102ms/step
+Epoch 160/600
+2025-05-29 06:31:30.579061: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 187s - loss: 10.9958 - mse: 6.4369 - val_loss: 161.2149 - val_mse: 109.3913 - 187s/epoch - 94ms/step
+Epoch 161/600
+2025-05-29 06:34:39.767499: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 189s - loss: 10.6820 - mse: 6.2540 - val_loss: 157.2963 - val_mse: 107.1237 - 189s/epoch - 95ms/step
+Epoch 162/600
+2025-05-29 06:37:52.626794: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 193s - loss: 10.5819 - mse: 6.2087 - val_loss: 170.6262 - val_mse: 116.2048 - 193s/epoch - 97ms/step
+Epoch 163/600
+2025-05-29 06:41:10.717042: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 198s - loss: 10.2592 - mse: 6.0030 - val_loss: 166.4536 - val_mse: 113.6879 - 198s/epoch - 99ms/step
+Epoch 164/600
+2025-05-29 06:44:17.843565: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 187s - loss: 10.0147 - mse: 5.8543 - val_loss: 155.7138 - val_mse: 105.2544 - 187s/epoch - 93ms/step
+Epoch 165/600
+2025-05-29 06:47:23.479184: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 186s - loss: 9.8743 - mse: 5.7930 - val_loss: 155.4437 - val_mse: 105.1976 - 186s/epoch - 93ms/step
+Epoch 166/600
+2025-05-29 06:50:37.363183: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 194s - loss: 9.5822 - mse: 5.6218 - val_loss: 162.7405 - val_mse: 110.6832 - 194s/epoch - 97ms/step
+Epoch 167/600
+2025-05-29 06:54:01.100298: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 204s - loss: 9.2307 - mse: 5.3923 - val_loss: 162.9257 - val_mse: 110.8258 - 204s/epoch - 102ms/step
+Epoch 168/600
+2025-05-29 06:57:22.454978: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 202s - loss: 8.9323 - mse: 5.2222 - val_loss: 161.8303 - val_mse: 109.7388 - 202s/epoch - 101ms/step
+Epoch 169/600
+2025-05-29 07:01:12.273943: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 232s - loss: 8.8117 - mse: 5.1619 - val_loss: 158.3198 - val_mse: 107.4300 - 232s/epoch - 116ms/step
+Epoch 170/600
+2025-05-29 07:04:43.462795: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 209s - loss: 8.5727 - mse: 5.0188 - val_loss: 157.5961 - val_mse: 107.1070 - 209s/epoch - 105ms/step
+Epoch 171/600
+2025-05-29 07:08:10.129343: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 207s - loss: 8.3154 - mse: 4.8686 - val_loss: 154.2756 - val_mse: 103.9693 - 207s/epoch - 104ms/step
+Epoch 172/600
+2025-05-29 07:11:27.148065: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 197s - loss: 8.1486 - mse: 4.7648 - val_loss: 157.6516 - val_mse: 106.6313 - 197s/epoch - 98ms/step
+Epoch 173/600
+2025-05-29 07:14:39.519643: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 192s - loss: 7.9199 - mse: 4.6304 - val_loss: 154.9001 - val_mse: 104.1531 - 192s/epoch - 96ms/step
+Epoch 174/600
+2025-05-29 07:17:54.179443: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 195s - loss: 7.8082 - mse: 4.5756 - val_loss: 156.2634 - val_mse: 105.4367 - 195s/epoch - 98ms/step
+Epoch 175/600
+2025-05-29 07:21:13.567357: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 200s - loss: 7.4350 - mse: 4.3497 - val_loss: 156.8783 - val_mse: 105.8920 - 200s/epoch - 100ms/step
+Epoch 176/600
+2025-05-29 07:24:40.276140: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 208s - loss: 7.3027 - mse: 4.2777 - val_loss: 154.5089 - val_mse: 103.9824 - 208s/epoch - 104ms/step
+Epoch 177/600
+2025-05-29 07:28:05.427957: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 204s - loss: 7.2332 - mse: 4.2471 - val_loss: 158.5137 - val_mse: 106.4742 - 204s/epoch - 102ms/step
+Epoch 178/600
+2025-05-29 07:31:24.035352: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 199s - loss: 6.9331 - mse: 4.0668 - val_loss: 157.7472 - val_mse: 106.9492 - 199s/epoch - 99ms/step
+Epoch 179/600
+2025-05-29 07:34:36.205101: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 192s - loss: 6.6517 - mse: 3.8871 - val_loss: 157.7924 - val_mse: 107.2263 - 192s/epoch - 96ms/step
+Epoch 180/600
+2025-05-29 07:37:59.256824: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 203s - loss: 6.5250 - mse: 3.8160 - val_loss: 153.8666 - val_mse: 103.6172 - 203s/epoch - 101ms/step
+Epoch 181/600
+2025-05-29 07:41:29.852171: W tensorflow/core/framework/dataset.cc:956] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+2000/2000 - 213s - loss: 6.2565 - mse: 3.6563 - val_loss: 154.8354 - val_mse: 104.1580 - 213s/epoch - 106ms/step
+Epoch 182/600
+2025-05-29 07:42:32.821306: F tensorflow/tsl/platform/default/env.cc:74] Check failed: ret == 0 (11 vs. 0)Thread collective_ops creation via pthread_create() failed.

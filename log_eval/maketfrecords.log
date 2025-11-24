@@ -1,0 +1,16 @@
+nohup: ignoring input
+2025-06-06 12:32:23.061173: I tensorflow/core/util/port.cc:110] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-06-06 12:32:23.109945: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-06-06 12:43:38.785022: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 46542 MB memory:  -> device: 0, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:3d:00.0, compute capability: 8.9
+2025-06-06 12:43:38.788100: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 45220 MB memory:  -> device: 1, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:61:00.0, compute capability: 8.9
+2025-06-06 12:43:38.789730: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:2 with 22808 MB memory:  -> device: 2, name: NVIDIA TITAN RTX, pci bus id: 0000:60:00.0, compute capability: 7.5
+2025-06-06 12:43:38.792316: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:3 with 22808 MB memory:  -> device: 3, name: NVIDIA TITAN RTX, pci bus id: 0000:64:00.0, compute capability: 7.5
+2025-06-06 12:43:38.794508: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:4 with 9615 MB memory:  -> device: 4, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:3e:00.0, compute capability: 7.5
+2025-06-06 12:43:38.800109: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:5 with 9616 MB memory:  -> device: 5, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:42:00.0, compute capability: 7.5
+2025-06-06 12:43:38.803072: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:6 with 9616 MB memory:  -> device: 6, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:43:00.0, compute capability: 7.5
+Counting total number of examples...
+Total examples across all files: 1660000
+Writing TFRecord shards ... this may take a while.
+  → Processed file 'dataset/dataset_160000_surfaces_noise0.35_2805_2239.pkl', wrote 160000 examples, total so far: 160000/1660000  → Processed file 'dataset/dataset_400000_surfaces_noise0.35_3105_0633.pkl', wrote 400000 examples, total so far: 560000/1660000  → Processed file 'dataset/dataset_560000_surfaces_noise0.35_3005_0231.pkl', wrote 560000 examples, total so far: 1120000/1660000  → Processed file 'dataset/dataset_40000_surfaces_noise0.35_2805_1411.pkl', wrote 40000 examples, total so far: 1160000/1660000  → Processed file 'dataset/dataset_500000_surfaces_noise0.35_0106_1757.pkl', wrote 500000 examples, total so far: 1660000/1660000
+All shards written.

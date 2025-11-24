@@ -1,0 +1,57 @@
+nohup: ignoring input
+2025-06-19 20:29:25.112255: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-06-19 20:29:25.128362: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1750357765.148178 3130218 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1750357765.154420 3130218 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1750357765.169763 3130218 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750357765.169788 3130218 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750357765.169791 3130218 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750357765.169794 3130218 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-06-19 20:29:25.174632: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Torch: 2.7.1+cu126  CUDA available: True
+GPUs: 2 ['NVIDIA RTX 6000 Ada Generation', 'NVIDIA RTX 6000 Ada Generation']
+TensorFlow (for TFRecord I/O only): 2.19.0
+Train shards: 80  Val shards: 20
+I0000 00:00:1750357770.400053 3130218 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 46542 MB memory:  -> device: 0, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:3d:00.0, compute capability: 8.9
+I0000 00:00:1750357770.403750 3130218 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 46551 MB memory:  -> device: 1, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:61:00.0, compute capability: 8.9
+device count  2
+start training for 100 epochs
+2025-06-19 20:29:32.031601: I tensorflow/core/kernels/data/tf_record_dataset_op.cc:381] TFRecordDataset `buffer_size` is unspecified, default to 262144
+/home/ainsworth/master/train_pointnet_surface_torch.py:196: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:203.)
+  xyz = torch.from_numpy(xyz_np).to(_DEVICE).float()
+  [train] step 500/2343  loss=602.7419  mse=508.8421
+  [train] step 1000/2343  loss=538.5583  mse=448.4866
+  [train] step 1500/2343  loss=504.3257  mse=416.2864
+  [train] step 2000/2343  loss=486.9245  mse=399.9130
+  [train] step 2343/2343  loss=479.2682  mse=392.6636
+  [val] step 390/390  loss=553.0075  mse=457.8049
+Epoch 001/100  train_loss=479.2682  train_mse=392.6636  val_loss=553.0075  val_mse=457.8049  time=2760.1s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=553.0075)
+  [train] step 500/2343  loss=435.0657  mse=351.1742
+  [train] step 1000/2343  loss=434.9207  mse=351.0687
+  [train] step 1500/2343  loss=434.8385  mse=351.0162
+  [train] step 2000/2343  loss=434.5447  mse=350.7197
+  [train] step 2343/2343  loss=434.2485  mse=350.4581
+  [val] step 390/390  loss=448.0099  mse=363.1129
+Epoch 002/100  train_loss=434.2485  train_mse=350.4581  val_loss=448.0099  val_mse=363.1129  time=2731.4s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=448.0099)
+  [train] step 500/2343  loss=434.1577  mse=350.3185
+  [train] step 1000/2343  loss=434.2078  mse=350.3564
+  [train] step 1500/2343  loss=434.3133  mse=350.4612
+  [train] step 2000/2343  loss=434.2152  mse=350.3942
+  [train] step 2343/2343  loss=434.1252  mse=350.3087
+  [val] step 390/390  loss=471.4703  mse=385.4234
+Epoch 003/100  train_loss=434.1252  train_mse=350.3087  val_loss=471.4703  val_mse=385.4234  time=2738.6s
+  [train] step 500/2343  loss=433.4280  mse=349.6827
+  [train] step 1000/2343  loss=433.3753  mse=349.5903
+  [train] step 1500/2343  loss=433.4495  mse=349.6562
+  [train] step 2000/2343  loss=433.4734  mse=349.6994
+  [train] step 2343/2343  loss=433.5089  mse=349.7475
+  [val] step 390/390  loss=450.3472  mse=364.2093
+Epoch 004/100  train_loss=433.5089  train_mse=349.7475  val_loss=450.3472  val_mse=364.2093  time=2738.4s
+  [train] step 500/2343  loss=432.9887  mse=349.2296
+  [train] step 1000/2343  loss=433.2837  mse=349.5493
+  [train] step 1500/2343  loss=433.1654  mse=349.4087
+  [train] step 2000/2343  loss=433.3063  mse=349.5397

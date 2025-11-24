@@ -1,0 +1,50 @@
+nohup: ignoring input
+2025-08-20 17:57:56.327418: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-08-20 17:57:56.344320: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1755705476.365185 2263391 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1755705476.371246 2263391 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1755705476.387037 2263391 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1755705476.387064 2263391 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1755705476.387067 2263391 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1755705476.387069 2263391 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-08-20 17:57:56.391822: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Train shards: 80  Val shards: 20
+I0000 00:00:1755705480.382281 2263391 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 46550 MB memory:  -> device: 0, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:61:00.0, compute capability: 8.9
+I0000 00:00:1755705480.383951 2263391 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 45181 MB memory:  -> device: 1, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:3d:00.0, compute capability: 8.9
+Using 2 GPUs (DataParallel)
+Total parameters: 6,249,901 | Trainable: 6,249,901
+Torch: 2.7.1+cu126  CUDA available: True
+GPUs: 2 ['NVIDIA RTX 6000 Ada Generation', 'NVIDIA RTX 6000 Ada Generation']
+start training for 100 epochs; train_steps/epoch=33200 val_steps/epoch=500
+2025-08-20 17:58:03.234384: I tensorflow/core/kernels/data/tf_record_dataset_op.cc:381] TFRecordDataset `buffer_size` is unspecified, default to 262144
+/home/ainsworth/master/pointnet_torch_nurbs-diff.py:130: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:203.)
+  xyz  = torch.from_numpy(xyz_np).to(_DEVICE).float()        # (B, N, 3)
+precompute cpp  [train] step 500/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 1000/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 1500/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 2000/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 2500/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 3000/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 3500/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 4000/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 4500/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 5000/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 5500/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 6000/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 6500/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 7000/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 7500/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 8000/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 8500/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 9000/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 9500/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 10000/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 10500/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 11000/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 11500/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 12000/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 12500/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 13000/33200  loss=nan  ctrl_mse=nan  surf_mse=nan
+  [train] step 13500/33200  loss=nan  ctrl_mse=nan  surf_mse=nan

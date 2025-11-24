@@ -1,0 +1,6 @@
+nohup: ignoring input
+[Batch 1/1] Saved to: dataset_coons/coons_dataset_batch1_2000_coons_norm_noise0.0_2309_0015.pkl  (took 652.65s)
+
+All 1 batches created.
+Batch filepaths CSV written to: dataset_coons/batch_filepaths.csv
+Batch creation log appended to: logs/batch_creation_1_000_000.log

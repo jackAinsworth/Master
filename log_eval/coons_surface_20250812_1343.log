@@ -1,0 +1,233 @@
+nohup: ignoring input
+2025-08-12 13:43:31.450277: I tensorflow/core/util/port.cc:110] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-08-12 13:43:31.534466: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+All shards found: ['./tfrecords_coons/data_0077-of-0100.tfrecord', './tfrecords_coons/data_0048-of-0067.tfrecord', './tfrecords_coons/data_0065-of-0100.tfrecord', './tfrecords_coons/data_0091-of-0100.tfrecord', './tfrecords_coons/data_0016-of-0067.tfrecord', './tfrecords_coons/data_0081-of-0100.tfrecord', './tfrecords_coons/data_0062-of-0067.tfrecord', './tfrecords_coons/data_0050-of-0067.tfrecord', './tfrecords_coons/data_0057-of-0067.tfrecord', './tfrecords_coons/data_0033-of-0100.tfrecord', './tfrecords_coons/data_0084-of-0100.tfrecord', './tfrecords_coons/data_0038-of-0067.tfrecord', './tfrecords_coons/data_0047-of-0100.tfrecord', './tfrecords_coons/data_0041-of-0100.tfrecord', './tfrecords_coons/data_0010-of-0100.tfrecord', './tfrecords_coons/data_0019-of-0067.tfrecord', './tfrecords_coons/data_0038-of-0100.tfrecord', './tfrecords_coons/data_0027-of-0067.tfrecord', './tfrecords_coons/data_0052-of-0100.tfrecord', './tfrecords_coons/data_0046-of-0067.tfrecord', './tfrecords_coons/data_0079-of-0100.tfrecord', './tfrecords_coons/data_0043-of-0067.tfrecord', './tfrecords_coons/data_0034-of-0067.tfrecord', './tfrecords_coons/data_0006-of-0067.tfrecord', './tfrecords_coons/data_0014-of-0100.tfrecord', './tfrecords_coons/data_0020-of-0067.tfrecord', './tfrecords_coons/data_0080-of-0100.tfrecord', './tfrecords_coons/data_0051-of-0100.tfrecord', './tfrecords_coons/data_0090-of-0100.tfrecord', './tfrecords_coons/data_0062-of-0100.tfrecord', './tfrecords_coons/data_0075-of-0100.tfrecord', './tfrecords_coons/data_0013-of-0100.tfrecord', './tfrecords_coons/data_0048-of-0100.tfrecord', './tfrecords_coons/data_0059-of-0100.tfrecord', './tfrecords_coons/data_0025-of-0100.tfrecord', './tfrecords_coons/data_0055-of-0100.tfrecord', './tfrecords_coons/data_0030-of-0100.tfrecord', './tfrecords_coons/data_0041-of-0067.tfrecord', './tfrecords_coons/data_0017-of-0100.tfrecord', './tfrecords_coons/data_0098-of-0100.tfrecord', './tfrecords_coons/data_0063-of-0067.tfrecord', './tfrecords_coons/data_0001-of-0100.tfrecord', './tfrecords_coons/data_0040-of-0067.tfrecord', './tfrecords_coons/data_0050-of-0100.tfrecord', './tfrecords_coons/data_0096-of-0100.tfrecord', './tfrecords_coons/data_0054-of-0100.tfrecord', './tfrecords_coons/data_0015-of-0067.tfrecord', './tfrecords_coons/data_0059-of-0067.tfrecord', './tfrecords_coons/data_0069-of-0100.tfrecord', './tfrecords_coons/data_0008-of-0067.tfrecord', './tfrecords_coons/data_0007-of-0067.tfrecord', './tfrecords_coons/data_0003-of-0067.tfrecord', './tfrecords_coons/data_0009-of-0100.tfrecord', './tfrecords_coons/data_0067-of-0100.tfrecord', './tfrecords_coons/data_0060-of-0067.tfrecord', './tfrecords_coons/data_0092-of-0100.tfrecord', './tfrecords_coons/data_0015-of-0100.tfrecord', './tfrecords_coons/data_0087-of-0100.tfrecord', './tfrecords_coons/data_0032-of-0100.tfrecord', './tfrecords_coons/data_0047-of-0067.tfrecord', './tfrecords_coons/data_0063-of-0100.tfrecord', './tfrecords_coons/data_0011-of-0067.tfrecord', './tfrecords_coons/data_0025-of-0067.tfrecord', './tfrecords_coons/data_0039-of-0100.tfrecord', './tfrecords_coons/data_0082-of-0100.tfrecord', './tfrecords_coons/data_0035-of-0100.tfrecord', './tfrecords_coons/data_0024-of-0067.tfrecord', './tfrecords_coons/data_0014-of-0067.tfrecord', './tfrecords_coons/data_0029-of-0100.tfrecord', './tfrecords_coons/data_0093-of-0100.tfrecord', './tfrecords_coons/data_0021-of-0100.tfrecord', './tfrecords_coons/data_0028-of-0100.tfrecord', './tfrecords_coons/data_0012-of-0100.tfrecord', './tfrecords_coons/data_0073-of-0100.tfrecord', './tfrecords_coons/data_0083-of-0100.tfrecord', './tfrecords_coons/data_0007-of-0100.tfrecord', './tfrecords_coons/data_0088-of-0100.tfrecord', './tfrecords_coons/data_0005-of-0067.tfrecord', './tfrecords_coons/data_0006-of-0100.tfrecord', './tfrecords_coons/data_0035-of-0067.tfrecord', './tfrecords_coons/data_0086-of-0100.tfrecord', './tfrecords_coons/data_0046-of-0100.tfrecord', './tfrecords_coons/data_0037-of-0067.tfrecord', './tfrecords_coons/data_0055-of-0067.tfrecord', './tfrecords_coons/data_0054-of-0067.tfrecord', './tfrecords_coons/data_0056-of-0067.tfrecord', './tfrecords_coons/data_0005-of-0100.tfrecord', './tfrecords_coons/data_0019-of-0100.tfrecord', './tfrecords_coons/data_0095-of-0100.tfrecord', './tfrecords_coons/data_0043-of-0100.tfrecord', './tfrecords_coons/data_0034-of-0100.tfrecord', './tfrecords_coons/data_0013-of-0067.tfrecord', './tfrecords_coons/data_0027-of-0100.tfrecord', './tfrecords_coons/data_0042-of-0100.tfrecord', './tfrecords_coons/data_0040-of-0100.tfrecord', './tfrecords_coons/data_0003-of-0100.tfrecord', './tfrecords_coons/data_0066-of-0100.tfrecord', './tfrecords_coons/data_0022-of-0100.tfrecord', './tfrecords_coons/data_0049-of-0100.tfrecord', './tfrecords_coons/data_0094-of-0100.tfrecord', './tfrecords_coons/data_0065-of-0067.tfrecord', './tfrecords_coons/data_0000-of-0100.tfrecord', './tfrecords_coons/data_0053-of-0067.tfrecord', './tfrecords_coons/data_0016-of-0100.tfrecord', './tfrecords_coons/data_0008-of-0100.tfrecord', './tfrecords_coons/data_0033-of-0067.tfrecord', './tfrecords_coons/data_0036-of-0067.tfrecord', './tfrecords_coons/data_0028-of-0067.tfrecord', './tfrecords_coons/data_0061-of-0067.tfrecord', './tfrecords_coons/data_0011-of-0100.tfrecord', './tfrecords_coons/data_0044-of-0067.tfrecord', './tfrecords_coons/data_0056-of-0100.tfrecord', './tfrecords_coons/data_0017-of-0067.tfrecord', './tfrecords_coons/data_0000-of-0067.tfrecord', './tfrecords_coons/data_0097-of-0100.tfrecord', './tfrecords_coons/data_0002-of-0067.tfrecord', './tfrecords_coons/data_0066-of-0067.tfrecord', './tfrecords_coons/data_0026-of-0067.tfrecord', './tfrecords_coons/data_0053-of-0100.tfrecord', './tfrecords_coons/data_0024-of-0100.tfrecord', './tfrecords_coons/data_0052-of-0067.tfrecord', './tfrecords_coons/data_0068-of-0100.tfrecord', './tfrecords_coons/data_0061-of-0100.tfrecord', './tfrecords_coons/data_0002-of-0100.tfrecord', './tfrecords_coons/data_0020-of-0100.tfrecord', './tfrecords_coons/data_0004-of-0067.tfrecord', './tfrecords_coons/data_0058-of-0100.tfrecord', './tfrecords_coons/data_0060-of-0100.tfrecord', './tfrecords_coons/data_0029-of-0067.tfrecord', './tfrecords_coons/data_0049-of-0067.tfrecord', './tfrecords_coons/data_0004-of-0100.tfrecord', './tfrecords_coons/data_0042-of-0067.tfrecord', './tfrecords_coons/data_0036-of-0100.tfrecord', './tfrecords_coons/data_0031-of-0100.tfrecord', './tfrecords_coons/data_0018-of-0100.tfrecord', './tfrecords_coons/data_0044-of-0100.tfrecord', './tfrecords_coons/data_0009-of-0067.tfrecord', './tfrecords_coons/data_0037-of-0100.tfrecord', './tfrecords_coons/data_0026-of-0100.tfrecord', './tfrecords_coons/data_0058-of-0067.tfrecord', './tfrecords_coons/data_0064-of-0100.tfrecord', './tfrecords_coons/data_0074-of-0100.tfrecord', './tfrecords_coons/data_0023-of-0100.tfrecord', './tfrecords_coons/data_0064-of-0067.tfrecord', './tfrecords_coons/data_0045-of-0067.tfrecord', './tfrecords_coons/data_0051-of-0067.tfrecord', './tfrecords_coons/data_0032-of-0067.tfrecord', './tfrecords_coons/data_0072-of-0100.tfrecord', './tfrecords_coons/data_0022-of-0067.tfrecord', './tfrecords_coons/data_0085-of-0100.tfrecord', './tfrecords_coons/data_0071-of-0100.tfrecord', './tfrecords_coons/data_0039-of-0067.tfrecord', './tfrecords_coons/data_0089-of-0100.tfrecord', './tfrecords_coons/data_0031-of-0067.tfrecord', './tfrecords_coons/data_0023-of-0067.tfrecord', './tfrecords_coons/data_0078-of-0100.tfrecord', './tfrecords_coons/data_0018-of-0067.tfrecord', './tfrecords_coons/data_0099-of-0100.tfrecord', './tfrecords_coons/data_0057-of-0100.tfrecord', './tfrecords_coons/data_0030-of-0067.tfrecord', './tfrecords_coons/data_0070-of-0100.tfrecord', './tfrecords_coons/data_0010-of-0067.tfrecord', './tfrecords_coons/data_0076-of-0100.tfrecord', './tfrecords_coons/data_0045-of-0100.tfrecord', './tfrecords_coons/data_0001-of-0067.tfrecord', './tfrecords_coons/data_0012-of-0067.tfrecord', './tfrecords_coons/data_0021-of-0067.tfrecord']
+2025-08-12 13:43:38.124233: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 45782 MB memory:  -> device: 0, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:3d:00.0, compute capability: 8.9
+2025-08-12 13:43:38.153038: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 46550 MB memory:  -> device: 1, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:61:00.0, compute capability: 8.9
+2025-08-12 13:43:38.306809: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:2 with 22807 MB memory:  -> device: 2, name: NVIDIA TITAN RTX, pci bus id: 0000:60:00.0, compute capability: 7.5
+2025-08-12 13:43:38.314047: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:3 with 22807 MB memory:  -> device: 3, name: NVIDIA TITAN RTX, pci bus id: 0000:64:00.0, compute capability: 7.5
+2025-08-12 13:43:38.316700: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:4 with 9615 MB memory:  -> device: 4, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:3e:00.0, compute capability: 7.5
+2025-08-12 13:43:38.319604: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:5 with 9615 MB memory:  -> device: 5, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:42:00.0, compute capability: 7.5
+2025-08-12 13:43:38.322323: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:6 with 9615 MB memory:  -> device: 6, name: NVIDIA GeForce RTX 2080 Ti, pci bus id: 0000:43:00.0, compute capability: 7.5
+Train shards: 133 Val shards: 34
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input_1 (InputLayer)        [(None, 50, 50, 3)]          0         []                            
+                                                                                                  
+ conv2d (Conv2D)             (None, 50, 50, 128)          9728      ['input_1[0][0]']             
+                                                                                                  
+ conv2d_2 (Conv2D)           (None, 50, 50, 64)           8256      ['conv2d[0][0]']              
+                                                                                                  
+ conv2d_4 (Conv2D)           (None, 50, 50, 64)           8256      ['conv2d[0][0]']              
+                                                                                                  
+ max_pooling2d (MaxPooling2  (None, 50, 50, 128)          0         ['conv2d[0][0]']              
+ D)                                                                                               
+                                                                                                  
+ conv2d_1 (Conv2D)           (None, 50, 50, 64)           8256      ['conv2d[0][0]']              
+                                                                                                  
+ conv2d_3 (Conv2D)           (None, 50, 50, 64)           36928     ['conv2d_2[0][0]']            
+                                                                                                  
+ conv2d_5 (Conv2D)           (None, 50, 50, 64)           102464    ['conv2d_4[0][0]']            
+                                                                                                  
+ conv2d_6 (Conv2D)           (None, 50, 50, 64)           8256      ['max_pooling2d[0][0]']       
+                                                                                                  
+ concatenate (Concatenate)   (None, 50, 50, 256)          0         ['conv2d_1[0][0]',            
+                                                                     'conv2d_3[0][0]',            
+                                                                     'conv2d_5[0][0]',            
+                                                                     'conv2d_6[0][0]']            
+                                                                                                  
+ conv2d_7 (Conv2D)           (None, 50, 50, 256)          590080    ['concatenate[0][0]']         
+                                                                                                  
+ batch_normalization (Batch  (None, 50, 50, 256)          1024      ['conv2d_7[0][0]']            
+ Normalization)                                                                                   
+                                                                                                  
+ max_pooling2d_1 (MaxPoolin  (None, 17, 17, 256)          0         ['batch_normalization[0][0]'] 
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_9 (Conv2D)           (None, 17, 17, 512)          131584    ['max_pooling2d_1[0][0]']     
+                                                                                                  
+ conv2d_11 (Conv2D)          (None, 17, 17, 512)          131584    ['max_pooling2d_1[0][0]']     
+                                                                                                  
+ max_pooling2d_2 (MaxPoolin  (None, 17, 17, 256)          0         ['max_pooling2d_1[0][0]']     
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_8 (Conv2D)           (None, 17, 17, 512)          131584    ['max_pooling2d_1[0][0]']     
+                                                                                                  
+ conv2d_10 (Conv2D)          (None, 17, 17, 512)          2359808   ['conv2d_9[0][0]']            
+                                                                                                  
+ conv2d_12 (Conv2D)          (None, 17, 17, 512)          6554112   ['conv2d_11[0][0]']           
+                                                                                                  
+ conv2d_13 (Conv2D)          (None, 17, 17, 512)          131584    ['max_pooling2d_2[0][0]']     
+                                                                                                  
+ concatenate_1 (Concatenate  (None, 17, 17, 2048)         0         ['conv2d_8[0][0]',            
+ )                                                                   'conv2d_10[0][0]',           
+                                                                     'conv2d_12[0][0]',           
+                                                                     'conv2d_13[0][0]']           
+                                                                                                  
+ conv2d_14 (Conv2D)          (None, 17, 17, 512)          9437696   ['concatenate_1[0][0]']       
+                                                                                                  
+ batch_normalization_1 (Bat  (None, 17, 17, 512)          2048      ['conv2d_14[0][0]']           
+ chNormalization)                                                                                 
+                                                                                                  
+ max_pooling2d_3 (MaxPoolin  (None, 6, 6, 512)            0         ['batch_normalization_1[0][0]'
+ g2D)                                                               ]                             
+                                                                                                  
+ conv2d_16 (Conv2D)          (None, 6, 6, 512)            262656    ['max_pooling2d_3[0][0]']     
+                                                                                                  
+ conv2d_18 (Conv2D)          (None, 6, 6, 512)            262656    ['max_pooling2d_3[0][0]']     
+                                                                                                  
+ max_pooling2d_4 (MaxPoolin  (None, 6, 6, 512)            0         ['max_pooling2d_3[0][0]']     
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_15 (Conv2D)          (None, 6, 6, 512)            262656    ['max_pooling2d_3[0][0]']     
+                                                                                                  
+ conv2d_17 (Conv2D)          (None, 6, 6, 512)            2359808   ['conv2d_16[0][0]']           
+                                                                                                  
+ conv2d_19 (Conv2D)          (None, 6, 6, 512)            6554112   ['conv2d_18[0][0]']           
+                                                                                                  
+ conv2d_20 (Conv2D)          (None, 6, 6, 512)            262656    ['max_pooling2d_4[0][0]']     
+                                                                                                  
+ concatenate_2 (Concatenate  (None, 6, 6, 2048)           0         ['conv2d_15[0][0]',           
+ )                                                                   'conv2d_17[0][0]',           
+                                                                     'conv2d_19[0][0]',           
+                                                                     'conv2d_20[0][0]']           
+                                                                                                  
+ conv2d_21 (Conv2D)          (None, 6, 6, 256)            4718848   ['concatenate_2[0][0]']       
+                                                                                                  
+ batch_normalization_2 (Bat  (None, 6, 6, 256)            1024      ['conv2d_21[0][0]']           
+ chNormalization)                                                                                 
+                                                                                                  
+ max_pooling2d_5 (MaxPoolin  (None, 2, 2, 256)            0         ['batch_normalization_2[0][0]'
+ g2D)                                                               ]                             
+                                                                                                  
+ conv2d_23 (Conv2D)          (None, 2, 2, 512)            131584    ['max_pooling2d_5[0][0]']     
+                                                                                                  
+ conv2d_25 (Conv2D)          (None, 2, 2, 512)            131584    ['max_pooling2d_5[0][0]']     
+                                                                                                  
+ max_pooling2d_6 (MaxPoolin  (None, 2, 2, 256)            0         ['max_pooling2d_5[0][0]']     
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_22 (Conv2D)          (None, 2, 2, 512)            131584    ['max_pooling2d_5[0][0]']     
+                                                                                                  
+ conv2d_24 (Conv2D)          (None, 2, 2, 512)            2359808   ['conv2d_23[0][0]']           
+                                                                                                  
+ conv2d_26 (Conv2D)          (None, 2, 2, 512)            6554112   ['conv2d_25[0][0]']           
+                                                                                                  
+ conv2d_27 (Conv2D)          (None, 2, 2, 512)            131584    ['max_pooling2d_6[0][0]']     
+                                                                                                  
+ concatenate_3 (Concatenate  (None, 2, 2, 2048)           0         ['conv2d_22[0][0]',           
+ )                                                                   'conv2d_24[0][0]',           
+                                                                     'conv2d_26[0][0]',           
+                                                                     'conv2d_27[0][0]']           
+                                                                                                  
+ conv2d_28 (Conv2D)          (None, 2, 2, 512)            9437696   ['concatenate_3[0][0]']       
+                                                                                                  
+ batch_normalization_3 (Bat  (None, 2, 2, 512)            2048      ['conv2d_28[0][0]']           
+ chNormalization)                                                                                 
+                                                                                                  
+ max_pooling2d_7 (MaxPoolin  (None, 1, 1, 512)            0         ['batch_normalization_3[0][0]'
+ g2D)                                                               ]                             
+                                                                                                  
+ conv2d_30 (Conv2D)          (None, 1, 1, 512)            262656    ['max_pooling2d_7[0][0]']     
+                                                                                                  
+ conv2d_32 (Conv2D)          (None, 1, 1, 512)            262656    ['max_pooling2d_7[0][0]']     
+                                                                                                  
+ max_pooling2d_8 (MaxPoolin  (None, 1, 1, 512)            0         ['max_pooling2d_7[0][0]']     
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_29 (Conv2D)          (None, 1, 1, 512)            262656    ['max_pooling2d_7[0][0]']     
+                                                                                                  
+ conv2d_31 (Conv2D)          (None, 1, 1, 512)            2359808   ['conv2d_30[0][0]']           
+                                                                                                  
+ conv2d_33 (Conv2D)          (None, 1, 1, 512)            6554112   ['conv2d_32[0][0]']           
+                                                                                                  
+ conv2d_34 (Conv2D)          (None, 1, 1, 512)            262656    ['max_pooling2d_8[0][0]']     
+                                                                                                  
+ concatenate_4 (Concatenate  (None, 1, 1, 2048)           0         ['conv2d_29[0][0]',           
+ )                                                                   'conv2d_31[0][0]',           
+                                                                     'conv2d_33[0][0]',           
+                                                                     'conv2d_34[0][0]']           
+                                                                                                  
+ conv2d_35 (Conv2D)          (None, 1, 1, 1024)           1887539   ['concatenate_4[0][0]']       
+                                                          2                                       
+                                                                                                  
+ batch_normalization_4 (Bat  (None, 1, 1, 1024)           4096      ['conv2d_35[0][0]']           
+ chNormalization)                                                                                 
+                                                                                                  
+ max_pooling2d_9 (MaxPoolin  (None, 1, 1, 1024)           0         ['batch_normalization_4[0][0]'
+ g2D)                                                               ]                             
+                                                                                                  
+ flatten (Flatten)           (None, 1024)                 0         ['max_pooling2d_9[0][0]']     
+                                                                                                  
+ ctrl1 (Dense)               (None, 1296)                 1328400   ['flatten[0][0]']             
+                                                                                                  
+ ctrl0 (Dense)               (None, 864)                  1120608   ['ctrl1[0][0]']               
+                                                                                                  
+ ctrl (Dense)                (None, 432)                  373680    ['ctrl0[0][0]']               
+                                                                                                  
+ ctrl_net (Reshape)          (None, 12, 12, 3)            0         ['ctrl[0][0]']                
+                                                                                                  
+==================================================================================================
+Total params: 84884384 (323.81 MB)
+Trainable params: 84879264 (323.79 MB)
+Non-trainable params: 5120 (20.00 KB)
+__________________________________________________________________________________________________
+Epoch 1/30
+2025-08-12 13:43:58.321844: I tensorflow/compiler/xla/stream_executor/cuda/cuda_dnn.cc:432] Loaded cuDNN version 8907
+2025-08-12 13:43:58.348965: I tensorflow/compiler/xla/stream_executor/cuda/cuda_dnn.cc:432] Loaded cuDNN version 8907
+2025-08-12 13:44:01.699241: I tensorflow/compiler/xla/stream_executor/cuda/cuda_blas.cc:606] TensorFloat-32 will be used for the matrix multiplication. This will only be logged once.
+2025-08-12 13:44:09.047116: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7ee8db610130 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2025-08-12 13:44:09.047247: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): NVIDIA RTX 6000 Ada Generation, Compute Capability 8.9
+2025-08-12 13:44:09.047294: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (1): NVIDIA RTX 6000 Ada Generation, Compute Capability 8.9
+2025-08-12 13:44:09.047338: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (2): NVIDIA TITAN RTX, Compute Capability 7.5
+2025-08-12 13:44:09.047357: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (3): NVIDIA TITAN RTX, Compute Capability 7.5
+2025-08-12 13:44:09.047375: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (4): NVIDIA GeForce RTX 2080 Ti, Compute Capability 7.5
+2025-08-12 13:44:09.047394: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (5): NVIDIA GeForce RTX 2080 Ti, Compute Capability 7.5
+2025-08-12 13:44:09.047412: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (6): NVIDIA GeForce RTX 2080 Ti, Compute Capability 7.5
+2025-08-12 13:44:09.064150: I tensorflow/compiler/mlir/tensorflow/utils/dump_mlir_util.cc:255] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
+2025-08-12 13:44:09.227234: I ./tensorflow/compiler/jit/device_compiler.h:186] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+2025-08-12 14:03:51.615359: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 14394258374023365744
+2025-08-12 14:03:51.615520: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 9228417556384800905
+2025-08-12 14:03:51.615628: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 12142104280998733234
+2025-08-12 14:03:51.615672: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 11752207842391400953
+2025-08-12 14:03:51.615713: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 6255850713309896051
+2025-08-12 14:03:51.615746: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 12560694217736565801
+2025-08-12 14:03:51.615777: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 15555807980254779796
+2025-08-12 14:03:51.615806: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 9625336168983874081
+2025-08-12 14:03:51.615839: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 4556785017556765332
+2025-08-12 14:03:51.615869: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 1008164320759484089
+2025-08-12 14:03:51.615901: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 8380022215693163132
+2025-08-12 14:03:51.615930: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 3389955604945637613
+2025-08-12 14:03:51.615962: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 6574418430161206108
+2025-08-12 14:03:51.615980: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 13655931788146398845
+2025-08-12 14:03:51.615998: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 4151263179152381468
+2025-08-12 14:03:51.616024: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 7360719098419018493
+2025-08-12 14:03:51.616054: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 16718997480519810646
+2025-08-12 14:03:51.616082: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 11764196030527376757
+2025-08-12 14:03:51.616112: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 221124708483949895
+2025-08-12 14:03:51.616138: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 5185125418467270653
+2025-08-12 14:03:51.616165: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 12871010890465248807
+2025-08-12 14:03:51.616196: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 10713423036077127871
+2025-08-12 14:03:51.616218: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 11474148557599890463
+2025-08-12 14:03:51.616258: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 6054167929124474536
+2025-08-12 14:05:11.180205: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 14014406768776274617
+2025-08-12 14:05:11.180396: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 5743744648996854194
+2025-08-12 14:05:11.180604: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 232510120625183378
+2025-08-12 14:05:11.180625: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 17946555554853268243
+2025-08-12 14:05:11.180664: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 5878510717358048859
+2025-08-12 14:05:11.180684: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 1240229600056894809
+2025-08-12 14:05:11.180731: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 2119438596185304268
+2025-08-12 14:05:11.180747: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 259792570456711789
+2025-08-12 14:05:11.180776: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 17598373436001223956
+2025-08-12 14:05:11.180800: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 17984483844676372084
+2025-08-12 14:05:11.180816: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 1697790692001461476
+2025-08-12 14:05:11.180833: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 8599095721228693598
+2025-08-12 14:05:11.180874: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 17811755943296533694
+2025-08-12 14:05:11.180951: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 17854230260588797798
+2025-08-12 14:05:11.180992: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 2168874246478725560
+2025-08-12 14:05:11.181018: I tensorflow/core/framework/local_rendezvous.cc:405] Local rendezvous recv item cancelled. Key hash: 18352765424845098432
+3890/3890 - 1296s - loss: nan - mse: 0.0446 - val_loss: 0.0622 - val_mse: 0.0495 - lr: 2.0000e-04 - 1296s/epoch - 333ms/step
+Epoch 2/30

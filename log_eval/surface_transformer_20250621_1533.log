@@ -1,0 +1,41 @@
+nohup: ignoring input
+2025-06-21 15:46:29.754074: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-06-21 15:46:29.770758: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1750513589.790041 3523446 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1750513589.795854 3523446 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1750513589.811549 3523446 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750513589.811574 3523446 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750513589.811576 3523446 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750513589.811579 3523446 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-06-21 15:46:29.816426: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+I0000 00:00:1750513594.559403 3523446 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 22644 MB memory:  -> device: 0, name: NVIDIA TITAN RTX, pci bus id: 0000:64:00.0, compute capability: 7.5
+/home/ainsworth/master/py312/lib/python3.12/site-packages/torch/optim/lr_scheduler.py:182: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn(
+2025-06-21 15:46:36.350344: I tensorflow/core/kernels/data/tf_record_dataset_op.cc:381] TFRecordDataset `buffer_size` is unspecified, default to 262144
+/home/ainsworth/master/surface_transformer.py:162: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:203.)
+  torch.from_numpy(xyz_np).to(DEVICE).float(),
+Epoch 1/100 | train_loss=410.2957 mse=327.8772 val_loss=399.9473 mse=318.5877 time=9778.4s
+Epoch 2/100 | train_loss=399.5679 mse=318.2764 val_loss=396.6598 mse=315.6089 time=9751.6s
+Epoch 3/100 | train_loss=396.0301 mse=315.0526 val_loss=393.2705 mse=312.4575 time=9765.6s
+Epoch 4/100 | train_loss=391.8889 mse=311.2064 val_loss=383.4929 mse=303.4084 time=9758.9s
+Epoch 5/100 | train_loss=382.3927 mse=302.4449 val_loss=376.5393 mse=296.9486 time=9707.8s
+Epoch 6/100 | train_loss=375.7468 mse=296.1914 val_loss=367.4508 mse=288.5016 time=9694.7s
+Epoch 7/100 | train_loss=370.9025 mse=291.6802 val_loss=457.9851 mse=372.4422 time=9694.6s
+Epoch 8/100 | train_loss=369.0610 mse=289.9033 val_loss=364.1830 mse=285.2832 time=9699.0s
+Epoch 9/100 | train_loss=367.2236 mse=288.2437 val_loss=364.9249 mse=286.3022 time=9726.4s
+/home/ainsworth/master/py312/lib/python3.12/site-packages/torch/optim/lr_scheduler.py:198: UserWarning: The epoch parameter in `scheduler.step()` was not necessary and is being deprecated where possible. Please use `scheduler.step()` to step the scheduler. During the deprecation, if epoch is different from None, the closed form is used instead of the new chainable form, where available. Please open an issue if you are unable to replicate your use case: https://github.com/pytorch/pytorch/issues/new/choose.
+  warnings.warn(EPOCH_DEPRECATION_WARNING, UserWarning)
+Epoch 10/100 | train_loss=379.8201 mse=299.8847 val_loss=424.8653 mse=341.1795 time=9717.9s
+Epoch 11/100 | train_loss=411.3740 mse=328.8495 val_loss=416.0391 mse=333.1754 time=9702.9s
+Epoch 12/100 | train_loss=408.7959 mse=326.5931 val_loss=414.2938 mse=331.5886 time=9669.9s
+Epoch 13/100 | train_loss=409.3966 mse=327.1211 val_loss=409.0376 mse=326.7532 time=9716.7s
+Epoch 14/100 | train_loss=409.8885 mse=327.5989 val_loss=418.4376 mse=335.4183 time=9722.5s
+Epoch 15/100 | train_loss=417.5222 mse=334.5237 val_loss=427.2419 mse=343.6524 time=9702.5s
+Epoch 16/100 | train_loss=421.5134 mse=338.3041 val_loss=443.2239 mse=359.0505 time=9664.1s
+Epoch 17/100 | train_loss=427.0361 mse=343.5392 val_loss=444.6781 mse=360.3429 time=9689.2s
+Epoch 18/100 | train_loss=426.3721 mse=342.9227 val_loss=439.4690 mse=355.3436 time=9653.1s
+Epoch 19/100 | train_loss=428.0339 mse=344.4951 val_loss=435.2229 mse=351.4983 time=9648.3s
+Epoch 20/100 | train_loss=429.7376 mse=346.1351 val_loss=434.0281 mse=350.1374 time=9708.0s
+Epoch 21/100 | train_loss=430.2805 mse=346.6802 val_loss=433.4943 mse=349.6397 time=9727.3s

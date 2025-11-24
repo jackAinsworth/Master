@@ -1,0 +1,948 @@
+nohup: ignoring input
+training title:   all 256 
+2025-10-26 02:18:03.164163: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-10-26 02:18:03.182022: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1761441483.202040 2374941 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1761441483.207905 2374941 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1761441483.224406 2374941 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1761441483.224431 2374941 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1761441483.224434 2374941 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1761441483.224436 2374941 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-10-26 02:18:03.229264: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+training title:  all 256 starting from ep 60 going to 100  
+I0000 00:00:1761441487.158703 2374941 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 46550 MB memory:  -> device: 0, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:61:00.0, compute capability: 8.9
+I0000 00:00:1761441487.160451 2374941 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 46550 MB memory:  -> device: 1, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:3d:00.0, compute capability: 8.9
+Model: "functional"
+┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)        ┃ Output Shape      ┃    Param # ┃ Connected to      ┃
+┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━┩
+│ input_layer         │ (None, 50, 50, 3) │          0 │ -                 │
+│ (InputLayer)        │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d (Conv2D)     │ (None, 50, 50,    │      4,864 │ input_layer[0][0] │
+│                     │ 64)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ re_lu (ReLU)        │ (None, 50, 50,    │          0 │ conv2d[0][0]      │
+│                     │ 64)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_2 (Conv2D)   │ (None, 50, 50,    │     16,640 │ re_lu[0][0]       │
+│                     │ 256)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_4 (Conv2D)   │ (None, 50, 50,    │     16,640 │ re_lu[0][0]       │
+│                     │ 256)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ max_pooling2d       │ (None, 50, 50,    │          0 │ re_lu[0][0]       │
+│ (MaxPooling2D)      │ 64)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_1 (Conv2D)   │ (None, 50, 50,    │     16,640 │ re_lu[0][0]       │
+│                     │ 256)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_3 (Conv2D)   │ (None, 50, 50,    │    590,080 │ conv2d_2[0][0]    │
+│                     │ 256)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_5 (Conv2D)   │ (None, 50, 50,    │  1,638,656 │ conv2d_4[0][0]    │
+│                     │ 256)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_6 (Conv2D)   │ (None, 50, 50,    │     16,640 │ max_pooling2d[0]… │
+│                     │ 256)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ concatenate         │ (None, 50, 50,    │          0 │ conv2d_1[0][0],   │
+│ (Concatenate)       │ 1024)             │            │ conv2d_3[0][0],   │
+│                     │                   │            │ conv2d_5[0][0],   │
+│                     │                   │            │ conv2d_6[0][0]    │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_7 (Conv2D)   │ (None, 50, 50,    │  1,179,776 │ concatenate[0][0] │
+│                     │ 128)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ batch_normalization │ (None, 50, 50,    │        512 │ conv2d_7[0][0]    │
+│ (BatchNormalizatio… │ 128)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ re_lu_1 (ReLU)      │ (None, 50, 50,    │          0 │ batch_normalizat… │
+│                     │ 128)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ max_pooling2d_1     │ (None, 17, 17,    │          0 │ re_lu_1[0][0]     │
+│ (MaxPooling2D)      │ 128)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_9 (Conv2D)   │ (None, 17, 17,    │     33,024 │ max_pooling2d_1[… │
+│                     │ 256)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_11 (Conv2D)  │ (None, 17, 17,    │     33,024 │ max_pooling2d_1[… │
+│                     │ 256)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ max_pooling2d_2     │ (None, 17, 17,    │          0 │ max_pooling2d_1[… │
+│ (MaxPooling2D)      │ 128)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_8 (Conv2D)   │ (None, 17, 17,    │     33,024 │ max_pooling2d_1[… │
+│                     │ 256)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_10 (Conv2D)  │ (None, 17, 17,    │    590,080 │ conv2d_9[0][0]    │
+│                     │ 256)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_12 (Conv2D)  │ (None, 17, 17,    │  1,638,656 │ conv2d_11[0][0]   │
+│                     │ 256)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_13 (Conv2D)  │ (None, 17, 17,    │     33,024 │ max_pooling2d_2[… │
+│                     │ 256)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ concatenate_1       │ (None, 17, 17,    │          0 │ conv2d_8[0][0],   │
+│ (Concatenate)       │ 1024)             │            │ conv2d_10[0][0],  │
+│                     │                   │            │ conv2d_12[0][0],  │
+│                     │                   │            │ conv2d_13[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_14 (Conv2D)  │ (None, 17, 17,    │  4,719,104 │ concatenate_1[0]… │
+│                     │ 512)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ batch_normalizatio… │ (None, 17, 17,    │      2,048 │ conv2d_14[0][0]   │
+│ (BatchNormalizatio… │ 512)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ re_lu_2 (ReLU)      │ (None, 17, 17,    │          0 │ batch_normalizat… │
+│                     │ 512)              │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ max_pooling2d_3     │ (None, 6, 6, 512) │          0 │ re_lu_2[0][0]     │
+│ (MaxPooling2D)      │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_16 (Conv2D)  │ (None, 6, 6, 256) │    131,328 │ max_pooling2d_3[… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_18 (Conv2D)  │ (None, 6, 6, 256) │    131,328 │ max_pooling2d_3[… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ max_pooling2d_4     │ (None, 6, 6, 512) │          0 │ max_pooling2d_3[… │
+│ (MaxPooling2D)      │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_15 (Conv2D)  │ (None, 6, 6, 256) │    131,328 │ max_pooling2d_3[… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_17 (Conv2D)  │ (None, 6, 6, 256) │    590,080 │ conv2d_16[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_19 (Conv2D)  │ (None, 6, 6, 256) │  1,638,656 │ conv2d_18[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_20 (Conv2D)  │ (None, 6, 6, 256) │    131,328 │ max_pooling2d_4[… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ concatenate_2       │ (None, 6, 6,      │          0 │ conv2d_15[0][0],  │
+│ (Concatenate)       │ 1024)             │            │ conv2d_17[0][0],  │
+│                     │                   │            │ conv2d_19[0][0],  │
+│                     │                   │            │ conv2d_20[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_21 (Conv2D)  │ (None, 6, 6, 256) │  2,359,552 │ concatenate_2[0]… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ batch_normalizatio… │ (None, 6, 6, 256) │      1,024 │ conv2d_21[0][0]   │
+│ (BatchNormalizatio… │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ re_lu_3 (ReLU)      │ (None, 6, 6, 256) │          0 │ batch_normalizat… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ max_pooling2d_5     │ (None, 2, 2, 256) │          0 │ re_lu_3[0][0]     │
+│ (MaxPooling2D)      │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_23 (Conv2D)  │ (None, 2, 2, 256) │     65,792 │ max_pooling2d_5[… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_25 (Conv2D)  │ (None, 2, 2, 256) │     65,792 │ max_pooling2d_5[… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ max_pooling2d_6     │ (None, 2, 2, 256) │          0 │ max_pooling2d_5[… │
+│ (MaxPooling2D)      │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_22 (Conv2D)  │ (None, 2, 2, 256) │     65,792 │ max_pooling2d_5[… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_24 (Conv2D)  │ (None, 2, 2, 256) │    590,080 │ conv2d_23[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_26 (Conv2D)  │ (None, 2, 2, 256) │  1,638,656 │ conv2d_25[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_27 (Conv2D)  │ (None, 2, 2, 256) │     65,792 │ max_pooling2d_6[… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ concatenate_3       │ (None, 2, 2,      │          0 │ conv2d_22[0][0],  │
+│ (Concatenate)       │ 1024)             │            │ conv2d_24[0][0],  │
+│                     │                   │            │ conv2d_26[0][0],  │
+│                     │                   │            │ conv2d_27[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_28 (Conv2D)  │ (None, 2, 2, 512) │  4,719,104 │ concatenate_3[0]… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ batch_normalizatio… │ (None, 2, 2, 512) │      2,048 │ conv2d_28[0][0]   │
+│ (BatchNormalizatio… │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ re_lu_4 (ReLU)      │ (None, 2, 2, 512) │          0 │ batch_normalizat… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ max_pooling2d_7     │ (None, 1, 1, 512) │          0 │ re_lu_4[0][0]     │
+│ (MaxPooling2D)      │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ flatten (Flatten)   │ (None, 512)       │          0 │ max_pooling2d_7[… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ ctrl (Dense)        │ (None, 432)       │    221,616 │ flatten[0][0]     │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ ctrl_net (Reshape)  │ (None, 12, 12, 3) │          0 │ ctrl[0][0]        │
+└─────────────────────┴───────────────────┴────────────┴───────────────────┘
+ Total params: 69,329,554 (264.47 MB)
+ Trainable params: 23,108,912 (88.15 MB)
+ Non-trainable params: 2,816 (11.00 KB)
+ Optimizer params: 46,217,826 (176.31 MB)
+2025-10-26 02:18:14.088242: I tensorflow/core/kernels/data/tf_record_dataset_op.cc:381] TFRecordDataset `buffer_size` is unspecified, default to 262144
+Epoch 1/40
+I0000 00:00:1761441514.547522 2375093 cuda_dnn.cc:529] Loaded cuDNN version 90501
+I0000 00:00:1761441514.548047 2375100 cuda_dnn.cc:529] Loaded cuDNN version 90501
+2025-10-26 03:00:44.745297: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+	 [[{{node MultiDeviceIteratorGetNextFromShard}}]]
+2025-10-26 03:00:44.745990: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+	 [[{{node MultiDeviceIteratorGetNextFromShard}}]]
+	 [[RemoteCall]]
+2025-10-26 03:00:44.746272: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+	 [[{{node MultiDeviceIteratorGetNextFromShard}}]]
+	 [[RemoteCall]]
+2025-10-26 03:00:49.473170: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 03:00:49.473261: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 03:00:49.473286: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 03:00:49.473306: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 03:00:49.473326: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 03:00:49.473345: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 03:00:49.473426: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 1652659683797029184
+2025-10-26 03:00:49.473452: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 03:00:49.473471: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 03:00:49.473488: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11684515356494779394
+2025-10-26 03:00:49.473507: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 03:00:49.473521: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 03:00:49.473540: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 03:00:49.473564: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 03:00:49.473580: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-26 03:00:49.473594: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11278984380468198192
+2025-10-26 03:00:49.473613: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16142066357444654655
+/home/ainsworth/master/py312/lib/python3.12/site-packages/keras/src/trainers/epoch_iterator.py:160: UserWarning: Your input ran out of data; interrupting training. Make sure that your dataset or generator can generate at least `steps_per_epoch * epochs` batches. You may need to use the `.repeat()` function when building your dataset.
+  self._interrupted_warning()
+2025-10-26 03:00:50.135663: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: CANCELLED: GetNextFromShard was cancelled
+	 [[{{node MultiDeviceIteratorGetNextFromShard}}]]
+	 [[RemoteCall]] [type.googleapis.com/tensorflow.DerivedStatus='']
+2025-10-26 03:08:13.782799: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+	 [[{{node IteratorGetNext_1}}]]
+2025-10-26 03:08:13.783847: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 03:08:13.783936: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-26 03:08:13.784007: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2996s - 426ms/step - loss: 0.0016 - mse: 5.7738e-04 - val_loss: 0.0149 - val_mse: 0.0064 - learning_rate: 1.0000e-04
+Epoch 2/40
+2025-10-26 03:50:20.518049: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 03:50:20.519791: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 03:50:20.519816: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 03:50:20.519829: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 03:50:20.519840: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 03:50:20.519853: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 03:50:20.519868: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 03:50:20.519879: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 03:50:20.519888: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11684515356494779394
+2025-10-26 03:50:20.519901: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 03:50:20.519909: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 03:50:20.519922: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 03:50:20.519937: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 03:50:20.519946: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-26 03:57:48.545533: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+	 [[{{node IteratorGetNext_1}}]]
+	 [[GroupCrossDeviceControlEdges_0/StatefulPartitionedCall/NoOp/_7]]
+2025-10-26 03:57:48.547786: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-26 03:57:48.547818: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 03:57:48.547890: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2974s - 423ms/step - loss: 0.0015 - mse: 5.6487e-04 - val_loss: 0.0152 - val_mse: 0.0065 - learning_rate: 1.0000e-04
+Epoch 3/40
+2025-10-26 04:40:01.621161: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-26 04:40:01.622154: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 04:40:01.622253: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 04:40:01.622277: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 04:40:01.622318: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11278984380468198192
+2025-10-26 04:40:01.622373: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 04:40:01.622414: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 04:40:01.622427: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 04:40:01.622466: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 04:40:01.622481: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 04:40:01.622518: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 04:40:01.622536: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11684515356494779394
+2025-10-26 04:40:01.622549: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 04:40:01.622567: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 04:40:01.622585: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 04:47:25.054183: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 04:47:25.056394: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+2025-10-26 04:47:25.056420: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+7031/7031 - 2978s - 424ms/step - loss: 0.0015 - mse: 5.5385e-04 - val_loss: 0.0149 - val_mse: 0.0064 - learning_rate: 1.0000e-04
+Epoch 4/40
+2025-10-26 05:29:36.282676: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 05:29:36.285188: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-26 05:29:36.285231: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 05:29:36.285247: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 05:29:36.285317: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 05:29:36.285334: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 05:29:36.285343: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11684515356494779394
+2025-10-26 05:29:36.285358: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 05:29:36.285366: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 05:29:36.285379: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 05:29:36.285391: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 05:29:36.285431: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 05:29:36.285451: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 05:29:36.285471: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 05:37:11.108295: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 05:37:11.110072: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+	 [[{{node IteratorGetNext_1}}]]
+2025-10-26 05:37:11.110148: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+2025-10-26 05:37:11.110169: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+7031/7031 - 2984s - 424ms/step - loss: 0.0015 - mse: 5.4601e-04 - val_loss: 0.0150 - val_mse: 0.0064 - learning_rate: 1.0000e-04
+Epoch 5/40
+2025-10-26 06:19:18.121292: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 06:19:18.123290: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-26 06:19:18.123330: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 06:19:18.123358: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 06:19:18.123382: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 06:19:18.123454: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 06:19:18.123478: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 06:19:18.123491: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 06:19:18.123517: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 06:19:18.123529: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 06:19:18.123540: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 06:19:18.123552: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 06:19:18.123572: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 06:26:44.094575: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 06:26:44.095729: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+2025-10-26 06:26:44.095762: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+7031/7031 - 2975s - 423ms/step - loss: 0.0015 - mse: 5.3411e-04 - val_loss: 0.0149 - val_mse: 0.0064 - learning_rate: 1.0000e-04
+Epoch 6/40
+2025-10-26 07:08:56.994525: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 07:08:56.996630: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 07:08:56.996657: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 07:08:56.996684: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 07:08:56.996699: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 07:08:56.996728: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 07:08:56.996799: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 07:08:56.996816: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 07:08:56.996844: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 07:08:56.996877: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 07:08:56.996908: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 07:08:56.996928: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 07:16:36.525212: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 07:16:36.526267: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+2025-10-26 07:16:36.526324: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+7031/7031 - 2990s - 425ms/step - loss: 0.0014 - mse: 5.2512e-04 - val_loss: 0.0152 - val_mse: 0.0065 - learning_rate: 1.0000e-04
+Epoch 7/40
+2025-10-26 07:58:50.098066: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 07:58:50.100625: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 07:58:50.100704: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 07:58:50.100753: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 07:58:50.100790: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 07:58:50.100805: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 07:58:50.100837: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 07:58:50.100851: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 07:58:50.100881: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 07:58:50.100905: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 07:58:50.100941: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 07:58:50.100968: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 08:06:18.440600: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-26 08:06:18.442642: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 08:06:18.442705: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2982s - 424ms/step - loss: 0.0014 - mse: 5.1656e-04 - val_loss: 0.0151 - val_mse: 0.0065 - learning_rate: 1.0000e-04
+Epoch 8/40
+2025-10-26 08:48:32.966882: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 08:48:32.968711: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 08:48:32.968777: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 08:48:32.968792: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 08:48:32.968821: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 08:48:32.968831: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 08:48:32.968853: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 08:48:32.968863: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 08:48:32.968886: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 08:48:32.968895: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 08:48:32.968917: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 08:48:32.968930: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 08:56:04.406987: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 08:56:04.409220: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+2025-10-26 08:56:04.409267: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+7031/7031 - 2986s - 425ms/step - loss: 0.0014 - mse: 5.0630e-04 - val_loss: 0.0153 - val_mse: 0.0065 - learning_rate: 1.0000e-04
+Epoch 9/40
+2025-10-26 09:38:20.126003: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+	 [[{{node MultiDeviceIteratorGetNextFromShard}}]]
+2025-10-26 09:38:20.471725: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 09:38:20.471804: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 09:38:20.471875: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 09:38:20.471907: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 09:38:20.471935: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 09:38:20.471959: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 09:38:20.471985: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 09:38:20.472008: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 09:38:20.472029: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 09:38:20.472052: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 09:38:20.472077: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 09:38:20.472127: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 09:45:48.517920: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-26 09:45:48.520136: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 09:45:48.520321: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2984s - 424ms/step - loss: 0.0014 - mse: 5.0303e-04 - val_loss: 0.0151 - val_mse: 0.0064 - learning_rate: 1.0000e-04
+Epoch 10/40
+2025-10-26 10:28:03.044646: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 10:28:03.046703: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 10:28:03.046719: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 10:28:03.046728: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 10:28:03.046741: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 10:28:03.046811: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 10:28:03.046820: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 10:28:03.046828: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 10:28:03.046882: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 10:28:03.046925: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 10:28:03.046946: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 10:28:03.046966: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 10:35:33.277975: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 10:35:33.280030: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+2025-10-26 10:35:33.280098: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+7031/7031 - 2985s - 425ms/step - loss: 0.0014 - mse: 4.9506e-04 - val_loss: 0.0152 - val_mse: 0.0065 - learning_rate: 1.0000e-04
+Epoch 11/40
+2025-10-26 11:17:40.663748: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 11:17:40.665407: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 11:17:40.665429: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 11:17:40.665439: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 11:17:40.665448: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 11:17:40.665463: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 11:17:40.665478: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 11:17:40.665498: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 11:17:40.665504: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11684515356494779394
+2025-10-26 11:17:40.665510: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 11:17:40.665520: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 11:17:40.665530: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 11:17:40.665543: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 11:17:40.665548: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-26 11:25:09.562859: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 11:25:09.564813: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+2025-10-26 11:25:09.564852: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+7031/7031 - 2976s - 423ms/step - loss: 0.0013 - mse: 4.8823e-04 - val_loss: 0.0155 - val_mse: 0.0066 - learning_rate: 1.0000e-04
+Epoch 12/40
+2025-10-26 12:07:24.187213: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 12:07:24.189076: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 12:07:24.189092: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 12:07:24.189100: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 12:07:24.189109: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 12:07:24.189114: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 12:07:24.189122: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 12:07:24.189189: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 12:07:24.189229: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 12:07:24.189257: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 12:07:24.189275: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 12:07:24.189293: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 12:14:46.189543: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 12:14:46.190647: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+2025-10-26 12:14:46.190681: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+7031/7031 - 2977s - 423ms/step - loss: 0.0013 - mse: 4.8195e-04 - val_loss: 0.0152 - val_mse: 0.0065 - learning_rate: 1.0000e-04
+Epoch 13/40
+2025-10-26 12:56:56.478409: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 12:56:56.480229: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 12:56:56.480243: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 12:56:56.480252: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 12:56:56.480259: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 12:56:56.480267: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 12:56:56.480276: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 12:56:56.480346: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 12:56:56.480356: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 12:56:56.480362: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 12:56:56.480370: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 12:56:56.480377: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 13:04:25.224347: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-26 13:04:25.226076: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 13:04:25.226144: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2979s - 424ms/step - loss: 0.0013 - mse: 4.7594e-04 - val_loss: 0.0152 - val_mse: 0.0065 - learning_rate: 1.0000e-04
+Epoch 14/40
+2025-10-26 13:46:38.768208: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 13:46:38.769976: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 13:46:38.769994: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 13:46:38.770005: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 13:46:38.770016: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 13:46:38.770031: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 13:46:38.770040: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 13:46:38.770050: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 13:46:38.770058: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 13:46:38.770065: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 13:46:38.770073: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 13:46:38.770083: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 13:53:53.249387: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 13:53:53.250425: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-26 13:53:53.250489: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2968s - 422ms/step - loss: 0.0013 - mse: 4.7150e-04 - val_loss: 0.0152 - val_mse: 0.0065 - learning_rate: 1.0000e-04
+Epoch 15/40
+2025-10-26 14:36:04.820728: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 14:36:04.821558: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-26 14:36:04.821592: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 14:36:04.821680: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 14:36:04.821734: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 14:36:04.821771: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 14:36:04.821787: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 14:36:04.821794: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 14:36:04.821816: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11684515356494779394
+2025-10-26 14:36:04.821824: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 14:36:04.821844: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 14:36:04.821852: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 14:36:04.821871: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 14:36:04.821886: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 14:43:33.185128: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 14:43:33.185914: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-26 14:43:33.185997: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2980s - 424ms/step - loss: 0.0013 - mse: 4.6863e-04 - val_loss: 0.0157 - val_mse: 0.0067 - learning_rate: 1.0000e-04
+Epoch 16/40
+2025-10-26 15:25:47.064430: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 15:25:47.065218: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 15:25:47.065285: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 15:25:47.065314: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 15:25:47.065340: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 15:25:47.065401: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 15:25:47.065425: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 15:25:47.065446: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 15:25:47.065464: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 15:25:47.065485: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 15:25:47.065495: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 15:25:47.065507: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 15:33:12.045287: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 15:33:12.045946: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-26 15:33:12.046011: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2979s - 424ms/step - loss: 0.0013 - mse: 4.6285e-04 - val_loss: 0.0151 - val_mse: 0.0065 - learning_rate: 1.0000e-04
+Epoch 17/40
+2025-10-26 16:15:21.107648: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+	 [[{{node MultiDeviceIteratorGetNextFromShard}}]]
+2025-10-26 16:15:21.464561: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 16:15:21.464656: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 16:15:21.464725: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 16:15:21.464756: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 16:15:21.464772: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 16:15:21.464790: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 16:15:21.464802: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 16:15:21.464829: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 16:15:21.464854: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 16:15:21.464883: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 16:15:21.464896: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 16:15:21.464921: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 16:22:43.298415: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 16:22:43.299247: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-26 16:22:43.299317: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2971s - 423ms/step - loss: 0.0012 - mse: 4.4999e-04 - val_loss: 0.0152 - val_mse: 0.0065 - learning_rate: 1.0000e-04
+Epoch 18/40
+2025-10-26 17:04:56.547528: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 17:04:56.549342: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 17:04:56.549360: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 17:04:56.549369: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 17:04:56.549376: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 17:04:56.549385: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 17:04:56.549392: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 17:04:56.549400: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 17:04:56.549406: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11684515356494779394
+2025-10-26 17:04:56.549411: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 17:04:56.549418: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 17:04:56.549426: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 17:04:56.549436: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 17:04:56.549441: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-26 17:12:18.434404: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 17:12:18.436395: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+2025-10-26 17:12:18.436426: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+7031/7031 - 2975s - 423ms/step - loss: 0.0012 - mse: 4.4929e-04 - val_loss: 0.0154 - val_mse: 0.0066 - learning_rate: 1.0000e-04
+Epoch 19/40
+2025-10-26 17:54:29.528297: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 17:54:29.530491: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 17:54:29.530521: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 17:54:29.530534: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 17:54:29.530546: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 17:54:29.530559: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 17:54:29.530571: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 17:54:29.530582: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 17:54:29.530591: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11684515356494779394
+2025-10-26 17:54:29.530613: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 17:54:29.530620: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 17:54:29.530630: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 17:54:29.530644: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 17:54:29.530651: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-26 18:02:01.376521: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-26 18:02:01.377619: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 18:02:01.377726: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2983s - 424ms/step - loss: 0.0012 - mse: 4.4380e-04 - val_loss: 0.0154 - val_mse: 0.0066 - learning_rate: 1.0000e-04
+Epoch 20/40
+2025-10-26 18:44:15.157748: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 18:44:15.159305: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 18:44:15.159338: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 18:44:15.159357: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 18:44:15.159375: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 18:44:15.159405: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 18:44:15.159413: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 18:44:15.159423: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 18:44:15.159429: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 18:44:15.159438: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 18:44:15.159446: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 18:44:15.159457: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 18:51:29.787149: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 18:51:29.789014: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-26 18:51:29.789066: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2968s - 422ms/step - loss: 0.0012 - mse: 4.4341e-04 - val_loss: 0.0154 - val_mse: 0.0066 - learning_rate: 1.0000e-04
+Epoch 21/40
+2025-10-26 19:33:37.340542: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 19:33:37.342653: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 19:33:37.342701: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 19:33:37.342714: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 19:33:37.342725: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 19:33:37.342738: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 19:33:37.342748: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 19:33:37.342761: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 19:33:37.342769: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11684515356494779394
+2025-10-26 19:33:37.342780: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 19:33:37.342788: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 19:33:37.342799: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 19:33:37.342813: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 19:33:37.342820: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-26 19:41:00.008612: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-26 19:41:00.010649: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 19:41:00.010701: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2970s - 422ms/step - loss: 0.0012 - mse: 4.3130e-04 - val_loss: 0.0153 - val_mse: 0.0066 - learning_rate: 1.0000e-04
+Epoch 22/40
+2025-10-26 20:23:06.271455: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 20:23:06.273295: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 20:23:06.273315: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 20:23:06.273324: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 20:23:06.273332: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 20:23:06.273342: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 20:23:06.273352: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 20:23:06.273360: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 20:23:06.273370: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 20:23:06.273375: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 20:23:06.273385: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 20:23:06.273396: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 20:30:28.211213: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 20:30:28.212226: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-26 20:30:28.212318: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2968s - 422ms/step - loss: 9.5183e-04 - mse: 3.4245e-04 - val_loss: 0.0150 - val_mse: 0.0064 - learning_rate: 5.0000e-05
+Epoch 23/40
+2025-10-26 21:12:37.109508: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 21:12:37.111461: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-26 21:12:37.111483: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 21:12:37.111492: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 21:12:37.111499: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 21:12:37.111505: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11684515356494779394
+2025-10-26 21:12:37.111513: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 21:12:37.111579: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 21:12:37.111587: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 21:12:37.111595: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 21:12:37.111620: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 21:12:37.111654: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 21:12:37.111673: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 21:12:37.111692: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 21:19:57.691253: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-26 21:19:57.694977: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 21:19:57.695066: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2970s - 422ms/step - loss: 8.9833e-04 - mse: 3.2265e-04 - val_loss: 0.0150 - val_mse: 0.0064 - learning_rate: 5.0000e-05
+Epoch 24/40
+2025-10-26 22:02:09.095017: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 22:02:09.097059: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 22:02:09.097079: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 22:02:09.097089: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 22:02:09.097099: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 22:02:09.097198: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 22:02:09.097212: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-26 22:02:09.097233: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 22:02:09.097242: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 22:02:09.097249: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 22:02:09.097253: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11684515356494779394
+2025-10-26 22:02:09.097259: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 22:02:09.097262: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 22:02:09.097267: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 22:09:37.723530: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 22:09:37.724645: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-26 22:09:37.724716: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2980s - 424ms/step - loss: 8.7489e-04 - mse: 3.1412e-04 - val_loss: 0.0151 - val_mse: 0.0065 - learning_rate: 5.0000e-05
+Epoch 25/40
+2025-10-26 22:51:45.588136: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 22:51:45.589960: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 22:51:45.589980: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 22:51:45.589990: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 22:51:45.590000: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 22:51:45.590022: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 22:51:45.590033: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 22:51:45.590105: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 22:51:45.590118: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 22:51:45.590141: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 22:51:45.590149: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 22:51:45.590171: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 22:59:18.958632: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-26 22:59:18.960526: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 22:59:18.960615: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2981s - 424ms/step - loss: 8.5431e-04 - mse: 3.0675e-04 - val_loss: 0.0151 - val_mse: 0.0064 - learning_rate: 5.0000e-05
+Epoch 26/40
+2025-10-26 23:41:33.127524: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-26 23:41:33.129608: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-26 23:41:33.129645: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-26 23:41:33.129663: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-26 23:41:33.129681: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-26 23:41:33.129710: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-26 23:41:33.129730: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 1652659683797029184
+2025-10-26 23:41:33.129756: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-26 23:41:33.129769: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-26 23:41:33.129778: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11684515356494779394
+2025-10-26 23:41:33.129786: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-26 23:41:33.129797: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-26 23:41:33.129809: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-26 23:41:33.129828: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-26 23:41:33.129837: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-26 23:41:33.129845: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11278984380468198192
+2025-10-26 23:41:33.129856: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16142066357444654655
+2025-10-26 23:48:49.568161: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-26 23:48:49.570047: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-26 23:48:49.570122: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2971s - 422ms/step - loss: 8.4117e-04 - mse: 3.0207e-04 - val_loss: 0.0151 - val_mse: 0.0064 - learning_rate: 5.0000e-05
+Epoch 27/40
+2025-10-27 00:31:02.362827: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-27 00:31:02.363862: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-27 00:31:02.363902: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-27 00:31:02.363922: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-27 00:31:02.363940: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-27 00:31:02.363977: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-27 00:31:02.363994: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 1652659683797029184
+2025-10-27 00:31:02.364011: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-27 00:31:02.364027: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-27 00:31:02.364040: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11684515356494779394
+2025-10-27 00:31:02.364056: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-27 00:31:02.364067: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-27 00:31:02.364095: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-27 00:31:02.364109: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-27 00:31:02.364117: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-27 00:31:02.364124: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11278984380468198192
+2025-10-27 00:31:02.364137: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16142066357444654655
+2025-10-27 00:38:23.089664: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-27 00:38:23.091778: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-27 00:38:23.091858: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2974s - 423ms/step - loss: 8.3271e-04 - mse: 2.9918e-04 - val_loss: 0.0150 - val_mse: 0.0064 - learning_rate: 5.0000e-05
+Epoch 28/40
+2025-10-27 01:20:36.868593: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-27 01:20:36.869558: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-27 01:20:36.869591: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-27 01:20:36.869605: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-27 01:20:36.869620: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-27 01:20:36.869637: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-27 01:20:36.869651: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-27 01:20:36.869663: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-27 01:20:36.869672: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11684515356494779394
+2025-10-27 01:20:36.869683: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-27 01:20:36.869691: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-27 01:20:36.869710: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-27 01:20:36.869741: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-27 01:20:36.869750: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-27 01:28:04.043650: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-27 01:28:04.044654: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-27 01:28:04.044711: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2981s - 424ms/step - loss: 8.2044e-04 - mse: 2.9475e-04 - val_loss: 0.0151 - val_mse: 0.0065 - learning_rate: 5.0000e-05
+Epoch 29/40
+2025-10-27 02:10:13.753296: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-27 02:10:13.755229: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-27 02:10:13.755300: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-27 02:10:13.755311: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-27 02:10:13.755340: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-27 02:10:13.755361: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-27 02:10:13.755368: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-27 02:10:13.755383: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-27 02:10:13.755418: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-27 02:10:13.755448: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-27 02:10:13.755472: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11684515356494779394
+2025-10-27 02:10:13.755510: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-27 02:10:13.755533: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-27 02:10:13.755562: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-27 02:17:37.229245: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-27 02:17:37.231223: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+2025-10-27 02:17:37.231259: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+7031/7031 - 2973s - 423ms/step - loss: 8.1577e-04 - mse: 2.9313e-04 - val_loss: 0.0152 - val_mse: 0.0065 - learning_rate: 5.0000e-05
+Epoch 30/40
+2025-10-27 02:59:50.287588: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-27 02:59:50.288419: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-27 02:59:50.288462: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-27 02:59:50.288603: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-27 02:59:50.288638: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-27 02:59:50.288668: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-27 02:59:50.288698: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-27 02:59:50.288714: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-27 02:59:50.288725: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11684515356494779394
+2025-10-27 02:59:50.288736: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-27 02:59:50.288758: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-27 02:59:50.288780: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-27 02:59:50.288793: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-27 02:59:50.288812: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-27 03:07:07.432126: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-27 03:07:07.433445: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-27 03:07:07.433523: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2970s - 422ms/step - loss: 8.0077e-04 - mse: 2.8771e-04 - val_loss: 0.0152 - val_mse: 0.0065 - learning_rate: 5.0000e-05
+Epoch 31/40
+2025-10-27 03:49:27.499345: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-27 03:49:27.500734: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-27 03:49:27.500759: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-27 03:49:27.500769: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-27 03:49:27.500860: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-27 03:49:27.500877: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-27 03:49:27.500903: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-27 03:49:27.500941: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-27 03:49:27.500963: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-27 03:49:27.500986: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-27 03:49:27.501001: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-27 03:49:27.501021: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-27 03:56:36.399241: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-27 03:56:36.400114: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-27 03:56:36.400203: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2969s - 422ms/step - loss: 7.9355e-04 - mse: 2.8520e-04 - val_loss: 0.0152 - val_mse: 0.0065 - learning_rate: 5.0000e-05
+Epoch 32/40
+2025-10-27 04:38:46.167059: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-27 04:38:46.168310: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-27 04:38:46.168348: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-27 04:38:46.168371: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-27 04:38:46.168385: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-27 04:38:46.168406: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11278984380468198192
+2025-10-27 04:38:46.168418: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-27 04:38:46.168439: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-27 04:38:46.168460: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-27 04:38:46.168474: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-27 04:38:46.168499: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-27 04:38:46.168511: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11684515356494779394
+2025-10-27 04:38:46.168519: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-27 04:38:46.168531: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-27 04:38:46.168542: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-27 04:46:05.267993: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-27 04:46:05.270125: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-27 04:46:05.270210: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2969s - 422ms/step - loss: 7.8385e-04 - mse: 2.8165e-04 - val_loss: 0.0152 - val_mse: 0.0065 - learning_rate: 5.0000e-05
+Epoch 33/40
+2025-10-27 05:28:20.297972: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+	 [[{{function_node cond_false_4438}}{{node cond/IteratorGetNext_1}}]]
+2025-10-27 05:28:20.299868: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-27 05:28:20.299888: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-27 05:28:20.299972: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-27 05:28:20.299995: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-27 05:28:20.300017: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-27 05:28:20.300023: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-27 05:28:20.300047: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-27 05:28:20.300070: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-27 05:28:20.300095: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-27 05:28:20.300117: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-27 05:28:20.300132: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-27 05:28:20.300152: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-27 05:35:44.626750: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-27 05:35:44.627774: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+2025-10-27 05:35:44.627800: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+7031/7031 - 2979s - 424ms/step - loss: 7.7907e-04 - mse: 2.8002e-04 - val_loss: 0.0152 - val_mse: 0.0065 - learning_rate: 5.0000e-05
+Epoch 34/40
+2025-10-27 06:17:50.893390: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-27 06:17:50.895275: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-27 06:17:50.895293: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-27 06:17:50.895303: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-27 06:17:50.895312: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-27 06:17:50.895320: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-27 06:17:50.895417: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-27 06:17:50.895428: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-27 06:17:50.895432: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-27 06:17:50.895454: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-27 06:17:50.895462: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11684515356494779394
+2025-10-27 06:17:50.895466: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-27 06:17:50.895472: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-27 06:17:50.895478: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-27 06:25:16.326790: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-27 06:25:16.328230: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-27 06:25:16.328299: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2972s - 423ms/step - loss: 7.7101e-04 - mse: 2.7713e-04 - val_loss: 0.0154 - val_mse: 0.0066 - learning_rate: 5.0000e-05
+Epoch 35/40
+2025-10-27 07:07:26.602288: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-27 07:07:26.603714: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-27 07:07:26.603765: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-27 07:07:26.603843: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-27 07:07:26.603854: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-27 07:07:26.603862: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-27 07:07:26.603868: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11684515356494779394
+2025-10-27 07:07:26.603880: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-27 07:07:26.603884: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-27 07:07:26.603907: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-27 07:07:26.603917: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-27 07:07:26.603977: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-27 07:07:26.603998: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-27 07:07:26.604016: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-27 07:15:10.786687: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-27 07:15:10.789063: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+2025-10-27 07:15:10.789200: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+7031/7031 - 2994s - 426ms/step - loss: 7.6688e-04 - mse: 2.7574e-04 - val_loss: 0.0152 - val_mse: 0.0065 - learning_rate: 5.0000e-05
+Epoch 36/40
+2025-10-27 07:57:24.116943: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-27 07:57:24.119204: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-27 07:57:24.119248: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-27 07:57:24.119320: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-27 07:57:24.119343: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-27 07:57:24.119374: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-27 07:57:24.119384: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11684515356494779394
+2025-10-27 07:57:24.119400: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-27 07:57:24.119406: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-27 07:57:24.119432: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-27 07:57:24.119440: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-27 07:57:24.119444: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-27 07:57:24.119472: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-27 07:57:24.119490: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-27 08:04:58.715158: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-27 08:04:58.716229: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+2025-10-27 08:04:58.716391: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+7031/7031 - 2988s - 425ms/step - loss: 7.5969e-04 - mse: 2.7323e-04 - val_loss: 0.0153 - val_mse: 0.0065 - learning_rate: 5.0000e-05
+Epoch 37/40
+2025-10-27 08:47:12.338411: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-27 08:47:12.340333: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-27 08:47:12.340352: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-27 08:47:12.340361: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-27 08:47:12.340368: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-27 08:47:12.340377: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-27 08:47:12.340384: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 1652659683797029184
+2025-10-27 08:47:12.340391: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-27 08:47:12.340399: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-27 08:47:12.340404: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11684515356494779394
+2025-10-27 08:47:12.340411: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-27 08:47:12.340416: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-27 08:47:12.340424: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-27 08:47:12.340434: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-27 08:47:12.340439: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-27 08:47:12.340444: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11278984380468198192
+2025-10-27 08:47:12.340464: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16142066357444654655
+2025-10-27 08:54:34.612847: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-27 08:54:34.613869: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-27 08:54:34.613962: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2976s - 423ms/step - loss: 7.4904e-04 - mse: 2.6934e-04 - val_loss: 0.0153 - val_mse: 0.0066 - learning_rate: 5.0000e-05
+Epoch 38/40
+2025-10-27 09:36:48.536719: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-27 09:36:48.540540: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-27 09:36:48.540552: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-27 09:36:48.540558: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-27 09:36:48.540564: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-27 09:36:48.540571: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-27 09:36:48.540585: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-27 09:36:48.540658: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-27 09:36:48.540667: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-27 09:36:48.540672: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11684515356494779394
+2025-10-27 09:36:48.540675: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 17252364600029925636
+2025-10-27 09:36:48.540689: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-27 09:36:48.540698: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-27 09:36:48.540704: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-27 09:44:12.789915: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-27 09:44:12.791981: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+2025-10-27 09:44:12.792009: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+7031/7031 - 2978s - 424ms/step - loss: 7.4551e-04 - mse: 2.6811e-04 - val_loss: 0.0152 - val_mse: 0.0065 - learning_rate: 5.0000e-05
+Epoch 39/40
+2025-10-27 10:26:23.531641: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-27 10:26:23.532637: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-27 10:26:23.532710: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-27 10:26:23.532753: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11278984380468198192
+2025-10-27 10:26:23.532777: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-27 10:26:23.532804: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16142066357444654655
+2025-10-27 10:26:23.532824: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-27 10:26:23.532836: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-27 10:26:23.532854: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-27 10:26:23.532861: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 1652659683797029184
+2025-10-27 10:26:23.532884: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-27 10:26:23.532900: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-27 10:26:23.532913: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-27 10:26:23.532929: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-27 10:26:23.532945: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-27 10:33:51.110459: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-27 10:33:51.112517: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+2025-10-27 10:33:51.112596: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+7031/7031 - 2978s - 424ms/step - loss: 7.4001e-04 - mse: 2.6622e-04 - val_loss: 0.0153 - val_mse: 0.0065 - learning_rate: 5.0000e-05
+Epoch 40/40
+2025-10-27 11:15:59.527631: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3140259043424739466
+2025-10-27 11:15:59.531317: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 4628382879663308920
+2025-10-27 11:15:59.531333: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 16326448399944698818
+2025-10-27 11:15:59.531340: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 570252199612251853
+2025-10-27 11:15:59.531346: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 3093951323087789710
+2025-10-27 11:15:59.531354: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 15706324985777178912
+2025-10-27 11:15:59.531432: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 7092122981370425498
+2025-10-27 11:15:59.531443: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 2883482210836968698
+2025-10-27 11:15:59.531446: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 11278984380468198192
+2025-10-27 11:15:59.531468: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13415970684451325138
+2025-10-27 11:15:59.531475: I tensorflow/core/framework/local_rendezvous.cc:430] Local rendezvous send item cancelled. Key hash: 3786972132689053742
+2025-10-27 11:15:59.531483: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 233899530172463486
+2025-10-27 11:15:59.531490: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 13181205318590717156
+2025-10-27 11:23:25.232621: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 11023131607867283589
+2025-10-27 11:23:25.234636: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 6338306035602675636
+2025-10-27 11:23:25.234664: I tensorflow/core/framework/local_rendezvous.cc:426] Local rendezvous recv item cancelled. Key hash: 8126840626413343516
+7031/7031 - 2974s - 423ms/step - loss: 7.3797e-04 - mse: 2.6558e-04 - val_loss: 0.0153 - val_mse: 0.0065 - learning_rate: 5.0000e-05
+Finished training → final model saved to models/coons_surface_incept_20251027_1123_40ep.keras

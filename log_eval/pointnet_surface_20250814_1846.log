@@ -1,0 +1,802 @@
+nohup: ignoring input
+2025-08-14 18:46:24.739850: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-08-14 18:46:24.758709: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1755189984.779081 3104052 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1755189984.785287 3104052 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1755189984.801923 3104052 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1755189984.801948 3104052 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1755189984.801951 3104052 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1755189984.801953 3104052 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-08-14 18:46:24.806663: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Torch: 2.7.1+cu126  CUDA available: True
+GPUs: 2 ['NVIDIA RTX 6000 Ada Generation', 'NVIDIA RTX 6000 Ada Generation']
+TensorFlow (for TFRecord I/O only): 2.19.0
+Train shards: 80  Val shards: 20
+I0000 00:00:1755189993.018734 3104052 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 45782 MB memory:  -> device: 0, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:3d:00.0, compute capability: 8.9
+I0000 00:00:1755189993.020326 3104052 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 46550 MB memory:  -> device: 1, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:61:00.0, compute capability: 8.9
+Total parameters: 3,134,892
+Trainable parameters: 3,134,892
+Detailed summary with torchinfo:
+==========================================================================================
+Layer (type:depth-idx)                   Output Shape              Param #
+==========================================================================================
+PointNet2SurfaceRegressor                [1, 10, 10, 3]            --
+├─Sequential: 1-1                        [1, 64, 1225]             --
+│    └─Conv1d: 2-1                       [1, 64, 1225]             192
+│    └─BatchNorm1d: 2-2                  [1, 64, 1225]             128
+│    └─ReLU: 2-3                         [1, 64, 1225]             --
+├─PointNetSetAbstractionKNN: 1-2         [1, 3, 612]               --
+│    └─ModuleList: 2-4                   --                        --
+│    │    └─Sequential: 3-1              [1, 64, 612, 32]          4,416
+│    │    └─Sequential: 3-2              [1, 64, 612, 32]          4,224
+│    │    └─Sequential: 3-3              [1, 128, 612, 32]         8,448
+├─PointNetSetAbstractionKNN: 1-3         [1, 3, 306]               --
+│    └─ModuleList: 2-5                   --                        --
+│    │    └─Sequential: 3-4              [1, 128, 306, 32]         17,024
+│    │    └─Sequential: 3-5              [1, 128, 306, 32]         16,640
+│    │    └─Sequential: 3-6              [1, 256, 306, 32]         33,280
+├─PointNetSetAbstractionKNN: 1-4         [1, 3, 76]                --
+│    └─ModuleList: 2-6                   --                        --
+│    │    └─Sequential: 3-7              [1, 256, 76, 32]          66,816
+│    │    └─Sequential: 3-8              [1, 256, 76, 32]          66,048
+│    │    └─Sequential: 3-9              [1, 512, 76, 32]          132,096
+├─PointNetSetAbstractionKNN: 1-5         [1, 3, 38]                --
+│    └─ModuleList: 2-7                   --                        --
+│    │    └─Sequential: 3-10             [1, 512, 38, 32]          264,704
+│    │    └─Sequential: 3-11             [1, 512, 38, 32]          263,168
+│    │    └─Sequential: 3-12             [1, 1024, 38, 32]         526,336
+├─Sequential: 1-6                        [1, 512]                  --
+│    └─Linear: 2-8                       [1, 1024]                 1,049,600
+│    └─ReLU: 2-9                         [1, 1024]                 --
+│    └─BatchNorm1d: 2-10                 [1, 1024]                 2,048
+│    └─Dropout: 2-11                     [1, 1024]                 --
+│    └─Linear: 2-12                      [1, 512]                  524,800
+│    └─ReLU: 2-13                        [1, 512]                  --
+│    └─BatchNorm1d: 2-14                 [1, 512]                  1,024
+│    └─Dropout: 2-15                     [1, 512]                  --
+├─Linear: 1-7                            [1, 300]                  153,900
+==========================================================================================
+Total params: 3,134,892
+Trainable params: 3,134,892
+Non-trainable params: 0
+Total mult-adds (Units.GIGABYTES): 2.89
+==========================================================================================
+Input size (MB): 0.01
+Forward/backward pass size (MB): 241.41
+Params size (MB): 12.54
+Estimated Total Size (MB): 253.96
+==========================================================================================
+device count  2
+start training for 100 epochs
+2025-08-14 18:46:36.645428: I tensorflow/core/kernels/data/tf_record_dataset_op.cc:381] TFRecordDataset `buffer_size` is unspecified, default to 262144
+/home/ainsworth/master/train_pointnet_surface_torch.py:268: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:203.)
+  xyz = torch.from_numpy(xyz_np).to(_DEVICE).float()
+  [train] step 500/2343  loss=419.1130  mse=335.5240
+  [train] step 1000/2343  loss=407.7908  mse=325.1093
+  [train] step 1500/2343  loss=402.4043  mse=320.1885
+  [train] step 2000/2343  loss=398.9562  mse=316.9915
+  [train] step 2343/2343  loss=397.0844  mse=315.2764
+  [val] step 390/390  loss=7017.8189  mse=5396.0516
+Epoch 001/100  train_loss=397.0844  train_mse=315.2764  val_loss=7017.8189  val_mse=5396.0516  time=1753.1s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=7017.8189)
+  [train] step 500/2343  loss=383.0751  mse=302.1328
+  [train] step 1000/2343  loss=380.8086  mse=300.0408
+  [train] step 1500/2343  loss=378.0348  mse=297.4576
+  [train] step 2000/2343  loss=375.5255  mse=295.1140
+  [train] step 2343/2343  loss=373.7763  mse=293.4856
+  [val] step 390/390  loss=407.3531  mse=324.1861
+Epoch 002/100  train_loss=373.7763  train_mse=293.4856  val_loss=407.3531  val_mse=324.1861  time=1752.9s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=407.3531)
+  [train] step 500/2343  loss=359.0627  mse=279.6524
+  [train] step 1000/2343  loss=356.5812  mse=277.3245
+  [train] step 1500/2343  loss=358.3962  mse=279.0071
+  [train] step 2000/2343  loss=356.1485  mse=276.9197
+  [train] step 2343/2343  loss=355.7931  mse=276.5989
+  [val] step 390/390  loss=448.7693  mse=361.7621
+Epoch 003/100  train_loss=355.7931  train_mse=276.5989  val_loss=448.7693  val_mse=361.7621  time=1747.6s
+  [train] step 500/2343  loss=347.8317  mse=269.1933
+  [train] step 1000/2343  loss=345.3573  mse=266.9758
+  [train] step 1500/2343  loss=343.6211  mse=265.3092
+  [train] step 2000/2343  loss=341.9296  mse=263.7588
+  [train] step 2343/2343  loss=342.3532  mse=264.1228
+  [val] step 390/390  loss=24277.5945  mse=20402.1672
+Epoch 004/100  train_loss=342.3532  train_mse=264.1228  val_loss=24277.5945  val_mse=20402.1672  time=1747.1s
+  [train] step 500/2343  loss=382.7371  mse=301.9922
+  [train] step 1000/2343  loss=381.6203  mse=300.8449
+  [train] step 1500/2343  loss=373.0270  mse=292.7865
+  [train] step 2000/2343  loss=375.1748  mse=294.7889
+  [train] step 2343/2343  loss=373.8301  mse=293.5539
+  [val] step 390/390  loss=432.2696  mse=348.3540
+Epoch 005/100  train_loss=373.8301  train_mse=293.5539  val_loss=432.2696  val_mse=348.3540  time=1743.7s
+  [train] step 500/2343  loss=373.7482  mse=293.6247
+  [train] step 1000/2343  loss=363.5587  mse=283.9582
+  [train] step 1500/2343  loss=357.4671  mse=278.2880
+  [train] step 2000/2343  loss=352.6317  mse=273.7697
+  [train] step 2343/2343  loss=352.7570  mse=273.8690
+  [val] step 390/390  loss=449.3166  mse=343.4714
+Epoch 006/100  train_loss=352.7570  train_mse=273.8690  val_loss=449.3166  val_mse=343.4714  time=1732.2s
+  [train] step 500/2343  loss=345.7555  mse=267.2856
+  [train] step 1000/2343  loss=344.0166  mse=265.6506
+  [train] step 1500/2343  loss=341.8573  mse=263.7003
+  [train] step 2000/2343  loss=338.7504  mse=260.8147
+  [train] step 2343/2343  loss=338.7246  mse=260.8077
+  [val] step 390/390  loss=4741.5260  mse=4250.4619
+Epoch 007/100  train_loss=338.7246  train_mse=260.8077  val_loss=4741.5260  val_mse=4250.4619  time=1734.3s
+  [train] step 500/2343  loss=331.5197  mse=254.0198
+  [train] step 1000/2343  loss=329.3918  mse=252.1081
+  [train] step 1500/2343  loss=328.4445  mse=251.2459
+  [train] step 2000/2343  loss=326.9339  mse=249.8842
+  [train] step 2343/2343  loss=326.0881  mse=249.0955
+  [val] step 390/390  loss=364.6880  mse=284.3760
+Epoch 008/100  train_loss=326.0881  train_mse=249.0955  val_loss=364.6880  val_mse=284.3760  time=1732.7s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=364.6880)
+  [train] step 500/2343  loss=317.8646  mse=241.6085
+  [train] step 1000/2343  loss=316.4359  mse=240.2971
+  [train] step 1500/2343  loss=317.2363  mse=241.0548
+  [train] step 2000/2343  loss=316.7969  mse=240.6635
+  [train] step 2343/2343  loss=315.6573  mse=239.6226
+  [val] step 390/390  loss=332.6492  mse=254.5570
+Epoch 009/100  train_loss=315.6573  train_mse=239.6226  val_loss=332.6492  val_mse=254.5570  time=1745.1s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=332.6492)
+  [train] step 500/2343  loss=306.9160  mse=231.6002
+  [train] step 1000/2343  loss=306.0726  mse=230.9093
+  [train] step 1500/2343  loss=305.3765  mse=230.2756
+  [train] step 2000/2343  loss=304.7823  mse=229.7364
+  [train] step 2343/2343  loss=304.6681  mse=229.6373
+  [val] step 390/390  loss=351.8114  mse=273.8525
+Epoch 010/100  train_loss=304.6681  train_mse=229.6373  val_loss=351.8114  val_mse=273.8525  time=1738.4s
+  [train] step 500/2343  loss=312.4669  mse=236.7573
+  [train] step 1000/2343  loss=307.5172  mse=232.2725
+  [train] step 1500/2343  loss=306.0184  mse=230.9055
+  [train] step 2000/2343  loss=303.8705  mse=228.9373
+  [train] step 2343/2343  loss=302.8036  mse=227.9892
+  [val] step 390/390  loss=309.7664  mse=234.6535
+Epoch 011/100  train_loss=302.8036  train_mse=227.9892  val_loss=309.7664  val_mse=234.6535  time=1742.9s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=309.7664)
+  [train] step 500/2343  loss=296.2495  mse=222.0991
+  [train] step 1000/2343  loss=295.5853  mse=221.5322
+  [train] step 1500/2343  loss=303.3643  mse=228.6258
+  [train] step 2000/2343  loss=321.7104  mse=245.5490
+  [train] step 2343/2343  loss=324.0860  mse=247.6881
+  [val] step 390/390  loss=1029.3626  mse=768.5510
+Epoch 012/100  train_loss=324.0860  train_mse=247.6881  val_loss=1029.3626  val_mse=768.5510  time=1739.9s
+  [train] step 500/2343  loss=321.5835  mse=245.1244
+  [train] step 1000/2343  loss=312.9622  mse=237.2467
+  [train] step 1500/2343  loss=309.5375  mse=234.1004
+  [train] step 2000/2343  loss=306.4210  mse=231.2944
+  [train] step 2343/2343  loss=305.0492  mse=230.0417
+  [val] step 390/390  loss=341.9816  mse=263.6263
+Epoch 013/100  train_loss=305.0492  train_mse=230.0417  val_loss=341.9816  val_mse=263.6263  time=1741.3s
+  [train] step 500/2343  loss=295.2565  mse=221.1454
+  [train] step 1000/2343  loss=294.5427  mse=220.5513
+  [train] step 1500/2343  loss=294.5974  mse=220.6106
+  [train] step 2000/2343  loss=293.9403  mse=220.0396
+  [train] step 2343/2343  loss=299.8620  mse=225.4453
+  [val] step 390/390  loss=42226.1291  mse=38260.0831
+Epoch 014/100  train_loss=299.8620  train_mse=225.4453  val_loss=42226.1291  val_mse=38260.0831  time=1738.1s
+  [train] step 500/2343  loss=313.0961  mse=237.2836
+  [train] step 1000/2343  loss=303.9646  mse=229.0054
+  [train] step 1500/2343  loss=299.9491  mse=225.4477
+  [train] step 2000/2343  loss=297.8240  mse=223.5505
+  [train] step 2343/2343  loss=296.5539  mse=222.4161
+  [val] step 390/390  loss=312.4344  mse=236.8987
+Epoch 015/100  train_loss=296.5539  train_mse=222.4161  val_loss=312.4344  val_mse=236.8987  time=1736.8s
+  [train] step 500/2343  loss=293.0908  mse=219.3588
+  [train] step 1000/2343  loss=291.1563  mse=217.6223
+  [train] step 1500/2343  loss=290.2797  mse=216.8075
+  [train] step 2000/2343  loss=289.6483  mse=216.2535
+  [train] step 2343/2343  loss=289.2011  mse=215.8463
+  [val] step 390/390  loss=307.9489  mse=233.3860
+Epoch 016/100  train_loss=289.2011  train_mse=215.8463  val_loss=307.9489  val_mse=233.3860  time=1734.4s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=307.9489)
+  [train] step 500/2343  loss=287.8697  mse=214.7970
+  [train] step 1000/2343  loss=287.4006  mse=214.3233
+  [train] step 1500/2343  loss=287.4438  mse=214.3479
+  [train] step 2000/2343  loss=292.0421  mse=218.4802
+  [train] step 2343/2343  loss=299.6921  mse=225.4545
+  [val] step 390/390  loss=388.6005  mse=303.2535
+Epoch 017/100  train_loss=299.6921  train_mse=225.4545  val_loss=388.6005  val_mse=303.2535  time=1727.6s
+  [train] step 500/2343  loss=300.2517  mse=225.7792
+  [train] step 1000/2343  loss=299.0354  mse=224.6979
+  [train] step 1500/2343  loss=298.6203  mse=224.3309
+  [train] step 2000/2343  loss=296.7381  mse=222.6472
+  [train] step 2343/2343  loss=295.2672  mse=221.3201
+  [val] step 390/390  loss=388.6791  mse=306.3581
+Epoch 018/100  train_loss=295.2672  train_mse=221.3201  val_loss=388.6791  val_mse=306.3581  time=1737.9s
+  [train] step 500/2343  loss=287.1999  mse=214.0297
+  [train] step 1000/2343  loss=287.1643  mse=214.0734
+  [train] step 1500/2343  loss=286.8838  mse=213.8389
+  [train] step 2000/2343  loss=286.4815  mse=213.4734
+  [train] step 2343/2343  loss=287.9112  mse=214.7736
+  [val] step 390/390  loss=470.2708  mse=376.4394
+Epoch 019/100  train_loss=287.9112  train_mse=214.7736  val_loss=470.2708  val_mse=376.4394  time=1736.0s
+  [train] step 500/2343  loss=286.1378  mse=213.1700
+  [train] step 1000/2343  loss=285.3377  mse=212.4603
+  [train] step 1500/2343  loss=287.7558  mse=214.6616
+  [train] step 2000/2343  loss=289.0202  mse=215.7882
+  [train] step 2343/2343  loss=288.5388  mse=215.3410
+  [val] step 390/390  loss=331.5338  mse=255.2332
+Epoch 020/100  train_loss=288.5388  train_mse=215.3410  val_loss=331.5338  val_mse=255.2332  time=1722.2s
+  [train] step 500/2343  loss=283.3835  mse=210.7850
+  [train] step 1000/2343  loss=283.7764  mse=211.1140
+  [train] step 1500/2343  loss=283.5840  mse=210.9554
+  [train] step 2000/2343  loss=283.6119  mse=210.9657
+  [train] step 2343/2343  loss=283.4869  mse=210.8530
+  [val] step 390/390  loss=305.4320  mse=231.1938
+Epoch 021/100  train_loss=283.4869  train_mse=210.8530  val_loss=305.4320  val_mse=231.1938  time=1720.4s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=305.4320)
+  [train] step 500/2343  loss=282.3250  mse=209.9003
+  [train] step 1000/2343  loss=281.9751  mse=209.5623
+  [train] step 1500/2343  loss=281.9624  mse=209.6016
+  [train] step 2000/2343  loss=281.8495  mse=209.5035
+  [train] step 2343/2343  loss=282.4775  mse=210.0349
+  [val] step 390/390  loss=345.1037  mse=267.0168
+Epoch 022/100  train_loss=282.4775  train_mse=210.0349  val_loss=345.1037  val_mse=267.0168  time=1722.4s
+  [train] step 500/2343  loss=292.5789  mse=219.0245
+  [train] step 1000/2343  loss=287.9518  mse=214.8268
+  [train] step 1500/2343  loss=287.8500  mse=214.7576
+  [train] step 2000/2343  loss=295.9754  mse=222.2036
+  [train] step 2343/2343  loss=295.3801  mse=221.6580
+  [val] step 390/390  loss=330.3804  mse=249.9010
+Epoch 023/100  train_loss=295.3801  train_mse=221.6580  val_loss=330.3804  val_mse=249.9010  time=1723.9s
+  [train] step 500/2343  loss=284.8809  mse=212.0906
+  [train] step 1000/2343  loss=283.5437  mse=210.8937
+  [train] step 1500/2343  loss=285.2851  mse=212.4762
+  [train] step 2000/2343  loss=284.6065  mse=211.8909
+  [train] step 2343/2343  loss=284.0882  mse=211.4191
+  [val] step 390/390  loss=318.4167  mse=241.6481
+Epoch 024/100  train_loss=284.0882  train_mse=211.4191  val_loss=318.4167  val_mse=241.6481  time=1718.0s
+  [train] step 500/2343  loss=280.7769  mse=208.4880
+  [train] step 1000/2343  loss=281.0179  mse=208.6986
+  [train] step 1500/2343  loss=283.1536  mse=210.5836
+  [train] step 2000/2343  loss=292.5467  mse=219.1216
+  [train] step 2343/2343  loss=292.1916  mse=218.7833
+  [val] step 390/390  loss=307.8435  mse=228.4254
+Epoch 025/100  train_loss=292.1916  train_mse=218.7833  val_loss=307.8435  val_mse=228.4254  time=1725.8s
+  [train] step 500/2343  loss=291.6561  mse=218.3372
+  [train] step 1000/2343  loss=295.4978  mse=221.7690
+  [train] step 1500/2343  loss=295.3619  mse=221.5167
+  [train] step 2000/2343  loss=296.2693  mse=222.3704
+  [train] step 2343/2343  loss=295.5303  mse=221.7064
+  [val] step 390/390  loss=4458054.6348  mse=3330375.2495
+Epoch 026/100  train_loss=295.5303  train_mse=221.7064  val_loss=4458054.6348  val_mse=3330375.2495  time=1723.5s
+  [train] step 500/2343  loss=287.4982  mse=214.5317
+  [train] step 1000/2343  loss=284.7424  mse=212.0370
+  [train] step 1500/2343  loss=283.9874  mse=211.3693
+  [train] step 2000/2343  loss=287.9522  mse=214.9387
+  [train] step 2343/2343  loss=287.3876  mse=214.4201
+  [val] step 390/390  loss=319.5757  mse=243.1927
+Epoch 027/100  train_loss=287.3876  train_mse=214.4201  val_loss=319.5757  val_mse=243.1927  time=1723.6s
+  [train] step 500/2343  loss=281.7104  mse=209.3522
+  [train] step 1000/2343  loss=281.5357  mse=209.2366
+  [train] step 1500/2343  loss=281.7207  mse=209.3749
+  [train] step 2000/2343  loss=281.4222  mse=209.1002
+  [train] step 2343/2343  loss=281.2132  mse=208.9169
+  [val] step 390/390  loss=332.8244  mse=257.4667
+Epoch 028/100  train_loss=281.2132  train_mse=208.9169  val_loss=332.8244  val_mse=257.4667  time=1715.8s
+  [train] step 500/2343  loss=280.8760  mse=208.6605
+  [train] step 1000/2343  loss=280.9710  mse=208.7512
+  [train] step 1500/2343  loss=280.5893  mse=208.3828
+  [train] step 2000/2343  loss=283.9284  mse=211.4190
+  [train] step 2343/2343  loss=286.3510  mse=213.5602
+  [val] step 390/390  loss=309.2892  mse=234.4310
+Epoch 029/100  train_loss=286.3510  train_mse=213.5602  val_loss=309.2892  val_mse=234.4310  time=1718.3s
+  [train] step 500/2343  loss=280.8399  mse=208.5968
+  [train] step 1000/2343  loss=289.2757  mse=216.1506
+  [train] step 1500/2343  loss=295.7903  mse=221.9971
+  [train] step 2000/2343  loss=292.4799  mse=218.9844
+  [train] step 2343/2343  loss=290.8328  mse=217.5055
+  [val] step 390/390  loss=302.9760  mse=229.0563
+Epoch 030/100  train_loss=290.8328  train_mse=217.5055  val_loss=302.9760  val_mse=229.0563  time=1731.1s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=302.9760)
+  [train] step 500/2343  loss=281.7177  mse=209.2937
+  [train] step 1000/2343  loss=281.2247  mse=208.9145
+  [train] step 1500/2343  loss=280.9346  mse=208.6674
+  [train] step 2000/2343  loss=280.8235  mse=208.5476
+  [train] step 2343/2343  loss=280.8699  mse=208.5961
+  [val] step 390/390  loss=302.7776  mse=228.2320
+Epoch 031/100  train_loss=280.8699  train_mse=208.5961  val_loss=302.7776  val_mse=228.2320  time=1722.5s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=302.7776)
+  [train] step 500/2343  loss=288.2328  mse=215.1036
+  [train] step 1000/2343  loss=283.5835  mse=211.0329
+  [train] step 1500/2343  loss=282.2711  mse=209.8378
+  [train] step 2000/2343  loss=285.6346  mse=212.9073
+  [train] step 2343/2343  loss=285.1394  mse=212.4646
+  [val] step 390/390  loss=316.7078  mse=240.4187
+Epoch 032/100  train_loss=285.1394  train_mse=212.4646  val_loss=316.7078  val_mse=240.4187  time=1730.9s
+  [train] step 500/2343  loss=281.2148  mse=208.9242
+  [train] step 1000/2343  loss=280.6356  mse=208.4650
+  [train] step 1500/2343  loss=280.1204  mse=208.0001
+  [train] step 2000/2343  loss=280.0900  mse=207.9858
+  [train] step 2343/2343  loss=280.0092  mse=207.9087
+  [val] step 390/390  loss=302.0925  mse=228.4787
+Epoch 033/100  train_loss=280.0092  train_mse=207.9087  val_loss=302.0925  val_mse=228.4787  time=1737.6s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=302.0925)
+  [train] step 500/2343  loss=289.1990  mse=216.0175
+  [train] step 1000/2343  loss=285.0287  mse=212.3091
+  [train] step 1500/2343  loss=282.9794  mse=210.4442
+  [train] step 2000/2343  loss=282.5022  mse=210.0518
+  [train] step 2343/2343  loss=281.9746  mse=209.5858
+  [val] step 390/390  loss=357.4100  mse=281.5104
+Epoch 034/100  train_loss=281.9746  train_mse=209.5858  val_loss=357.4100  val_mse=281.5104  time=1733.8s
+  [train] step 500/2343  loss=278.8846  mse=206.8724
+  [train] step 1000/2343  loss=279.4075  mse=207.3606
+  [train] step 1500/2343  loss=278.9448  mse=206.9562
+  [train] step 2000/2343  loss=282.4651  mse=210.1403
+  [train] step 2343/2343  loss=282.0031  mse=209.7067
+  [val] step 390/390  loss=327.9231  mse=250.9266
+Epoch 035/100  train_loss=282.0031  train_mse=209.7067  val_loss=327.9231  val_mse=250.9266  time=1724.6s
+  [train] step 500/2343  loss=288.0282  mse=215.0287
+  [train] step 1000/2343  loss=283.7630  mse=211.2007
+  [train] step 1500/2343  loss=281.9268  mse=209.5786
+  [train] step 2000/2343  loss=281.4751  mse=209.1710
+  [train] step 2343/2343  loss=296.4003  mse=222.8246
+  [val] step 390/390  loss=20261460.6772  mse=18040300.0709
+Epoch 036/100  train_loss=296.4003  train_mse=222.8246  val_loss=20261460.6772  val_mse=18040300.0709  time=1734.1s
+  [train] step 500/2343  loss=334.7010  mse=257.2832
+  [train] step 1000/2343  loss=313.2650  mse=237.7979
+  [train] step 1500/2343  loss=303.8814  mse=229.2674
+  [train] step 2000/2343  loss=298.5675  mse=224.4774
+  [train] step 2343/2343  loss=296.0027  mse=222.1802
+  [val] step 390/390  loss=298.4262  mse=225.4446
+Epoch 037/100  train_loss=296.0027  train_mse=222.1802  val_loss=298.4262  val_mse=225.4446  time=1730.6s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=298.4262)
+  [train] step 500/2343  loss=280.2643  mse=208.1174
+  [train] step 1000/2343  loss=280.4453  mse=208.2976
+  [train] step 1500/2343  loss=281.2250  mse=208.9809
+  [train] step 2000/2343  loss=288.2703  mse=215.1404
+  [train] step 2343/2343  loss=288.2072  mse=215.0653
+  [val] step 390/390  loss=340.6390  mse=261.0930
+Epoch 038/100  train_loss=288.2072  train_mse=215.0653  val_loss=340.6390  val_mse=261.0930  time=1729.7s
+  [train] step 500/2343  loss=283.3102  mse=210.4989
+  [train] step 1000/2343  loss=281.8117  mse=209.3313
+  [train] step 1500/2343  loss=281.3052  mse=208.9365
+  [train] step 2000/2343  loss=280.6760  mse=208.3713
+  [train] step 2343/2343  loss=280.4017  mse=208.1665
+  [val] step 390/390  loss=307.6183  mse=232.3656
+Epoch 039/100  train_loss=280.4017  train_mse=208.1665  val_loss=307.6183  val_mse=232.3656  time=1734.0s
+  [train] step 500/2343  loss=278.4543  mse=206.4448
+  [train] step 1000/2343  loss=282.5539  mse=210.1068
+  [train] step 1500/2343  loss=283.2041  mse=210.6151
+  [train] step 2000/2343  loss=282.2743  mse=209.8070
+  [train] step 2343/2343  loss=282.8898  mse=210.3312
+  [val] step 390/390  loss=299.4308  mse=224.2850
+Epoch 040/100  train_loss=282.8898  train_mse=210.3312  val_loss=299.4308  val_mse=224.2850  time=1713.5s
+  [train] step 500/2343  loss=278.0278  mse=206.0653
+  [train] step 1000/2343  loss=278.3994  mse=206.4043
+  [train] step 1500/2343  loss=278.1937  mse=206.2793
+  [train] step 2000/2343  loss=288.8407  mse=215.9926
+  [train] step 2343/2343  loss=293.6468  mse=220.2769
+  [val] step 390/390  loss=411.9166  mse=328.8929
+Epoch 041/100  train_loss=293.6468  train_mse=220.2769  val_loss=411.9166  val_mse=328.8929  time=1713.2s
+  [train] step 500/2343  loss=336.3909  mse=258.3154
+  [train] step 1000/2343  loss=324.6393  mse=247.5803
+  [train] step 1500/2343  loss=319.5116  mse=243.0064
+  [train] step 2000/2343  loss=311.4949  mse=235.7798
+  [train] step 2343/2343  loss=307.9851  mse=232.6223
+  [val] step 390/390  loss=310.5948  mse=234.2953
+Epoch 042/100  train_loss=307.9851  train_mse=232.6223  val_loss=310.5948  val_mse=234.2953  time=1714.9s
+  [train] step 500/2343  loss=283.6219  mse=210.9052
+  [train] step 1000/2343  loss=282.9160  mse=210.2400
+  [train] step 1500/2343  loss=282.6171  mse=209.9984
+  [train] step 2000/2343  loss=281.9935  mse=209.4902
+  [train] step 2343/2343  loss=281.8054  mse=209.3198
+  [val] step 390/390  loss=327.0513  mse=251.4550
+Epoch 043/100  train_loss=281.8054  train_mse=209.3198  val_loss=327.0513  val_mse=251.4550  time=1723.5s
+  [train] step 500/2343  loss=280.2268  mse=208.0284
+  [train] step 1000/2343  loss=279.7248  mse=207.5715
+  [train] step 1500/2343  loss=280.5987  mse=208.3826
+  [train] step 2000/2343  loss=290.9606  mse=217.7113
+  [train] step 2343/2343  loss=294.3461  mse=220.7647
+  [val] step 390/390  loss=375.3768  mse=294.2607
+Epoch 044/100  train_loss=294.3461  train_mse=220.7647  val_loss=375.3768  val_mse=294.2607  time=1714.6s
+  [train] step 500/2343  loss=296.3699  mse=222.2524
+  [train] step 1000/2343  loss=289.1207  mse=215.7579
+  [train] step 1500/2343  loss=286.4286  mse=213.3779
+  [train] step 2000/2343  loss=284.9345  mse=212.0942
+  [train] step 2343/2343  loss=284.3046  mse=211.5553
+  [val] step 390/390  loss=753.1165  mse=488.7723
+Epoch 045/100  train_loss=284.3046  train_mse=211.5553  val_loss=753.1165  val_mse=488.7723  time=1719.8s
+  [train] step 500/2343  loss=291.6833  mse=218.2779
+  [train] step 1000/2343  loss=288.8601  mse=215.6940
+  [train] step 1500/2343  loss=285.6993  mse=212.8974
+  [train] step 2000/2343  loss=283.9258  mse=211.3152
+  [train] step 2343/2343  loss=283.0060  mse=210.4996
+  [val] step 390/390  loss=312.4801  mse=237.1363
+Epoch 046/100  train_loss=283.0060  train_mse=210.4996  val_loss=312.4801  val_mse=237.1363  time=1720.4s
+  [train] step 500/2343  loss=278.6778  mse=206.7368
+  [train] step 1000/2343  loss=279.8668  mse=207.7693
+  [train] step 1500/2343  loss=279.3228  mse=207.2535
+  [train] step 2000/2343  loss=282.9740  mse=210.4645
+  [train] step 2343/2343  loss=283.3489  mse=210.8134
+  [val] step 390/390  loss=310.4323  mse=235.8369
+Epoch 047/100  train_loss=283.3489  train_mse=210.8134  val_loss=310.4323  val_mse=235.8369  time=1730.4s
+  [train] step 500/2343  loss=277.8559  mse=205.8821
+  [train] step 1000/2343  loss=277.6773  mse=205.7393
+  [train] step 1500/2343  loss=277.6014  mse=205.6914
+  [train] step 2000/2343  loss=278.1401  mse=206.1760
+  [train] step 2343/2343  loss=277.8821  mse=205.9411
+  [val] step 390/390  loss=325.0868  mse=249.1551
+Epoch 048/100  train_loss=277.8821  train_mse=205.9411  val_loss=325.0868  val_mse=249.1551  time=1716.5s
+  [train] step 500/2343  loss=259.4945  mse=189.7616
+  [train] step 1000/2343  loss=257.9218  mse=188.4378
+  [train] step 1500/2343  loss=258.4031  mse=188.8753
+  [train] step 2000/2343  loss=257.4910  mse=188.0671
+  [train] step 2343/2343  loss=257.0317  mse=187.6578
+  [val] step 390/390  loss=287.4039  mse=215.3339
+Epoch 049/100  train_loss=257.0317  train_mse=187.6578  val_loss=287.4039  val_mse=215.3339  time=1725.1s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=287.4039)
+  [train] step 500/2343  loss=254.4038  mse=185.4520
+  [train] step 1000/2343  loss=254.3161  mse=185.3673
+  [train] step 1500/2343  loss=254.1013  mse=185.1624
+  [train] step 2000/2343  loss=255.0386  mse=186.0197
+  [train] step 2343/2343  loss=254.7943  mse=185.7995
+  [val] step 390/390  loss=256.5418  mse=187.9729
+Epoch 050/100  train_loss=254.7943  train_mse=185.7995  val_loss=256.5418  val_mse=187.9729  time=1726.4s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=256.5418)
+  [train] step 500/2343  loss=252.7675  mse=184.0241
+  [train] step 1000/2343  loss=252.8754  mse=184.1508
+  [train] step 1500/2343  loss=252.9362  mse=184.2316
+  [train] step 2000/2343  loss=253.0319  mse=184.3043
+  [train] step 2343/2343  loss=253.1208  mse=184.3656
+  [val] step 390/390  loss=285.2664  mse=213.7331
+Epoch 051/100  train_loss=253.1208  train_mse=184.3656  val_loss=285.2664  val_mse=213.7331  time=1738.2s
+  [train] step 500/2343  loss=253.4970  mse=184.7255
+  [train] step 1000/2343  loss=253.3507  mse=184.5700
+  [train] step 1500/2343  loss=253.3140  mse=184.5562
+  [train] step 2000/2343  loss=253.4153  mse=184.6429
+  [train] step 2343/2343  loss=253.4530  mse=184.6958
+  [val] step 390/390  loss=311.7046  mse=237.2870
+Epoch 052/100  train_loss=253.4530  train_mse=184.6958  val_loss=311.7046  val_mse=237.2870  time=1731.4s
+  [train] step 500/2343  loss=253.4795  mse=184.6618
+  [train] step 1000/2343  loss=255.8925  mse=186.8395
+  [train] step 1500/2343  loss=254.8922  mse=185.9716
+  [train] step 2000/2343  loss=254.4547  mse=185.6087
+  [train] step 2343/2343  loss=254.3681  mse=185.5356
+  [val] step 390/390  loss=324.9816  mse=248.7730
+Epoch 053/100  train_loss=254.3681  train_mse=185.5356  val_loss=324.9816  val_mse=248.7730  time=1734.6s
+  [train] step 500/2343  loss=252.5374  mse=183.9486
+  [train] step 1000/2343  loss=252.6205  mse=184.0016
+  [train] step 1500/2343  loss=252.5800  mse=183.9402
+  [train] step 2000/2343  loss=252.7318  mse=184.0967
+  [train] step 2343/2343  loss=252.7435  mse=184.1190
+  [val] step 390/390  loss=275.3901  mse=205.2495
+Epoch 054/100  train_loss=252.7435  train_mse=184.1190  val_loss=275.3901  val_mse=205.2495  time=1736.0s
+  [train] step 500/2343  loss=262.1535  mse=192.3047
+  [train] step 1000/2343  loss=257.8849  mse=188.5127
+  [train] step 1500/2343  loss=256.2741  mse=187.1425
+  [train] step 2000/2343  loss=255.4769  mse=186.5046
+  [train] step 2343/2343  loss=255.1751  mse=186.2513
+  [val] step 390/390  loss=257.5654  mse=188.6505
+Epoch 055/100  train_loss=255.1751  train_mse=186.2513  val_loss=257.5654  val_mse=188.6505  time=1728.9s
+  [train] step 500/2343  loss=252.2204  mse=183.7201
+  [train] step 1000/2343  loss=252.4560  mse=183.8839
+  [train] step 1500/2343  loss=252.4666  mse=183.9298
+  [train] step 2000/2343  loss=252.2573  mse=183.7565
+  [train] step 2343/2343  loss=252.3264  mse=183.8144
+  [val] step 390/390  loss=310.8114  mse=237.7939
+Epoch 056/100  train_loss=252.3264  train_mse=183.8144  val_loss=310.8114  val_mse=237.7939  time=1731.3s
+  [train] step 500/2343  loss=252.7379  mse=184.2485
+  [train] step 1000/2343  loss=252.6935  mse=184.1647
+  [train] step 1500/2343  loss=252.4338  mse=183.9132
+  [train] step 2000/2343  loss=252.5855  mse=184.0405
+  [train] step 2343/2343  loss=252.3696  mse=183.8673
+  [val] step 390/390  loss=336.5253  mse=254.7583
+Epoch 057/100  train_loss=252.3696  train_mse=183.8673  val_loss=336.5253  val_mse=254.7583  time=1735.2s
+  [train] step 500/2343  loss=252.1640  mse=183.7670
+  [train] step 1000/2343  loss=252.0581  mse=183.6786
+  [train] step 1500/2343  loss=252.2643  mse=183.8249
+  [train] step 2000/2343  loss=252.0001  mse=183.6147
+  [train] step 2343/2343  loss=252.0181  mse=183.6230
+  [val] step 390/390  loss=289.6989  mse=216.8350
+Epoch 058/100  train_loss=252.0181  train_mse=183.6230  val_loss=289.6989  val_mse=216.8350  time=1733.5s
+  [train] step 500/2343  loss=250.9121  mse=182.6060
+  [train] step 1000/2343  loss=251.4178  mse=183.1105
+  [train] step 1500/2343  loss=251.6225  mse=183.2779
+  [train] step 2000/2343  loss=251.3734  mse=183.0672
+  [train] step 2343/2343  loss=251.4386  mse=183.1227
+  [val] step 390/390  loss=270.5447  mse=200.2535
+Epoch 059/100  train_loss=251.4386  train_mse=183.1227  val_loss=270.5447  val_mse=200.2535  time=1735.7s
+  [train] step 500/2343  loss=251.4782  mse=183.0343
+  [train] step 1000/2343  loss=251.2141  mse=182.8734
+  [train] step 1500/2343  loss=251.4272  mse=183.1106
+  [train] step 2000/2343  loss=251.4829  mse=183.1635
+  [train] step 2343/2343  loss=251.7050  mse=183.3443
+  [val] step 390/390  loss=350.6068  mse=271.1621
+Epoch 060/100  train_loss=251.7050  train_mse=183.3443  val_loss=350.6068  val_mse=271.1621  time=1735.7s
+  [train] step 500/2343  loss=251.4964  mse=183.2373
+  [train] step 1000/2343  loss=251.2683  mse=183.0654
+  [train] step 1500/2343  loss=251.3249  mse=183.1123
+  [train] step 2000/2343  loss=251.1619  mse=182.9277
+  [train] step 2343/2343  loss=251.1436  mse=182.8994
+  [val] step 390/390  loss=280.6769  mse=208.8146
+Epoch 061/100  train_loss=251.1436  train_mse=182.8994  val_loss=280.6769  val_mse=208.8146  time=1720.3s
+  [train] step 500/2343  loss=236.3728  mse=170.1520
+  [train] step 1000/2343  loss=235.3260  mse=169.2935
+  [train] step 1500/2343  loss=234.8144  mse=168.8492
+  [train] step 2000/2343  loss=234.4819  mse=168.5503
+  [train] step 2343/2343  loss=234.3004  mse=168.4084
+  [val] step 390/390  loss=253.2579  mse=186.6992
+Epoch 062/100  train_loss=234.3004  train_mse=168.4084  val_loss=253.2579  val_mse=186.6992  time=1733.9s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=253.2579)
+  [train] step 500/2343  loss=232.2893  mse=166.5485
+  [train] step 1000/2343  loss=232.1516  mse=166.4868
+  [train] step 1500/2343  loss=232.0435  mse=166.4353
+  [train] step 2000/2343  loss=232.1558  mse=166.5315
+  [train] step 2343/2343  loss=232.1027  mse=166.5063
+  [val] step 390/390  loss=240.5840  mse=174.3607
+Epoch 063/100  train_loss=232.1027  train_mse=166.5063  val_loss=240.5840  val_mse=174.3607  time=1735.1s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=240.5840)
+  [train] step 500/2343  loss=232.4221  mse=166.8255
+  [train] step 1000/2343  loss=232.4227  mse=166.8455
+  [train] step 1500/2343  loss=232.1529  mse=166.6177
+  [train] step 2000/2343  loss=232.1726  mse=166.6172
+  [train] step 2343/2343  loss=232.2047  mse=166.6454
+  [val] step 390/390  loss=235.4649  mse=169.2391
+Epoch 064/100  train_loss=232.2047  train_mse=166.6454  val_loss=235.4649  val_mse=169.2391  time=1728.4s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=235.4649)
+  [train] step 500/2343  loss=231.3926  mse=166.0162
+  [train] step 1000/2343  loss=231.6888  mse=166.2285
+  [train] step 1500/2343  loss=231.7511  mse=166.2820
+  [train] step 2000/2343  loss=231.7239  mse=166.2584
+  [train] step 2343/2343  loss=231.9133  mse=166.4355
+  [val] step 390/390  loss=240.5864  mse=174.0414
+Epoch 065/100  train_loss=231.9133  train_mse=166.4355  val_loss=240.5864  val_mse=174.0414  time=1734.9s
+  [train] step 500/2343  loss=233.1344  mse=167.4257
+  [train] step 1000/2343  loss=232.8943  mse=167.2408
+  [train] step 1500/2343  loss=232.6136  mse=166.9820
+  [train] step 2000/2343  loss=232.6464  mse=167.0187
+  [train] step 2343/2343  loss=232.6084  mse=166.9790
+  [val] step 390/390  loss=246.8317  mse=180.2017
+Epoch 066/100  train_loss=232.6084  train_mse=166.9790  val_loss=246.8317  val_mse=180.2017  time=1732.0s
+  [train] step 500/2343  loss=232.9569  mse=167.3836
+  [train] step 1000/2343  loss=232.9290  mse=167.3475
+  [train] step 1500/2343  loss=232.8200  mse=167.2001
+  [train] step 2000/2343  loss=232.7094  mse=167.1283
+  [train] step 2343/2343  loss=232.6984  mse=167.1322
+  [val] step 390/390  loss=233.2020  mse=167.8814
+Epoch 067/100  train_loss=232.6984  train_mse=167.1322  val_loss=233.2020  val_mse=167.8814  time=1734.6s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=233.2020)
+  [train] step 500/2343  loss=233.1008  mse=167.5047
+  [train] step 1000/2343  loss=233.1846  mse=167.5607
+  [train] step 1500/2343  loss=233.1393  mse=167.5136
+  [train] step 2000/2343  loss=233.2023  mse=167.5600
+  [train] step 2343/2343  loss=233.1917  mse=167.5627
+  [val] step 390/390  loss=256.9160  mse=188.4587
+Epoch 068/100  train_loss=233.1917  train_mse=167.5627  val_loss=256.9160  val_mse=188.4587  time=1725.0s
+  [train] step 500/2343  loss=232.8305  mse=167.1742
+  [train] step 1000/2343  loss=232.9910  mse=167.3697
+  [train] step 1500/2343  loss=233.1326  mse=167.5168
+  [train] step 2000/2343  loss=233.1050  mse=167.4810
+  [train] step 2343/2343  loss=233.0441  mse=167.4243
+  [val] step 390/390  loss=297.1072  mse=221.2992
+Epoch 069/100  train_loss=233.0441  train_mse=167.4243  val_loss=297.1072  val_mse=221.2992  time=1726.0s
+  [train] step 500/2343  loss=233.7322  mse=167.9335
+  [train] step 1000/2343  loss=233.9083  mse=168.1601
+  [train] step 1500/2343  loss=233.8916  mse=168.1590
+  [train] step 2000/2343  loss=233.7979  mse=168.0760
+  [train] step 2343/2343  loss=233.9001  mse=168.1564
+  [val] step 390/390  loss=268.1177  mse=197.3825
+Epoch 070/100  train_loss=233.9001  train_mse=168.1564  val_loss=268.1177  val_mse=197.3825  time=1734.6s
+  [train] step 500/2343  loss=233.8156  mse=168.0924
+  [train] step 1000/2343  loss=233.2661  mse=167.6759
+  [train] step 1500/2343  loss=233.1476  mse=167.5833
+  [train] step 2000/2343  loss=233.3603  mse=167.7769
+  [train] step 2343/2343  loss=233.2472  mse=167.6644
+  [val] step 390/390  loss=273.8857  mse=200.1015
+Epoch 071/100  train_loss=233.2472  train_mse=167.6644  val_loss=273.8857  val_mse=200.1015  time=1731.3s
+  [train] step 500/2343  loss=233.6371  mse=167.9463
+  [train] step 1000/2343  loss=233.8006  mse=168.1248
+  [train] step 1500/2343  loss=233.7601  mse=168.1132
+  [train] step 2000/2343  loss=233.8486  mse=168.2097
+  [train] step 2343/2343  loss=233.8744  mse=168.2276
+  [val] step 390/390  loss=278.1759  mse=207.6522
+Epoch 072/100  train_loss=233.8744  train_mse=168.2276  val_loss=278.1759  val_mse=207.6522  time=1734.4s
+  [train] step 500/2343  loss=232.9105  mse=167.3647
+  [train] step 1000/2343  loss=233.2339  mse=167.5880
+  [train] step 1500/2343  loss=233.2864  mse=167.6662
+  [train] step 2000/2343  loss=233.2747  mse=167.6676
+  [train] step 2343/2343  loss=233.3411  mse=167.7274
+  [val] step 390/390  loss=283.1454  mse=212.1091
+Epoch 073/100  train_loss=233.3411  train_mse=167.7274  val_loss=283.1454  val_mse=212.1091  time=1735.1s
+  [train] step 500/2343  loss=233.9899  mse=168.2190
+  [train] step 1000/2343  loss=233.7310  mse=168.0100
+  [train] step 1500/2343  loss=233.7606  mse=168.0447
+  [train] step 2000/2343  loss=233.7145  mse=168.0529
+  [train] step 2343/2343  loss=233.7312  mse=168.0729
+  [val] step 390/390  loss=269.9765  mse=198.5495
+Epoch 074/100  train_loss=233.7312  train_mse=168.0729  val_loss=269.9765  val_mse=198.5495  time=1733.9s
+  [train] step 500/2343  loss=234.0166  mse=168.2974
+  [train] step 1000/2343  loss=233.8560  mse=168.1877
+  [train] step 1500/2343  loss=233.9420  mse=168.3051
+  [train] step 2000/2343  loss=233.8416  mse=168.2296
+  [train] step 2343/2343  loss=233.7828  mse=168.1781
+  [val] step 390/390  loss=287.1605  mse=216.0165
+Epoch 075/100  train_loss=233.7828  train_mse=168.1781  val_loss=287.1605  val_mse=216.0165  time=1732.9s
+  [train] step 500/2343  loss=233.7925  mse=168.1794
+  [train] step 1000/2343  loss=234.0186  mse=168.3805
+  [train] step 1500/2343  loss=234.0988  mse=168.4371
+  [train] step 2000/2343  loss=234.1568  mse=168.4776
+  [train] step 2343/2343  loss=234.1083  mse=168.4490
+  [val] step 390/390  loss=243.4070  mse=177.0645
+Epoch 076/100  train_loss=234.1083  train_mse=168.4490  val_loss=243.4070  val_mse=177.0645  time=1737.5s
+  [train] step 500/2343  loss=234.0653  mse=168.4067
+  [train] step 1000/2343  loss=233.9952  mse=168.3602
+  [train] step 1500/2343  loss=234.0939  mse=168.4177
+  [train] step 2000/2343  loss=233.9008  mse=168.2667
+  [train] step 2343/2343  loss=234.0490  mse=168.3971
+  [val] step 390/390  loss=287.8592  mse=215.9716
+Epoch 077/100  train_loss=234.0490  train_mse=168.3971  val_loss=287.8592  val_mse=215.9716  time=1732.2s
+  [train] step 500/2343  loss=233.3015  mse=167.7857
+  [train] step 1000/2343  loss=233.3674  mse=167.8210
+  [train] step 1500/2343  loss=233.3951  mse=167.8500
+  [train] step 2000/2343  loss=233.3971  mse=167.8428
+  [train] step 2343/2343  loss=233.6050  mse=168.0180
+  [val] step 390/390  loss=274.0710  mse=204.2116
+Epoch 078/100  train_loss=233.6050  train_mse=168.0180  val_loss=274.0710  val_mse=204.2116  time=1724.6s
+  [train] step 500/2343  loss=222.7694  mse=158.7829
+  [train] step 1000/2343  loss=221.7293  mse=157.9168
+  [train] step 1500/2343  loss=221.2352  mse=157.4888
+  [train] step 2000/2343  loss=220.7638  mse=157.0956
+  [train] step 2343/2343  loss=220.6582  mse=156.9894
+  [val] step 390/390  loss=224.8551  mse=160.8492
+Epoch 079/100  train_loss=220.6582  train_mse=156.9894  val_loss=224.8551  val_mse=160.8492  time=1727.9s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=224.8551)
+  [train] step 500/2343  loss=219.1106  mse=155.7544
+  [train] step 1000/2343  loss=219.4648  mse=156.0166
+  [train] step 1500/2343  loss=219.1701  mse=155.7805
+  [train] step 2000/2343  loss=218.9989  mse=155.6010
+  [train] step 2343/2343  loss=219.0716  mse=155.6835
+  [val] step 390/390  loss=230.8449  mse=166.5547
+Epoch 080/100  train_loss=219.0716  train_mse=155.6835  val_loss=230.8449  val_mse=166.5547  time=1736.2s
+  [train] step 500/2343  loss=218.1638  mse=154.9403
+  [train] step 1000/2343  loss=218.4916  mse=155.2063
+  [train] step 1500/2343  loss=218.4187  mse=155.1531
+  [train] step 2000/2343  loss=218.6252  mse=155.3024
+  [train] step 2343/2343  loss=218.5761  mse=155.2531
+  [val] step 390/390  loss=229.5346  mse=164.4027
+Epoch 081/100  train_loss=218.5761  train_mse=155.2531  val_loss=229.5346  val_mse=164.4027  time=1736.0s
+  [train] step 500/2343  loss=218.1702  mse=155.0152
+  [train] step 1000/2343  loss=218.0583  mse=154.8825
+  [train] step 1500/2343  loss=218.2725  mse=155.0665
+  [train] step 2000/2343  loss=218.2787  mse=155.0798
+  [train] step 2343/2343  loss=218.3407  mse=155.1268
+  [val] step 390/390  loss=218.2995  mse=155.3958
+Epoch 082/100  train_loss=218.3407  train_mse=155.1268  val_loss=218.2995  val_mse=155.3958  time=1732.6s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=218.2995)
+  [train] step 500/2343  loss=218.2358  mse=155.0448
+  [train] step 1000/2343  loss=218.0767  mse=154.8544
+  [train] step 1500/2343  loss=218.0718  mse=154.8650
+  [train] step 2000/2343  loss=218.3265  mse=155.0853
+  [train] step 2343/2343  loss=218.2416  mse=155.0228
+  [val] step 390/390  loss=264.8272  mse=195.5449
+Epoch 083/100  train_loss=218.2416  train_mse=155.0228  val_loss=264.8272  val_mse=195.5449  time=1727.6s
+  [train] step 500/2343  loss=217.7698  mse=154.6194
+  [train] step 1000/2343  loss=218.0191  mse=154.7942
+  [train] step 1500/2343  loss=218.1747  mse=154.9214
+  [train] step 2000/2343  loss=218.0824  mse=154.8507
+  [train] step 2343/2343  loss=218.1043  mse=154.8963
+  [val] step 390/390  loss=229.8970  mse=166.0845
+Epoch 084/100  train_loss=218.1043  train_mse=154.8963  val_loss=229.8970  val_mse=166.0845  time=1719.9s
+  [train] step 500/2343  loss=217.7644  mse=154.6145
+  [train] step 1000/2343  loss=217.8472  mse=154.6627
+  [train] step 1500/2343  loss=218.0312  mse=154.8307
+  [train] step 2000/2343  loss=218.0390  mse=154.8615
+  [train] step 2343/2343  loss=217.9803  mse=154.8216
+  [val] step 390/390  loss=242.0092  mse=176.6770
+Epoch 085/100  train_loss=217.9803  train_mse=154.8216  val_loss=242.0092  val_mse=176.6770  time=1723.6s
+  [train] step 500/2343  loss=218.5693  mse=155.3261
+  [train] step 1000/2343  loss=218.7999  mse=155.4706
+  [train] step 1500/2343  loss=218.7353  mse=155.4099
+  [train] step 2000/2343  loss=218.5844  mse=155.3250
+  [train] step 2343/2343  loss=218.3749  mse=155.1619
+  [val] step 390/390  loss=224.6637  mse=160.4208
+Epoch 086/100  train_loss=218.3749  train_mse=155.1619  val_loss=224.6637  val_mse=160.4208  time=1728.9s
+  [train] step 500/2343  loss=218.7424  mse=155.4396
+  [train] step 1000/2343  loss=218.3933  mse=155.1458
+  [train] step 1500/2343  loss=218.2384  mse=155.0188
+  [train] step 2000/2343  loss=218.3122  mse=155.1093
+  [train] step 2343/2343  loss=218.2032  mse=155.0205
+  [val] step 390/390  loss=223.1828  mse=159.4782
+Epoch 087/100  train_loss=218.2032  train_mse=155.0205  val_loss=223.1828  val_mse=159.4782  time=1734.0s
+  [train] step 500/2343  loss=218.7946  mse=155.5867
+  [train] step 1000/2343  loss=218.7394  mse=155.5352
+  [train] step 1500/2343  loss=218.8455  mse=155.5921
+  [train] step 2000/2343  loss=218.7486  mse=155.5003
+  [train] step 2343/2343  loss=218.6801  mse=155.4440
+  [val] step 390/390  loss=226.6516  mse=162.9178
+Epoch 088/100  train_loss=218.6801  train_mse=155.4440  val_loss=226.6516  val_mse=162.9178  time=1731.8s
+  [train] step 500/2343  loss=218.5210  mse=155.3125
+  [train] step 1000/2343  loss=218.7773  mse=155.5561
+  [train] step 1500/2343  loss=218.7558  mse=155.5218
+  [train] step 2000/2343  loss=218.5813  mse=155.3599
+  [train] step 2343/2343  loss=218.5680  mse=155.3566
+  [val] step 390/390  loss=237.9612  mse=173.7596
+Epoch 089/100  train_loss=218.5680  train_mse=155.3566  val_loss=237.9612  val_mse=173.7596  time=1721.6s
+  [train] step 500/2343  loss=218.2169  mse=154.9972
+  [train] step 1000/2343  loss=218.9192  mse=155.6173
+  [train] step 1500/2343  loss=218.8976  mse=155.6194
+  [train] step 2000/2343  loss=218.8682  mse=155.6100
+  [train] step 2343/2343  loss=218.8587  mse=155.6061
+  [val] step 390/390  loss=249.1445  mse=178.3132
+Epoch 090/100  train_loss=218.8587  train_mse=155.6061  val_loss=249.1445  val_mse=178.3132  time=1733.3s
+  [train] step 500/2343  loss=218.4840  mse=155.3393
+  [train] step 1000/2343  loss=218.3988  mse=155.2900
+  [train] step 1500/2343  loss=218.5388  mse=155.3760
+  [train] step 2000/2343  loss=218.4976  mse=155.3368
+  [train] step 2343/2343  loss=218.4898  mse=155.3176
+  [val] step 390/390  loss=241.8707  mse=176.8857
+Epoch 091/100  train_loss=218.4898  train_mse=155.3176  val_loss=241.8707  val_mse=176.8857  time=1733.1s
+  [train] step 500/2343  loss=218.1162  mse=154.9786
+  [train] step 1000/2343  loss=218.6325  mse=155.4066
+  [train] step 1500/2343  loss=218.7770  mse=155.5057
+  [train] step 2000/2343  loss=218.7766  mse=155.5238
+  [train] step 2343/2343  loss=218.8265  mse=155.5592
+  [val] step 390/390  loss=239.1411  mse=173.6045
+Epoch 092/100  train_loss=218.8265  train_mse=155.5592  val_loss=239.1411  val_mse=173.6045  time=1738.3s
+  [train] step 500/2343  loss=218.4492  mse=155.3240
+  [train] step 1000/2343  loss=218.8602  mse=155.6700
+  [train] step 1500/2343  loss=218.9739  mse=155.7633
+  [train] step 2000/2343  loss=218.9270  mse=155.7223
+  [train] step 2343/2343  loss=218.8847  mse=155.6812
+  [val] step 390/390  loss=216.1260  mse=153.8434
+Epoch 093/100  train_loss=218.8847  train_mse=155.6812  val_loss=216.1260  val_mse=153.8434  time=1731.9s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=216.1260)
+  [train] step 500/2343  loss=218.3454  mse=155.1659
+  [train] step 1000/2343  loss=218.6811  mse=155.4930
+  [train] step 1500/2343  loss=218.5925  mse=155.4327
+  [train] step 2000/2343  loss=218.9245  mse=155.7187
+  [train] step 2343/2343  loss=218.8934  mse=155.6864
+  [val] step 390/390  loss=220.1319  mse=156.4468
+Epoch 094/100  train_loss=218.8934  train_mse=155.6864  val_loss=220.1319  val_mse=156.4468  time=1737.1s
+  [train] step 500/2343  loss=219.8689  mse=156.4564
+  [train] step 1000/2343  loss=219.5364  mse=156.1929
+  [train] step 1500/2343  loss=219.2553  mse=155.9638
+  [train] step 2000/2343  loss=219.2344  mse=155.9607
+  [train] step 2343/2343  loss=219.0331  mse=155.8109
+  [val] step 390/390  loss=236.0882  mse=170.2755
+Epoch 095/100  train_loss=219.0331  train_mse=155.8109  val_loss=236.0882  val_mse=170.2755  time=1734.0s
+  [train] step 500/2343  loss=219.1134  mse=155.9557
+  [train] step 1000/2343  loss=219.2260  mse=156.0158
+  [train] step 1500/2343  loss=218.9826  mse=155.7845
+  [train] step 2000/2343  loss=218.9091  mse=155.7339
+  [train] step 2343/2343  loss=218.8978  mse=155.7218
+  [val] step 390/390  loss=262.0678  mse=194.3588
+Epoch 096/100  train_loss=218.8978  train_mse=155.7218  val_loss=262.0678  val_mse=194.3588  time=1736.5s
+  [train] step 500/2343  loss=219.2437  mse=156.0490
+  [train] step 1000/2343  loss=219.0873  mse=155.8611
+  [train] step 1500/2343  loss=219.1469  mse=155.9232
+  [train] step 2000/2343  loss=219.1214  mse=155.9030
+  [train] step 2343/2343  loss=219.0767  mse=155.8766
+  [val] step 390/390  loss=258.3177  mse=190.5933
+Epoch 097/100  train_loss=219.0767  train_mse=155.8766  val_loss=258.3177  val_mse=190.5933  time=1733.2s
+  [train] step 500/2343  loss=218.8344  mse=155.6719
+  [train] step 1000/2343  loss=218.9692  mse=155.7790
+  [train] step 1500/2343  loss=218.9275  mse=155.7228
+  [train] step 2000/2343  loss=218.7868  mse=155.6059
+  [train] step 2343/2343  loss=218.9070  mse=155.7230
+  [val] step 390/390  loss=282.1803  mse=206.7215
+Epoch 098/100  train_loss=218.9070  train_mse=155.7230  val_loss=282.1803  val_mse=206.7215  time=1725.4s
+  [train] step 500/2343  loss=220.2065  mse=156.8100
+  [train] step 1000/2343  loss=219.6411  mse=156.3313
+  [train] step 1500/2343  loss=219.4372  mse=156.1680
+  [train] step 2000/2343  loss=219.3925  mse=156.1477
+  [train] step 2343/2343  loss=219.2856  mse=156.0630
+  [val] step 390/390  loss=260.0622  mse=190.4188
+Epoch 099/100  train_loss=219.2856  train_mse=156.0630  val_loss=260.0622  val_mse=190.4188  time=1723.3s
+  [train] step 500/2343  loss=218.9061  mse=155.7159
+  [train] step 1000/2343  loss=218.9535  mse=155.7769
+  [train] step 1500/2343  loss=219.0850  mse=155.8844
+  [train] step 2000/2343  loss=218.9665  mse=155.7824
+  [train] step 2343/2343  loss=219.0677  mse=155.8736
+  [val] step 390/390  loss=221.6741  mse=158.9308
+Epoch 100/100  train_loss=219.0677  train_mse=155.8736  val_loss=221.6741  val_mse=158.9308  time=1731.0s
+Traceback (most recent call last):
+  File "/home/ainsworth/master/train_pointnet_surface_torch.py", line 471, in <module>
+    main(args.tfrecord_glob, args.epochs)
+  File "/home/ainsworth/master/train_pointnet_surface_torch.py", line 441, in main
+    final_name = ckpt_dir / f"pointnet_surface_{stamp}_{epochs}ep.pt"
+                 ^^^^^^^^
+NameError: name 'ckpt_dir' is not defined

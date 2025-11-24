@@ -1,0 +1,97 @@
+nohup: ignoring input
+2025-06-20 14:38:02.115294: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-06-20 14:38:02.132702: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1750423082.160419 3177469 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1750423082.167317 3177469 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1750423082.184082 3177469 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750423082.184116 3177469 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750423082.184119 3177469 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1750423082.184122 3177469 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-06-20 14:38:02.189143: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Torch: 2.7.1+cu126  CUDA available: True
+GPUs: 2 ['NVIDIA RTX 6000 Ada Generation', 'NVIDIA RTX 6000 Ada Generation']
+TensorFlow (for TFRecord I/O only): 2.19.0
+Train shards: 80  Val shards: 20
+I0000 00:00:1750423088.466978 3177469 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 23755 MB memory:  -> device: 0, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:3d:00.0, compute capability: 8.9
+I0000 00:00:1750423088.474333 3177469 gpu_device.cc:2019] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 23806 MB memory:  -> device: 1, name: NVIDIA RTX 6000 Ada Generation, pci bus id: 0000:61:00.0, compute capability: 8.9
+Total parameters: 3,134,892
+Trainable parameters: 3,134,892
+Detailed summary with torchinfo:
+==========================================================================================
+Layer (type:depth-idx)                   Output Shape              Param #
+==========================================================================================
+PointNet2SurfaceRegressor                [1, 10, 10, 3]            --
+├─Sequential: 1-1                        [1, 64, 1225]             --
+│    └─Conv1d: 2-1                       [1, 64, 1225]             192
+│    └─BatchNorm1d: 2-2                  [1, 64, 1225]             128
+│    └─ReLU: 2-3                         [1, 64, 1225]             --
+├─MaxPool1d: 1-2                         [1, 64, 612]              --
+├─MaxPool1d: 1-3                         [1, 3, 612]               --
+├─PointNetSetAbstractionKNN: 1-4         [1, 3, 612]               --
+│    └─ModuleList: 2-4                   --                        --
+│    │    └─Sequential: 3-1              [1, 64, 612, 32]          4,416
+│    │    └─Sequential: 3-2              [1, 64, 612, 32]          4,224
+│    │    └─Sequential: 3-3              [1, 128, 612, 32]         8,448
+├─PointNetSetAbstractionKNN: 1-5         [1, 3, 306]               --
+│    └─ModuleList: 2-5                   --                        --
+│    │    └─Sequential: 3-4              [1, 128, 306, 32]         17,024
+│    │    └─Sequential: 3-5              [1, 128, 306, 32]         16,640
+│    │    └─Sequential: 3-6              [1, 256, 306, 32]         33,280
+├─PointNetSetAbstractionKNN: 1-6         [1, 3, 76]                --
+│    └─ModuleList: 2-6                   --                        --
+│    │    └─Sequential: 3-7              [1, 256, 76, 32]          66,816
+│    │    └─Sequential: 3-8              [1, 256, 76, 32]          66,048
+│    │    └─Sequential: 3-9              [1, 512, 76, 32]          132,096
+├─PointNetSetAbstractionKNN: 1-7         [1, 3, 38]                --
+│    └─ModuleList: 2-7                   --                        --
+│    │    └─Sequential: 3-10             [1, 512, 38, 32]          264,704
+│    │    └─Sequential: 3-11             [1, 512, 38, 32]          263,168
+│    │    └─Sequential: 3-12             [1, 1024, 38, 32]         526,336
+├─Sequential: 1-8                        [1, 512]                  --
+│    └─Linear: 2-8                       [1, 1024]                 1,049,600
+│    └─ReLU: 2-9                         [1, 1024]                 --
+│    └─BatchNorm1d: 2-10                 [1, 1024]                 2,048
+│    └─Dropout: 2-11                     [1, 1024]                 --
+│    └─Linear: 2-12                      [1, 512]                  524,800
+│    └─ReLU: 2-13                        [1, 512]                  --
+│    └─BatchNorm1d: 2-14                 [1, 512]                  1,024
+│    └─Dropout: 2-15                     [1, 512]                  --
+├─Linear: 1-9                            [1, 300]                  153,900
+==========================================================================================
+Total params: 3,134,892
+Trainable params: 3,134,892
+Non-trainable params: 0
+Total mult-adds (Units.GIGABYTES): 2.89
+==========================================================================================
+Input size (MB): 0.01
+Forward/backward pass size (MB): 241.41
+Params size (MB): 12.54
+Estimated Total Size (MB): 253.96
+==========================================================================================
+device count  2
+start training for 100 epochs
+2025-06-20 14:38:11.754557: I tensorflow/core/kernels/data/tf_record_dataset_op.cc:381] TFRecordDataset `buffer_size` is unspecified, default to 262144
+/home/ainsworth/master/train_pointnet_surface_torch.py:268: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:203.)
+  xyz = torch.from_numpy(xyz_np).to(_DEVICE).float()
+  [train] step 500/2343  loss=582.2409  mse=489.0885
+  [train] step 1000/2343  loss=515.8228  mse=426.7005
+  [train] step 1500/2343  loss=474.3372  mse=387.6994
+  [train] step 2000/2343  loss=451.2789  mse=366.1410
+  [train] step 2343/2343  loss=440.0545  mse=355.6808
+  [val] step 390/390  loss=368.6954  mse=289.2103
+Epoch 001/100  train_loss=440.0545  train_mse=355.6808  val_loss=368.6954  val_mse=289.2103  time=2859.0s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=368.6954)
+  [train] step 500/2343  loss=368.3263  mse=288.8507
+  [train] step 1000/2343  loss=364.0053  mse=284.8973
+  [train] step 1500/2343  loss=359.1967  mse=280.4628
+  [train] step 2000/2343  loss=354.3397  mse=275.9890
+  [train] step 2343/2343  loss=351.3484  mse=273.1841
+  [val] step 390/390  loss=330.1447  mse=253.6247
+Epoch 002/100  train_loss=351.3484  train_mse=273.1841  val_loss=330.1447  val_mse=253.6247  time=2851.7s
+  ↳ New best model saved to models/best_pointnet_surface_100.weights.h5 (val_loss=330.1447)
+  [train] step 500/2343  loss=329.6151  mse=252.9419
+  [train] step 1000/2343  loss=326.1304  mse=249.6884
+  [train] step 1500/2343  loss=322.9085  mse=246.7015
+  [train] step 2000/2343  loss=320.3370  mse=244.3373
