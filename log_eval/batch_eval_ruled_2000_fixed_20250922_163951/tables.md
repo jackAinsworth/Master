@@ -1,0 +1,39 @@
+## Noise STD = 0.00000000
+
+| Category    | Metric             | Value       |
+|:------------|:-------------------|:------------|
+| Control-Net | Total entries      | 2000        |
+| Control-Net | Shape mismatches   | 8           |
+| Control-Net | Mismatch ratio (%) | 0.40000000% |
+
+## Noise STD = 0.00100000
+
+| Category    | Metric             | Value       |
+|:------------|:-------------------|:------------|
+| Control-Net | Total entries      | 2000        |
+| Control-Net | Shape mismatches   | 35          |
+| Control-Net | Mismatch ratio (%) | 1.75000000% |
+
+## Noise STD = 0.00500000
+
+| Category    | Metric             | Value        |
+|:------------|:-------------------|:-------------|
+| Control-Net | Total entries      | 2000         |
+| Control-Net | Shape mismatches   | 768          |
+| Control-Net | Mismatch ratio (%) | 38.40000000% |
+
+## Noise STD = 0.01000000
+
+| Category    | Metric             | Value        |
+|:------------|:-------------------|:-------------|
+| Control-Net | Total entries      | 2000         |
+| Control-Net | Shape mismatches   | 1414         |
+| Control-Net | Mismatch ratio (%) | 70.70000000% |
+
+## Noise STD = 0.02000000
+
+| Category    | Metric             | Value        |
+|:------------|:-------------------|:-------------|
+| Control-Net | Total entries      | 2000         |
+| Control-Net | Shape mismatches   | 1866         |
+| Control-Net | Mismatch ratio (%) | 93.30000000% |

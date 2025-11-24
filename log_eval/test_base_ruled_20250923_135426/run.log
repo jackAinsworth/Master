@@ -1,0 +1,20 @@
+[2025-09-23 13:54:26] INFO: Starting batch evaluation
+[2025-09-23 13:54:26] INFO: DEVICE_ID=2  DATASET_PATH='dataset/dataset_2000_surfaces_noise0.0_2109_1806.pkl'  MODEL_PATH='models/coons_surface_incept_20250923_0307_150ep.keras'  TARGET_SHAPE=(50, 50, 3)  W_LAP=0.05
+[2025-09-23 13:54:26] INFO: Loading dataset…
+[2025-09-23 13:54:26] INFO: Loaded dataset with 2000 entries
+[2025-09-23 13:54:26] INFO: Loading model…
+[2025-09-23 13:54:30] INFO: Model loaded
+[2025-09-23 13:54:30] INFO: Evaluating across noise levels…
+[2025-09-23 15:18:56] INFO: Saved raw metrics to log_eval/test_base_ruled_20250923_135426/df_noise.csv
+[2025-09-23 15:18:56] INFO: Wrote formatted tables to tables.txt and tables.md
+[2025-09-23 15:18:56] INFO: === Compact overview (first few rows) ===
+[2025-09-23 15:18:56] INFO: 
+           total_entries  shape_mismatch_count  mismatch_ratio  avg_mse_cn_pred_cropped  median_mse_cn_pred_cropped  avg_mse_cn_app_cropped  median_mse_cn_app_cropped  avg_ch_cn_pred_full  median_ch_cn_pred_full  avg_ch_cn_app_full  median_ch_cn_app_full  avg_mse_surf_pred_true  median_mse_surf_pred_true  avg_ch_surf_pred_true  median_ch_surf_pred_true  avg_mse_surf_app_true  median_mse_surf_app_true  avg_ch_surf_app_true  median_ch_surf_app_true
+noise_std                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0.000               2000                    25          0.0125                 0.000345                    0.000147                0.000199                   0.000102             0.001064                0.000864            0.001150               0.000606                0.000152                   0.000117               0.000388                  0.000314               0.000169                  0.000110              0.000087                 0.000078
+0.001               2000                   194          0.0970                 0.000916                    0.000161                0.000198                   0.000102             0.002010                0.000942            0.001141               0.000606                0.000537                   0.000122               0.000642                  0.000346               0.000166                  0.000107              0.000087                 0.000078
+0.005               2000                  1045          0.5225                 0.005146                    0.001111                0.000173                   0.000107             0.007859                0.003613            0.001005               0.000632                0.002219                   0.000293               0.002205                  0.000693               0.000108                  0.000063              0.000080                 0.000071
+0.010               2000                  1618          0.8090                 0.012076                    0.006304                0.000212                   0.000179             0.017992                0.011144            0.001209               0.001033                0.006204                   0.001519               0.006247                  0.002433               0.000048                  0.000023              0.000081                 0.000074
+0.020               2000                  1906          0.9530                 0.030554                    0.025031                0.000589                   0.000527             0.046524                0.036491            0.003030               0.002646                0.019300                   0.013000               0.025378                  0.016144               0.000025                  0.000020              0.000101                 0.000092
+[2025-09-23 15:18:56] INFO: All outputs in: /home/ainsworth/master/log_eval/test_base_ruled_20250923_135426
+[2025-09-23 15:18:56] INFO: Done.

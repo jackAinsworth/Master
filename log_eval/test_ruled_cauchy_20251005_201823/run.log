@@ -1,0 +1,21 @@
+[2025-10-05 20:18:23] INFO: Starting batch evaluation
+[2025-10-05 20:18:23] INFO: DEVICE_ID=2  DATASET_PATH='dataset/dataset_2000_surfaces_noise0.0_2109_1806.pkl'  MODEL_PATH='models/coons_surface_incept_20250920_0829_150ep.keras'  TARGET_SHAPE=(50, 50, 3)  W_LAP=0.05  SCHEMA=auto
+[2025-10-05 20:18:23] INFO: Loading dataset…
+[2025-10-05 20:18:24] INFO: Loaded dataset with 2000 entries
+[2025-10-05 20:18:24] INFO: Effective schema: rotated
+[2025-10-05 20:18:24] INFO: Loading model…
+[2025-10-05 20:18:29] INFO: Model loaded
+[2025-10-05 20:18:29] INFO: Evaluating across noise levels…
+[2025-10-05 21:40:05] INFO: Saved raw metrics to log_eval/test_ruled_cauchy_20251005_201823/df_noise.csv
+[2025-10-05 21:40:05] INFO: Wrote formatted tables to tables.txt and tables.md
+[2025-10-05 21:40:05] INFO: === Compact overview (first few rows) ===
+[2025-10-05 21:40:05] INFO: 
+           total_entries  shape_mismatch_count  mismatch_ratio  avg_mse_cn_pred_cropped  median_mse_cn_pred_cropped  avg_mse_cn_app_cropped  median_mse_cn_app_cropped  avg_ch_cn_pred_full  median_ch_cn_pred_full  avg_ch_cn_app_full  median_ch_cn_app_full  avg_mse_surf_pred_true  median_mse_surf_pred_true  avg_ch_surf_pred_true  median_ch_surf_pred_true  avg_mse_surf_app_true  median_mse_surf_app_true  avg_ch_surf_app_true  median_ch_surf_app_true
+noise_std                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0.000               2000                     8          0.0040                 0.000150                    0.000017                0.000199                   0.000102             0.000177                0.000099            0.001150               0.000606                0.000022                   0.000012               0.000078                  0.000067               0.000066                  0.000052              0.000105                 0.000099
+0.001               2000                  1945          0.9725               246.456022                    0.054085               39.552790                   0.003125           696.198603                0.065965          118.511261               0.008147              179.157455                   0.033722             537.325736                  0.034269               3.531127                  0.000171             10.568249                 0.000272
+0.005               2000                  1970          0.9850             34937.038504                    0.982709              267.374086                   0.078756         62346.059318                1.508657          801.250377               0.144582            18550.485273                   0.563704           55693.118922                  1.087783               6.781211                  0.002885             20.218238                 0.003547
+0.010               2000                  1973          0.9865            145787.273797                    5.569782             4840.992269                   0.323831        294265.136117                9.423100        14520.435884               0.714402            89334.511821                   3.234247          268323.889243                  7.999962             171.137448                  0.011896            513.026227                 0.017067
+0.020               2000                  1968          0.9840             98112.222841                   29.717366             9498.160960                   1.168577        248747.776178               53.552405        28491.088281               2.835531            85221.576228                  16.837239          255826.062127                 45.635828             465.392888                  0.044517           1395.765156                 0.076478
+[2025-10-05 21:40:05] INFO: All outputs in: /home/ainsworth/master/log_eval/test_ruled_cauchy_20251005_201823
+[2025-10-05 21:40:05] INFO: Done.

@@ -1,0 +1,21 @@
+[2025-10-05 16:09:57] INFO: Starting batch evaluation
+[2025-10-05 16:09:57] INFO: DEVICE_ID=2  DATASET_PATH='dataset/dataset_2000_surfaces_noise0.0_2109_1806.pkl'  MODEL_PATH='models/coons_surface_incept_20250920_0829_150ep.keras'  TARGET_SHAPE=(50, 50, 3)  W_LAP=0.05  SCHEMA=auto
+[2025-10-05 16:09:57] INFO: Loading dataset…
+[2025-10-05 16:09:58] INFO: Loaded dataset with 2000 entries
+[2025-10-05 16:09:58] INFO: Effective schema: rotated
+[2025-10-05 16:09:58] INFO: Loading model…
+[2025-10-05 16:10:02] INFO: Model loaded
+[2025-10-05 16:10:02] INFO: Evaluating across noise levels…
+[2025-10-05 17:29:29] INFO: Saved raw metrics to log_eval/test_ruled_heteroscedastic_20251005_160957/df_noise.csv
+[2025-10-05 17:29:29] INFO: Wrote formatted tables to tables.txt and tables.md
+[2025-10-05 17:29:29] INFO: === Compact overview (first few rows) ===
+[2025-10-05 17:29:29] INFO: 
+           total_entries  shape_mismatch_count  mismatch_ratio  avg_mse_cn_pred_cropped  median_mse_cn_pred_cropped  avg_mse_cn_app_cropped  median_mse_cn_app_cropped  avg_ch_cn_pred_full  median_ch_cn_pred_full  avg_ch_cn_app_full  median_ch_cn_app_full  avg_mse_surf_pred_true  median_mse_surf_pred_true  avg_ch_surf_pred_true  median_ch_surf_pred_true  avg_mse_surf_app_true  median_mse_surf_app_true  avg_ch_surf_app_true  median_ch_surf_app_true
+noise_std                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0.000               2000                     8          0.0040                 0.000150                    0.000017                0.000199                   0.000102             0.000177                0.000099            0.001150               0.000606                0.000022                   0.000012               0.000078                  0.000067               0.000066                  0.000052              0.000105                 0.000099
+0.001               2000                    52          0.0260                 0.000271                    0.000016                0.000197                   0.000102             0.000509                0.000093            0.001137               0.000605                0.000163                   0.000009               0.000177                  0.000049               0.000065                  0.000051              0.000105                 0.000099
+0.005               2000                   964          0.4820                 0.003404                    0.000693                0.000173                   0.000116             0.006341                0.002271            0.001002               0.000679                0.001815                   0.000089               0.001561                  0.000245               0.000048                  0.000039              0.000103                 0.000099
+0.010               2000                  1617          0.8085                 0.012361                    0.006997                0.000262                   0.000231             0.018291                0.011754            0.001465               0.001287                0.006300                   0.001706               0.006055                  0.002178               0.000037                  0.000033              0.000111                 0.000107
+0.020               2000                  1909          0.9545                 0.026052                    0.020272                0.000832                   0.000749             0.035748                0.027697            0.004051               0.003585                0.013893                   0.009018               0.014676                  0.008939               0.000048                  0.000045              0.000145                 0.000141
+[2025-10-05 17:29:29] INFO: All outputs in: /home/ainsworth/master/log_eval/test_ruled_heteroscedastic_20251005_160957
+[2025-10-05 17:29:29] INFO: Done.

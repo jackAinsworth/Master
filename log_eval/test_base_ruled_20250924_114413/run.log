@@ -1,0 +1,21 @@
+[2025-09-24 11:44:13] INFO: Starting batch evaluation
+[2025-09-24 11:44:13] INFO: DEVICE_ID=2  DATASET_PATH='dataset/dataset_10_surfaces_noise0.0_2109_1704.pkl'  MODEL_PATH='models/coons_surface_incept_20250923_0307_150ep.keras'  TARGET_SHAPE=(50, 50, 3)  W_LAP=0.05  SCHEMA=auto
+[2025-09-24 11:44:13] INFO: Loading dataset…
+[2025-09-24 11:44:13] INFO: Loaded dataset with 10 entries
+[2025-09-24 11:44:13] INFO: Effective schema: rotated
+[2025-09-24 11:44:13] INFO: Loading model…
+[2025-09-24 11:44:19] INFO: Model loaded
+[2025-09-24 11:44:19] INFO: Evaluating across noise levels…
+[2025-09-24 11:44:46] INFO: Saved raw metrics to log_eval/test_base_ruled_20250924_114413/df_noise.csv
+[2025-09-24 11:44:46] INFO: Wrote formatted tables to tables.txt and tables.md
+[2025-09-24 11:44:46] INFO: === Compact overview (first few rows) ===
+[2025-09-24 11:44:46] INFO: 
+           total_entries  shape_mismatch_count  mismatch_ratio  avg_mse_cn_pred_cropped  median_mse_cn_pred_cropped  avg_mse_cn_app_cropped  median_mse_cn_app_cropped  avg_ch_cn_pred_full  median_ch_cn_pred_full  avg_ch_cn_app_full  median_ch_cn_app_full  avg_mse_surf_pred_true  median_mse_surf_pred_true  avg_ch_surf_pred_true  median_ch_surf_pred_true  avg_mse_surf_app_true  median_mse_surf_app_true  avg_ch_surf_app_true  median_ch_surf_app_true
+noise_std                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0.000                 10                     1             0.1                 0.000129                    0.000123                0.000272                   0.000134             0.001008                0.000731            0.001610               0.000782                0.000243                   0.000096               0.000360                  0.000318               0.000107                  0.000054              0.000103                 0.000108
+0.001                 10                     1             0.1                 0.000186                    0.000155                0.000269                   0.000133             0.000985                0.000863            0.001591               0.000779                0.000111                   0.000102               0.000318                  0.000303               0.000105                  0.000053              0.000103                 0.000107
+0.005                 10                     6             0.6                 0.001621                    0.000770                0.000217                   0.000116             0.004292                0.003273            0.001275               0.000693                0.000779                   0.000196               0.001005                  0.000635               0.000067                  0.000039              0.000096                 0.000082
+0.010                 10                     8             0.8                 0.012427                    0.003881                0.000195                   0.000155             0.014073                0.010567            0.001118               0.000861                0.006365                   0.001503               0.003818                  0.002899               0.000030                  0.000016              0.000084                 0.000072
+0.020                 10                     9             0.9                 0.024153                    0.023674                0.000629                   0.000570             0.038905                0.027244            0.003251               0.002833                0.019546                   0.007463               0.018552                  0.011791               0.000022                  0.000021              0.000099                 0.000085
+[2025-09-24 11:44:46] INFO: All outputs in: /home/ainsworth/master/log_eval/test_base_ruled_20250924_114413
+[2025-09-24 11:44:46] INFO: Done.

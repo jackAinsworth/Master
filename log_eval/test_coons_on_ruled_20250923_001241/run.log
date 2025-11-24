@@ -1,0 +1,20 @@
+[2025-09-23 00:12:41] INFO: Starting batch evaluation
+[2025-09-23 00:12:41] INFO: DEVICE_ID=2  DATASET_PATH='dataset/dataset_10_surfaces_noise0.0_2109_1704.pkl'  MODEL_PATH='models/coons_surface_incept_20250916_0821_150ep.keras'  TARGET_SHAPE=(50, 50, 3)  W_LAP=0.05
+[2025-09-23 00:12:41] INFO: Loading dataset…
+[2025-09-23 00:12:41] INFO: Loaded dataset with 10 entries
+[2025-09-23 00:12:41] INFO: Loading model…
+[2025-09-23 00:12:47] INFO: Model loaded
+[2025-09-23 00:12:47] INFO: Evaluating across noise levels…
+[2025-09-23 00:13:15] INFO: Saved raw metrics to log_eval/test_coons_on_ruled_20250923_001241/df_noise.csv
+[2025-09-23 00:13:15] INFO: Wrote formatted tables to tables.txt and tables.md
+[2025-09-23 00:13:15] INFO: === Compact overview (first few rows) ===
+[2025-09-23 00:13:15] INFO: 
+           total_entries  shape_mismatch_count  mismatch_ratio  avg_mse_cn_pred_cropped  median_mse_cn_pred_cropped  avg_mse_cn_app_cropped  median_mse_cn_app_cropped  avg_ch_cn_pred_full  median_ch_cn_pred_full  avg_ch_cn_app_full  median_ch_cn_app_full  avg_mse_surf_pred_true  median_mse_surf_pred_true  avg_ch_surf_pred_true  median_ch_surf_pred_true  avg_mse_surf_app_true  median_mse_surf_app_true  avg_ch_surf_app_true  median_ch_surf_app_true
+noise_std                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0.000                 10                     1             0.1                 0.000670                    0.000455                0.000272                   0.000134             0.003077                0.002165            0.001610               0.000782                0.000192                   0.000144               0.000494                  0.000442               0.000107                  0.000054              0.000103                 0.000108
+0.001                 10                     6             0.6                 0.004491                    0.002130                0.000267                   0.000133             0.007962                0.006903            0.001583               0.000777                0.002217                   0.000903               0.002130                  0.000897               0.000105                  0.000053              0.000102                 0.000107
+0.005                 10                     7             0.7                 0.003163                    0.001987                0.000213                   0.000121             0.009064                0.007832            0.001264               0.000681                0.003390                   0.002167               0.001813                  0.001706               0.000068                  0.000038              0.000101                 0.000088
+0.010                 10                     6             0.6                 0.007760                    0.004358                0.000219                   0.000162             0.008243                0.006599            0.001263               0.000907                0.002948                   0.000962               0.002427                  0.001373               0.000030                  0.000019              0.000086                 0.000073
+0.020                 10                     9             0.9                 0.014453                    0.003899                0.000569                   0.000557             0.012554                0.010950            0.002997               0.002562                0.003329                   0.001241               0.003178                  0.002176               0.000024                  0.000021              0.000109                 0.000097
+[2025-09-23 00:13:15] INFO: All outputs in: /home/ainsworth/master/log_eval/test_coons_on_ruled_20250923_001241
+[2025-09-23 00:13:15] INFO: Done.

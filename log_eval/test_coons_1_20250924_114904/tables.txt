@@ -1,0 +1,44 @@
+######################
+Noise STD = 0.00000000
+######################
+
+   Category             Metric       Value
+Control-Net      Total entries        2000
+Control-Net   Shape mismatches          14
+Control-Net Mismatch ratio (%) 0.70000000%
+
+######################
+Noise STD = 0.00100000
+######################
+
+   Category             Metric       Value
+Control-Net      Total entries        2000
+Control-Net   Shape mismatches         110
+Control-Net Mismatch ratio (%) 5.50000000%
+
+######################
+Noise STD = 0.00500000
+######################
+
+   Category             Metric        Value
+Control-Net      Total entries         2000
+Control-Net   Shape mismatches          359
+Control-Net Mismatch ratio (%) 17.95000000%
+
+######################
+Noise STD = 0.01000000
+######################
+
+   Category             Metric        Value
+Control-Net      Total entries         2000
+Control-Net   Shape mismatches          586
+Control-Net Mismatch ratio (%) 29.30000000%
+
+######################
+Noise STD = 0.02000000
+######################
+
+   Category             Metric        Value
+Control-Net      Total entries         2000
+Control-Net   Shape mismatches         1077
+Control-Net Mismatch ratio (%) 53.85000000%

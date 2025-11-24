@@ -1,0 +1,20 @@
+[2025-09-22 16:39:51] INFO: Starting batch evaluation
+[2025-09-22 16:39:51] INFO: DEVICE_ID=2  DATASET_PATH='dataset/dataset_2000_surfaces_noise0.0_2109_1806.pkl'  MODEL_PATH='models/coons_surface_incept_20250920_0829_150ep.keras'  TARGET_SHAPE=(50, 50, 3)  W_LAP=0.05
+[2025-09-22 16:39:51] INFO: Loading dataset…
+[2025-09-22 16:39:52] INFO: Loaded dataset with 2000 entries
+[2025-09-22 16:39:52] INFO: Loading model…
+[2025-09-22 16:39:56] INFO: Model loaded
+[2025-09-22 16:39:56] INFO: Evaluating across noise levels…
+[2025-09-22 18:05:58] INFO: Saved raw metrics to log_eval/batch_eval_ruled_2000_fixed_20250922_163951/df_noise.csv
+[2025-09-22 18:05:58] INFO: Wrote formatted tables to tables.txt and tables.md
+[2025-09-22 18:05:58] INFO: === Compact overview (first few rows) ===
+[2025-09-22 18:05:58] INFO: 
+           total_entries  shape_mismatch_count  mismatch_ratio  avg_mse_cn_pred_cropped  median_mse_cn_pred_cropped  avg_mse_cn_app_cropped  median_mse_cn_app_cropped  avg_ch_cn_pred_full  median_ch_cn_pred_full  avg_ch_cn_app_full  median_ch_cn_app_full  avg_mse_surf_pred_true  median_mse_surf_pred_true  avg_ch_surf_pred_true  median_ch_surf_pred_true  avg_mse_surf_app_true  median_mse_surf_app_true  avg_ch_surf_app_true  median_ch_surf_app_true
+noise_std                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0.000               2000                     8          0.0040                 0.000150                    0.000017                0.000199                   0.000102             0.000177                0.000099            0.001150               0.000606                0.000022                   0.000012               0.000078                  0.000067               0.000169                  0.000110              0.000087                 0.000078
+0.001               2000                    35          0.0175                 0.000163                    0.000015                0.000198                   0.000102             0.000351                0.000091            0.001141               0.000604                0.000102                   0.000009               0.000124                  0.000050               0.000166                  0.000107              0.000087                 0.000078
+0.005               2000                   768          0.3840                 0.002489                    0.000291                0.000174                   0.000108             0.004711                0.001179            0.001007               0.000636                0.001151                   0.000043               0.001067                  0.000155               0.000108                  0.000063              0.000080                 0.000071
+0.010               2000                  1414          0.7070                 0.009005                    0.003747                0.000214                   0.000181             0.013566                0.008052            0.001218               0.001028                0.004270                   0.000800               0.004205                  0.001166               0.000048                  0.000024              0.000080                 0.000073
+0.020               2000                  1866          0.9330                 0.022240                    0.016529                0.000581                   0.000527             0.031519                0.023108            0.003006               0.002682                0.012028                   0.006199               0.012368                  0.006821               0.000025                  0.000020              0.000101                 0.000092
+[2025-09-22 18:05:58] INFO: All outputs in: /home/ainsworth/master/log_eval/batch_eval_ruled_2000_fixed_20250922_163951
+[2025-09-22 18:05:58] INFO: Done.

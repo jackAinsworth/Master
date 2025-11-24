@@ -1,0 +1,221 @@
+######################
+Noise STD = 0.00000000
+######################
+
+   Category                        Metric       Value
+Control-Net                 Total entries          10
+Control-Net              Shape mismatches           0
+Control-Net            Mismatch ratio (%) 0.00000000%
+Control-Net          Avg. MSE (predicted)  0.00001252
+Control-Net       Avg. MSE (approximated)  0.00027211
+Control-Net      Avg. Chamfer (predicted)  0.00007511
+Control-Net   Avg. Chamfer (approximated)  0.00161042
+Control-Net        Median MSE (predicted)  0.00001064
+Control-Net     Median MSE (approximated)  0.00013393
+Control-Net    Median Chamfer (predicted)  0.00006385
+Control-Net Median Chamfer (approximated)  0.00078193
+
+   Category                          Metric      Value
+Surface-All         Avg. MSE (pred surface) 0.00001198
+Surface-All     Avg. Chamfer (pred surface) 0.00006362
+Surface-All       Avg. MSE (approx surface) 0.00009639
+Surface-All   Avg. Chamfer (approx surface) 0.00007411
+Surface-All       Median MSE (pred surface) 0.00001236
+Surface-All   Median Chamfer (pred surface) 0.00006628
+Surface-All     Median MSE (approx surface) 0.00004473
+Surface-All Median Chamfer (approx surface) 0.00006846
+
+     Category                                     Metric Value
+Mismatch-Surf         Avg. MSE (pred surf on mismatches)   nan
+Mismatch-Surf     Avg. Chamfer (pred surf on mismatches)   nan
+Mismatch-Surf       Avg. MSE (approx surf on mismatches)   nan
+Mismatch-Surf   Avg. Chamfer (approx surf on mismatches)   nan
+Mismatch-Surf       Median MSE (pred surf on mismatches)   nan
+Mismatch-Surf   Median Chamfer (pred surf on mismatches)   nan
+Mismatch-Surf     Median MSE (approx surf on mismatches)   nan
+Mismatch-Surf Median Chamfer (approx surf on mismatches)   nan
+
+######################
+Noise STD = 0.00100000
+######################
+
+   Category                        Metric       Value
+Control-Net                 Total entries          10
+Control-Net              Shape mismatches           0
+Control-Net            Mismatch ratio (%) 0.00000000%
+Control-Net          Avg. MSE (predicted)  0.00002564
+Control-Net       Avg. MSE (approximated)  0.00026756
+Control-Net      Avg. Chamfer (predicted)  0.00014924
+Control-Net   Avg. Chamfer (approximated)  0.00158425
+Control-Net        Median MSE (predicted)  0.00001560
+Control-Net     Median MSE (approximated)  0.00013420
+Control-Net    Median Chamfer (predicted)  0.00009363
+Control-Net Median Chamfer (approximated)  0.00078397
+
+   Category                          Metric      Value
+Surface-All         Avg. MSE (pred surface) 0.00001772
+Surface-All     Avg. Chamfer (pred surface) 0.00006076
+Surface-All       Avg. MSE (approx surface) 0.00009523
+Surface-All   Avg. Chamfer (approx surface) 0.00007730
+Surface-All       Median MSE (pred surface) 0.00000947
+Surface-All   Median Chamfer (pred surface) 0.00005335
+Surface-All     Median MSE (approx surface) 0.00004451
+Surface-All Median Chamfer (approx surface) 0.00007046
+
+     Category                                     Metric Value
+Mismatch-Surf         Avg. MSE (pred surf on mismatches)   nan
+Mismatch-Surf     Avg. Chamfer (pred surf on mismatches)   nan
+Mismatch-Surf       Avg. MSE (approx surf on mismatches)   nan
+Mismatch-Surf   Avg. Chamfer (approx surf on mismatches)   nan
+Mismatch-Surf       Median MSE (pred surf on mismatches)   nan
+Mismatch-Surf   Median Chamfer (pred surf on mismatches)   nan
+Mismatch-Surf     Median MSE (approx surf on mismatches)   nan
+Mismatch-Surf Median Chamfer (approx surf on mismatches)   nan
+
+######################
+Noise STD = 0.00500000
+######################
+
+   Category                        Metric        Value
+Control-Net                 Total entries           10
+Control-Net              Shape mismatches            3
+Control-Net            Mismatch ratio (%) 30.00000000%
+Control-Net          Avg. MSE (predicted)   0.00066339
+Control-Net       Avg. MSE (approximated)   0.00015159
+Control-Net      Avg. Chamfer (predicted)   0.00144761
+Control-Net   Avg. Chamfer (approximated)   0.00087972
+Control-Net        Median MSE (predicted)   0.00004729
+Control-Net     Median MSE (approximated)   0.00013649
+Control-Net    Median Chamfer (predicted)   0.00028375
+Control-Net Median Chamfer (approximated)   0.00077960
+
+   Category                          Metric      Value
+Surface-All         Avg. MSE (pred surface) 0.00475445
+Surface-All     Avg. Chamfer (pred surface) 0.00420383
+Surface-All       Avg. MSE (approx surface) 0.00007905
+Surface-All   Avg. Chamfer (approx surface) 0.00013270
+Surface-All       Median MSE (pred surface) 0.00019860
+Surface-All   Median Chamfer (pred surface) 0.00033617
+Surface-All     Median MSE (approx surface) 0.00004858
+Surface-All Median Chamfer (approx surface) 0.00013120
+
+     Category                                     Metric    Value
+Mismatch-Surf         Avg. MSE (pred surf on mismatches) 1.53e-02
+Mismatch-Surf     Avg. Chamfer (pred surf on mismatches) 1.31e-02
+Mismatch-Surf       Avg. MSE (approx surf on mismatches) 8.11e-05
+Mismatch-Surf   Avg. Chamfer (approx surf on mismatches) 1.31e-04
+Mismatch-Surf       Median MSE (pred surf on mismatches) 1.52e-02
+Mismatch-Surf   Median Chamfer (pred surf on mismatches) 8.52e-03
+Mismatch-Surf     Median MSE (approx surf on mismatches) 4.12e-05
+Mismatch-Surf Median Chamfer (approx surf on mismatches) 1.19e-04
+
+######################
+Noise STD = 0.01000000
+######################
+
+   Category                        Metric        Value
+Control-Net                 Total entries           10
+Control-Net              Shape mismatches            6
+Control-Net            Mismatch ratio (%) 60.00000000%
+Control-Net          Avg. MSE (predicted)   0.00133215
+Control-Net       Avg. MSE (approximated)   0.00029452
+Control-Net      Avg. Chamfer (predicted)   0.00518365
+Control-Net   Avg. Chamfer (approximated)   0.00175392
+Control-Net        Median MSE (predicted)   0.00104808
+Control-Net     Median MSE (approximated)   0.00024095
+Control-Net    Median Chamfer (predicted)   0.00461477
+Control-Net Median Chamfer (approximated)   0.00142109
+
+   Category                          Metric      Value
+Surface-All         Avg. MSE (pred surface) 0.00201512
+Surface-All     Avg. Chamfer (pred surface) 0.00278519
+Surface-All       Avg. MSE (approx surface) 0.00012069
+Surface-All   Avg. Chamfer (approx surface) 0.00024457
+Surface-All       Median MSE (pred surface) 0.00082842
+Surface-All   Median Chamfer (pred surface) 0.00092543
+Surface-All     Median MSE (approx surface) 0.00010936
+Surface-All Median Chamfer (approx surface) 0.00025113
+
+     Category                                     Metric    Value
+Mismatch-Surf         Avg. MSE (pred surf on mismatches) 2.87e-03
+Mismatch-Surf     Avg. Chamfer (pred surf on mismatches) 3.83e-03
+Mismatch-Surf       Avg. MSE (approx surf on mismatches) 1.18e-04
+Mismatch-Surf   Avg. Chamfer (approx surf on mismatches) 2.34e-04
+Mismatch-Surf       Median MSE (pred surf on mismatches) 1.00e-03
+Mismatch-Surf   Median Chamfer (pred surf on mismatches) 1.36e-03
+Mismatch-Surf     Median MSE (approx surf on mismatches) 1.08e-04
+Mismatch-Surf Median Chamfer (approx surf on mismatches) 2.20e-04
+
+######################
+Noise STD = 0.02000000
+######################
+
+   Category                        Metric         Value
+Control-Net                 Total entries            10
+Control-Net              Shape mismatches            10
+Control-Net            Mismatch ratio (%) 100.00000000%
+Control-Net          Avg. MSE (predicted)           nan
+Control-Net       Avg. MSE (approximated)           nan
+Control-Net      Avg. Chamfer (predicted)           nan
+Control-Net   Avg. Chamfer (approximated)           nan
+Control-Net        Median MSE (predicted)           nan
+Control-Net     Median MSE (approximated)           nan
+Control-Net    Median Chamfer (predicted)           nan
+Control-Net Median Chamfer (approximated)           nan
+
+   Category                          Metric      Value
+Surface-All         Avg. MSE (pred surface) 0.00701125
+Surface-All     Avg. Chamfer (pred surface) 0.00764354
+Surface-All       Avg. MSE (approx surface) 0.00040480
+Surface-All   Avg. Chamfer (approx surface) 0.00061791
+Surface-All       Median MSE (pred surface) 0.00291443
+Surface-All   Median Chamfer (pred surface) 0.00326072
+Surface-All     Median MSE (approx surface) 0.00040647
+Surface-All Median Chamfer (approx surface) 0.00062992
+
+     Category                                     Metric    Value
+Mismatch-Surf         Avg. MSE (pred surf on mismatches) 7.01e-03
+Mismatch-Surf     Avg. Chamfer (pred surf on mismatches) 7.64e-03
+Mismatch-Surf       Avg. MSE (approx surf on mismatches) 4.05e-04
+Mismatch-Surf   Avg. Chamfer (approx surf on mismatches) 6.18e-04
+Mismatch-Surf       Median MSE (pred surf on mismatches) 2.91e-03
+Mismatch-Surf   Median Chamfer (pred surf on mismatches) 3.26e-03
+Mismatch-Surf     Median MSE (approx surf on mismatches) 4.06e-04
+Mismatch-Surf Median Chamfer (approx surf on mismatches) 6.30e-04
+
+######################
+Noise STD = 0.04000000
+######################
+
+   Category                        Metric         Value
+Control-Net                 Total entries            10
+Control-Net              Shape mismatches            10
+Control-Net            Mismatch ratio (%) 100.00000000%
+Control-Net          Avg. MSE (predicted)           nan
+Control-Net       Avg. MSE (approximated)           nan
+Control-Net      Avg. Chamfer (predicted)           nan
+Control-Net   Avg. Chamfer (approximated)           nan
+Control-Net        Median MSE (predicted)           nan
+Control-Net     Median MSE (approximated)           nan
+Control-Net    Median Chamfer (predicted)           nan
+Control-Net Median Chamfer (approximated)           nan
+
+   Category                          Metric      Value
+Surface-All         Avg. MSE (pred surface) 0.02290654
+Surface-All     Avg. Chamfer (pred surface) 0.01714926
+Surface-All       Avg. MSE (approx surface) 0.00160068
+Surface-All   Avg. Chamfer (approx surface) 0.00188616
+Surface-All       Median MSE (pred surface) 0.02037149
+Surface-All   Median Chamfer (pred surface) 0.01016162
+Surface-All     Median MSE (approx surface) 0.00159907
+Surface-All Median Chamfer (approx surface) 0.00192390
+
+     Category                                     Metric    Value
+Mismatch-Surf         Avg. MSE (pred surf on mismatches) 2.29e-02
+Mismatch-Surf     Avg. Chamfer (pred surf on mismatches) 1.71e-02
+Mismatch-Surf       Avg. MSE (approx surf on mismatches) 1.60e-03
+Mismatch-Surf   Avg. Chamfer (approx surf on mismatches) 1.89e-03
+Mismatch-Surf       Median MSE (pred surf on mismatches) 2.04e-02
+Mismatch-Surf   Median Chamfer (pred surf on mismatches) 1.02e-02
+Mismatch-Surf     Median MSE (approx surf on mismatches) 1.60e-03
+Mismatch-Surf Median Chamfer (approx surf on mismatches) 1.92e-03

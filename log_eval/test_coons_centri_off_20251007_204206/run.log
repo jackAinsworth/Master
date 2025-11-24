@@ -1,0 +1,21 @@
+[2025-10-07 20:42:06] INFO: Starting batch evaluation
+[2025-10-07 20:42:06] INFO: DEVICE_ID=2  DATASET_PATH='/home/ainsworth/master/dataset_coons/coons_dataset_batch1_2000_coons_norm_noise0.0_2309_0015.pkl'  MODEL_PATH='models/coons_surface_incept_20250916_0821_150ep.keras'  TARGET_SHAPE=(50, 50, 3)  W_LAP=0.05  SCHEMA=auto
+[2025-10-07 20:42:06] INFO: Loading dataset…
+[2025-10-07 20:42:07] INFO: Loaded dataset with 2000 entries
+[2025-10-07 20:42:07] INFO: Effective schema: coons
+[2025-10-07 20:42:07] INFO: Loading model…
+[2025-10-07 20:42:10] INFO: Model loaded
+[2025-10-07 20:42:10] INFO: Evaluating across noise levels…
+[2025-10-07 21:55:16] INFO: Saved raw metrics to log_eval/test_coons_centri_off_20251007_204206/df_noise.csv
+[2025-10-07 21:55:16] INFO: Wrote formatted tables to tables.txt and tables.md
+[2025-10-07 21:55:16] INFO: === Compact overview (first few rows) ===
+[2025-10-07 21:55:16] INFO: 
+           total_entries  shape_mismatch_count  mismatch_ratio  avg_mse_cn_pred_cropped  median_mse_cn_pred_cropped  avg_mse_cn_app_cropped  median_mse_cn_app_cropped  avg_ch_cn_pred_full  median_ch_cn_pred_full  avg_ch_cn_app_full  median_ch_cn_app_full  avg_mse_surf_pred_true  median_mse_surf_pred_true  avg_ch_surf_pred_true  median_ch_surf_pred_true  avg_mse_surf_app_true  median_mse_surf_app_true  avg_ch_surf_app_true  median_ch_surf_app_true
+noise_std                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0.000               2000                    14          0.0070                 0.000504                    0.000350                0.001079                   0.000649             0.002411                0.001806            0.005296               0.003360                0.000149                   0.000111               0.000369                  0.000312               0.000310                  0.000256              0.000146                 0.000125
+0.001               2000                   107          0.0535                 0.000685                    0.000378                0.001053                   0.000638             0.002755                0.001950            0.005188               0.003299                0.000246                   0.000117               0.000458                  0.000326               0.000302                  0.000250              0.000144                 0.000124
+0.005               2000                   333          0.1665                 0.001414                    0.000487                0.000662                   0.000420             0.003656                0.002416            0.003444               0.002267                0.000538                   0.000142               0.000677                  0.000372               0.000188                  0.000154              0.000124                 0.000113
+0.010               2000                   565          0.2825                 0.002502                    0.000704                0.000389                   0.000303             0.004926                0.003171            0.002125               0.001694                0.000824                   0.000190               0.001029                  0.000472               0.000086                  0.000071              0.000111                 0.000105
+0.020               2000                  1089          0.5445                 0.005864                    0.001782                0.000630                   0.000561             0.008322                0.005494            0.003291               0.002900                0.001593                   0.000373               0.001757                  0.000781               0.000049                  0.000044              0.000125                 0.000121
+[2025-10-07 21:55:16] INFO: All outputs in: /home/ainsworth/master/log_eval/test_coons_centri_off_20251007_204206
+[2025-10-07 21:55:16] INFO: Done.
